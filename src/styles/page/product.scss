@@ -15,7 +15,7 @@
         margin-right: 4px;
         padding: 0.5rem 1rem;
         border: 1px solid #ebebeb;
-        transition: all 0.2s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+        transition: $transition-cb2;
       }
 
       > button:hover {
@@ -35,7 +35,7 @@
         border: 1px solid #ebebeb;
         border-radius: 1rem;
         padding: 0.5rem 1rem;
-        transition: all 0.2s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+        transition: $transition-cb2;
       }
 
       > input::placeholder {
@@ -46,10 +46,14 @@
         border: 1px solid $color-main;
       }
 
-      .product-search {
+      > button {
         position: absolute;
         top: 0.5rem;
         right: 8px;
+      }
+
+      .product-search {
+        pointer-events: none;
       }
     }
 
@@ -73,7 +77,7 @@
         border-radius: 1rem;
         padding: 0.5rem 1rem;
         z-index: 2;
-        transition: all 0.2s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+        transition: $transition-cb2;
       }
 
       > select:hover, > span:hover {
@@ -106,7 +110,6 @@
 
     .product-item {
       background-color: $color-white;
-      // background-color: gray;
       border-radius: $border-r32;
       margin: 0 8px 2rem 8px;
       padding: 2rem 2rem;
@@ -116,8 +119,12 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      transition: all 0.2s cubic-bezier(0.25, 0.25, 0.75, 0.75);
+      transition: $transition-cb2;
       filter: drop-shadow(2px 2px 2px rgba(#ebebeb, $alpha: 0.5));
+      // display: flex;
+      // flex-direction: column;
+      // justify-content: center;
+      // align-items: center;
 
       div {
         // border: 1px solid red;
@@ -136,7 +143,8 @@
         }
 
         .promotion1 {
-          background-color: gray;
+          background-color: $color-white;
+          opacity: 1;
         }
         .promotion2 { // 세일
           background-color: #e8642a;
@@ -154,6 +162,14 @@
 
       .product-image {
         
+        .product-image-box {
+          width: 100%;
+
+          > img {
+            width: 100%;
+            object-fit: cover;
+          }
+        }
       }
 
       .product-name {
@@ -178,5 +194,4 @@
       }
     }
   }
-
 }
