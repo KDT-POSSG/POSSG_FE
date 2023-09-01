@@ -16,6 +16,7 @@ function App() {
       <Header />
       <Routes>
           <Route path='/payment' element={<Payment />} />
+          <Route path='/product' element={<ProductList />} />
       </Routes>
     </BrowserRouter>
   );
