@@ -1,5 +1,4 @@
 import React from "react";
-import '../styles/page/employees/employees.css';
 
 function Employees() {
     return(
