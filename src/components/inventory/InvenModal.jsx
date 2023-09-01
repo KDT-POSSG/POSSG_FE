@@ -44,7 +44,7 @@ function InvenModal (props) {
         cash: totalCash,
       };
     
-    axios.post('/', data)
+    axios.post('http://192.168.56.1:3000/addsettlement', data)
     .then((res) => {
       console.log(res.data);
       console.log('보내기 성공');
@@ -87,6 +87,12 @@ function InvenModal (props) {
             />
             </div>
         </div>
+
+
+
+
+        
+            <input className="memo" placeholder="메모를 입력해주세요."/>
         <div className="total-input-container">
             <p className="total-input">총 금액 : { calculateTotal().toLocaleString() }원</p> 
             <button className="modal-button" onClick={ sendData }>저장</button>

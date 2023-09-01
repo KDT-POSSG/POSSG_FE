@@ -10,7 +10,7 @@ import './styles/layout/FullScreenDiv.css'
 function App() {
   return (
     <div className='full-screen-div'>
-      {/* <Inventory /> */}
+      <Inventory />
       {/* <Employees /> */}
       {/* <Payment/> */}
     </div>
