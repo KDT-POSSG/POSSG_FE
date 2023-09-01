@@ -1,0 +1,95 @@
+/* payment.css 파일 */
+.payment-title {
+    padding: 20px;
+    font-size: 2rem;
+}
+
+.payment-container {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    height: 100%;
+}
+
+.product-list {
+    border: 1px solid #000000;
+    text-align: center;
+    position: relative;
+}
+
+.total-product {
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+}
+
+.payment-method {
+    border: 1px solid #000000;
+    padding: 10px;
+    text-align: center;
+    background-color: #0079f2;
+    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.total-payment{
+    font-size: 2rem;
+    color: #000000;
+    padding: 16px;
+}
+
+
+.payment-btn {
+    background-color: #ffffff;
+    font-size: 2rem;
+    cursor: pointer;
+    border-radius: 1rem;
+    font-weight: bold;
+    height: 150px;
+    
+}
+
+.payment-method-top{
+    margin-top: 90px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 150px;
+}
+
+.division-payment-btn {
+    background-color: #F9BB00;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 1rem;
+    width: 160px;
+    height: 56px;
+    font-weight: bold;
+}
+
+.membership-btn-container{
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 130px;
+}
+
+.payment-method-btn-container{
+    margin-top: 16px;
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
+}
+
+.card-payment-btn{
+    font-size: 2rem;
+    background-color: #F9BB00;
+    cursor: pointer;
+    border-radius: 1rem;
+    font-weight: bold;
+}

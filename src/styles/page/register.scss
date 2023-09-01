@@ -1,0 +1,121 @@
+
+.regi-content-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.regi-title{
+    font-size: 2rem;
+    text-align: center;
+    margin: 5rem;
+}
+
+.form-row {
+    position: relative; 
+    width: 500px;
+}
+
+.form-block {
+    margin-bottom: 8px;
+    padding: 8px 12px; 
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+    height: 60px;
+}
+
+.input-text {
+    font-family: Arial;
+    padding: 8px 4px;
+    position: relative;
+    width: 100%;
+    z-index: 3; 
+    border: none;
+    border-bottom: 1px solid #4e5059;
+}
+
+.label-helper {
+    position: absolute;
+    opacity: 0;
+    transition: .1s bottom, .1s opacity;
+    bottom: 0;
+    left: 0;
+    z-index: 1; 
+}
+
+.input-button{
+    position: absolute; 
+}
+  
+.input-text:focus + .label-helper, .input-text:invalid + .label-helper {
+    bottom: 95%;
+    font-family: arial;
+    font-size: 12px;
+    line-height: 1;
+    opacity: 1;
+    padding: 4px; 
+}
+
+.input-text:invalid {
+    border-left: 10px solid #f00; }
+
+.input-text:invalid + .label-helper::after {
+    color: #f00;
+    content: "X";
+    font-family: arial;
+    font-size: 12px;
+    line-height: 1;
+    padding-left: 12px; 
+}
+
+.input-text:not(:placeholder-shown) + .label-helper,
+.input-text:focus + .label-helper,
+.input-text:invalid + .label-helper {
+  bottom: 95%;
+  font-family: arial;
+  font-size: 12px;
+  line-height: 1;
+  opacity: 1;
+  padding: 4px;
+}
+
+.input-text.input-filled + .label-helper {
+    bottom: 95%;
+    font-family: arial;
+    font-size: 14px;
+    line-height: 1;
+    opacity: 1;
+    padding: 4px;
+  }
+
+.span-text{
+    font-size: 12px;
+    margin-left: .3125rem;
+    color: #f95a00;
+}
+
+.btn-container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.regi-btn{
+    width: 18.75rem;
+    height: 4.375rem;
+    background-color: #4e5059;
+    border: 1px solid #4e5059;
+    color: #fff;
+    text-align: center;
+}
+
+/*  */
+.check-wrap{
+    border: 1px solid #dedede;
+}
+.all-check{
+    border-bottom: 1px solid #dedede;
+}
