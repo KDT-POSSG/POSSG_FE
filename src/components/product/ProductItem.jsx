@@ -30,6 +30,7 @@ function ProductItem({ product }) {
   }, []);
 
   return (
+    <div className='test'>
     <div className='product-item'>
 
       <div className='product-promotion'>
@@ -39,7 +40,9 @@ function ProductItem({ product }) {
       </div>
 
       <div className='product-image'>
-        <img src={product.imgUrl} alt={product.productName} />
+        <div className='product-image-box'>
+          <img src={product.imgUrl} alt={product.productName} />
+        </div>
       </div>
 
       <div className='product-name'>
@@ -72,6 +75,7 @@ function ProductItem({ product }) {
         남은 재고 : {product.stockQuantity} 개
       </div>
 
+    </div>
     </div>
   )
 }

@@ -15,6 +15,7 @@ function App() {
       <Header />
       <Routes>
           <Route path='/payment' element={<Payment />} />
+          <Route path='/product' element={<ProductList />} />
           <Route path='/inventory' element={<Inventory />} />
           <Route path='/employees' element={<Employees />} />
           <Route path='/register' element={<Register />} />
