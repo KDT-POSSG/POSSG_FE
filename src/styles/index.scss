@@ -1,3 +1,8 @@
 @import './base/reset';
 @import './base/variable';
 @import './base/common';
+
+@import './layout/header';
+
+@import './page/product.scss';
+@import './page/register.scss';
