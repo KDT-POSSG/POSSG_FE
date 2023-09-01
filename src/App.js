@@ -17,6 +17,7 @@ function App() {
           <Route path='/payment' element={<Payment />} />
           <Route path='/inventory' element={<Inventory />} />
           <Route path='/employees' element={<Employees />} />
+          <Route path='/register' element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
