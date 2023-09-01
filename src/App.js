@@ -7,7 +7,6 @@ import Register from './components/convenience/Register';
 import Inventory from './pages/Inventory';
 import Employees from './pages/Employees';
 import Payment from './pages/Payment';
-import './styles/layout/FullScreenDiv.css'
 import ProductList from 'pages/ProductList';
 
 function App() {
@@ -16,6 +15,8 @@ function App() {
       <Header />
       <Routes>
           <Route path='/payment' element={<Payment />} />
+          <Route path='/inventory' element={<Inventory />} />
+          <Route path='/employees' element={<Employees />} />
       </Routes>
     </BrowserRouter>
   );

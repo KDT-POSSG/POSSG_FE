@@ -1,0 +1,48 @@
+.Cardpay{
+   
+    
+    .modal-container{
+    
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+        .cardpay-top{
+        
+            padding-top: 40px;
+        }
+
+        .payment-amount-container{
+            text-align: center;
+            padding-top: 40px;
+            background-color: #ebebeb;
+            height: 12.5rem;
+            width: 25rem;
+            border-radius: 16px;
+            margin-top: 100px;
+
+            .payment-amount{
+                font-size: 1.5rem;
+            }
+            .payment-amount-value{
+                font-size: 3rem;
+                margin-top: 20px;
+            }
+        }
+
+        .cancel-btn{
+            background-color: #ffffff;
+            border: 1px solid red;
+            color : red;
+            border-radius: 1rem;
+            font-size: 1rem;
+            width: 200px;
+            height: 46px;
+            margin-top: 120px;
+        }
+    }
+
+}
+  
+

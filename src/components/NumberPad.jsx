@@ -1,4 +1,3 @@
-import "../styles/numberPad.css"
 
 function NumberPad({ onInputValueChange, selectedInputValue }) {
 
