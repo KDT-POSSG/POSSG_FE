@@ -7,7 +7,7 @@
   {
     "id": 2,
     "name": "시재 페이지",
-    "link": "#"
+    "link": "/inventory"
   },
   {
     "id": 3,
@@ -27,7 +27,7 @@
   {
     "id": 6,
     "name": "회원 페이지",
-    "link": "#"
+    "link": "/register"
   },
   {
     "id": 7,
@@ -37,7 +37,7 @@
   {
     "id": 8,
     "name": "직원 페이지",
-    "link": "#"
+    "link": "/employees"
   },
   {
     "id": 9,

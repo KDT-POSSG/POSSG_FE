@@ -1,17 +1,16 @@
 /* payment.css 파일 */
-.payment-title {
-    padding: 20px;
-    font-size: 2rem;
-}
+
 
 .payment-container {
     display: grid;
     grid-template-columns: 30% 70%;
     height: 100%;
+    width: 100vw; /* 뷰포트 가로 너비의 100%를 차지합니다. */
+    height:calc(100vh - 2.5rem); /* 뷰포트 세로 너비의 100%를 차지합니다. */
 }
 
+
 .product-list {
-    border: 1px solid #000000;
     text-align: center;
     position: relative;
 }
@@ -26,10 +25,9 @@
 }
 
 .payment-method {
-    border: 1px solid #000000;
     padding: 10px;
     text-align: center;
-    background-color: #0079f2;
+    background-color: #ebebeb;
     align-items: center; 
     display: flex;
     flex-direction: column;
@@ -57,7 +55,6 @@
     margin-top: 90px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 150px;
 }
 
 .division-payment-btn {
@@ -66,8 +63,9 @@
     cursor: pointer;
     border-radius: 1rem;
     width: 160px;
-    height: 56px;
+    height: 64px;
     font-weight: bold;
+    margin-left: 100px;
 }
 
 .membership-btn-container{
@@ -75,7 +73,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    margin-top: 130px;
+    margin-top: 100px;
 }
 
 .payment-method-btn-container{
