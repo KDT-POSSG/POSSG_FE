@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "value": "newest",
+    "title": "최신순"
+  },
+  {
+    "id": 2,
+    "value": "lowestPrice",
+    "title": "낮은가격순"
+  },
+  {
+    "id": 3,
+    "value": "highestPrice",
+    "title": "높은가격순"
+  },
+  {
+    "id": 4,
+    "value": "discountRate",
+    "title": "할인율높은순"
+  }
+]
