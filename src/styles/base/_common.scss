@@ -6,7 +6,18 @@
   letter-spacing: -0.025rem;
 }
 
-body {
+body,
+button,
+input,
+textarea,
+select,
+option {
   color: $color-gray;
   font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
 }
