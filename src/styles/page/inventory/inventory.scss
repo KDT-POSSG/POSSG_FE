@@ -1,74 +1,107 @@
-.inven-title {
-    padding: 20px;
-    font-size: 2rem;
+.inventory{
+
+    .inven-content {
+      padding: 1rem;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 40px;
+
+    .center-container {
+      display: flex;
+      justify-content: right;
+      margin-right: 160px;
+
+      .inven-btn {
+        background-color: transparent;
+        color: red;
+        border: 2px solid red;  
+        border-radius: 1rem;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 1rem;
+        width: 200px;
+        margin-top: 15px;
+    }
+      .inven-btn:hover {
+        background-color: red;
+        color: white;
+        transition: 0.3s;
+        font-weight: bold;
+      }
+
+    
+    }
+
+    .inventory-table {
+      padding :1em;
+      display: flex;
+      justify-content: center;
+
+      table {
+        border: 1px #a39485 solid;
+        font-size: 1.2rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,.25);
+        width: 85%;
+        border-collapse: collapse;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      
+      th {
+        text-align: center;
+      }
+        
+      thead {
+        font-weight: bold;
+        color: #fff;
+        background: $color-main;
+      }
+        
+       td, th {
+        padding: 1em .5em;
+        vertical-align: middle;
+      }
+        
+      td {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+        background: #fff;
+        cursor: pointer;
+      }
+
+      tr:hover td{
+        background-color: #f5f5f5;
+
+      }
+      
+      
+      a {
+        color: #73685d;
+      }
+    }
+  
+}
+  
+.drop-memo-container {
+  font-size: 1rem;
+  padding: 10px;
+
+  .drop-memo{
+    display: flex;  
+    margin-left: 60px;
+    cursor: default;
+  }
 }
 
-.inven-content {
-    padding: 1rem;
-    font-size: 1.5rem;
-    text-align: center;
-    margin-top: 40px;
 }
 
 
 
-.inven-btn {
-    background-color: transparent;
-    color: red;
-    border: 2px solid red;  
-    border-radius: 1rem;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    width: 200px;
-    margin-top: 15px;
-}
-
-.center-container {
-    display: flex;
-    justify-content: right;
-    margin-right: 160px;
-  }
 
 
-  .inventory-table {
-    padding :1em;
-    display: flex;
-    justify-content: center;
-  }
-  
-  table {
-    border: 1px #a39485 solid;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,.25);
-    width: 85%;
-    border-collapse: collapse;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  th {
-    text-align: center;
-  }
-    
-  thead {
-    font-weight: bold;
-    color: #fff;
-    background: #f0ba84;
-  }
-    
-   td, th {
-    padding: 1em .5em;
-    vertical-align: middle;
-  }
-    
-   td {
-    border-bottom: 1px solid rgba(0,0,0,.1);
-    background: #fff;
-  }
-  
-  a {
-    color: #73685d;
-  }
+
+
+ 
+
+ 
     
  
