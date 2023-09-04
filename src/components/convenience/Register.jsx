@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register(){
     // label JS
@@ -25,6 +26,8 @@ function Register(){
             https://velog.io/@leemember/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EC%9C%A0%ED%9A%A8%EC%84%B1-%EA%B2%80%EC%82%AC
             */}
 
+    const navi = useNavigate();
+
     // 상태관리 초기값 세팅
     const [account, setAccount] = useState({
         id: "",
@@ -40,7 +43,7 @@ function Register(){
     const [pwCheck, setPwCheck] = useState("");
     const [branchName, setBranchName] = useState("");
     const [repreName, setRepreName] = useState("");
-    const [phoneNum, setrphoneNum] = useState("");
+    const [phoneNum, setphoneNum] = useState("");
     const [num, setNum] = useState("");
 
     // 오류 메세지 전달 상태값 세팅
@@ -60,8 +63,10 @@ function Register(){
     const [isBranchName, setIsBranchName] = useState(false);
     const [isPhoneNum, setIsPhoneNum] = useState(false);
     const [isNum, setIsNum] = useState(false);
+    const [numVisible, setNumVisible] = useState(false); // 인증번호 입력칸 보이게
+    const [verificationCode, setVerificationCode] = useState(""); // 인증번호 상태
+
     const [formIsValid, setFormIsValid] = useState(false);
-    const [numVisible, setNumVisible] = useState(false);
 
     const checkFormValidity = () => {
         //어떤 입력 필드가 변경될 때마다 폼의 유효성을 확인하는 함수를 생성
@@ -90,15 +95,19 @@ function Register(){
         const currentId = e.target.value;
         setId(currentId);
         checkFormValidity();
-        const idReg = /^[a-z0-9]{6,16}$/;
-        //const idReg = /^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,16}$/;
+        const idReg1 = /^[a-z][a-z\d]{6,16}$/;
+        const idReg2 =  /[0-9]/;
         //console.log("currentId >> ", currentId) // 
-        if(!idReg.test(currentId)){
-            setIdMsg("아이디 형식을 확인해주세요");
+        if(idReg1.test(currentId)){
+            if(idReg2.test(currentId)){
+                //console.log("A");
+                setIdMsg("");
+                //setIsId(true);
+            }
+        }else{
+            //console.log("C");
+            setIdMsg("아이디는 6~16자의 소문자, 숫자만 입력해야합니다");
             setIsId(false);
-        }else if(idReg.test(currentId)){
-            setIdMsg("");
-            checkDuplicateId();
         }
     }
     
@@ -106,7 +115,7 @@ function Register(){
         const currentId = id;
         //console.log("currentId >> ", currentId);
         try {
-            const res = await axios.post(`http://10.10.10.134:3000/idcheck?userId=${currentId}`);
+            const res = await axios.post(`http://10.10.10.92:3000/idcheck?userId=${currentId}`);
             //console.log(res);
             if (res.data==="YES") {
                 console.log(res.data);
@@ -144,7 +153,7 @@ function Register(){
         const currentNum = accountNum;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://10.10.10.134:3000/keycheck?convKey=${currentNum}`);
+            const res = await axios.post(`http://10.10.10.92:3000/keycheck?convKey=${currentNum}`);
             //console.log("res >>> " + res.data);
             if(res.data==="YES"){
                 alert("OK");
@@ -191,11 +200,12 @@ function Register(){
     // 휴대폰 번호 유효성
     const onChangePhoneNum = (e) => {
         const currentPNum = e.target.value;
-        setrphoneNum(currentPNum);
+        setphoneNum(currentPNum);
         checkFormValidity();
-        const numRegExp = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/
+        const numRegExp = /^([0-9]{11})$/;
+        // /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/
         if (!numRegExp.test(currentPNum)) {
-            setphoneNumMsg("숫자, '-'만 입력해주세요");
+            setphoneNumMsg("숫자만 입력해주세요");
             setIsPhoneNum(false);
         }
         else {          
@@ -204,9 +214,31 @@ function Register(){
         }
       };
     
+    const onSendPhoneNum = async(e) => {
+        // 인증번호 보내기
+        //alert("클릭")
+        const currentNum = phoneNum; // 휴대폰번호 가져오기
+        //console.log(currentNum);
+        try{//to - 번호 / content - 아디
+            const res = await axios.post(`http://10.10.10.92:3000/regisend`, { to: currentNum });
+            //console.log("res >>> " + res.data);
+            if(res.data.statusCode === "202" && res.data.statusName === "success"){
+                alert("인증번호가 발송되었습니다");
+                setIsPhoneNum(true);
+                setNumVisible(true); // 인증번호 입력 필드를 보이도록 설정
+            }else{
+                alert("휴대폰번호를 확인해주세요");
+                setIsPhoneNum(false);
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     // 휴대폰 인증번호 유효성
     const onChangeNum = (e) => {
-        ///^[0-9]$
+        // 인증번호 입력
+        //^[0-9]$
         const currentNum = e.target.value;
         setNum(currentNum);
         checkFormValidity();
@@ -220,22 +252,36 @@ function Register(){
             setIsNum(true);
         }
     }
-
-    const onClickPhoneNum = async(e) => {
-        //alert("클릭")
-        const currentNum = accountNum;
-        //console.log(currentNum);
+    const onCheckNum = async (e) => { // 인증번호 폼데이터로 받아서 파람x
+        // 인증번호 확인
+        const currentNum = num;
+        console.log(currentNum);
         try{
-            const res = await axios.post(`http://10.10.10.134:3000/sendSms?phoneNumber=${currentNum}`);
-            //console.log("res >>> " + res.data);
+            // 폼 데이터 생성
+            const formData = new FormData();
+            formData.append("CodeNumber", currentNum);
+
+            // 요청을 보낼 때 Content-Type을 설정하고 폼 데이터를 전달
+            // const res = await axios.post("http://10.10.10.92:3000/Authentication", formData, {
+            //     headers: {
+            //         "Content-Type": "application/x-www-form-urlencoded",
+            //     },
+            // });
+            
+            const res = await axios.post("http://10.10.10.92:3000/Authentication", null, {
+                params: {
+                    CodeNumber: currentNum
+                },
+            });
+
+            // const res = await axios.post(`http://10.10.10.92:3000/Authentication`, {CodeNumber : currentNum});
             if(res.data==="YES"){
-                alert("OK");
-                setIsAccount(true);
-                // 인증번호 입력 필드를 보이도록 설정
-                setNumVisible(true);
+                alert("성공");
+                setVerificationCode(true);
             }else if(res.data==="NO"){
-                alert("지급번호를 확인해주세요");
-                setIsAccount(false);
+                // 인증 실패 처리
+                alert("실패");
+                setVerificationCode(false);
             }
         }catch(err){
             console.log(err);
@@ -244,18 +290,22 @@ function Register(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.134:3000/adduser", {
+        axios.post("http://10.10.10.92:3000/adduser", {
+            //userId,pwd,representativeName,branchName,phoneNumber,convKey
             "userId": id,
             "pwd": pw,
             "representativeName": repreName,
             "branchName": branchName,
             "phoneNumber": phoneNum,
-            "accountNum": accountNum,
+            "convKey": accountNum,
         })
         .then((res)=>{
             console.log(res.data);
             if(res.data==="YES"){
                 alert("회원가입성공");
+                // 로그인으로
+                navi("/login");
+                
             }else if(res.data==="NO"){
                 alert("회원가입실패");
             }
@@ -317,9 +367,9 @@ function Register(){
 
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="phoneNum" name="phoneNum" value={phoneNum} onChange={onChangePhoneNum} placeholder="휴대폰번호 (숫자, '-' 만 입력해주세요)" />
-                            <label className="label-helper" htmlFor="input">휴대폰번호 (숫자, '-' 만 입력해주세요)</label>
-                            <input className="input-button" onClick={onClickPhoneNum} type="button" value="인증번호받기" />
+                            <input type="text" className="input-text" id="phoneNum" name="phoneNum" value={phoneNum} onChange={onChangePhoneNum} placeholder="휴대폰번호 (숫자만 입력해주세요)" />
+                            <label className="label-helper" htmlFor="input">휴대폰번호 (숫자만 입력해주세요)</label>
+                            <input className="input-button" onClick={onSendPhoneNum} type="button" value="인증번호받기" />
                             <span className="span-text">{phoneNumMsg}</span>
                         </div>
                     </div>
@@ -329,7 +379,7 @@ function Register(){
                         <div className="input-container">
                             <input type="text" className="input-text" id="num" name="num" value={num} onChange={onChangeNum} placeholder="인증번호 (숫자 6자)" />
                             <label className="label-helper" htmlFor="input">인증번호 (숫자 6자)</label>
-                            <input className="input-button" type="button" value="인증번호확인" />
+                            <input className="input-button" onClick={onCheckNum} type="button" value="인증번호확인" />
                             <span className="span-text">{numMsg}</span>
                         </div>
                     </div>
@@ -368,9 +418,10 @@ function Register(){
                             </div>
                         </div>
                     </div> */}
-
-                    <div className="btn-container">
-                        <input className="regi-btn" type="submit" value="회원가입" disabled={!formIsValid} />
+                    <div className="form-row">
+                        <div className="btn-container">
+                            <input className="regi-btn" type="submit" value="회원가입" disabled={!formIsValid} />
+                        </div>
                     </div>
                 </form>
             </div>
