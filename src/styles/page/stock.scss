@@ -1,0 +1,21 @@
+.stock-page {
+  min-height: 100vh;
+  background-color: $color-back;
+  padding: 0vw 10vw;
+
+  .stock-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid blue;
+
+    .stock-top-search {
+      display: flex;
+    }
+  }
+
+  .stock-list {
+    background-color: $color-white;
+    text-align: center;
+  }
+}
