@@ -47,9 +47,9 @@ function EmployeeModal() {
         <input type="text" placeholder="성별"  onChange={(e) => setGender(e.target.value)} />
         <input type="tel" placeholder="전화번호"  onChange={(e) => setPhoneNumber(e.target.value)} />
         <input placeholder="고용일(예: 20230101)"  onChange={(e) => setHireDate(e.target.value)} />
-        <input placeholder="급여"  onChange={(e) => setSalary(parseInt(e.target.value, 10))} />
+        <input placeholder="급여"  onChange={(e) => setSalary(parseInt(e.target.value))} />
       </form>
-      <button onClick={handleSubmit}>제출</button>
+      <button onClick={ handleSubmit }>제출</button>
     </div>
   );
 }
