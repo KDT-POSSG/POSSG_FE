@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function EmployeeModal() {
+function AddEmployeeModal() {
   // 각 입력 필드에 대한 상태를 설정합니다.
   const [empName, setEmpName] = useState('');
   const [convSeq, setConvSeq] = useState(0);
@@ -13,7 +13,7 @@ function EmployeeModal() {
 
   // 제출 버튼을 누를 때 실행될 함수입니다.
   const handleSubmit = () => {
-    
+
     // 입력한 정보를 JSON 형식으로 만듭니다.
     const employeeData = {
       empName,
@@ -41,12 +41,12 @@ function EmployeeModal() {
     <div>
       <h1>직원 모달</h1>
       <form>
-        <input type="text" placeholder="이름" value={empName}  onChange={(e) => setEmpName(e.target.value)} />
-        <input type="number" placeholder="convSeq"  onChange={(e) => setConvSeq(parseInt(e.target.value))} />
-        <input placeholder="생년월일(예: 980123)"  onChange={(e) => setBirthDate(e.target.value)} />
-        <input type="text" placeholder="성별"  onChange={(e) => setGender(e.target.value)} />
-        <input type="tel" placeholder="전화번호"  onChange={(e) => setPhoneNumber(e.target.value)} />
-        <input placeholder="고용일(예: 20230101)"  onChange={(e) => setHireDate(e.target.value)} />
+        <input type="text" placeholder="이름" onChange={(e) => setEmpName(e.target.value)} />
+        <input type="number" placeholder="convSeq" onChange={(e) => setConvSeq(parseInt(e.target.value))} />
+        <input type="date" onChange={(e) => setBirthDate(e.target.value)} />
+        <input type="text" placeholder="성별" onChange={(e) => setGender(e.target.value)} />
+        <input type="tel" placeholder="전화번호" onChange={(e) => setPhoneNumber(e.target.value)} />
+        <input type="date" placeholder="고용일" onChange={(e) => setHireDate(e.target.value)} />
         <input placeholder="급여"  onChange={(e) => setSalary(parseInt(e.target.value))} />
       </form>
       <button onClick={ handleSubmit }>제출</button>
@@ -54,4 +54,4 @@ function EmployeeModal() {
   );
 }
 
-export default EmployeeModal;
+export default AddEmployeeModal;

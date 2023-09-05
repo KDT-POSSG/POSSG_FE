@@ -9,8 +9,11 @@ import Employees from './pages/Employees';
 import Payment from './pages/Payment';
 import ProductList from 'pages/ProductList';
 
+import AttendaceCheck from './components/employees/AttendanceCheck';
+
 function App() {
   return (
+    <>
     <BrowserRouter>
       <Header />
       <Routes>
@@ -21,6 +24,8 @@ function App() {
           <Route path='/register' element={<Register />} />
       </Routes>
     </BrowserRouter>
+    <AttendaceCheck/>
+    </>
   );
 }
 
