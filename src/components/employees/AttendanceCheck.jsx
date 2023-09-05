@@ -1,6 +1,5 @@
 import React from 'react';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Modal from '../Modal';
 import EmployeeSeq from './EmployeeSeq';
@@ -28,11 +27,10 @@ function AttendanceCehck(){
             <button onClick={() => openModal('attendance')}>출근</button>
             <button onClick={() => openModal('leavework')}>퇴근</button>
 
-            <Modal isOpen={modalIsOpen} onClose={closeModal}>
-                {workType === 'attendance' && <Attendace />}
-                {workType === 'leavework' && <LeaveWork />}
-                
-            </Modal>
+        <Modal isOpen={modalIsOpen} onClose={closeModal}>
+            {workType === 'attendance' && <Attendace onClose={closeModal} />}
+            {workType === 'leavework' && <LeaveWork onClose={closeModal} />}
+        </Modal>
         </div>
     )
 }

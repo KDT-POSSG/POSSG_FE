@@ -6,6 +6,7 @@ import './styles/index.scss';
 import Register from './components/convenience/Register';
 import Inventory from './pages/Inventory';
 import Employees from './pages/Employees';
+import EmployeeInfo from './components/employees/EmployeeInfo';
 import Payment from './pages/Payment';
 import ProductList from 'pages/ProductList';
 
@@ -20,7 +21,8 @@ function App() {
           <Route path='/payment' element={<Payment />} />
           <Route path='/product' element={<ProductList />} />
           <Route path='/inventory' element={<Inventory />} />
-          <Route path='/employees' element={<Employees />} />
+          <Route path='/employees/' element={<Employees />}/>
+          <Route path='/employeeInfo/:employeeSeq' element={<EmployeeInfo />} />
           <Route path='/register' element={<Register />} />
       </Routes>
     </BrowserRouter>

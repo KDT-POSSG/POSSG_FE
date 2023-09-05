@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 
-function LeaveWork() {
+function LeaveWork({onClose}) {
     const [employeeSeq, setEmployeeSeq] = useState(0);
     const [leavework, setLeaveWork] = useState('');
 
@@ -13,6 +13,8 @@ function LeaveWork() {
         .then((res)=> {
             setLeaveWork(res.data.leavework);
             console.log('퇴근 성공');
+            onClose();
+            
         })
         .catch((err)=>{
             console.log('Error Response:', err.response);

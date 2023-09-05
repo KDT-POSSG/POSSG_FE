@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 
 
-function Attendance() {
+function Attendance({onClose}) {
     const [employeeSeq, setEmployeeSeq] = useState(0);
     const [attendance, setAttendance] = useState('');
 
@@ -17,6 +17,7 @@ function Attendance() {
         .then((res)=> {
             setAttendance(res.data.attendance);
             console.log('출근 성공');
+            onClose();
         })
         .catch((err)=>{
             console.log('Error Response:', err.response);
