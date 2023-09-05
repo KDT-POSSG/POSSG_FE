@@ -13,6 +13,7 @@ import EmployeeInfo from './components/employees/EmployeeInfo';
 import Payment from './pages/Payment';
 import ProductList from 'pages/ProductList';
 import Login from 'components/convenience/Login';
+import Stock from 'pages/Stock';
 
 import AttendaceCheck from './components/employees/AttendanceCheck';
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/employeeInfo/:employeeSeq' element={<EmployeeInfo />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/stock' element={<Stock />} />
       </Routes>
     </BrowserRouter>
   );

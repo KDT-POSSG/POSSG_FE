@@ -1,0 +1,143 @@
+.stock-page {
+  background-color: $color-back;
+  padding: 3vw 10vw;
+  min-height: 100vh;
+
+  .stock-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .stock-page-title {
+      margin-bottom: 2rem;
+    }
+
+    /* stock nav */
+    .stock-top-nav {
+      display: flex;
+
+      .stock-search {
+        position: relative;
+        width: 30vw;
+        margin: 0 0.5rem;
+
+        > input {
+          background-color: $color-white;
+          border: 1px solid $color-border;
+          border-radius: 1rem;
+          padding: 0.5rem 1rem;
+          transition: $transition-cb2;
+          width: 100%;
+        }
+
+        > input::placeholder {
+          opacity: 0.8;
+        }
+  
+        > input:focus {
+          border: 1px solid $color-main;
+        }
+
+        > button {
+          position: absolute;
+          top: 0.5rem;
+          right: 8px;
+        }
+      }
+
+      .stock-sort {
+        position: relative;
+        border-radius: 1rem;
+        background-color: $color-white;
+
+        > select {
+          position: relative;
+          -o-appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          background: transparent;
+          border: 1px solid #ebebeb;
+          border-radius: 1rem;
+          padding: 0.5rem 2rem 0.5rem 1rem;
+          z-index: 2;
+          transition: $transition-cb2;
+        }
+
+        > select:hover {
+          cursor: pointer;
+          border: 1px solid $color-main;
+        }
+
+        > span {
+          position: absolute;
+          top: 0.5rem;
+          right: 8px;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  /* stock list */
+  .stock-grid-container {
+    background-color: $color-white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
+
+    .stock-grid {
+      display: grid;
+      grid-template-columns: 1fr 5fr 1fr 1fr;
+    }
+
+    .stock-grid-head {
+      font-weight: bold;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid $color-border;
+    }
+    
+    .stock-grid-item {
+      border-bottom: 1px solid $color-back;
+      padding: 0.5rem 0;
+
+      > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .stock-grid-name {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .sub-btn {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .stock-grid-sub-none {
+      height: 0;
+      max-height: 0;
+      line-height: 0;
+      padding: 0;
+      overflow: hidden;
+      transition: $transition-cb2;
+    }
+
+    .stock-grid-sub {
+      transition: $transition-cb2;
+      background-color: $color-back;
+      padding: 0.5rem 1rem;
+
+      .content {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
