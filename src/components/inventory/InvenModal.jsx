@@ -42,11 +42,12 @@ function InvenModal (props) {
         "memo": memo
       };
     
-    axios.post('http://10.10.10.148:3000/addsettlement', data)
+    axios.post('http://10.10.10.90:3000/addsettlement', data)
     .then((res) => {
       console.log(res.data);
       console.log('보내기 성공');
       props.updateLastTime(new Date(currentDateTime));
+      props.closeModal(); 
     }).catch((err) => {
       console.log(err);
       console.log('보내기 실패');
