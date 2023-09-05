@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { addComma } from '../../store/utils/function.js';
+import { promotion } from '../../store/utils/function.js';
 
 function ProductItem({ product }) {
 
@@ -7,31 +8,27 @@ function ProductItem({ product }) {
 
   useEffect(() => {
     
-    switch (product.promotionInfo) {
-      case 1:
-        setIsPromotion("");
-        break;
-      case 2:
-        setIsPromotion("세일");
-        break;
-      case 3:
-        setIsPromotion("덤증정");
-        break;
-      case 4:
-        setIsPromotion("1+1");
-        break;
-      case 5:
-        setIsPromotion("2+1");
-        break;
-      default:
-        break;
-    }
+    setIsPromotion(promotion(product.promotionInfo));
 
   }, []);
 
   return (
-    <div className='test'>
     <div className='product-item'>
+
+      {
+        product.stockQuantity === 0 ?
+        (
+          <div className='product-soldout'>
+            <div className='product-soldout-title'>품절</div>
+            <div>
+              <button>발주 요청하기</button>
+            </div>
+          </div>
+        )
+        :
+        (<></>)
+        
+      }
 
       <div className='product-promotion'>
         <div className={`promo promotion${product.promotionInfo}`}>
@@ -53,29 +50,28 @@ function ProductItem({ product }) {
         {
           product.price === product.priceDiscount ? 
           (
-            <div className='product-price-sale'>
+            <div className='product-price-normal'>
               {addComma(product.price)} 원
             </div>
           )
           :
           (
             <>
-            <div className='product-price-origin'>
-              {addComma(product.price)} 원
-            </div>
-            <div className='product-price-sale'>
-              {addComma(product.priceDiscount)} 원
-            </div>
-        </>
+              <div className='product-price-origin'>
+                {addComma(product.price)} 원
+              </div>
+              <div className='product-price-sale'>
+                {addComma(product.priceDiscount)} 원
+              </div>
+            </>
           )
         }
       </div>
 
-      <div>
+      <div className='product-stock'>
         남은 재고 : {product.stockQuantity} 개
       </div>
 
-    </div>
     </div>
   )
 }

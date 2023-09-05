@@ -10,7 +10,7 @@ function ProductNav({ keyword, setKeyword }) {
     setKeyword({...keyword, [e.target.name]: e.target.value});
   }
 
-  const handleSearchKeyword = (e) => {
+  const handleSearchText = (e) => {
     setSearch(e.target.value);
   }
 
@@ -18,10 +18,10 @@ function ProductNav({ keyword, setKeyword }) {
     <div className='product-nav'>
 
       <div className='product-nav-filter'>
-        {/* active-btn */}
         {
           productFilterDatas.map((item) => (
-            <button key={item.id} name={item.name} value={item.value} onClick={handleKeyword}>
+            <button key={item.id} name={item.name} value={item.value} onClick={handleKeyword}
+              className={keyword.promotionInfo == item.value ? "active-btn" : ""}>
               {item.title}
             </button>
           ))
@@ -29,7 +29,9 @@ function ProductNav({ keyword, setKeyword }) {
       </div>
 
       <div className='product-nav-search'>
-        <input type="text" placeholder='검색할 상품을 입력해주세요' value={search} onChange={handleSearchKeyword} />
+        {/* <input type="text" placeholder='검색할 상품을 입력해주세요' value={search} onChange={handleSearchText} /> */}
+        <input type="text" placeholder='검색할 상품을 입력해주세요' name='search' value={search} 
+                onChange={(e) => {setSearch(e.target.value); handleKeyword(e);} } />
         <button type='button' name='search' value={search} onClick={handleKeyword}>
           <span className="material-symbols-rounded product-search">search</span>
         </button>

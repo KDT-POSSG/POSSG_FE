@@ -7,130 +7,128 @@
     align-items: center;
     background-color: $color-back;
     padding: 5vw 10vw;
+    min-height: 100vh;
 
     // title
     .regi-title{
         font-size: 2rem;
         text-align: center;
-        margin: 3.125rem;
+        margin: 2.5rem;
     }
 
     // content
-    .regi-content{
+    .regi-content {
+        background-color: $color-back;
+        width: 100vw;
+        height: 100vh; 
         
         .form-row {
-            position: relative; 
-            width: 500px;
-        }
-
-        .form-block {
-            margin-bottom: 8px;
-            padding: 8px 12px; 
+            text-align: center;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            background-color: $color-back;
+            
         }
 
         .input-container {
             position: relative;
-            margin-bottom: 20px;
+            margin: 1.5rem 0;
             height: 60px;
         }
 
-        .input-text {
-            padding: 8px 4px;
-            // position: relative;
-            width: 100%;
-            z-index: 3; 
-            border: none;
-            border-bottom: 1px solid $color-gray;
+        input {
+            border: 1px solid $color-border;
+            border-radius: 32px;
+            padding: 1rem 1rem;
+            width: 40vw;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            border-color: $color-main;
+        }
+
+        label span {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            color: rgba($color: $color-gray, $alpha: 0.5);
+            transition: all 0.2s;
+        }
+
+        input:focus + label span,
+        input:valid + label span {
+            position: absolute;
+            top: -4px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            // font-weight: bold;
+            color: $color-main;
+            background: linear-gradient($color-back, $color-white);
+        }
+
+        .form-row button {
+            position: absolute;
+            top: 4px;
+            right: 5px;
+            padding: 14px 1.25rem;
+            background-color: $color-main;
+            color: $color-white;
+            // font-weight: bold;
+            border-radius: 32px;
+            font-size: 14px;
+        }
+
+        .p-text{
+            color: $color-point;
+            font-size: 12px;
+            text-align: left;
+            margin: 10px 20px;
             background-color: $color-back;
         }
 
-        .label-helper {
-            position: absolute;
-            opacity: 0;
-            transition: .1s bottom, .1s opacity;
-            bottom: 0;
-            left: 0;
-            z-index: 1; 
+        .btn-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $color-back;
+            padding: 1.5rem 0;
+        }
+
+        .btn-container button {
+            padding: 15px 1rem;
+            margin-bottom: 50px;
+            background-color: $color-main;
+            color: $color-white;
             font-weight: bold;
-        }
-        
-        .input-button{
-            position: absolute;
-            background-color: $color-main;
-            border: 1px solid $color-main;
-            color: color-gray;
-            text-align: center;
-            right: 1px;
-            bottom: 25px;
-        }
-          
-        .input-text:focus + .label-helper, .input-text:invalid + .label-helper {
-            bottom: 95%;
-            font-size: 12px;
-            line-height: 1;
-            opacity: 1;
-            padding: 4px; 
-        }
-        
-        .input-text:invalid {
-            border-left: 10px solid #f00; }
-        
-        .input-text:invalid + .label-helper::after {
-            color: #f00;
-            content: "X";
-            font-size: 12px;
-            line-height: 1;
-            padding-left: 12px; 
-        }
-        
-        .input-text:not(:placeholder-shown) + .label-helper,
-        .input-text:focus + .label-helper,
-        .input-text:invalid + .label-helper {
-          bottom: 95%;
-          font-size: 12px;
-          line-height: 1;
-          opacity: 1;
-          padding: 4px;
-        }
-        
-        .input-text.input-filled + .label-helper {
-            bottom: 95%;
-            font-size: 14px;
-            line-height: 1;
-            opacity: 1;
-            padding: 4px;
-          }
-        
-        .span-text{
-            font-size: 12px;
-            margin-left: .3125rem;
-            color: #f95a00;
-        }
-    }
-
-    // button
-    .btn-container{
-        display: flex;
-        justify-content: center;
-        margin-bottom: 5rem;
-
-        .regi-btn{
-            width: 18.75rem;
-            height: 4.375rem;
-            background-color: $color-main;
-            border: 1px solid $color-main;
-            color: color-gray;
-            text-align: center;
+            border-radius: 32px;
+            width: 20vw;
         }
     }
 }
 
-/* 
-.check-wrap{
-    border: 1px solid #dedede;
-}
-.all-check{
-    border-bottom: 1px solid #dedede;
+
+
+// /* 
+// .check-wrap{
+//     border: 1px solid #dedede;
+// }
+// .all-check{
+//     border-bottom: 1px solid #dedede;
+// }
+
+//  */
+
+label, button, span {
+    // font-size: 1rem !important;
+    // font-weight: normal !important;
 }
 
- */
+input:invalid + label {
+    // opacity: 0.8;
+}

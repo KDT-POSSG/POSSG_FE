@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 function HeaderToggle() {
 
@@ -6,6 +7,13 @@ function HeaderToggle() {
 
   const handleToggle = () => {
     setIsPos(!isPos);
+
+    // if(isPos) {
+    //   toast.success("POS 모드로 변경되었습니다");
+    // }
+    // else {
+    //   toast.success("KIOSK 모드로 변경되었습니다");
+    // }
   }
 
   return (
