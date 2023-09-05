@@ -22,7 +22,7 @@
         border-radius: 1rem;
         margin-right: 4px;
         padding: 0.5rem 1rem;
-        border: 1px solid #ebebeb;
+        border: 1px solid $color-border;
         transition: $transition-cb2;
       }
 
@@ -42,7 +42,7 @@
 
       > input {
         background-color: $color-white;
-        border: 1px solid #ebebeb;
+        border: 1px solid $color-border;
         border-radius: 1rem;
         padding: 0.5rem 1rem;
         transition: $transition-cb2;
@@ -84,14 +84,14 @@
         -moz-appearance: none;
         appearance: none;
         background: transparent;
-        border: 1px solid #ebebeb;
+        border: 1px solid $color-border;
         border-radius: 1rem;
         padding: 0.5rem 2rem 0.5rem 1rem;
         z-index: 2;
         transition: $transition-cb2;
       }
 
-      > select:hover, > span:hover {
+      > select:hover {
         cursor: pointer;
         border: 1px solid $color-main;
       }
@@ -122,7 +122,7 @@
     /* product item */
     .product-item:hover {
       transform: translate(-2px, -2px);
-      filter: drop-shadow(2px 2px 4px rgba(#ebebeb, $alpha: 0.8));
+      filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
       cursor: pointer;
     }
 
@@ -140,7 +140,7 @@
       justify-content: space-between;
       text-align: center;
       transition: $transition-cb2;
-      filter: drop-shadow(2px 2px 2px rgba(#ebebeb, $alpha: 0.5));
+      filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
 
       .product-soldout {
         position: absolute;
