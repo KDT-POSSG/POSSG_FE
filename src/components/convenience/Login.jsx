@@ -1,20 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function Login(){
-    // label JS
-    document.addEventListener('DOMContentLoaded', () => {
-        const input = document.getElementById('input');
-        input.addEventListener('input', () => {
-            if (input.value !== '') {
-                input.classList.add('input-filled');
-            } else {
-                input.classList.remove('input-filled');
-            }
-        });
-    });
+
+    const navi = useNavigate();
 
     // 상태관리 초기값 세팅
     const [id, setId] = useState("");
@@ -34,10 +26,7 @@ function Login(){
         const idIsValid = id.trim() !== "";
         const pwIsValid = pw.trim() !== "";
     
-        setFormIsValid(
-            idIsValid &&
-            pwIsValid 
-        );
+        setFormIsValid(idIsValid &&pwIsValid);
     };
 
 
@@ -84,17 +73,18 @@ function Login(){
             "pwd": pw,
         })
         .then((res)=>{
-            console.log(res.data);
-            // if(res.data==="YES"){
-            //     alert("로그인성공");
-            //     // 토큰저장
-            //     localStorage.setItem("id", res.data.id);
-            //     localStorage.setItem("pw", res.data.pw);
-            // }else if(res.data==="NO"){
-            //     alert("로그인실패");
-            // }
+            console.log(res);
+            if(res.status===200){
+                const { accessToken, refreshToken } = res.data;
+                localStorage.setItem("accessToken", accessToken);
+                localStorage.setItem("refreshToken", refreshToken);
+                //alert("로그인성공");
+                toast.success("로그인 되었습니다.");
+                navi("/");
+            }
         })
         .catch((err)=>{
+            toast.error("아이디 또는 비밀번호를 확인해주세요");
             console.log(err);
         })
     }
