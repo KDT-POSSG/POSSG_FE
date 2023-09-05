@@ -12,60 +12,55 @@ function Menu() {
   }
 
   return (
-    <div onClick={handleMenu}>
+    <div className='menu-container'>
 
-      <span className="material-symbols-rounded">menu</span>
+      <span className="material-symbols-rounded menu-icon" onClick={handleMenu}>menu</span>
 
-      {
-        isOpen ? 
-        <div className='header-menu-container'>
-          <div className='header-menu'>
+      <div className={isOpen ? 'menu-back' : 'menu-back menu-back-nonview'}>
+      </div>
 
-            <div className='logo-container'>
-              <div>
-                <img src={logo} alt="POSSG 로고" height="100%" />
-              </div>
-              <div>
-                <span className="material-symbols-rounded close-btn">close</span>
-              </div>
-            </div>
+      <div className={isOpen ? 'menu-left' : 'menu-left menu-left-nonview'}>
 
-            <div>
-              센텀시티점
-              <br /><br />
-            </div>
-            <hr />
-
-            <ul>
-            {
-              menuDatas.map((item) => (
-                item.id === 5 || item.id === 7 ? 
-                <React.Fragment key={item.id}>
-                  <Link to={item.link}>
-                    <li>{item.name}</li>
-                  </Link>
-                  <hr />
-                </React.Fragment>
-                :
-                <React.Fragment key={item.id}>
-                  <Link to={item.link}>
-                    <li>{item.name}</li>
-                  </Link>
-                </React.Fragment>
-              ))
-            }
-            </ul>
-
-            <hr />
-            <div className='header-menu-logout'>
-              로그아웃
-            </div>
-
+        <div className='logo-container'>
+          <div>
+            <img src={logo} alt="POSSG 로고" height="100%" />
+          </div>
+          <div>
+            <span className="material-symbols-rounded close-btn" onClick={handleMenu}>close</span>
           </div>
         </div>
-        :
-        <></>
-      }
+
+        <div>
+          센텀시티점
+          <br /><br />
+        </div>
+        <hr />
+
+        <ul>
+        {
+          menuDatas.map((item) => (
+            item.id === 5 || item.id === 7 ? 
+            <React.Fragment key={item.id}>
+              <Link to={item.link} onClick={handleMenu}>
+                <li>{item.name}</li>
+              </Link>
+              <hr />
+            </React.Fragment>
+            :
+            <React.Fragment key={item.id}>
+              <Link to={item.link} onClick={handleMenu}>
+                <li>{item.name}</li>
+              </Link>
+            </React.Fragment>
+          ))
+        }
+        </ul>
+
+        <hr />
+        <div className='header-menu-logout'>
+          로그아웃
+        </div>
+      </div>
 
     </div>
   )
