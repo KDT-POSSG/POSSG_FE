@@ -1,14 +1,14 @@
 import React from 'react';
-import Menu from '../ui/HeaderMenu';
+import HeaderMenu from '../ui/HeaderMenu';
 import HeaderToggle from '../ui/HeaderToggle';
-import Alarm from '../ui/HeaderAlarm';
+import HeaderAlarm from '../ui/HeaderAlarm';
 
 function Header() {
   return (
     <div className='possg-header'>
 
       <div>
-        <Menu />
+        <HeaderMenu />
       </div>
 
       <div>
@@ -16,7 +16,7 @@ function Header() {
       </div>
 
       <div>
-        <Alarm />
+        <HeaderAlarm />
       </div>
 
     </div>

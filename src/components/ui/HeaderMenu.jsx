@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import menuDatas from '../../assets/datas/menuDatas.json';
 import logo from '../../assets/svg/possg_logo.svg';
 
-function Menu() {
+function HeaderMenu() {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -66,4 +66,4 @@ function Menu() {
   )
 }
 
-export default Menu;
+export default HeaderMenu;
