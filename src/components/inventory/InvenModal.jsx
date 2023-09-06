@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import NumberPad from '../NumberPad';
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 
 function InvenModal (props) {
@@ -42,12 +43,13 @@ function InvenModal (props) {
         "memo": memo
       };
     
-    axios.post('http://10.10.10.90:3000/addsettlement', data)
+    axios.post('http://10.10.10.152:3000/addsettlement', data)
     .then((res) => {
       console.log(res.data);
       console.log('보내기 성공');
       props.updateLastTime(new Date(currentDateTime));
       props.closeModal(); 
+      toast.success("시재 추가 완료");
     }).catch((err) => {
       console.log(err);
       console.log('보내기 실패');
