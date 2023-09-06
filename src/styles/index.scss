@@ -7,8 +7,10 @@
 @import './page/product.scss';
 @import './page/stock/stock.scss';
 @import './page/stock/stockModal.scss';
-@import './page/register.scss';
-@import './page/login.scss';
+@import './page/convenience/register.scss';
+@import './page/convenience/login.scss';
+@import './page/convenience/myPage.scss';
+
 
 @import './page/inventory/invenModal.scss';
 @import './page/inventory/inventory.scss';
@@ -20,4 +22,5 @@
 @import './Modal.scss';
 @import './numberPad.scss';
 
+@import './page/employees/employeesinfo.scss';
 @import './page/employees/employees.scss';

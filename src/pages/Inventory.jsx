@@ -3,6 +3,8 @@ import Modal from '../components/Modal';
 import InvenModal from '../components/inventory/InvenModal';
 import axios from 'axios';
 import Pagination from "react-js-pagination"; // npm i react-js-pagination
+import { addComma } from 'store/utils/function';
+import { toast } from "react-hot-toast";
 
 
 function Inventory() {
@@ -21,7 +23,7 @@ function Inventory() {
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         setCurrentPageData(inventoryList.slice(start, end));
-    }, [inventoryList, page, itemsPerPage]);
+    }, [inventoryList, page, itemsPerPage]); 
 
     //시간
     useEffect( () => {
@@ -48,10 +50,11 @@ function Inventory() {
 
     //시재 리스트 불러오기
     useEffect(() => {
-        axios.get('http://10.10.10.90:3000/settlementlist', {params: {convSeq :1, page : page}}) //convSeq는 나중에 로그인한 지점의 seq로 변경
+        axios.get('http://10.10.10.152:3000/settlementlist', {params: {convSeq :1, page : page}}) //convSeq는 나중에 로그인한 지점의 seq로 변경
         .then((res) => {
             setInventoryList(res.data.settlement);
             setTotalCnt(res.data.cnt);
+            
         })
         .catch((err) => {
             console.log(err);
@@ -73,8 +76,8 @@ function Inventory() {
             <h1 className='page-title'>시재 관리</h1>
             <div className='inven-content'>
                 <h2 className='present-time'>현재 시간 : { formattedTime }</h2>
-            <div className='center-container'>
-                <button className='inven-btn' onClick={openModal}>시재 입력</button>
+            <div className='btn-container'>
+                <button className='inven-btn' onClick={ openModal }>시재 입력</button>
             </div>
                 <div className='inventory-table'>
                 <table>
@@ -90,11 +93,11 @@ function Inventory() {
                         {
                             currentPageData.map((item, index) => (
                                 <>
-                                <tr key={index} className="row" onClick={() => handleRowClick(index)}>
+                                <tr key={index} onClick={() => handleRowClick(index)}>
                                     <td>{item.seq}</td>
                                     <td>{item.convName}</td>
                                     <td>{item.rdate}</td>
-                                    <td>{item.cash}</td>
+                                    <td>{addComma(item.cash)}</td>
                                 </tr>
                                 {selectedRow === index && (
                                         <tr className='drop-memo-container'>
@@ -119,7 +122,7 @@ function Inventory() {
                 onChange={(pageNumber) => setPage(pageNumber)}
             />
 
-            <Modal isOpen={modalIsOpen} onClose={ closeModal }>
+            <Modal isOpen={modalIsOpen} onClose={ closeModal } >
                 <InvenModal updateLastTime={ updateLastTime } closeModal={ closeModal }/>
             </Modal>
         </div>
