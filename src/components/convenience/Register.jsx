@@ -381,7 +381,7 @@ function Register(){
                         </div>
                     </div>
 
-                    {/* {numVisible && ( */}
+                    {numVisible && (
                     <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="num" name="num" value={num} onChange={onChangeNum} required />
@@ -391,7 +391,7 @@ function Register(){
                             <p className="p-text">{numMsg}</p>
                         </div>
                     </div>
-                    {/* )} */}
+                    )}
 
                     {/* 약관동의 : 내용, 기능 좀 더 수정해야됨. 약관 필요할까? */}
                     {/* 
