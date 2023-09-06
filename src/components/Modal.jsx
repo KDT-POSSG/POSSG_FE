@@ -11,7 +11,9 @@ const Modal = ({ isOpen, onClose, children }) => {
       overlayClassName="modal-overlay"
     >
       <button className="modal-close" onClick={onClose}>
-        <span aria-hidden="true">×</span>
+        <span aria-hidden="true">
+          <span className="material-symbols-rounded">close</span>
+        </span>
       </button>
       {children}
     </ReactModal>
