@@ -16,6 +16,7 @@ import Login from 'components/convenience/Login';
 import Stock from 'pages/Stock';
 
 import AttendaceCheck from './components/employees/AttendanceCheck';
+import MyPage from 'components/convenience/Mypage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/stock' element={<Stock />} />
+        <Route path='/myPage' element={<MyPage />} />
       </Routes>
     </BrowserRouter>
   );
