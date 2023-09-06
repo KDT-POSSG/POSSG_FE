@@ -85,6 +85,7 @@
     padding: 2rem;
     text-align: center;
     border-radius: 1rem;
+    margin-bottom: 1.5rem;
     filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
 
     .stock-grid {
@@ -101,7 +102,7 @@
     
     .stock-grid-item {
       border-bottom: 1px solid $color-back;
-      padding: 0.5rem 0;
+      padding: 0.75rem 0;
 
       > div {
         display: flex;
@@ -116,8 +117,35 @@
 
         .sub-btn {
           cursor: pointer;
+          transition: all 0.5s;
+        }
+
+        .sub-btn-open {
+          transform: rotate(180deg);
+          cursor: pointer;
+          transition: all 0.5s;
         }
       }
+
+      .stock-add {
+        background-color: $color-white;
+        color: $color-main;
+        font-size: .75rem;
+        border: 1px solid $color-main;
+        border-radius: 2rem;
+        padding: 0.25rem 1rem;
+        transition: $transition-cb2;
+      }
+
+      .stock-add:hover {
+        background-color: $color-main;
+        color: $color-white;
+      }
+    }
+
+    .stock-sub-container {
+      background-color: $color-back;
+      border-radius: 0 0 0.5rem 0.5rem;
     }
 
     .stock-grid-sub-none {
@@ -126,13 +154,13 @@
       line-height: 0;
       padding: 0;
       overflow: hidden;
-      transition: $transition-cb2;
+      // transition: $transition-cb2;
     }
 
     .stock-grid-sub {
-      transition: $transition-cb2;
-      background-color: $color-back;
-      padding: 0.5rem 1rem;
+      height: auto;
+      padding: 0.5rem 1.5rem 0.5rem 1rem;
+      // transition: $transition-cb2;
 
       .content {
         display: flex;
