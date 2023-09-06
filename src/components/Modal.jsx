@@ -12,7 +12,9 @@ const Modal = ({ isOpen, onClose, children,style }) => {
       style={style}
     >
       <button className="modal-close" onClick={onClose}>
-        <span aria-hidden="true">×</span>
+        <span aria-hidden="true">
+          <span className="material-symbols-rounded">close</span>
+        </span>
       </button>
       {children}
     </ReactModal>

@@ -1,54 +1,113 @@
+// .pagination {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// ul {
+//   list-style: none;
+//   padding: 0;
+// }
+
+// ul.pagination li {
+//   display: inline-block;
+//   width: 30px;
+//   height: 30px;
+//   // border: 1px solid $color-border;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-size: 1rem;
+// }
+
+// ul.pagination li:first-child{
+//   // border-radius: 5px 0 0 5px;
+// }
+
+// ul.pagination li:last-child{
+//   // border-radius: 0 5px 5px 0;
+// }
+
+// ul.pagination li a {
+//   text-decoration: none;
+//   color: $color-gray;
+//   font-size: .875rem;
+//   transition: all 0.2s;
+// }
+
+// ul.pagination li.active a {
+//   color: $color-white;
+// }
+
+// ul.pagination li.active {
+//   background-color: $color-main;
+//   border-radius: 8px;
+//   pointer-events: none;
+//   // font-weight: bold;
+// }
+
+// ul.pagination li a:hover,
+// ul.pagination li a.active {
+//   color: $color-main;
+// }
+
+// .page-selection {
+//   width: 48px;
+//   height: 30px;
+//   color: $color-main;
+// }
+
+// =======
+
 .pagination {
-    display: flex;
-    justify-content: center;
-    
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  ul.pagination li {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+
+  li {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: 1px solid #e2e2e2;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
+
+    a {
+      text-decoration: none;
+      color: $color-gray;
+      font-size: .875rem;
+      transition: all 0.2s;
+    }
   }
 
-  ul.pagination li:first-child{
-    border-radius: 5px 0 0 5px;
-  }
-
-  ul.pagination li:last-child{
-    border-radius: 0 5px 5px 0;
-  }
-  
-  ul.pagination li a {
-    text-decoration: none;
-    color: #aaaaaa;
-    font-size: 1rem;
-  }
-  
-  ul.pagination li.active a {
-    color: rgb(5, 5, 5);
-  }
-
-  ul.pagination li.active {
+  li.active {
     background-color: $color-main;
+    border-radius: 8px;
+    pointer-events: none;
+
+    a {
+      color: $color-white;
+    }
+  }
+
+  li a:hover,
+  li a.active {
+    color: $color-main;
+  }
+
+  .page-btn {
+    padding-top: 2px;
+    transition: all 0.2s;
   }
   
-  ul.pagination li a:hover,
-  ul.pagination li a.active {
-    color: rgb(0, 0, 0);
+  .page-btn:hover {
+    color: $color-main;
   }
-  
-  .page-selection {
-    width: 48px;
-    height: 30px;
-    color: #337ab7;
-  }
+}
+
+.page-selection {
+  width: 48px;
+  height: 30px;
+  color: red;
+}
