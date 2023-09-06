@@ -42,32 +42,34 @@ function ProductList() {
   return (
     <div className='product-page'>
 
-      <div className='page-title product-page-title'>상품 페이지</div>
+      <div className='product-test'>
+        <div className='page-title product-page-title'>상품 페이지</div>
 
-      <div>
-        <ProductNav keyword={keyword} setKeyword={setKeyword} />
-      </div>
-
-      {
-        product && product.length === 0 ? 
-        (
-          <div className='product-noitem'>
-            해당하는 상품이 없습니다.
-          </div>
-        )
-        :
-        (<></>)
-      }
-
-      <div className='product-item-container'>
-        {/* <div className='product-item'>1</div> */}
+        <div>
+          <ProductNav keyword={keyword} setKeyword={setKeyword} />
+        </div>
 
         {
-          product && product.map((item) => (
-            <ProductItem key={item.productSeq} product={item} />
-          ))
+          product && product.length === 0 ? 
+          (
+            <div className='product-noitem'>
+              해당하는 상품이 없습니다.
+            </div>
+          )
+          :
+          (<></>)
         }
-        
+
+        <div className='product-item-container'>
+          {/* <div className='product-item'>1</div> */}
+
+          {
+            product && product.map((item) => (
+              <ProductItem key={item.productSeq} product={item} />
+            ))
+          }
+          
+        </div>
       </div>
 
     </div>
