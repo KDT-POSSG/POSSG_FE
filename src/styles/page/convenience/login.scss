@@ -5,126 +5,131 @@
     align-items: center;
     background-color: $color-back;
     padding: 5vw 10vw;
+    min-height: 100vh;
 
     // title
     .login-title{
         font-size: 2rem;
         text-align: center;
-        margin: 3.125rem;
+        margin: 2.5rem;
     }
 
     // content
     .login-content{
+        background-color: $color-back;
+        width: 100vw;
         
         .form-row {
-            position: relative; 
-            width: 500px;
-        }
-
-        .form-block {
-            margin-bottom: 8px;
-            padding: 8px 12px; 
+            text-align: center;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            background-color: $color-back;
         }
 
         .input-container {
             position: relative;
-            margin-bottom: 40px;
-            height: 60px;
+            margin: 1.5rem 0;
         }
 
-        .input-text {
-            padding: 8px 4px;
-            // position: relative;
-            width: 100%;
-            z-index: 3; 
-            border: none;
-            border-bottom: 1px solid $color-gray;
-            background-color: $color-back;
-        }
-
-        .label-helper {
-            position: absolute;
-            opacity: 0;
-            transition: .1s bottom, .1s opacity;
-            bottom: 0;
-            left: 0;
-            z-index: 1; 
-            font-weight: bold;
-        }
-        
-        .input-button{
-            position: absolute;
-            background-color: $color-border;
+        .input-container input {
             border: 1px solid $color-border;
-            color: $color-gray;
-            text-align: center;
-            right: 1px;
-            bottom: 25px;
+            border-radius: 32px;
+            padding: 1rem 1rem;
+            width: 30vw;
+            transition: all 0.2s;
         }
-          
-        .input-text:focus + .label-helper, .input-text:invalid + .label-helper {
-            bottom: 95%;
-            font-size: 12px;
-            line-height: 1;
-            opacity: 1;
-            padding: 4px; 
+
+        .input-container input:focus {
+            border-color: $color-main;
         }
-        
-        .input-text:invalid {
-            border-left: 10px solid #f00; }
-        
-        .input-text:invalid + .label-helper::after {
-            color: #f00;
-            content: "X";
-            font-size: 12px;
-            line-height: 1;
-            padding-left: 12px; 
+
+        .input-container label span {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            color: rgba($color: $color-gray, $alpha: 0.5);
+            transition: all 0.2s;
         }
-        
-        .input-text:not(:placeholder-shown) + .label-helper,
-        .input-text:focus + .label-helper,
-        .input-text:invalid + .label-helper {
-          bottom: 95%;
-          font-size: 12px;
-          line-height: 1;
-          opacity: 1;
-          padding: 4px;
-        }
-        
-        .input-text.input-filled + .label-helper {
-            bottom: 95%;
-            font-size: 14px;
-            line-height: 1;
-            opacity: 1;
-            padding: 4px;
-          }
-        
-        .span-text{
-            font-size: 12px;
-            margin-left: .3125rem;
-            color: #f95a00;
+
+        .input-container input:focus + label span,
+        .input-container input:valid + label span {
+            position: absolute;
+            top: -4px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            color: $color-main;
+            background: linear-gradient($color-back, $color-white);
         }
 
         // checkbox
         .check-container{
-            margin-bottom: 40px;
+            position: relative;
+            margin-right: 300px;
         }
+        
+        /* input 숨겨준다 */
+        input#saveLogin{
+            display:none;
+            position: absolute;
+            }
+        
+        input#saveLogin + label{
+            cursor:pointer;
+        }
+        
+        input#saveLogin + label > span{
+            vertical-align: middle;
+            padding-left: 5px;
+        }
+        
+        /* label:before에 체크하기 전 상태 CSS */
+        input#saveLogin + label:before{
+            content:"";
+            display:inline-block;
+            width:17px;
+            height:17px;
+            border:2px solid $color-main;
+            border-radius: 4px;
+            vertical-align:middle;
+            }
+            
+        /* label:before에 체크 된 상태 CSS */  
+        input#saveLogin:checked + label:before{
+            content:"";
+            background-color:$color-main;
+            border-color:$color-main;
+            //background-image: url('check_btn.png');
+            background-repeat: no-repeat;
+            background-position: 50%;
+            }
 
         // button
         .btn-container{
+            padding: 1.5rem 0;
+        }
+
+        .btn-container button{
+            margin-top: 1.5rem;
+            padding: 15px 1rem;
+            background-color: $color-main;
+            color: $color-white;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 32px;
+            width: 20vw;
+            cursor: pointer;
+        }
+
+        // link
+        .link-container{
             display: flex;
             justify-content: center;
-            margin-bottom: 40px;
-    
-            .login-btn{
-                width: 18.75rem;
-                height: 4.375rem;
-                background-color: $color-main;
-                border: 1px solid $color-main;
-                color: $color-gray;
-                font-weight: bold;
-                text-align: center;
-            }
+            padding-top: 20px;
         }
     }
 
