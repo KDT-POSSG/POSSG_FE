@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Alarm() {
+function HeaderAlarm() {
 
   const [isAlarm, setIsAlarm] = useState(true);
 
@@ -14,4 +14,4 @@ function Alarm() {
   )
 }
 
-export default Alarm;
+export default HeaderAlarm;
