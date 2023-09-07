@@ -1,6 +1,7 @@
+import axios from 'axios';
 import StockList from 'components/stock/StockList';
 import StockNav from 'components/stock/StockNav';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pagination from "react-js-pagination";
 
 function Stock() {
@@ -8,10 +9,29 @@ function Stock() {
   // const [totalCnt, setTotalCnt] = useState(10);
   const [page, setPage] = useState(1);  // 현재 페이지
   // const [itemsPerPage, setItemsPerPage] = useState(1);
+  const [stock, setStock] = useState([]);
 
   const handlePage = (pageNumber) => {
+    console.log("page >> ", page);
     setPage(pageNumber);
   }
+
+  useEffect(() => {
+
+    axios.get('http://10.10.10.81:3000/getAllProductStock', {
+        parmas: {
+          pageNumber: page
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        setStock(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+
+  }, [page]);
 
   return (
     <div className='stock-page'>
@@ -21,7 +41,7 @@ function Stock() {
         <StockNav />
       </div>
 
-      <StockList />
+      <StockList stock={stock} />
 
       <Pagination
         activePage={page}
