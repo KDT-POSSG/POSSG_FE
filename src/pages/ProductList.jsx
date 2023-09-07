@@ -8,7 +8,7 @@ function ProductList() {
 
   const [product, setProduct] = useState([]);
   const [keyword, setKeyword] = useState({
-    choice: "product_name",
+    choice: "productName",
     pageNumber: 0,
     promotionInfo: 0,
     search: null,

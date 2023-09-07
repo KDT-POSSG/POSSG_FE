@@ -1,13 +1,13 @@
 import React from 'react';
 
-function StockAddModal() {
+function StockAddModal({ name }) {
   return (
     <div className='stock-add-modal'>
 
       <div>
         <div>상품 이미지</div>
         <div>
-          상품 이름
+          {name}
           상품 가격
         </div>
       </div>
