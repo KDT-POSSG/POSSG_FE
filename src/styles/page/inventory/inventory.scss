@@ -1,5 +1,5 @@
 .inventory{
-
+  background-color: $color-back;
     .inven-content {
       padding: 1rem;
       font-size: 1.5rem;
@@ -77,6 +77,19 @@
       
       a {
         color: #73685d;
+      }
+
+      .drop-memo-hidden {
+        height: 0;
+        max-height: 0;
+        line-height: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      
+      .drop-memo-visible {
+        height: auto;
+        padding: 0.5rem;
       }
     }
   

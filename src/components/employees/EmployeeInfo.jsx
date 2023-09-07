@@ -50,13 +50,11 @@ function EmployeeInfo() {
             </div>
 
 
-
-
             <div className='employee-content'>
             <div className='center-container'>
                 <div className='employee-table'>
             <table>
-                <thead className='employee-header'>
+                <thead className=''>
                     <tr>
                        
                         <th>출근 시간</th>

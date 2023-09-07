@@ -46,38 +46,76 @@ function AddEmployeeModal({onAdd}) {
   };
 
   return (
-    <div>
-      <h1>직원 모달</h1>
-      <form>
-        <input type="text" placeholder="이름" onChange={(e) => setEmpName(e.target.value)} />
-        <input type="number" placeholder="convSeq" onChange={(e) => setConvSeq(parseInt(e.target.value))} />
-        <input placeholder="생년월일 ex)19980123" onChange={(e) => setBirthDate(e.target.value)} />
-        <div>
-          <label>
-            <input 
-              type="radio" 
-              value="남성" 
-              checked={gender === "남성"} 
-              onChange={(e) => setGender(e.target.value)}
-            />
-            남성
-          </label>
-          <label>
-            <input 
-              type="radio" 
-              value="여성" 
-              checked={gender === "여성"} 
-              onChange={(e) => setGender(e.target.value)}
-            />
-            여성
-          </label>
-        </div>
-        <input type="tel" placeholder="전화번호" onChange={(e) => setPhoneNumber(e.target.value)} />
-        <input placeholder="고용일 ex)20230901" onChange={(e) => setHireDate(e.target.value)} />
-        <input placeholder="급여"  onChange={(e) => setSalary(parseInt(e.target.value))} />
-      </form>
-      <button onClick={ handleSubmit }>직원 추가하기</button>
-    </div>
+    <div className="addemployeemodal">
+    <div className="regi-content">
+                
+                    <div className="form-row">
+                        <div className="input-container">
+                            <input className="input-text" onChange={(e) => setEmpName(e.target.value)} placeholder='이름' required />
+                            <label className="label-helper"><span class="material-symbols-rounded">person</span></label>
+                            
+                        </div>
+                    </div>
+                    
+                    <div className="form-row">
+                        <div className="input-container">
+                            <input type="text" className="input-text" onChange={(e) => setConvSeq(parseInt(e.target.value))} required />
+                            <label className="label-helper"><span>지점 번호</span></label>
+                           
+                        </div>
+                    </div>
+                    
+                    <div className="form-row">
+                      <div className='input-birth-container'>
+                        <div className="input-container">
+                            <input type="text" className="input-text" onChange={(e) => setBirthDate(e.target.value)} required />
+                            <label className="label-helper"><span>생년월일 (8자리 입력)</span></label>
+                        </div>
+                        <div className="input-gender">
+                          <input type="radio" vlaue="남성" onChange={(e) => setGender(e.target.value)} checked={gender === "남성"}/>
+                          <label htmlFor="gender-male">남성</label>
+                          <input type="radio" vlaue="여성" onChange={(e) => setGender(e.target.value)} checked={gender === "여성"} />
+                          <label htmlFor="gender-female">여성</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="input-container">
+                            <input type="text" className="input-text" onChange={(e) => setPhoneNumber(e.target.value)} required />
+                            <label className="label-helper"><span>연락처 ex.01056852833</span></label>
+                            
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="input-container">
+                            <input type="text" className="input-text" onChange={(e) => setHireDate(e.target.value)} required />
+                            <label className="label-helper"><span>고용 날짜 (8자리 입력)</span></label>
+                            
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="input-container">
+                            <input type="text" className="input-text" onChange={(e) => setSalary(parseInt(e.target.value))} required />
+                            <label className="label-helper"><span>시급</span></label>
+                            
+                        </div>
+                    </div>
+
+                    
+                   
+                    
+               
+
+                        <div className="btn-container">
+                            <button className="regi-btn" onClick={ handleSubmit } >저장</button>
+                            {/* <input className="regi-btn" type="submit" value="회원가입" disabled={!formIsValid} /> */}
+                        </div>
+                
+            </div>
+            </div>
   );
 }
 
