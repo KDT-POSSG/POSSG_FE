@@ -10,8 +10,20 @@ function StockList({ stock }) {
         <div>번호</div>
         <div>상품명</div>
         <div>재고 수량</div>
+        <div>개당 가격</div>
         <div>발주 추가</div>
       </div>
+
+      {
+        stock && stock.length === 0 ? 
+        (
+          <div>
+            해당하는 상품이 없습니다.
+          </div>
+        )
+        :
+        (<></>)
+      }
 
       {
         stock && stock.map((item, idx) => (
