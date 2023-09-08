@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import StockListItemSub from './StockListItemSub';
 import Modal from 'components/Modal';
 import StockAddModal from './StockAddModal';
+import { addComma } from 'store/utils/function';
 
 function StockListItemMain({ stock, idx }) {
 
@@ -33,6 +34,7 @@ function StockListItemMain({ stock, idx }) {
           </div>
         </div>
         <div>{stock.totalStock}</div>
+        <div>{addComma(stock.details[0].price)} 원</div>
         <div>
           <button type='button' className='stock-add' onClick={modalOpen}>발주 추가</button>
         </div>
@@ -47,8 +49,14 @@ function StockListItemMain({ stock, idx }) {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={modalClose}
-             style={{ content: { width: '30rem', height: '30rem' } }}>
-        <StockAddModal name={stock.product_name} />
+             style={{ content: { width: '30rem', height: 'auto' } }}>
+        <StockAddModal 
+          product_name={stock.product_name} 
+          img_url={stock.img_url} 
+          totalStock={stock.totalStock} 
+          price={stock.details[0].price} 
+          modalClose={modalClose}
+        />
       </Modal>
     </>
   )
