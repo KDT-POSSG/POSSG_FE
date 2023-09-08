@@ -46,3 +46,16 @@
   padding-top: 1rem;
   text-align: center;
 }
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
