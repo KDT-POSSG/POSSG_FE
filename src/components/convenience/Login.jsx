@@ -32,13 +32,12 @@ function Login(){
         axios.post("http://10.10.10.92:3000/login", {
             "userId": id,
             "pwd": pw,
-        })
+        },)
         .then((res)=>{
-            console.log(res);
+            //console.log(res.headers);
             if(res.status===200){
-                const { accessToken, refreshToken } = res.data;
-                localStorage.setItem("accessToken", accessToken);
-                localStorage.setItem("refreshToken", refreshToken);
+                const { accesstoken } = res.headers;
+                localStorage.setItem("accesstoken", accesstoken);
                 //alert("로그인성공");
                 toast.success("로그인 되었습니다.");
 
