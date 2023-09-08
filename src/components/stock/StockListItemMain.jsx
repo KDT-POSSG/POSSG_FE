@@ -47,7 +47,7 @@ function StockListItemMain({ stock, idx }) {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={modalClose}
-             style={{ content: { width: '30vw', height: '70vh' } }}>
+             style={{ content: { width: '30rem', height: '30rem' } }}>
         <StockAddModal name={stock.product_name} />
       </Modal>
     </>
