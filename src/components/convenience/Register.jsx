@@ -5,57 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
 function Register(){
-    // label JS
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const input = document.getElementById('input');
-    //     input.addEventListener('input', () => {
-    //         if (input.value !== '') {
-    //             input.classList.add('input-filled');
-    //         } else {
-    //             input.classList.remove('input-filled');
-    //         }
-    //     });
-    // });
-
-    // const input = document.getElementById("password-input");
-
-    // input.addEventListener("focus", () => {
-    // input.parentElement.querySelector("label span").style.top = "-5px";
-    // });
-
-    // input.addEventListener("blur", () => {
-    // if (input.value === "") {
-    //     input.parentElement.querySelector("label span").style.top = "18px";
-    // }
-    // });
-
-    // input.addEventListener("input", () => {
-    // if (input.value === "") {
-    //     input.parentElement.querySelector("label span").style.top = "18px";
-    // }
-    // });
-
-    {/* 
-            회원가입 유효성 참고 사이트
-            https://velog.io/@dev__note/react-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%ED%8F%BC-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EA%B8%B0%EB%B3%B8-%EA%B5%AC%EC%A1%B0%EC%99%80-%EC%9C%A0%ED%9A%A8%EC%84%B1-%EA%B2%80%EC%82%AC-%EC%84%B8%ED%8C%85
-            
-            아이디 중복 버튼 없이 아이디 체크
-            https://keeper.tistory.com/17
-
-            https://velog.io/@leemember/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EC%9C%A0%ED%9A%A8%EC%84%B1-%EA%B2%80%EC%82%AC
-            */}
 
     const navi = useNavigate();
 
     // 상태관리 초기값 세팅
-    const [account, setAccount] = useState({
-        id: "",
-        accountNum: "",
-        pw: "",
-        branchName: "",
-        repreName: "",
-        phoneNum: "",
-    });
     const [id, setId] = useState("");
     const [accountNum, setAccountNum] = useState("");
     const [pw, setPw] = useState("");
@@ -96,17 +49,18 @@ function Register(){
         const branchNameIsValid = branchName.trim() !== ""; 
         const repreNameIsValid = repreName.trim() !== "";
         const phoneNumIsValid = phoneNum.trim() !== "";
-    
+        
+
         setFormIsValid(
             idIsValid &&
             accountNumIsValid &&
             pwIsValid &&
             pwCheckIsValid &&
-            branchNameIsValid &&
-            repreNameIsValid &&
             phoneNumIsValid
         );
     };
+
+    //console.log(isId+"/"+isAccount+"/"+isPw+"/"+isPwCheck+"/"+isPhoneNum+"/"+isNum+"/");
 
     // 아이디 입력 & 아이디 중복체크
     const onChangeId = (e) => {
@@ -119,12 +73,10 @@ function Register(){
         //console.log("currentId >> ", currentId) // 
         if(idReg1.test(currentId)){
             if(idReg2.test(currentId)){
-                //console.log("A");
                 setIdMsg("");
                 //setIsId(true);
             }
         }else{
-            //console.log("C");
             setIdMsg("아이디는 6~16자의 소문자, 숫자만 입력해야합니다");
             setIsId(false);
         }
@@ -172,7 +124,7 @@ function Register(){
         const currentNum = accountNum;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://10.10.10.92:3000/keycheck?convKey=${currentNum}`);
+            const res = await axios.post(`http://10.10.10.92:3000/keyCheck?convKey=${currentNum}`);
             //console.log("res >>> " + res.data);
             if(res.data==="YES"){
                 toast.success("지급번호가 확인되었습니다");
@@ -239,7 +191,7 @@ function Register(){
         const currentNum = phoneNum; // 휴대폰번호 가져오기
         //console.log(currentNum);
         try{//to - 번호 / content - 아디
-            const res = await axios.post(`http://10.10.10.92:3000/regisend`, { to: currentNum });
+            const res = await axios.post(`http://10.10.10.92:3000/regiSend`, { to: currentNum });
             //console.log("res >>> " + res.data);
             if(res.data.statusCode === "202" && res.data.statusName === "success"){
                 toast.success("인증번호가 발송되었습니다");
@@ -295,7 +247,7 @@ function Register(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.92:3000/adduser", {
+        axios.post("http://10.10.10.92:3000/addUser", {
             //userId,pwd,representativeName,branchName,phoneNumber,convKey
             "userId": id,
             "pwd": pw,
@@ -329,7 +281,7 @@ function Register(){
                     <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="id" name="id" value={id} onChange={onChangeId} onBlur={checkDuplicateId} required />
-                            <label className="label-helper" htmlFor="id"><span>아이디 (소문자/숫자 6~16자)</span></label>
+                            <label className="label-helper" htmlFor="id"><span>아이디 (소문자+숫자 6~16자)</span></label>
                             <p className="p-text">{idMsg}</p>
                         </div>
                     </div>
@@ -338,34 +290,33 @@ function Register(){
                             <input type="text" className="input-text" id="accountNum" name="accountNum" onChange={onChangeAccountNum} required />
                             <label className="label-helper" htmlFor="accountNum"><span>본사 지급 번호 (숫자 16자)</span></label>
                             <button className="input-button" onClick={onClickAccountNum} type="button">번호 확인</button>
-                            {/* <input className="input-button" onClick={onClickAccountNum} type="button" value="지급번호확인" /> */}
                             <p className="p-text">{accountNumMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="pw" name="pw" value={pw} onChange={onChangePw} required />
-                            <label className="label-helper" htmlFor="pw"><span>비밀번호 (대소문자/숫자/특수문자 8자~16자)</span></label>
+                            <label className="label-helper" htmlFor="pw"><span>비밀번호 (대소문자+숫자+특수문자 8자~16자)</span></label>
                             <p className="p-text">{pwMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="pwCheck" name="pwCheck" value={pwCheck} onChange={onChangePwCheck} required />
-                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자/숫자/특수문자 8자~16자)</span></label>
+                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자+숫자+특수문자 8자~16자)</span></label>
                             <p className="p-text">{pwCheckMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="branchName" name="branchName" required />
+                            <input type="text" className="input-text" id="branchName" name="branchName" value={branchName} onChange={(e)=>{setBranchName(e.target.value)}} required />
                             <label className="label-helper" htmlFor="branchName"><span>지점명</span></label>
                             <p className="p-text">{branchNameMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="repreName" name="repreName" required />
+                            <input type="text" className="input-text" id="repreName" name="repreName" value={repreName} onChange={(e)=>{setRepreName(e.target.value)}} required />
                             <label className="label-helper" htmlFor="repreName"><span>대표자명</span></label>
                             <p className="p-text"></p>
                         </div>
@@ -376,7 +327,6 @@ function Register(){
                             <input type="text" className="input-text" id="phoneNum" name="phoneNum" value={phoneNum} onChange={onChangePhoneNum} required />
                             <label className="label-helper" htmlFor="phoneNum"><span>휴대폰번호 (숫자만 입력해주세요)</span></label>
                             <button className="input-button" onClick={onSendPhoneNum} type="button">인증 받기</button>
-                            {/* <input className="input-button" onClick={onSendPhoneNum} type="button" value="인증번호받기" /> */}
                             <p className="p-text">{phoneNumMsg}</p>
                         </div>
                     </div>
@@ -387,7 +337,6 @@ function Register(){
                             <input type="text" className="input-text" id="num" name="num" value={num} onChange={onChangeNum} required />
                             <label className="label-helper" htmlFor="num"><span>인증번호 (숫자 6자)</span></label>
                             <button className="input-button" onClick={onCheckNum} type="button">인증 확인</button>
-                            {/* <input className="input-button" onClick={onCheckNum} type="button" value="인증번호확인" /> */}
                             <p className="p-text">{numMsg}</p>
                         </div>
                     </div>

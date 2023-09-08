@@ -1,90 +1,85 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 function MyPage(){
 
-    const accessToken = localStorage.getItem("accessToken");
-    console.log(accessToken);
+    const navi = useNavigate();
+    const [accesstoken, setAccesstoken] = useState("");
+    const [userData, setUserData] = useState({});
 
-    // const mypage = (e) => {
+    const accesstokenStorage = localStorage.getItem("accesstoken");
+    //console.log("accesstokenStorage >>> " , accesstokenStorage); // 토큰
+
+    useEffect(() => {
+        if(accesstokenStorage){
+            // // 로컬스토리지에서 토큰가져오기
+            setAccesstoken(accesstokenStorage);
+            getUserData(accesstokenStorage);
+        }
+    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+
+    const getUserData = (accesstoken) => {
+        //console.log("b");
         axios.get("http://10.10.10.92:3000/myPage", {
             headers: {
-                accessToken: `Bearer ${accessToken}`, // 토큰을 헤더에 포함시킴
+                accessToken: `Bearer ${accesstoken}`,
             },
-          })
-          .then( (res) => {
-            console.log("res >>> ",res);
-            if(res.status===200){
-                // 서버에서 회원 정보를 가져온 후 처리
-                const userData = res.data; // 서버에서 받은 회원 정보
-                console.log("userData >>> ",userData);
-                // userData를 사용하여 원하는 정보를 가져올 수 있음
-                // const userId = userData.id;
-                // const userPassword = userData.password;
-            }
-            
-            
-
-            // 가져온 정보를 사용하여 필요한 작업을 수행
-          }).catch( (err) => {
+        })
+        .then( (res)=>{
+            //console.log("res >>> " , res);
+            setUserData(res.data);
+        })
+        .catch( (err)=>{
             console.log(err);
-          })
-    // }
-
-    // useEffect( ()=> {
-    //     mypage();
-    // })
-    
+        })
+    }
 
     return(
         <div className="mypage-content-wrap">
-            <div className="mypage-title">회원 정보 수정</div>
+            <div className="mypage-title">회원 정보</div>
         
+            
             <div className="mypage-content">
-                <form id="mypageForm" method="post" autoComplete="off">
+            <form id="regiForm" method="post" autoComplete="off" >
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="id" name="id" required />
-                            <label className="label-helper" htmlFor="id"><span>아이디고정</span></label>
+                            <input type="text" className="input-text" id="id" name="id" value={userData && userData.userId}  />
+                            <label className="label-helper" htmlFor="id"><span>아이디</span></label>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="password" className="input-text" id="pw" name="pw" required />
-                            <label className="label-helper" htmlFor="pw"><span>비밀번호 (대소문자/숫자/특수문자 8자~16자)</span></label>
+                            <input type="password" className="input-text" id="pw" name="pw" value="********" />
+                            <label className="label-helper" htmlFor="pw"><span>비밀번호</span></label>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="password" className="input-text" id="pwCheck" name="pwCheck" required />
-                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자/숫자/특수문자 8자~16자)</span></label>
+                            <input type="text" className="input-text" id="branchName" name="branchName" value={userData && userData.branchName} />
+                            <label className="label-helper" htmlFor="branchName"><span>지점명</span></label>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="branchName" name="branchName" required />
-                            <label className="label-helper" htmlFor="branchName"><span>지점명고정</span></label>
-                        </div>
-                    </div>
-                    <div className="form-row">
-                        <div className="input-container">
-                            <input type="text" className="input-text" id="repreName" name="repreName" required />
+                            <input type="text" className="input-text" id="repreName" name="repreName" value={userData && userData.representativeName} />
                             <label className="label-helper" htmlFor="repreName"><span>대표자명</span></label>
                         </div>
                     </div>
 
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="phoneNum" name="phoneNum" required />
-                            <label className="label-helper" htmlFor="phoneNum"><span>휴대폰번호 (숫자만 입력해주세요)</span></label>
+                            <input type="text" className="input-text" id="phoneNum" name="phoneNum" value={userData && userData.phoneNumber} />
+                            <label className="label-helper" htmlFor="phoneNum"><span>휴대폰번호</span></label>
                         </div>
                     </div>
 
                     
                         <div className="btn-container">
-                            <button className="mypage-btn" type="submit">수정</button>
+                            <Link to="/updateMypage"><button className="mypage-btn" type="button">회원정보수정</button></Link>
                         </div>
-                </form>
+                    </form>
             </div>
         </div>
     )

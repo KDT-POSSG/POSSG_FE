@@ -39,9 +39,9 @@
         input {
             border: 1px solid $color-border;
             border-radius: 32px;
-            padding: 1rem 1rem;
+            padding: 1rem 1.25rem;
             width: 40vw;
-            transition: all 0.2s;
+            //transition: all 0.2s;
         }
 
         input:focus {
@@ -50,12 +50,12 @@
 
         label span {
             position: absolute;
-            top: 18px;
+            top: -4px;
             left: 20px;
             padding: 0 4px;
             font-size: 1rem;
             color: rgba($color: $color-gray, $alpha: 0.5);
-            transition: all 0.2s;
+            //transition: all 0.2s;
         }
 
         input:focus + label span,
@@ -69,6 +69,7 @@
             color: $color-main;
             background: linear-gradient($color-back, $color-white);
         }
+
 
         .form-row button {
             position: absolute;

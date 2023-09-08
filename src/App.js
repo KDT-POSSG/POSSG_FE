@@ -17,6 +17,7 @@ import Stock from 'pages/Stock';
 
 import AttendaceCheck from './components/employees/AttendanceCheck';
 import MyPage from 'components/convenience/Mypage';
+import UpdateMyPage from 'components/convenience/UpdateMyPage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/stock' element={<Stock />} />
         <Route path='/myPage' element={<MyPage />} />
+        <Route path='/updateMyPage' element={<UpdateMyPage />} />
       </Routes>
     </BrowserRouter>
   );
