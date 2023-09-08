@@ -6,21 +6,28 @@ import Pagination from "react-js-pagination";
 
 function Stock() {
 
-  // const [totalCnt, setTotalCnt] = useState(10);
-  const [page, setPage] = useState(1);  // 현재 페이지
-  // const [itemsPerPage, setItemsPerPage] = useState(1);
   const [stock, setStock] = useState([]);
 
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("newest");
+
   const handlePage = (pageNumber) => {
-    console.log("page >> ", page);
     setPage(pageNumber);
   }
 
   useEffect(() => {
 
+    console.log("page - 1 >> ", page - 1);
+    console.log("search >> ", search);
+    console.log("filter >> ", filter);
+
     axios.get('http://10.10.10.81:3000/getAllProductStock', {
-        parmas: {
-          pageNumber: page
+        params: {
+          pageNumber: page - 1,
+          search: search,
+          sortOrder: filter,
+          pageSize: 10
         }
       })
       .then((response) => {
@@ -31,22 +38,22 @@ function Stock() {
         console.error(error);
       })
 
-  }, [page]);
+  }, [page, search, filter]);
 
   return (
     <div className='stock-page'>
       
       <div className='stock-top'>
         <div className='page-title stock-page-title'>재고 관리</div>
-        <StockNav />
+        <StockNav search={search} setSearch={setSearch} filter={filter} setFilter={setFilter} />
       </div>
 
-      <StockList stock={stock} />
+      <StockList stock={stock.ProductList} />
 
       <Pagination
         activePage={page}
-        itemsCountPerPage={10}
-        totalItemsCount={100}
+        itemsCountPerPage={1}
+        totalItemsCount={stock.pageProduct}
         pageRangeDisplayed={5}
         firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
         prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
