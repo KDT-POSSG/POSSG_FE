@@ -90,7 +90,7 @@
 
     .stock-grid {
       display: grid;
-      grid-template-columns: 1fr 5fr 1fr 1fr;
+      grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
     }
 
     .stock-grid-head {
@@ -159,12 +159,20 @@
 
     .stock-grid-sub {
       height: auto;
-      padding: 0.5rem 1.5rem 0.5rem 1rem;
-      // transition: $transition-cb2;
+      padding-bottom: 0.5rem;
 
       .content {
         display: flex;
         justify-content: space-between;
+        padding: 0.5rem 1.5rem 0.5rem 1rem;
+      }
+
+      .expiration-over {
+        color: $color-point;
+      }
+
+      .stock {
+        padding-top: 0.5rem;
       }
     }
   }

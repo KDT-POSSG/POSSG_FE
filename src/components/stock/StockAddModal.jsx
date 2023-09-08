@@ -1,19 +1,86 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { addComma } from 'store/utils/function';
 
-function StockAddModal() {
+function StockAddModal({ product_name, img_url, totalStock, price, modalClose }) {
+
+  const [addStock, setAddStock] = useState(1);
+
+  const handleAddStock = (e) => {
+
+    console.log(e.target.value);
+
+    if(e.target.value === "plus") {
+      setAddStock(addStock + 1);
+    }
+    else if(e.target.value === "minus") {
+      if(addStock <= 1) {
+        toast.error("수량은 1 미만이 될 수 없습니다");
+        return;
+      }
+      setAddStock(addStock - 1);
+    }
+    else {
+      if(e.target.value < 0) {
+        toast.error("수량은 1 미만이 될 수 없습니다");
+        return;
+      }
+      setAddStock(e.target.value);
+    }
+  }
+
+  const handleSubmitStock =() => {
+
+    if(addStock <= 0) {
+      toast.error("수량은 1 미만이 될 수 없습니다");
+      return;
+    }
+
+    modalClose();
+    // toast.success(`"${product_name}" 상품의 발주가 추가 되었습니다`);
+    toast.success(`발주가 추가 되었습니다`);
+  }
+
   return (
     <div className='stock-add-modal'>
 
-      <div>
-        <div>상품 이미지</div>
-        <div>
-          상품 이름
-          상품 가격
+      {/* <div>발주 추가</div> */}
+
+      <div className='add-modal-top'>
+        <div className='product-image'>
+          <img src={img_url} alt={product_name} />
+        </div>
+        <div className='product-info'>
+          <div className='name'>{product_name}</div>
+          <div className='stock-cnt'>현재 수량 : {totalStock} 개</div>
+          <div>개당 가격 : {addComma(price)} 원</div>
         </div>
       </div>
 
-      <div>
+      <div className='add-modal-input'>
+
+        <div className='process'>
+          
+          <button value="minus" onClick={handleAddStock} className='minus'>
+            <span className="material-symbols-rounded stock-calc">remove</span>
+          </button>
+
+          <input type="text" placeholder='추가 수량 입력' value={addStock} onChange={handleAddStock} /><br/>
+          
+          <button value="plus" onClick={handleAddStock} className='plus'>
+            <span className="material-symbols-rounded stock-calc">add</span>
+          </button>
+          
+        </div>
+
+        <div className='result'>
+          총 가격 : {addComma(price * addStock)} 원
+        </div>
         
+      </div>
+
+      <div className='add-modal-btn' onClick={handleAddStock}>
+        <button type='button' onClick={handleSubmitStock}>확인</button>
       </div>
 
     </div>

@@ -8,7 +8,7 @@ function ProductList() {
 
   const [product, setProduct] = useState([]);
   const [keyword, setKeyword] = useState({
-    choice: "product_name",
+    choice: "productName",
     pageNumber: 0,
     promotionInfo: 0,
     search: null,
@@ -50,7 +50,7 @@ function ProductList() {
         </div>
 
         {
-          product && product.length === 0 ? 
+          product.ProductList && product.ProductList.length === 0 ? 
           (
             <div className='product-noitem'>
               해당하는 상품이 없습니다.
@@ -64,7 +64,7 @@ function ProductList() {
           {/* <div className='product-item'>1</div> */}
 
           {
-            product && product.map((item) => (
+            product.ProductList && product.ProductList.map((item) => (
               <ProductItem key={item.productSeq} product={item} />
             ))
           }
