@@ -36,7 +36,6 @@ function StockNav({ search, setSearch, setFilter }) {
         </select>
         <span className="material-symbols-rounded">expand_more</span>
       </div>
-      {/* leastExpiry, mostExpiry, lowestPrice, highestPrice, discountRate, newest */}
 
     </div>
   )

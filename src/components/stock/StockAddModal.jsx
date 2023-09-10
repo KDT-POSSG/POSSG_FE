@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { addComma } from 'store/utils/function';
 
@@ -57,10 +57,11 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
         </div>
       </div>
 
+      <hr />
+
       <div className='add-modal-input'>
 
         <div className='process'>
-          
           <button value="minus" onClick={handleAddStock} className='minus'>
             <span className="material-symbols-rounded stock-calc">remove</span>
           </button>
@@ -70,14 +71,15 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
           <button value="plus" onClick={handleAddStock} className='plus'>
             <span className="material-symbols-rounded stock-calc">add</span>
           </button>
-          
         </div>
 
         <div className='result'>
-          총 가격 : {addComma(price * addStock)} 원
+          총합 : {addComma(price * addStock)} 원
         </div>
         
       </div>
+
+      <hr />
 
       <div className='add-modal-btn' onClick={handleAddStock}>
         <button type='button' onClick={handleSubmitStock}>확인</button>
