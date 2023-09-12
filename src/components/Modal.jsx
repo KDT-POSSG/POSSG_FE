@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 
-const Modal = ({ isOpen, onClose, children,style }) => {
+const Modal = ({ isOpen, onClose, children, style }) => {
   return (
     <ReactModal
       isOpen={isOpen}
