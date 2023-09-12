@@ -17,6 +17,7 @@ function Inventory() {
     const [page, setPage] = useState(1);  // 현재 페이지
     const [itemsPerPage, setItemsPerPage] = useState(5);  // 한 페이지에 5개 아이템
     const [currentPageData, setCurrentPageData] = useState([]);
+    
 
     //페이지
     useEffect(() => {
@@ -120,6 +121,10 @@ function Inventory() {
                 totalItemsCount={totalCnt}
                 pageRangeDisplayed={5}
                 onChange={(pageNumber) => setPage(pageNumber)}
+                firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
+                prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
+                nextPageText={<span className="material-symbols-rounded page-btn">chevron_right</span>}
+                lastPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_right</span>}
             />
 
             <Modal isOpen={modalIsOpen} onClose={ closeModal } >

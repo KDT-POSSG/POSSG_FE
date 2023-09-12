@@ -23,7 +23,7 @@ function Employees() {
      };
  
      const fetchEmployees = () => {
-      axios.get('http://10.10.10.152:3000/findallemployee', {params: {convSeq :1}})
+      axios.get('http://10.10.10.36:3000/findallemployee', {params: {convSeq :1}})
         .then((res) => {
             setEmployeeList(res.data);
             setTotalCnt(res.data.cnt);
@@ -47,16 +47,16 @@ function Employees() {
     return(
         <div className="employee">
           <div className="employee-header">
-          <div className='page-title'>직원 관리</div>
-          <button className='employee-btn' onClick={() => openModal('add')} >직원 추가</button>
+            <div className='page-title'>직원 관리</div>
+            <button className='employee-btn' onClick={() => openModal('add')} >직원 추가</button>
           </div>
-            <div className="employee-content">
-                <div className="center-container">
+          <div className="employee-content">
+            
 
                   <div className="employee-table">
                     
                     <table>
-                      <thead className="employee-header">
+                      <thead className="">
                         <tr>
                           <th>직원 번호</th>
                           <th>이름</th>
@@ -78,13 +78,13 @@ function Employees() {
                           <td>{employee.phoneNumber}</td>
                           <td>{employee.hireDate}</td>
                           <td>{employee.terminationDate}</td>
-                          <td><button className='' onClick={() => navigate(`/employeeInfo/${employee.employeeSeq}`)}>정보</button></td>
+                          <td><button className='employee-info-btn' onClick={() => navigate(`/employeeInfo/${employee.employeeSeq}`)}>정보 보기</button></td>
                         </tr>))}
                       </tbody>
                       
                     </table>
                   </div>
-                </div>
+                
             </div>
         
         <Modal isOpen={modalIsOpen} onClose={closeModal}>

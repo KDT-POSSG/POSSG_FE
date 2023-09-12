@@ -1,39 +1,65 @@
-.employeeinfo{
+.employeesinfo{
 
-  .employee-info{
+  .employee-information{
     display: flex;
-    justify-content: center;
     align-items: center;
-   
-
-    h2{
-      padding: 8px;
-    }
+    justify-content: center;
+    
+    margin-top: 50px;
+    
 
     .employee-img{
-      height: 500px
-      img{
-        height: 100%;
-      }
-    }
+      height: 300px;
+      width: 300px;
+      border: 1px #a39485 solid;
+      box-shadow: 0 2px 5px rgba(0,0,0,.25);
+      border-collapse: collapse;
+      border-radius: 5px;
+      border-radius: 1rem;
 
-    
+
+      img{
+        height: 300px;
+        width: 300px;
+        border-radius: 1rem;
+      }
+      
+    }
 
     .employee-info-container{
-    display: flex;
-    flex-direction: column;
-    font-size: 1rem;
-    margin-left: 20px;
-    }
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      margin-left: 50px;
+      font-weight: bold;
+      width: 600px;
   
+    h2{
+      padding: 12px;
+    }
+    .employee-name{
+      font-size: 2.3rem;
+
+    }
+    .employee-branch-container{
+      display: flex;
+      
+    }
     
+
+    }
   }
   
   .employee-content {
     font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    margin-top: 30px;
 
     .employee-btn {
-      background-color: transparent;
+      background-color: $color-white;
       color: red;
       border: 2px solid red;  
       border-radius: 1rem;
@@ -53,11 +79,7 @@
 
   .employee-table {
     padding :1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
+    width: 70%;
 
 
     table {
@@ -66,7 +88,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,.25);
       border-collapse: collapse;
       border-radius: 5px;
-      width: 80%;
+      width: 100%;
       overflow: hidden;
     }
     
@@ -106,11 +128,11 @@
     }
   }
   
-  .employee-btn-container{
-    display: flex;
-    justify-content: center;
+  // .employee-btn-container{
+  //   display: flex;
+  //   justify-content: center;
     
-  }
+  // }
   
   
 

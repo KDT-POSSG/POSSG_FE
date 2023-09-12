@@ -11,6 +11,7 @@ import Inventory from './pages/Inventory';
 import Employees from './pages/Employees';
 import EmployeeInfo from './components/employees/EmployeeInfo';
 import Payment from './pages/Payment';
+import Paymentlist from './pages/Paymentlist';
 import ProductList from 'pages/ProductList';
 import Login from 'components/convenience/Login';
 import Stock from 'pages/Stock';
@@ -30,6 +31,7 @@ function App() {
         {/* <Route path='/' element={<AttendaceCheck />} /> */}
         <Route path='/' element={<Home />} />
         <Route path='/payment' element={<Payment />} />
+        <Route path='/paymentlist' element={<Paymentlist />} />
         <Route path='/product' element={<ProductList />} />
         <Route path='/inventory' element={<Inventory />} />
         <Route path='/employees/' element={<Employees />}/>
