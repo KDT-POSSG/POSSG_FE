@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { addComma } from 'store/utils/function';
@@ -36,15 +37,32 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
       return;
     }
 
-    modalClose();
-    // toast.success(`"${product_name}" 상품의 발주가 추가 되었습니다`);
-    toast.success(`발주가 추가 되었습니다`);
+    axios.post('http://10.10.10.81:3000/addCallProductConv', null, {
+      params: {
+      productName: product_name,
+      branchName: "수영구 이마트",
+      amount: addStock
+    }})
+      .then((response) => {
+        console.log(response);
+
+        if(response.data === "YES") {
+          modalClose();
+          // toast.success(`"${product_name}" 상품의 발주가 추가 되었습니다`);
+          toast.success(`발주가 추가 되었습니다`);
+        }
+        else {
+          toast.error(`발주 추가에 실패했습니다`);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(`발주 추가에 실패했습니다`);
+      })
   }
 
   return (
     <div className='stock-add-modal'>
-
-      {/* <div>발주 추가</div> */}
 
       <div className='add-modal-top'>
         <div className='product-image'>
