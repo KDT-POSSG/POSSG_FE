@@ -3,19 +3,20 @@
         display: grid;
         grid-template-columns: 3fr 7fr;
         height: 100%;
-        width: 100vw; /* 뷰포트 가로 너비의 100%를 차지합니다. */
-        height:calc(100vh - 4rem); /* 뷰포트 세로 너비의 100%를 차지합니다. */
-
+        width: 100vw;
+       
         .paymentlist-menu{
             display: grid;
-            grid-template-rows: 80px 1fr 4fr;
+            // grid-template-rows: 5rem 18rem 40rem ;
+            grid-template-rows: 80px 1fr 5fr;
+            height: calc(100vh - 4rem);
 
             .paymentlist-title{
                 background-color: $color-white;
             }
     
             .paymentlist-search{
-                border: 1px solid black;
+                
 
                 .paymentlist-search-input{
                     height: 40px;
@@ -30,7 +31,7 @@
             }
     
             .paymentlist-content{
-                border: 1px solid black;
+               
                 .paymentlist-content-row{
                     display: flex;
                     padding: 12px 0;
@@ -69,62 +70,71 @@
 
         
         .paymentlist-information{
-            border: 1px solid black;
+            background-color: $color-back;
             display: grid;
-            grid-template-rows: 1fr 3fr;
+            grid-template-rows: 1fr 1fr 1fr;
         
             .paymentlist-information-header{
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 60px 40px;
-                padding-top: 2rem;
                 
-                .paymentlist-information-header-del{
+                .title{
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    color: #00b800;
-                }
-                .paymentlist-information-header-date{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 1rem;
-                    color: $color-gray;
-                }
-                .paymentlist-information-header-price{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 1.5rem;
-                    font-weight: bold;
+                    gap: 40rem;
                     padding-top: 4rem;
+                    .paymentlist-information-header-del{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 2.5rem;
+                        font-weight: bold;
+                    }
+                    .paymentlist-information-header-date{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: $color-gray;
+                    }
                 }
 
-            }
-        
-            .paymentlist-information-body{
-                display: grid;
-                height: 250px;
-                justify-items: center;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 150px 100px;
-                .paymentlist-information-body-price{
-                    grid-column-start: 1;
-                    grid-column-end: 3;
-                    font-size: 1.5rem;
+                .body{
+                    padding-left: 11rem;
+                    gap: 47rem;
+                    padding-top: 4rem;
+                    .paymentlist-information-header-price{
+                     
+                        align-items: center;
+                        font-size: 1.8rem;
+                        font-weight: bold;
+                        color: $color-main;
+                    }
+                    .paymentlist-information-header-price2{
+                        padding: 20px;
+                        align-items: center;
+                        font-size: 3rem;
+                        font-weight: bold;
+                        color: $color-gray;
+                    }
                 }
+            }
+
+            .paymentlist-information-body{
+                margin-top: 8rem;
+                display: flex;
+                justify-content: center;
+                gap: 4rem;
                 .paymentlist-information-body-btn{
                     background-color: $color-white;
                     color: $color-point;
                     border: 1px solid $color-point;  
                     border-radius: 1rem;
+                    padding: 10px 20px;
                     cursor: pointer;
-                    font-size: 1rem;
+                    font-size: 1.5rem;
                     width: 35rem;
-                    height: 3rem;
+                    height: 4rem;
                 }
                 .paymentlist-information-body-btn:hover {
                     background-color: $color-point;
@@ -133,7 +143,51 @@
                     font-weight: bold;
                   }
             }
+
+            .body2{
+                display: flex;
+                justify-self: center;
+                gap: 51rem;
+                margin-top: 6rem;
+                .paymentlist-information-body-method{
+                    display: flex;
+                    justify-content: center;
+                    font-size: 2rem;
+                    font-weight: bold;
+                    color: $color-main;
+                }
+                .paymentlist-information-body-method2{
+                    display: flex;
+                    justify-content: center;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: $color-gray;
+                }
+            }
+
+            .paymentlist-list{
+
+                .paymentlist-list-title{
+                    font-size: 2rem;
+                    font-weight: bold;
+                    padding-left: 184px;
+                }
+
+                .paymentlist-list-row{
+                    display: flex;
+                    justify-content: center;
+                    gap: 47rem;
+                    padding:30px;
+                    .paymentlist-list-row-name{
+                        font-size: 1.5rem;
+                    }
+                    .paymentlist-list-row-price{
+
+                    }
+                }
+            }
         
+            
         
         
         
