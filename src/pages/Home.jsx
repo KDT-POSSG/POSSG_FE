@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import homeMenuDatas from '../assets/datas/homeMenuDatas'
 import HomeItem from 'components/home/HomeItem';
+import HomeItemEdit from 'components/home/HomeItemEdit';
 
 function Home() {
+
+  const [homeMenu, setHomeMenu] = useState();
+
+  useEffect(() => {
+    setHomeMenu(homeMenuDatas);
+  }, []);
+
   return (
     <div className='home-page'>
       
@@ -21,10 +29,7 @@ function Home() {
             (<React.Fragment key={item.seq}></React.Fragment>)
           ))
         }
-        <div className='home-item home-edit'>
-          <span className="material-symbols-rounded home-add-icon">add_circle</span>
-          추가 및 편집
-        </div>
+        <HomeItemEdit />
       </div>
 
     </div>
