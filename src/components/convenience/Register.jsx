@@ -86,7 +86,7 @@ function Register(){
         const currentId = id;
         //console.log("currentId >> ", currentId);
         try {
-            const res = await axios.post(`http://10.10.10.92:3000/idcheck?userId=${currentId}`);
+            const res = await axios.post(`http://10.10.10.220:3000/idcheck?userId=${currentId}`);
             //console.log(res);
             if (res.data==="YES") {
                 console.log(res.data);
@@ -124,7 +124,7 @@ function Register(){
         const currentNum = accountNum;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://10.10.10.92:3000/keyCheck?convKey=${currentNum}`);
+            const res = await axios.post(`http://10.10.10.220:3000/keyCheck?convKey=${currentNum}`);
             //console.log("res >>> " + res.data);
             if(res.data==="YES"){
                 toast.success("지급번호가 확인되었습니다");
@@ -191,7 +191,7 @@ function Register(){
         const currentNum = phoneNum; // 휴대폰번호 가져오기
         //console.log(currentNum);
         try{//to - 번호 / content - 아디
-            const res = await axios.post(`http://10.10.10.92:3000/regiSend`, { to: currentNum });
+            const res = await axios.post(`http://10.10.10.220:3000/regiSend`, { to: currentNum });
             //console.log("res >>> " + res.data);
             if(res.data.statusCode === "202" && res.data.statusName === "success"){
                 toast.success("인증번호가 발송되었습니다");
@@ -228,7 +228,7 @@ function Register(){
         const currentNum = num;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://10.10.10.92:3000/Authentication?CodeNumber=${currentNum}`);
+            const res = await axios.post(`http://10.10.10.220:3000/Authentication?CodeNumber=${currentNum}`);
             //console.log("a");
             //console.log(res.data);
             if(res.data==="YES"){
@@ -247,7 +247,7 @@ function Register(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.92:3000/addUser", {
+        axios.post("http://10.10.10.220:3000/addUser", {
             //userId,pwd,representativeName,branchName,phoneNumber,convKey
             "userId": id,
             "pwd": pw,
