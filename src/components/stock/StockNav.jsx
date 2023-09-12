@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import stockSortDatas from '../../assets/datas/stockSortDatas.json'
 
 function StockNav({ search, setSearch, setFilter }) {
 
@@ -28,15 +29,14 @@ function StockNav({ search, setSearch, setFilter }) {
 
       <div className='stock-sort'>
         <select onChange={handleFilter}>
-          <option value="newest">최신순</option>
-          <option value="lowestPrice">낮은가격순</option>
-          <option value="highestPrice">높은가격순</option>
-          <option value="leastExpiry">유통기한짧은순</option>
-          <option value="mostExpiry">유통기한긴순</option>
+          {
+            stockSortDatas && stockSortDatas.map((item) => (
+              <option key={item.id} value={item.value}>{item.title}</option>
+            ))
+          }
         </select>
         <span className="material-symbols-rounded">expand_more</span>
       </div>
-      {/* leastExpiry, mostExpiry, lowestPrice, highestPrice, discountRate, newest */}
 
     </div>
   )

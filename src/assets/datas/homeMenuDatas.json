@@ -1,0 +1,56 @@
+[
+  {
+    "seq": 1,
+    "convSeq": 1,
+    "pageName": "결제 페이지",
+    "favoriteEnable": "enable"
+  },
+  {
+    "seq": 2,
+    "convSeq": 1,
+    "pageName": "시재 페이지",
+    "favoriteEnable": "enable"
+  },
+  {
+    "seq": 3,
+    "convSeq": 1,
+    "pageName": "재고 관리 페이지",
+    "favoriteEnable": "enable"
+  },
+  {
+    "seq": 4,
+    "convSeq": 1,
+    "pageName": "상품 페이지",
+    "favoriteEnable": "enable"
+  },
+  {
+    "seq": 5,
+    "convSeq": 1,
+    "pageName": "발주 페이지",
+    "favoriteEnable": "enable"
+  },
+  {
+    "seq": 6,
+    "convSeq": 1,
+    "pageName": "회원 페이지",
+    "favoriteEnable": "enable"
+  },
+  {
+    "seq": 7,
+    "convSeq": 1,
+    "pageName": "고객 페이지",
+    "favoriteEnable": "disable"
+  },
+  {
+    "seq": 8,
+    "convSeq": 1,
+    "pageName": "직원 페이지",
+    "favoriteEnable": "disable"
+  },
+  {
+    "seq": 9,
+    "convSeq": 1,
+    "pageName": "분석 페이지",
+    "favoriteEnable": "disable"
+  }
+]

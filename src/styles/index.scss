@@ -4,13 +4,17 @@
 
 @import './layout/header';
 
+@import './page/home/home.scss';
+@import './page/home/homeModal.scss';
 @import './page/product.scss';
 @import './page/stock/stock.scss';
 @import './page/stock/stockModal.scss';
+
 @import './page/convenience/register.scss';
 @import './page/convenience/login.scss';
 @import './page/convenience/myPage.scss';
 @import './page/convenience/findId.scss';
+@import './page/convenience/changePw.scss';
 
 
 @import './page/inventory/invenModal.scss';

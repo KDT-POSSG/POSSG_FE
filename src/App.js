@@ -19,6 +19,7 @@ import AttendaceCheck from './components/employees/AttendanceCheck';
 import MyPage from 'components/convenience/Mypage';
 import UpdateMyPage from 'components/convenience/UpdateMyPage';
 import FindId from 'components/convenience/FindId';
+import Home from 'pages/Home';
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
       <Toaster />
       <Header />
       <Routes>
-        <Route path='/' element={<AttendaceCheck />} />
+        {/* <Route path='/' element={<AttendaceCheck />} /> */}
+        <Route path='/' element={<Home />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/product' element={<ProductList />} />
         <Route path='/inventory' element={<Inventory />} />

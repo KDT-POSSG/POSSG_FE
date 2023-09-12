@@ -18,10 +18,6 @@ function Stock() {
 
   useEffect(() => {
 
-    console.log("page - 1 >> ", page - 1);
-    console.log("search >> ", search);
-    console.log("filter >> ", filter);
-
     axios.get('http://10.10.10.81:3000/getAllProductStock', {
         params: {
           pageNumber: page - 1,

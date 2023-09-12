@@ -29,7 +29,7 @@ function Login(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.92:3000/login", {
+        axios.post("http://10.10.10.220:3000/login", {
             "userId": id,
             "pwd": pw,
         },)
@@ -37,8 +37,11 @@ function Login(){
             //console.log(res.headers);
             if(res.status===200){
                 const { accesstoken } = res.headers;
+                const { convSeq, branchName } = res.data;
+                //console.log("res.data >>> ", res.data);
                 localStorage.setItem("accesstoken", accesstoken);
-                //alert("로그인성공");
+                localStorage.setItem("convSeq",convSeq);
+                localStorage.setItem("branchName",branchName);
                 toast.success("로그인 되었습니다.");
 
                 // 아이디 기억하기 옵션이 선택되었을 때, 쿠키에 아이디 저장
