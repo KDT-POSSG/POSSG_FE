@@ -18,10 +18,13 @@
 
 @import './page/payment/cardpay.scss';
 @import './page/payment/payment.scss';
+@import './page/payment/paymentlist.scss';
+
 
 @import './Modal.scss';
 @import './numberPad.scss';
 
 @import './page/employees/employeesinfo.scss';
 @import './page/employees/employees.scss';
-@import './page/employees/AddEmployeeModal.scss';
+@import './page/employees/addemployeemodal.scss';
+@import './page/employees/terminateemployeemodal.scss'

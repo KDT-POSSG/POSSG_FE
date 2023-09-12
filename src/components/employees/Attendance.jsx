@@ -13,10 +13,11 @@ function Attendance({onClose}) {
       };
 
     const handleclickAttendance = () =>{
-        axios.post('http://10.10.10.81:3000/attendance', attendancedata)
+        axios.post('http://10.10.10.36:3000/attendance', attendancedata)
         .then((res)=> {
             setAttendance(res.data.attendance);
             console.log('출근 성공');
+            
             onClose();
         })
         .catch((err)=>{

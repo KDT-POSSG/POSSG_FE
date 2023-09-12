@@ -5,7 +5,7 @@ import TerminateEmployeeModal from './TerminateEmployeeModal';
 
 function ModifyEmployeeModal(){
     const [modalIsOpen, setModalIsOpen] = useState(false);
-
+ 
     const openModal = (type) => {
         setModalIsOpen(true);
        };

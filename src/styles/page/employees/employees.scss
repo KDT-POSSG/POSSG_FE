@@ -5,9 +5,9 @@
         justify-content: space-around;
         
             .employee-btn {
-                background-color: transparent;
-                color: red;
-                border: 2px solid red;  
+                background-color: $color-white;
+                color: $color-point;
+                border: 1px solid $color-point;  
                 border-radius: 1rem;
                 padding: 10px 20px;
                 cursor: pointer;
@@ -16,7 +16,7 @@
                 margin-top: 15px;
               }
                 .employee-btn:hover {
-                  background-color: red;
+                  background-color: $color-point;
                   color: white;
                   transition: 0.3s;
                   font-weight: bold;

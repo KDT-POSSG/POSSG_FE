@@ -33,7 +33,7 @@ function AddEmployeeModal({onAdd}) {
     };
 
     // axios를 사용하여 서버에 데이터를 전송합니다.
-    axios.post('http://10.10.10.152:3000/addemployee', employeeData)
+    axios.post('http://10.10.10.81:3000/addemployee', employeeData)
       .then(response => {
         // 성공적으로 데이터를 보냈을 경우 실행될 코드
         console.log('데이터 성공적으로 전송', response);
@@ -61,7 +61,7 @@ function AddEmployeeModal({onAdd}) {
                     <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" onChange={(e) => setConvSeq(parseInt(e.target.value))} required />
-                            <label className="label-helper" htmlFor="pw"><span>지점 번호</span></label>
+                            <label className="label-helper" htmlFor="pw"><span>지점 번호 (추후 자동으로 받아오게)</span></label>
                            
                         </div>
                     </div>
