@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { addComma } from 'store/utils/function';
 
@@ -36,15 +37,32 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
       return;
     }
 
-    modalClose();
-    // toast.success(`"${product_name}" 상품의 발주가 추가 되었습니다`);
-    toast.success(`발주가 추가 되었습니다`);
+    axios.post('http://10.10.10.81:3000/addCallProductConv', null, {
+      params: {
+      productName: product_name,
+      branchName: "수영구 이마트",
+      amount: addStock
+    }})
+      .then((response) => {
+        console.log(response);
+
+        if(response.data === "YES") {
+          modalClose();
+          // toast.success(`"${product_name}" 상품의 발주가 추가 되었습니다`);
+          toast.success(`발주가 추가 되었습니다`);
+        }
+        else {
+          toast.error(`발주 추가에 실패했습니다`);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(`발주 추가에 실패했습니다`);
+      })
   }
 
   return (
     <div className='stock-add-modal'>
-
-      {/* <div>발주 추가</div> */}
 
       <div className='add-modal-top'>
         <div className='product-image'>
@@ -57,10 +75,11 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
         </div>
       </div>
 
+      <hr />
+
       <div className='add-modal-input'>
 
         <div className='process'>
-          
           <button value="minus" onClick={handleAddStock} className='minus'>
             <span className="material-symbols-rounded stock-calc">remove</span>
           </button>
@@ -70,14 +89,15 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
           <button value="plus" onClick={handleAddStock} className='plus'>
             <span className="material-symbols-rounded stock-calc">add</span>
           </button>
-          
         </div>
 
         <div className='result'>
-          총 가격 : {addComma(price * addStock)} 원
+          총합 : {addComma(price * addStock)} 원
         </div>
         
       </div>
+
+      <hr />
 
       <div className='add-modal-btn' onClick={handleAddStock}>
         <button type='button' onClick={handleSubmitStock}>확인</button>
