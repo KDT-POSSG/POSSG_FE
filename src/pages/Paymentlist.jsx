@@ -30,14 +30,65 @@ function Paymentlist()  {
                         <button className="paymentlist-search-btn">조회</button>
                     </div>
                     <div className="paymentlist-content">
-                    
+
                         <div className="paymentlist-content-row">
                             <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-row-info">
-                                <div className="paymentlist-content-price">5,000원</div>
-                                <div className="paymentlist-content-date">17:56</div>
-                                
-                            </div>
+                            <div className="paymentlist-content-price">5,000 원</div>
+                            <div className="paymentlist-content-date">17:56</div>
+                        </div>
+                       
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">현금</div>
+                            <div className="paymentlist-content-price">10,000 원</div>
+                            <div className="paymentlist-content-date">13:22</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">12,000 원</div>
+                            <div className="paymentlist-content-date">15:36</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">53,000 원</div>
+                            <div className="paymentlist-content-date">02:50</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">2,000 원</div>
+                            <div className="paymentlist-content-date">12:40</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">5,000 원</div>
+                            <div className="paymentlist-content-date">17:56</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">5,000원</div>
+                            <div className="paymentlist-content-date">17:56</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">5,000원</div>
+                            <div className="paymentlist-content-date">17:56</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">5,000원</div>
+                            <div className="paymentlist-content-date">17:56</div>
+                        </div>
+
+                       <div className="paymentlist-content-row">
+                            <div className="paymentlist-content-method">카드</div>
+                            <div className="paymentlist-content-price">5,000원</div>
+                            <div className="paymentlist-content-date">17:56</div>
                         </div>
                         
                     </div>
@@ -48,33 +99,92 @@ function Paymentlist()  {
                     <div className="paymentlist-information-header">
                         <div className="title">
                             <div className="paymentlist-information-header-del">결제 완료</div>
-                            <div className="paymentlist-information-header-date">2021-09-01 19:35</div>
+                            <div className="paymentlist-information-header-date">2023-09-01 19:35</div>
                         </div>
-                        <div className="body">
+                        <div className="body"> 
                             <div className="paymentlist-information-header-price">총 결제 금액</div>
-                            <div className="paymentlist-information-header-price2">5,000원</div>
+                            <div className="paymentlist-information-header-price2">5,000 원</div>
                         </div>
                         <hr/>
+                        <div className="paymentlist-information-body">
+                            <button className="paymentlist-information-body-btn">환불</button>
+                            <button className="paymentlist-information-body-btn">영수증 보기</button>
+                        </div>
                     </div>
 
-                    <div className="paymentlist-information-body">
-                        <button className="paymentlist-information-body-btn">환불</button>
-                        <button className="paymentlist-information-body-btn">영수증 보기</button>
-                    </div>
+                    
+                    
                     
 
                     <div className="body2">
                         <div className="paymentlist-information-body-method">결제 수단</div>
                         <div className="paymentlist-information-body-method2">카드</div>
                     </div>
+                    
 
                     <div className="paymentlist-list">
-                        <div className="paymentlist-list-title">결제내역</div>
+                        <div className="paymentlist-list-title">결제 내역</div>
                         <div className="paymentlist-list-row">
                             <div className="paymentlist-list-row-name">먹태깡 x2</div>
                             <div className="paymentlist-list-row-price">3,000 원</div>
                             
                         </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">자유시간</div>
+                            <div className="paymentlist-list-row-price">1,000 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">바나나맛 우유</div>
+                            <div className="paymentlist-list-row-price">2,000 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">파워에이드</div>
+                            <div className="paymentlist-list-row-price">1,900 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">새우깡</div>
+                            <div className="paymentlist-list-row-price">1,800 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
+                            <div className="paymentlist-list-row-price">3,000 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
+                            <div className="paymentlist-list-row-price">3,000 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
+                            <div className="paymentlist-list-row-price">3,000 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
+                            <div className="paymentlist-list-row-price">3,000 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
+                            <div className="paymentlist-list-row-price">3,000 원</div>
+                            
+                        </div>
+                        <div className="paymentlist-list-row">
+                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
+                            <div className="paymentlist-list-row-price">3,000 원</div>
+                            
+                        </div>
+
+                        
+                        
+                       
+                       
+                        
                     </div>
                 </div>
 
