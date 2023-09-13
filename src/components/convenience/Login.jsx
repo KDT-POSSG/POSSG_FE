@@ -99,7 +99,7 @@ function Login(){
                 </form>
                     <div className="link-container">
                         <Link to="#">아이디찾기</Link>&nbsp;&nbsp;|&nbsp;&nbsp;
-                        <Link to="#"> 비밀번호찾기</Link>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <Link to="/findPw"> 비밀번호찾기</Link>&nbsp;&nbsp;|&nbsp;&nbsp;
                         <Link to="/register">회원가입</Link>
                     </div>
             </div>

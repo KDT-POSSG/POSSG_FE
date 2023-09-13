@@ -21,6 +21,7 @@ import MyPage from 'components/convenience/Mypage';
 import UpdateMyPage from 'components/convenience/UpdateMyPage';
 import FindId from 'components/convenience/FindId';
 import Home from 'pages/Home';
+import FindPw from 'components/convenience/FindPw';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path='/myPage' element={<MyPage />} />
         <Route path='/updateMyPage' element={<UpdateMyPage />} />
         <Route path='/findId' element={<FindId />} />
+        <Route path='/findPw' element={<FindPw />} />
       </Routes>
     </BrowserRouter>
   );
