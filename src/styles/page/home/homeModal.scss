@@ -1,5 +1,4 @@
 .home-modal-container {
-  background-color: $color-back;
   width: 100%;
   height: 100%;
   padding: 2rem;
@@ -22,7 +21,7 @@
 
     .home-modal-left, 
     .home-modal-right {
-      width: 50%;
+      width: 40%;
       margin: 1rem;
 
       .modal-item-container {
