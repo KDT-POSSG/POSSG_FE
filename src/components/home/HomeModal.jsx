@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import homeMenuDatas from '../../assets/datas/homeMenuDatas'
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
-function HomeModal() {
+function HomeModal({ modalClose }) {
 
   const [homeMenu, setHomeMenu] = useState([]);
   const [enabledItems, setEnabledItems] = useState([]);
@@ -21,15 +23,49 @@ function HomeModal() {
     console.log("disabled >> ", disabled);
   }, [homeMenu]);
 
-  const handleMoveToRight = (item) => {
-    setEnabledItems(prevItems => [...prevItems, item]);
-    setDisabledItems(prevItems => prevItems.filter(disabledItem => disabledItem !== item));
-  };
-
   const handleMoveToLeft = (item) => {
-    setDisabledItems(prevItems => [...prevItems, item]);
-    setEnabledItems(prevItems => prevItems.filter(enabledItem => enabledItem !== item));
-  };
+
+    const updatedDisabledItems = disabledItems.filter(disabledItem => disabledItem !== item);
+    setDisabledItems(updatedDisabledItems);
+    
+    const updatedEnabledItems = [...enabledItems, item];
+    setEnabledItems(updatedEnabledItems);
+  }
+  
+  const handleMoveToRight = (item) => {
+    
+    const updatedEnabledItems = enabledItems.filter(enabledItem => enabledItem !== item);
+    setEnabledItems(updatedEnabledItems);
+    
+    const updatedDisabledItems = [...disabledItems, item];
+    setDisabledItems(updatedDisabledItems);
+  }
+
+  const handleSubmit = () => {
+
+    const menuSeq = [];
+
+    for(let i = 0; i < enabledItems.length; i++) {
+      menuSeq.push(enabledItems[i].seq);
+    }
+    console.log("menuSeq >> ", menuSeq);
+    modalClose();
+    toast.success("즐겨찾기 메뉴가 수정되었습니다");
+
+    // axios.post('http://10.10.10.81:3000/addFavoritePage', {
+    //     convSeq: "1",
+    //     seqList: menuSeq
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     modalClose();
+    //     toast.success("즐겨찾기 메뉴가 수정되었습니다");
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     toast.error("즐겨찾기 메뉴 수정에 실패했습니다");
+    //   })
+  }
 
   return (
     <div className='home-modal-container'>
@@ -44,7 +80,7 @@ function HomeModal() {
               enabledItems && enabledItems.map((item) => (
                 <React.Fragment key={item.seq}>
                   <div className='home-modal-item enable'>
-                    <div className='enable-circle' onClick={() => handleMoveToLeft(item)}>
+                    <div className='enable-circle' onClick={() => handleMoveToRight(item)}>
                       <span className="material-symbols-rounded">remove</span>
                     </div>
                     <div>{item.pageName}</div>
@@ -64,7 +100,7 @@ function HomeModal() {
               disabledItems && disabledItems.map((item) => (
                 <React.Fragment key={item.seq}>
                   <div className='home-modal-item disable'>
-                    <div className='disable-circle' onClick={() => handleMoveToRight(item)}>
+                    <div className='disable-circle' onClick={() => handleMoveToLeft(item)}>
                       <span className="material-symbols-rounded">add</span>
                     </div>
                     <div>{item.pageName}</div>
@@ -79,7 +115,7 @@ function HomeModal() {
       </div>
 
       <div className='home-modal-confirm'>
-        <button>확인</button>
+        <button onClick={handleSubmit}>확인</button>
       </div>
 
     </div>
