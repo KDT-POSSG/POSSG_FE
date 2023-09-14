@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "components/Modal";
 import FindIdInfo from "./FindIdInfo";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 function FindId(){
     // 상태관리 초기값 세팅
@@ -75,6 +76,11 @@ function FindId(){
                         style={{ content: { width: '30rem', height: 'auto' } }}>
                             <FindIdInfo findId={findId} />
                     </Modal>
+                    <div className="link-container">
+                        <Link to="/findPw">비밀번호찾기</Link>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <Link to="/login">로그인</Link>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        <Link to="/register">회원가입</Link>
+                    </div>
             </div>
         </div>
     )

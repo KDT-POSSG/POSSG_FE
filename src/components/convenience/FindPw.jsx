@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
+import Modal from "components/Modal";
+import FindPwInfo from "./FindPwInfo";
+
 function FindPw(){
     // 상태관리 초기값 세팅
     const [id, setId] = useState("");
@@ -12,6 +15,19 @@ function FindPw(){
     // 오류 메세지 전달 상태값 세팅
     const [phoneNumMsg, setphoneNumMsg] = useState(""); //폰번호
     const [numMsg, setNumMsg] = useState(""); //인증번호
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [findPw, setFindPw] = useState(null);
+
+    // 모달
+    const openModal = () => {
+        setFindPw(id);
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
 
     // 유효성 검사
     const [isId, setIsId] = useState(false); // 아이디
@@ -72,7 +88,8 @@ function FindPw(){
         console.log(currentNum);
         try{//to - 번호 / content - 아디
             const res = await axios.post(`http://10.10.10.220:3000/send`, { to: currentNum, content : currentId });
-            console.log("res >>> " + res.data);
+            console.log("res >>> " + res);
+            console.log("res.data >>> " + res.data);
             if(res.data.statusCode === "202" && res.data.statusName === "success"){
                 toast.success("인증번호가 발송되었습니다");
             }else{
@@ -108,8 +125,6 @@ function FindPw(){
         //console.log(currentNum);
         try{
             const res = await axios.post(`http://10.10.10.220:3000/Authentication?CodeNumber=${currentNum}`);
-            //console.log("a");
-            //console.log(res.data);
             if(res.data==="YES"){
                 //alert("성공");
                 toast.success("휴대폰 인증에 성공하였습니다")
@@ -124,6 +139,8 @@ function FindPw(){
         }
     }
 
+
+
     return(
         <div className="find-content-wrap">
             <div className="find-title">비밀번호 찾기</div>
@@ -133,7 +150,7 @@ function FindPw(){
                 <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="id" name="id" value={id} onChange={onChangeId} required />
-                            <label className="label-helper" htmlFor="id"><span>아이디 (소문자+숫자 6~16자)</span></label>
+                            <label className="label-helper" htmlFor="id"><span>아이디</span></label>
                             {/* <p className="p-text">{idMsg}</p> */}
                         </div>
                     </div>
@@ -156,7 +173,8 @@ function FindPw(){
                     </div>
                     <div className="form-row">
                         <div className="btn-container">
-                            <button type="submit" disabled={!formIsValid}>찾기</button>
+                            <button type="button" disabled={!formIsValid} onClick={() => openModal()}>찾기</button>
+                            {/* disabled={!formIsValid} */}
                         </div>
                     </div>
                 </form>
@@ -165,6 +183,10 @@ function FindPw(){
                         <Link to="/login">로그인</Link>&nbsp;&nbsp;|&nbsp;&nbsp;
                         <Link to="/register">회원가입</Link>
                     </div>
+                    <Modal isOpen={modalIsOpen} onClose={closeModal}
+                        style={{ content: { width: '30rem', height: 'auto' } }}>
+                        <FindPwInfo setModalIsOpen={setModalIsOpen} />
+                    </Modal>
             </div>
         </div>
     )
