@@ -1,0 +1,109 @@
+.stock-add-modal {
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  hr {
+    width: 88%;
+    height: 0px;
+    border: 0.5px solid $color-border;
+  }
+
+  .add-modal-top {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+
+    .product-image {
+      text-align: right;
+
+      > img {
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-right: 2rem;
+      font-size: .875rem;
+
+      .name {
+        font-size: 1.125rem;
+        font-weight: bold;
+        margin-bottom: 0.75rem;
+        line-height: 1.5rem;
+      }
+
+      .stock-cnt {
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+
+  .add-modal-input {
+    width: 100%;
+
+    .process {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 8rem;
+      margin: 1rem auto;
+
+      > input {
+        border: none;
+        border: 1px solid $color-border;
+        border-radius: 2rem;
+        text-align: center;
+        padding: 0.5rem 2rem;
+        width: 100%;
+      }
+
+      .plus, .minus {
+        position: absolute;
+        align-items: center;
+        top: 10px;
+      }
+
+      .minus {
+        left: 0.75rem;
+      }
+
+      .plus {
+        right: 0.75rem;
+      }
+    }
+
+    .result {
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .stock-calc{
+      pointer-events: none;
+      font-size: 22px;
+    }
+  }
+
+  .add-modal-btn {
+
+    > button {
+      background-color: $color-main;
+      color: $color-white;
+      border-radius: 1rem;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      transition: $transition-cb2;
+    }
+
+    > button:hover {
+      background-color: #F0A20A;
+    }
+  }
+}

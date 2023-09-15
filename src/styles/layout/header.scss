@@ -1,0 +1,194 @@
+.possg-header {
+  background-color: $color-main;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  position: relative;
+  box-shadow: 0px 2px 16px 2px rgba($color-gray, $alpha: 0.2);
+
+  .material-symbols-rounded {
+    font-size: 2rem;
+    color: $color-white;
+    font-variation-settings:
+    'FILL' 100,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+
+  /* menu */
+  .menu-container {
+    position: relative;
+
+    .menu-icon, .close-btn {
+      cursor: pointer;
+    }
+  
+    .menu-back {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba($color-gray, $alpha: 0.5);
+      transition: all 0.5s;
+      z-index: 99;
+    }
+  
+    .menu-back-nonview {
+      display: none;
+    }
+  
+    .menu-left {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: $color-white;
+      width: 22.5rem;
+      min-height: 100vh;
+      padding: 1.875rem;
+      transition: all 0.5s;
+      z-index: 100;
+      box-shadow: 0px 2px 16px 2px rgba($color-gray, $alpha: 0.2);
+  
+      hr {
+        border: none;
+        background-color: $color-gray;
+        height: 1px;
+      }
+  
+      .logo-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0 3rem 0;
+  
+        .close-btn {
+          color: $color-gray;
+        }
+      }
+  
+      hr, li {
+        margin-bottom: 1.5rem;
+      }
+  
+      li {
+        padding-left: 4px;
+      }
+  
+      .header-menu-logout {
+        padding-left: 4px;
+      }
+    }
+  
+    .menu-left-nonview {
+      left: -40%;
+    }
+  }
+
+  /* toggle */
+  .toggle-base {
+    font-weight: bold;
+    position: relative;
+    width: 25rem;
+    height: 2.75rem;
+    border-radius: 50px;
+    background-color: $color-white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+
+    > div {
+      width: 50%;
+      text-align: center;
+    }
+  }
+
+  .toggle-both {
+    border: 1px solid $color-main;
+    position: absolute;
+    width: 5rem;
+    height: 2.5rem;
+    border-radius: 50px;
+    transition : all 0.5s;
+
+    .toggle-circle {
+      position: absolute;
+      top: 5px;
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50px;
+      background-color: $color-main;
+      transition : all 0.5s;
+      z-index: 2;
+      filter: drop-shadow(2px 2px 2px rgba($color-gray, $alpha: 0.2));
+    }
+
+    .toggle-circle-pos {
+      left: 4px;
+    }
+
+    .toggle-circle-kiosk {
+      left: 166px;
+    }
+  }
+
+  .toggle-pos {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+  }
+
+  .toggle-kiosk {
+    position: absolute;
+    top: 2px;
+    left: 198px;
+  }
+
+  .pos-text, .kiosk-text {
+    position: relative;
+  }
+
+  .toggle-lock {
+    color: rgba($color-gray, $alpha: 0.5);
+    font-size: small;
+    margin-right: 2px;
+  }
+
+  .toggle-lock-non {
+    color: rgba($color-main, $alpha: 0);
+    font-size: small;
+    margin-right: 2px;
+  }
+
+  .toggle-text {
+    color: rgba($color-gray, $alpha: 0.5);
+  }
+
+  /* alarm */
+  .header-alarm {
+    position: relative;
+
+    .alarm-dot {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50px;
+      background-color: $color-point;
+    }
+  }
+}
+
+// .possg-header {
+//   background-color: $color-white;
+//   filter: drop-shadow(0px 0px 2px rgba($color-gray, $alpha: 0.2));
+  
+//   .material-symbols-rounded {
+//     color: $color-main;
+//   }
+// }

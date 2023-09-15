@@ -1,0 +1,226 @@
+.paymentlist {
+    height: calc(100vh - 4rem);
+    hr{
+        border :none;
+        height: 1px;
+        background-color: $color-border;
+        margin-top: 1.25rem;
+    }
+    .paymentlist-container{
+        display: flex;
+        height: 100%;
+       
+        .paymentlist-menu{
+            width: 27%;
+            border-right: 1px solid $color-border;
+           
+
+            .paymentlist-title{
+                background-color: $color-white;
+                height: 10%;
+                padding: 0 1.5rem;
+                border-bottom: 2px solid $color-border;
+            }
+    
+            .paymentlist-search{
+                width: 100%;
+                height: 15%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0  1.5rem;
+                border-bottom: 2px solid $color-border;
+                .paymentlist-search-input{
+                    background-color: $color-white;
+                    border: 1px solid $color-border;
+                    border-radius: 0.5rem;
+                    padding: 0.5rem 1rem;
+                    transition: $transition-cb2;
+                    width: 100%;
+                    height: 30%;
+                }
+                .paymentlist-search-input::placeholder {
+                    opacity: 0.8;
+                }
+                .paymentlist-search-input:focus {
+                    border: 1px solid $color-main;
+                }
+                
+
+                .paymentlist-search-btn{
+                    background-color: $color-main;
+                    color: $color-white;
+                    border-radius: 0.5rem;
+                    width: 3rem;
+                    height: 30%;
+                    margin-left: 1rem;
+                }
+            }
+    
+            .paymentlist-content{
+                height: 36rem;
+                overflow-y: auto;
+                
+                .paymentlist-content-row{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0  1.5rem;
+                    justify-content: space-between;
+                    border-bottom: 0.5px solid $color-border;
+                    height: 6rem;
+                    .paymentlist-content-method{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 0.5rem;
+                        background-color: $color-border;
+                        font-weight: bold;
+                    }
+                    
+                    .paymentlist-content-price{
+                        font-size: 18px;
+                        font-weight: bold;
+                        margin-right: 3rem;
+                    }
+                    .paymentlist-content-date{
+                        font-size: 1rem;
+                        color: $color-gray;
+                    }
+                
+                    
+                }
+            }
+            .paymentlist-content::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        
+        .paymentlist-information{
+            width: 73%;
+            background-color: $color-back;
+            overflow-y: auto; // 여기에 스크롤을 추가  // 여기에 높이를 고정. 필요에 따라 조정하세요.
+           
+            .paymentlist-information-header{
+                height: 300px;
+                padding: 0 5vw;
+                border-bottom: 4px solid $color-border;
+                .title{
+                    display: flex;
+                    align-items: center;   
+                    justify-content: space-between;             
+                    margin-top: 4rem;
+                    
+                    .paymentlist-information-header-del{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 2rem;
+                        font-weight: bold;
+                        color: $color-green;
+                    }
+                    .paymentlist-information-header-date{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 1rem;
+                        color: $color-gray;
+                    }
+                }
+
+                .body{
+                    margin-top: 3.5rem;
+                    
+                    .paymentlist-information-header-price{
+                        align-items: center;
+                        font-size: 1rem;
+                        // font-weight: bold;
+                        // color: $color-main;
+                    }
+                    .paymentlist-information-header-price2{
+                        margin-top: 1rem;
+                        align-items: center;
+                        font-size: 2rem;
+                        font-weight: bold;
+                        color: $color-gray;
+                    }
+                }
+
+                .paymentlist-information-body{
+                    display: flex;
+                    margin-top: 2rem;
+                    justify-content: space-between;
+                    .paymentlist-information-body-btn{
+                        
+                        color: $color-point;
+                        border: 1px solid $color-point;  
+                        border-radius: 1rem;
+                        cursor: pointer;
+                        font-size: 1rem;
+                        width: 48%;
+                        height: 3rem;
+                    }
+                    .paymentlist-information-body-btn:hover {
+                        background-color: $color-point;
+                        color: white;
+                        transition: 0.3s;
+                    }
+                }
+            }
+
+            
+
+            .body2{
+                display: flex;
+                padding-left: 5vw;
+                align-items: center;
+                height: 6rem;
+                border-bottom: 4px solid $color-border;
+                .paymentlist-information-body-method{
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    // color: $color-main;
+                }
+                .paymentlist-information-body-method2{
+                    font-size: 1rem;
+                    // font-weight: bold;
+                    // color: $color-gray;
+                    margin-left: 4rem;
+                }
+            }
+
+            .paymentlist-list{
+                padding: 0 5vw;
+                margin-top: 2rem;
+                padding-bottom: 2rem;
+                .paymentlist-list-title{
+                    display: flex;
+                    font-weight: bold;
+                    font-size: 1.5rem;
+                    margin-bottom: 1.2rem;
+                }
+
+                .paymentlist-list-row{
+                    display: flex;
+                    justify-content: space-between;
+                   
+                    
+                    
+                    .paymentlist-list-row-name{
+                        font-size: 1rem;
+                        padding: 12px 0;
+                    }
+                   
+                }
+            }
+        
+        }
+        .paymentlist-information::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+}

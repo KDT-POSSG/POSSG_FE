@@ -1,0 +1,57 @@
+[
+  {
+    "id": 0,
+    "name": "홈",
+    "link": "/"
+  },
+  {
+    "id": 1,
+    "name": "결제 페이지",
+    "link": "/payment"
+  },
+  {
+    "id": 2,
+    "name": "시재 페이지",
+    "link": "/inventory"
+  },
+  {
+    "id": 3,
+    "name": "재고 관리 페이지",
+    "link": "/stock"
+  },
+  {
+    "id": 4,
+    "name": "상품 페이지",
+    "link": "/product"
+  },
+  {
+    "id": 5,
+    "name": "발주 페이지",
+    "link": "/order"
+  },
+  {
+    "id": 6,
+    "name": "회원 페이지",
+    "link": "myPage"
+  },
+  {
+    "id": 7,
+    "name": "고객 페이지",
+    "link": "#"
+  },
+  {
+    "id": 8,
+    "name": "직원 페이지",
+    "link": "/employees"
+  },
+  {
+    "id": 9,
+    "name": "분석 페이지",
+    "link": "#"
+  },
+  {
+    "id": 10,
+    "name": "결제 내역 페이지",
+    "link": "/paymentlist"
+  }
+]

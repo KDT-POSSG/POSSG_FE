@@ -1,0 +1,161 @@
+
+.numberpad-grid {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0px 30px 30px 30px;
+}
+
+/* 넘버패드 공통 스타일  */
+.button-common {
+  font-size: 32px;
+  background-color: #F9FAFB;
+  height: 4.5rem;
+  width: 4.5rem;
+  border-radius: 1rem;
+  margin: 0px 2px 2px 2px;
+  border: 1px solid #ebebeb;
+}
+
+
+/* 특정 버튼에만 css 적용하고 싶으면 사용
+ex)  C버튼에만 스타일 적용 */
+.button-C {
+  color: red;
+}
+
+
+
+/*
+ .numberpad-grid {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0px 30px 30px 30px;
+ 
+  }
+  
+
+
+.button-1 {
+
+  border: 1px solid #ebebeb;
+  padding-top: 0px;
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-2 {
+    
+    border: 1px solid #ebebeb;
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-3 {
+    border: 1px solid #ebebeb;
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  .button-4 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-5 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-6 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  .button-7 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-8 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-9 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+
+  .button-0 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-C {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+  
+  .button-0 {
+    font-size: 32px;
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+
+  }
+  
+  .button-D {
+  
+    background-color: #F9FAFB;
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 1rem;
+    margin: 0px 2px 2px 2px;
+  }
+*/
