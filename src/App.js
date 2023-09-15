@@ -11,6 +11,9 @@ import Inventory from './pages/Inventory';
 import Employees from './pages/Employees';
 import EmployeeInfo from './components/employees/EmployeeInfo';
 import Payment from './pages/Payment';
+
+import Paymenttest from './pages/Paymenttest';
+
 import Paymentlist from './pages/Paymentlist';
 import ProductList from 'pages/ProductList';
 import Login from 'components/convenience/Login';
@@ -45,6 +48,7 @@ function App() {
         <Route path='/updateMyPage' element={<UpdateMyPage />} />
         <Route path='/findId' element={<FindId />} />
         <Route path='/findPw' element={<FindPw />} />
+        <Route path='/paymenttest' element={<Paymenttest />} />
         <Route path='/logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>

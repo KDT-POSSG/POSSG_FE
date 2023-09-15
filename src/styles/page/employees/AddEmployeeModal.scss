@@ -9,32 +9,20 @@
     }
     // content
     .regi-content {
-        
-        
-        
         .form-row {
             text-align: center;
             display: flex;
             flex-flow: column;
             justify-content: center;
             align-items: center;
-            
-            
-
             .input-birth-container{
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 padding-right: 18px;
-                
-               
-
                 .input-birth{
                     width: 260px;
-                    
                 }
-    
-                
                 .input-gender{
                     display: flex;
                     justify-content: center;
@@ -52,8 +40,6 @@
                         cursor: pointer;
 
                     }
-
-
                     input[type="radio"] {
                     display: none;
 
@@ -172,10 +158,5 @@
             border-radius: 32px;
             width: 20vw;
         }
-
-
-
-        ////////////////////////////정재원이 추가함////////////////////////////
-        
     }
 }

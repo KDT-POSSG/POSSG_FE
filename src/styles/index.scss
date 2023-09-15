@@ -25,7 +25,11 @@
 
 @import './page/payment/cardpay.scss';
 @import './page/payment/payment.scss';
-@import './page/payment/paymentlist.scss';
+@import './page/paymentlist/paymentlist.scss';
+@import './page/paymentlist/refund.scss';
+@import './page/paymentlist/receipt.scss';
+
+
 
 
 @import './Modal.scss';
