@@ -31,15 +31,41 @@ function Payment() {
             </div>
             <div className='payment-body'>
                 <div className='payment-list'>
-                    <div className='payment-list-row'>
-                        <div className='payment-list-row-info'>
-                            <div className='payment-list-name'>아메리카노</div>
-                            <div className='payment-list-amount'>x1</div>
-                            <div className='payment-list-price'>2,500 원</div>
+                    <div className='payment-list-list'>
+                        <div className='payment-list-row'>
+                            <div className='payment-list-row-info'>
+                                <div className='payment-list-name'>아메리카노</div>
+                                <div className='payment-list-amount'>x1</div>
+                                <div className='payment-list-price'>2,500 원</div>
+                            </div>
+                            <div className='payment-list-discount-info'>
+                                <div className='payment-list-discount'>할인</div>
+                                <div className='payment-list-discount2'>-500 원</div>
+                            </div>
                         </div>
-                        <div className='payment-list-discount-info'>
-                            <div className='payment-list-discount'>할인</div>
-                            <div className='payment-list-discount2'>-500 원</div>
+
+                        <div className='payment-list-row'>
+                            <div className='payment-list-row-info'>
+                                <div className='payment-list-name'>아메리카노</div>
+                                <div className='payment-list-amount'>x1</div>
+                                <div className='payment-list-price'>2,500 원</div>
+                            </div>
+                            <div className='payment-list-discount-info'>
+                                <div className='payment-list-discount'>할인</div>
+                                <div className='payment-list-discount2'>-500 원</div>
+                            </div>
+                        </div>
+
+                        <div className='payment-list-row'>
+                            <div className='payment-list-row-info'>
+                                <div className='payment-list-name'>아메리카노</div>
+                                <div className='payment-list-amount'>x1</div>
+                                <div className='payment-list-price'>2,500 원</div>
+                            </div>
+                            <div className='payment-list-discount-info'>
+                                <div className='payment-list-discount'>할인</div>
+                                <div className='payment-list-discount2'>-500 원</div>
+                            </div>
                         </div>
                     </div>
                     
@@ -56,11 +82,15 @@ function Payment() {
                         <button className='payment-division-button' onClick={() => openModal('division')}>분할 결제</button>
                     </div>
                     <div className='payment-method-container'>
-                        <button className='payment-method-discount' onClick={() => openModal('discount')}>할인/ 쿠폰</button>
-                        <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
-                        <button className='payment-method-cardpay' onClick={() => openModal('card')}>카드 결제</button>
-                        <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
-                        <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
+                        <div className='payment-method-top'>
+                            <button className='payment-method-discount' onClick={() => openModal('discount')}>할인/ 쿠폰</button>
+                            <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
+                        </div>
+                        <div className='payment-method-bottom'>
+                            <button className='payment-method-cardpay' onClick={() => openModal('card')}>카드 결제</button>
+                            <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
+                            <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
+                        </div>
                     </div>
                 </div>
             </div>

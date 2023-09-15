@@ -9,39 +9,44 @@
 
     .payment-body{
         display: flex;
-        min-height: calc(100vh - 115px);
-        background-color: red;
+        min-height: calc(100vh - 7rem);
+        background-color: rgb(249, 138, 138);
         .payment-list{
-            height: 100%;
+            min-height: calc(100vh - 7rem);
             width: 27%;
+            background-color: rgb(136, 247, 136);
             border-right: 2px solid $color-border;
             
-            .payment-list-row{
-                // height: 35rem;
+            .payment-list-list{
+                height: 37rem;
                 border-bottom: 2px solid $color-border;
-                .payment-list-row-info{
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 2rem 2rem 0 2rem;
-                    .payment-list-name{
-                        font-weight: 550;
+                .payment-list-row{
+                    border-bottom: 2px solid blue;
+                    padding-bottom: 10px;
+                    .payment-list-row-info{
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 2rem 2rem 0 2rem;
+                        .payment-list-name{
+                            font-weight: 550;
+                        }
+                        .payment-list-amount{
+                            color: #b1b2b2;
+                        }
+                        .payment-list-price{
+                            font-weight: 550;
+                        }
                     }
-                    .payment-list-amount{
-                        color: #b1b2b2;
-                    }
-                    .payment-list-price{
-                        font-weight: 550;
-                    }
-                }
-                .payment-list-discount-info{
-                    padding: 10px 2rem 0 3rem;
-                    display: flex;
-                    justify-content: space-between;
-                    .payment-list-discount{
-                        color: $color-point;
-                    }
-                    .payment-list-discount2{
-                        color: $color-point;
+                    .payment-list-discount-info{
+                        padding: 10px 2rem 0 3rem;
+                        display: flex;
+                        justify-content: space-between;
+                        .payment-list-discount{
+                            color: $color-point;
+                        }
+                        .payment-list-discount2{
+                            color: $color-point;
+                        }
                     }
                 }
             }
@@ -63,35 +68,66 @@
 
         .payment-method-container{
             width: 73%;
+            background-color: $color-back;
             .payment-total{
+                font-size: 1.2rem;
+                font-weight: 550;
+                padding: 2rem 2rem 0.5rem 2rem;
+            }
                 .payment-total-container{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 0 2rem;
                     .payment-total-price{
-
+                        font-size: 2.5rem;
+                        font-weight: 550;
+                        color: $color-point;
                     }
                     .payment-division-button{
-
+                        background-color: $color-white;
+                        color: $color-point;
+                        border: 1px solid $color-point;  
+                        border-radius: 0.5rem;
+                        cursor: pointer;
+                        font-size: 1rem;
+                        width: 10rem;
+                        height: 4rem;
                     }
+                    .payment-division-button:hover {
+                        background-color: $color-point;
+                        color: white;
+                        transition: 0.3s;
+                      }
                 }
 
                 .payment-method-container{
-                    .payment-method-discount{
-
+                    .payment-method-top{
+                        .payment-method-discount, .payment-method-point{
+                            background-color: $color-white;
+                            border: 1px solid $color-border;
+                            font-size: 1rem;
+                            font-weight: 600;
+                            width: 20rem;
+                            height: 10rem;
+                            border-radius: 0.5rem;
+                            filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
+                        }
+                       
                     }
-                    .payment-method-point{
+                    .payment-method-bottom{
+                        .payment-method-cardpay{
+                            
+                        }
+                        .payment-method-cashpay{
 
-                    }
-                    .payment-method-cardpay{
+                        }
+                        .payment-method-etcpay{
 
-                    }
-                    .payment-method-cashpay{
-
-                    }
-                    .payment-method-etcpay{
-
+                        }
                     }
 
                 }
             }
         }
     }
-}
