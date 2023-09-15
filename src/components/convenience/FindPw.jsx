@@ -71,7 +71,7 @@ function FindPw(){
         console.log(currentId);
         console.log(currentNum);
         try{//to - 번호 / content - 아디
-            const res = await axios.post(`http://10.10.10.220:3000/send`, { to: currentNum, content : currentId });
+            const res = await axios.post(`http://10.10.10.109:3000/send`, { to: currentNum, content : currentId });
             console.log("res >>> " + res.data);
             if(res.data.statusCode === "202" && res.data.statusName === "success"){
                 toast.success("인증번호가 발송되었습니다");
@@ -107,7 +107,7 @@ function FindPw(){
         const currentNum = num;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://10.10.10.220:3000/Authentication?CodeNumber=${currentNum}`);
+            const res = await axios.post(`http://10.10.10.109:3000/Authentication?CodeNumber=${currentNum}`);
             //console.log("a");
             //console.log(res.data);
             if(res.data==="YES"){

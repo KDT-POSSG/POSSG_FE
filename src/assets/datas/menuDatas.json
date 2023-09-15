@@ -52,6 +52,6 @@
   {
     "id": 10,
     "name": "결제 내역 페이지",
-    "link": "#"
+    "link": "/paymentlist"
   }
 ]
