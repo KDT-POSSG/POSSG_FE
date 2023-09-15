@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import menuDatas from '../../assets/datas/menuDatas.json';
 import logo from '../../assets/svg/possg_logo.svg';
+import Logout from 'components/convenience/Logout';
 
 function HeaderMenu() {
 
@@ -58,7 +59,7 @@ function HeaderMenu() {
 
         <hr />
         <div className='header-menu-logout'>
-          로그아웃
+          <Logout />
         </div>
       </div>
 
