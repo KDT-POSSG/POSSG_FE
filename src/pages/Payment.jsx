@@ -26,25 +26,45 @@ function Payment() {
 
     return (
         <div className="payment-container">
-            <div className="product-list">
-                <h1 className='page-title'>결제 목록</h1>
-                <h3 className='total-product'>총 ??개</h3>
-            </div> 
-            <div className="payment-method">
-                <div className='payment-method-top'>
-                    <h2 className='total-payment'>총 결제금액  ???원</h2>
-                    <button className='division-payment-btn' onClick={() => openModal('division')}>분할 결제</button>
+            <div className='payment-header'>
+                <div className='page-title'>결제</div>
+            </div>
+            <div className='payment-body'>
+                <div className='payment-list'>
+                    <div className='payment-list-row'>
+                        <div className='payment-list-row-info'>
+                            <div className='payment-list-name'>아메리카노</div>
+                            <div className='payment-list-amount'>x1</div>
+                            <div className='payment-list-price'>2,500 원</div>
+                        </div>
+                        <div className='payment-list-discount-info'>
+                            <div className='payment-list-discount'>할인</div>
+                            <div className='payment-list-discount2'>-500 원</div>
+                        </div>
+                    </div>
+                    
+                    <div className='payment-list-result'>
+                        <div className='payment-list-total'>총액</div>
+                        <div className='payment-list-total2'>2000 원</div>
+                    </div>
                 </div>
-                <div className='membership-btn-container'>
-                     <button className='payment-btn discount-coupon-btn' onClick={() => openModal('discount')}>할인 / 쿠폰</button>
-                     <button className='payment-btn point-btn' onClick={() => openModal('point')}>포인트 / 회원</button>
-                 </div>
-                <div className='payment-method-btn-container'>
-                      <button className='payment-btn card-payment-btn' onClick={() => openModal('card')}>💳<br/>카드 결제</button>
-                      <button className='payment-btn cash-payment-btn' onClick={() => openModal('cash')}>💵<br/>현금 결제</button>
-                      <button className='payment-btn etc-payment-btn' onClick={() => openModal('etc')}>🏧<br/>기타 결제</button>
+
+                <div className='payment-method-container'>
+                    <div className='payment-total'>결제 금액</div>
+                    <div className='payment-total-container'>
+                        <div className='payment-total-price'>2,000 원</div>
+                        <button className='payment-division-button' onClick={() => openModal('division')}>분할 결제</button>
+                    </div>
+                    <div className='payment-method-container'>
+                        <button className='payment-method-discount' onClick={() => openModal('discount')}>할인/ 쿠폰</button>
+                        <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
+                        <button className='payment-method-cardpay' onClick={() => openModal('card')}>카드 결제</button>
+                        <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
+                        <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
+                    </div>
                 </div>
             </div>
+            
             <Modal isOpen={modalIsOpen} onClose={closeModal}>
                 {paymentType === 'card' && <Cardpay />}
                 {paymentType === 'cash' && <Cashpay />}

@@ -1,93 +1,97 @@
-/* payment.css 파일 */
+.payment-container{
+    min-height: calc(100vh - 4rem);
+    background-color:#00e4e4;
+    .payment-header{
+        border-bottom: 2px solid $color-border;
+        height: 3rem;
+        padding-left: 1rem;
+    }
 
+    .payment-body{
+        display: flex;
+        min-height: calc(100vh - 115px);
+        background-color: red;
+        .payment-list{
+            height: 100%;
+            width: 27%;
+            border-right: 2px solid $color-border;
+            
+            .payment-list-row{
+                // height: 35rem;
+                border-bottom: 2px solid $color-border;
+                .payment-list-row-info{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 2rem 2rem 0 2rem;
+                    .payment-list-name{
+                        font-weight: 550;
+                    }
+                    .payment-list-amount{
+                        color: #b1b2b2;
+                    }
+                    .payment-list-price{
+                        font-weight: 550;
+                    }
+                }
+                .payment-list-discount-info{
+                    padding: 10px 2rem 0 3rem;
+                    display: flex;
+                    justify-content: space-between;
+                    .payment-list-discount{
+                        color: $color-point;
+                    }
+                    .payment-list-discount2{
+                        color: $color-point;
+                    }
+                }
+            }
+            .payment-list-result{
+                // height: 10.75rem;
+                display: flex;
+                justify-content: space-between;
+                padding: 2rem;
+                font-weight: bold;
+                font-size: 1.2rem;
+                .payment-list-total{
+                    
+                }
+                .payment-list-total2{
 
-.payment-container {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    height: 100%;
-    width: 100vw; /* 뷰포트 가로 너비의 100%를 차지합니다. */
-    height: calc(100vh - 4rem); /* 뷰포트 세로 너비의 100%를 차지합니다. */
-}
+                }
+            }
+        }
 
+        .payment-method-container{
+            width: 73%;
+            .payment-total{
+                .payment-total-container{
+                    .payment-total-price{
 
-.product-list {
-    text-align: center;
-    position: relative;
-}
+                    }
+                    .payment-division-button{
 
-.total-product {
-    font-size: 1.5rem;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 30px;
-}
+                    }
+                }
 
-.payment-method {
-    padding: 10px;
-    text-align: center;
-    background-color: #ebebeb;
-    align-items: center; 
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+                .payment-method-container{
+                    .payment-method-discount{
 
-.total-payment{
-    font-size: 2rem;
-    color: #000000;
-    padding: 16px;
-}
+                    }
+                    .payment-method-point{
 
+                    }
+                    .payment-method-cardpay{
 
-.payment-btn {
-    background-color: #ffffff;
-    font-size: 2rem;
-    cursor: pointer;
-    border-radius: 1rem;
-    font-weight: bold;
-    height: 150px;
-    
-}
+                    }
+                    .payment-method-cashpay{
 
-.payment-method-top{
-    margin-top: 90px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
+                    }
+                    .payment-method-etcpay{
 
-.division-payment-btn {
-    background-color: #F9BB00;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 1rem;
-    width: 160px;
-    height: 64px;
-    font-weight: bold;
-    margin-left: 100px;
-}
+                    }
 
-.membership-btn-container{
-    width: 60%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 100px;
-}
-
-.payment-method-btn-container{
-    margin-top: 16px;
-    width: 60%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-}
-
-.card-payment-btn{
-    font-size: 2rem;
-    background-color: #F9BB00;
-    cursor: pointer;
-    border-radius: 1rem;
-    font-weight: bold;
+                }
+            }
+        }
+    }
 }
