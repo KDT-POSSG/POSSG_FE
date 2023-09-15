@@ -18,5 +18,21 @@ export const promotion = (promotionInfo) => {
     default:
       break;
   }
+}
+
+export const orderState = (orderStateNumber) => {
+
+  switch (orderStateNumber) {
+    case 0:
+      return "발주대기";
+    case 1:
+      return "접수완료";
+    case 2:
+      return "배송중";
+    case 3:
+      return "배송완료";
+    default:
+      break;
+  }
 
 }
