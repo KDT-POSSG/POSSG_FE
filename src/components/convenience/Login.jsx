@@ -29,7 +29,7 @@ function Login(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.220:3000/login", {
+        axios.post("http://10.10.10.109:3000/login", {
             "userId": id,
             "pwd": pw,
         },)
