@@ -1,0 +1,99 @@
+.order-page {
+  background-color: $color-back;
+  padding: 3vw 10vw;
+  min-height: 100vh;
+
+  .order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .order-page-title {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .order-top-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    button {
+      background-color: $color-white;
+      font-weight: bold;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid $color-border;
+      transition: $transition-cb2;
+    }
+
+    button:hover {
+      background-color: $color-main;
+    }
+
+    .active-btn {
+      background-color: $color-main;
+    }
+
+    .order-filter-btn {
+      margin-right: 0.5rem;
+    }
+
+    .order-add-btn {
+      font-weight: normal;
+      background-color: $color-point;
+      color: $color-white;
+      border: 1px solid $color-point;
+
+      &:hover {
+        background-color: #e94606;
+      }
+    }
+  }
+
+  .order-grid-container {
+    background-color: $color-white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
+
+    .order-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1.5fr 1fr 1.5fr;
+    }
+
+    .order-grid-head {
+      font-weight: bold;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid $color-border;
+    }
+
+    .order-grid-item:hover {
+      background-color: rgba($color-border, $alpha: 0.6);
+    }
+
+    .order-grid-item {
+      border-bottom: 1px solid $color-back;
+      padding: 0.75rem 0;
+      transition: $transition-cb2;
+    }
+  }
+
+  .order-status {
+    font-weight: bold;
+  }
+
+  .order-status-1 {
+    color: $color-green;
+  }
+  .order-status-2 {
+    color: $color-point;
+  }
+  .order-status-3 {
+    color: rgba($color-gray, $alpha: 0.5);
+  }
+}

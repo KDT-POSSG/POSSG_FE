@@ -1,9 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Modal from '../components/Modal';
+import ReceiptModal from '../components/paymentlist/ReceiptModal'
+import RefundModal from "../components/paymentlist/RefundModal";
 
 function Paymentlist()  {
   
   const [paymentlist, setPaymentlist] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [paymentlistType, setPaymentListType] = useState(null);
+
+
+  const openModal = (type) => {
+    setPaymentListType(type);
+    setModalIsOpen(true);
+   };
+
+   const closeModal = () => {
+   setModalIsOpen(false);
+   };
 
 
   useEffect(() => {
@@ -107,14 +122,11 @@ function Paymentlist()  {
                         </div>
                         <hr/>
                         <div className="paymentlist-information-body">
-                            <button className="paymentlist-information-body-btn">환불</button>
-                            <button className="paymentlist-information-body-btn">영수증 보기</button>
+                            <button className="paymentlist-information-body-btn" onClick={() => openModal('refund')}>환불</button>
+                            <button className="paymentlist-information-body-btn" onClick={() => openModal('receipt')}>영수증 보기</button>
                         </div>
                     </div>
 
-                    
-                    
-                    
 
                     <div className="body2">
                         <div className="paymentlist-information-body-method">결제 수단</div>
@@ -178,13 +190,7 @@ function Paymentlist()  {
                             <div className="paymentlist-list-row-name">먹태깡 x2</div>
                             <div className="paymentlist-list-row-price">3,000 원</div>
                             
-                        </div>
-
-                        
-                        
-                       
-                       
-                        
+                        </div>               
                     </div>
                 </div>
 
@@ -210,6 +216,11 @@ function Paymentlist()  {
                     </li>
                 ))}
             </ul> */}
+        
+        <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{width:'40%' } }}>
+                {paymentlistType === 'refund' && <RefundModal />}
+                {paymentlistType === 'receipt' && <ReceiptModal />}
+        </Modal>
         </div>
     )
 }

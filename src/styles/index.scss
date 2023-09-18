@@ -7,6 +7,8 @@
 @import './page/home/home.scss';
 @import './page/home/homeModal.scss';
 @import './page/product.scss';
+@import './page/order/order.scss';
+@import './page/order/orderDetail.scss';
 @import './page/stock/stock.scss';
 @import './page/stock/stockModal.scss';
 
@@ -25,7 +27,11 @@
 
 @import './page/payment/cardpay.scss';
 @import './page/payment/payment.scss';
-@import './page/payment/paymentlist.scss';
+@import './page/paymentlist/paymentlist.scss';
+@import './page/paymentlist/refund.scss';
+@import './page/paymentlist/receipt.scss';
+
+
 
 
 @import './Modal.scss';
@@ -33,5 +39,5 @@
 
 @import './page/employees/employeesinfo.scss';
 @import './page/employees/employees.scss';
-@import './page/employees/addemployeemodal.scss';
+@import './page/employees/employeeAddModal.scss';
 @import './page/employees/terminateemployeemodal.scss'

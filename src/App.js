@@ -11,6 +11,9 @@ import Inventory from './pages/Inventory';
 import Employees from './pages/Employees';
 import EmployeeInfo from './components/employees/EmployeeInfo';
 import Payment from './pages/Payment';
+
+import Paymenttest from './pages/Paymenttest';
+
 import Paymentlist from './pages/Paymentlist';
 import ProductList from 'pages/ProductList';
 import Login from 'components/convenience/Login';
@@ -22,6 +25,9 @@ import UpdateMyPage from 'components/convenience/UpdateMyPage';
 import FindId from 'components/convenience/FindId';
 import Home from 'pages/Home';
 import FindPw from 'components/convenience/FindPw';
+import Order from 'pages/Order';
+import OrderDetail from 'pages/OrderDetail';
+import Logout from 'components/convenience/Logout';
 
 function App() {
   return (
@@ -44,6 +50,10 @@ function App() {
         <Route path='/updateMyPage' element={<UpdateMyPage />} />
         <Route path='/findId' element={<FindId />} />
         <Route path='/findPw' element={<FindPw />} />
+        <Route path='/order' element={<Order />}/>
+        <Route path='/order/:seq' element={<OrderDetail />} />
+        <Route path='/paymenttest' element={<Paymenttest />} />
+        <Route path='/logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );
