@@ -1,0 +1,74 @@
+/* customerRegi-content-wrap */
+.customerRegi-content-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $color-back;
+    padding: 5vw 10vw;
+    min-height: 100vh;
+
+    // title
+    .customerRegi-title{
+        font-size: 2rem;
+        text-align: center;
+        margin: 3.75rem;
+    }
+
+    // content
+    .customerRegi-content {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+
+        .customerRegi-info{
+            margin-right: 60px;
+        }
+
+        .info-container {
+            position: relative;
+            margin: 3.75rem 0;
+            height: 60px;
+            
+        }
+
+        input {
+            border: 1px solid $color-border;
+            border-radius: 32px;
+            padding: 1rem 1.25rem;
+            width: 20vw;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            border-color: $color-main;
+        }
+
+        label span {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            color: rgba($color: $color-gray, $alpha: 0.5);
+            transition: all 0.2s;
+        }
+
+        input:focus + label span,
+        input:valid + label span {
+            position: absolute;
+            top: -4px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            // font-weight: bold;
+            color: $color-main;
+            background: linear-gradient($color-back, $color-white);
+        }
+
+        .customerRegi-keypad{
+            margin-left: 60px;
+        }
+        
+    }
+}
+
