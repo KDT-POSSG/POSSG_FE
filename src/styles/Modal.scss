@@ -47,15 +47,19 @@
   text-align: center;
 }
 
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
 .ReactModal__Overlay {
-    opacity: 0;
-    transition: all 0.2s;
+  opacity: 0;
+  transition: all 0.2s;
 }
 
 .ReactModal__Overlay--after-open{
-    opacity: 1;
+  opacity: 1;
 }
 
 .ReactModal__Overlay--before-close{
-    opacity: 0;
+  opacity: 0;
 }
