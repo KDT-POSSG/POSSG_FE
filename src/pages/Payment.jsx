@@ -29,13 +29,14 @@ function Payment() {
             <div className='payment-header'>
                 <div className='page-title'>결제</div>
             </div>
+            
             <div className='payment-body'>
                 <div className='payment-list'>
                     <div className='payment-list-list'>
                         <div className='payment-list-row'>
                             <div className='payment-list-row-info'>
                                 <div className='payment-list-name'>아메리카노</div>
-                                <div className='payment-list-amount'>x1</div>
+                                <div className='payment-list-amount'>x 1</div>
                                 <div className='payment-list-price'>2,500 원</div>
                             </div>
                             <div className='payment-list-discount-info'>
@@ -46,21 +47,21 @@ function Payment() {
 
                         <div className='payment-list-row'>
                             <div className='payment-list-row-info'>
-                                <div className='payment-list-name'>아메리카노</div>
-                                <div className='payment-list-amount'>x1</div>
-                                <div className='payment-list-price'>2,500 원</div>
+                                <div className='payment-list-name'>바닐라 라떼</div>
+                                <div className='payment-list-amount'>x 3</div>
+                                <div className='payment-list-price'>10,500 원</div>
                             </div>
                             <div className='payment-list-discount-info'>
-                                <div className='payment-list-discount'>할인</div>
+                                <div className='payment-list-discount'>정재원 할인</div>
                                 <div className='payment-list-discount2'>-500 원</div>
                             </div>
                         </div>
 
                         <div className='payment-list-row'>
                             <div className='payment-list-row-info'>
-                                <div className='payment-list-name'>아메리카노</div>
-                                <div className='payment-list-amount'>x1</div>
-                                <div className='payment-list-price'>2,500 원</div>
+                                <div className='payment-list-name'>프로틴 쉐이크</div>
+                                <div className='payment-list-amount'>x 2</div>
+                                <div className='payment-list-price'>5,500 원</div>
                             </div>
                             <div className='payment-list-discount-info'>
                                 <div className='payment-list-discount'>할인</div>
@@ -72,26 +73,28 @@ function Payment() {
                     <div className='payment-list-result'>
                         <div className='payment-list-total'>총액</div>
                         <div className='payment-list-total2'>2000 원</div>
-                    </div>
+                    </div> 
                 </div>
 
                 <div className='payment-method-container'>
-                    <div className='payment-total'>결제 금액</div>
-                    <div className='payment-total-container'>
-                        <div className='payment-total-price'>2,000 원</div>
-                        <button className='payment-division-button' onClick={() => openModal('division')}>분할 결제</button>
-                    </div>
-                    <div className='payment-method-container'>
-                        <div className='payment-method-top'>
-                            <button className='payment-method-discount' onClick={() => openModal('discount')}>할인/ 쿠폰</button>
-                            <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
+                    <div className='container'>
+                        <div className='payment-total'>결제 금액</div>
+                        <div className='payment-total-container'>
+                            <div className='payment-total-price'>2,000 원</div>
+                            <button className='payment-division-button' onClick={() => openModal('division')}>분할 결제</button>
                         </div>
-                        <div className='payment-method-bottom'>
-                            <button className='payment-method-cardpay' onClick={() => openModal('card')}>카드 결제</button>
-                            <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
-                            <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
+                        <div className='payment-method-container2'>
+                            <div className='payment-method-top'>
+                                <button className='payment-method-discount' onClick={() => openModal('discount')}>할인 / 쿠폰</button>
+                                <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
+                            </div>
+                            <div className='payment-method-bottom'>
+                                <button className='payment-method-cardpay' onClick={() => openModal('card')}>카드 결제</button>
+                                <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
+                                <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
+                            </div>
                         </div>
-                    </div>
+                </div>
                 </div>
             </div>
             
