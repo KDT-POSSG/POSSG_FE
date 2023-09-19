@@ -54,6 +54,7 @@ function App() {
         <Route path='/order/:seq' element={<OrderDetail />} />
         <Route path='/paymenttest' element={<Paymenttest />} />
         <Route path='/customerRegister' element={<RegisterCustomer />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -33,7 +33,7 @@ function AddEmployeeModal({onAdd}) {
     };
 
     // axios를 사용하여 서버에 데이터를 전송합니다.
-    axios.post('http://10.10.10.81:3000/addemployee', employeeData)
+    axios.post('http://10.10.10.196:3000/addemployee', employeeData)
       .then(response => {
         // 성공적으로 데이터를 보냈을 경우 실행될 코드
         console.log('데이터 성공적으로 전송', response);

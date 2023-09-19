@@ -87,7 +87,7 @@ function FindPw(){
         console.log(currentId);
         console.log(currentNum);
         try{//to - 번호 / content - 아디
-            const res = await axios.post(`http://10.10.10.220:3000/send`, { to: currentNum, content : currentId });
+            const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/send`, { to: currentNum, content : currentId });
             console.log("res >>> " + res);
             console.log("res.data >>> " + res.data);
             if(res.data.statusCode === "202" && res.data.statusName === "success"){
@@ -124,7 +124,7 @@ function FindPw(){
         const currentNum = num;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://10.10.10.220:3000/Authentication?CodeNumber=${currentNum}`);
+            const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
             if(res.data==="YES"){
                 //alert("성공");
                 toast.success("휴대폰 인증에 성공하였습니다")
@@ -151,7 +151,6 @@ function FindPw(){
                         <div className="input-container">
                             <input type="text" className="input-text" id="id" name="id" value={id} onChange={onChangeId} required />
                             <label className="label-helper" htmlFor="id"><span>아이디</span></label>
-                            {/* <p className="p-text">{idMsg}</p> */}
                         </div>
                     </div>
                     <div className="form-row">
@@ -173,7 +172,7 @@ function FindPw(){
                     </div>
                     <div className="form-row">
                         <div className="btn-container">
-                            <button type="button" disabled={!formIsValid} onClick={() => openModal()}>찾기</button>
+                            <button type="button" onClick={() => openModal()}>찾기</button>
                             {/* disabled={!formIsValid} */}
                         </div>
                     </div>

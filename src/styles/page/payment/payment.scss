@@ -1,44 +1,42 @@
 .payment-container{
     min-height: calc(100vh - 4rem);
-    background-color:#00e4e4;
+   
     .payment-header{
         border-bottom: 2px solid $color-border;
-        height: 3rem;
-        padding-left: 1rem;
+        height: 4rem;
+        padding-left: 2rem;
+        display: flex;
+        align-items: center;
     }
-
+    
     .payment-body{
         display: flex;
-        min-height: calc(100vh - 7rem);
-        background-color: rgb(249, 138, 138);
+        min-height: calc(100vh - 15vh);
         .payment-list{
-            min-height: calc(100vh - 7rem);
-            width: 27%;
-            background-color: rgb(136, 247, 136);
+            width: 30%;
             border-right: 2px solid $color-border;
-            
             .payment-list-list{
-                height: 37rem;
                 border-bottom: 2px solid $color-border;
+                height: 33rem;
                 .payment-list-row{
-                    border-bottom: 2px solid blue;
+                    border-bottom: 1px solid $color-border;
                     padding-bottom: 10px;
                     .payment-list-row-info{
-                        display: flex;
-                        justify-content: space-between;
+                        display: grid;
+                        grid-template-columns: 2fr 1fr 1fr;
                         padding: 2rem 2rem 0 2rem;
                         .payment-list-name{
-                            font-weight: 550;
+                            font-weight: 500;
                         }
                         .payment-list-amount{
                             color: #b1b2b2;
                         }
                         .payment-list-price{
-                            font-weight: 550;
+                            font-weight: 500;
                         }
                     }
                     .payment-list-discount-info{
-                        padding: 10px 2rem 0 3rem;
+                        padding: 10px 5rem 0 3rem;
                         display: flex;
                         justify-content: space-between;
                         .payment-list-discount{
@@ -67,63 +65,88 @@
         }
 
         .payment-method-container{
-            width: 73%;
             background-color: $color-back;
-            .payment-total{
-                font-size: 1.2rem;
-                font-weight: 550;
-                padding: 2rem 2rem 0.5rem 2rem;
-            }
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            .container{
+                .payment-total{
+                    padding-top: 4rem;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    
+                }
+
                 .payment-total-container{
                     display: flex;
+                    justify-content: center;
                     justify-content: space-between;
-                    align-items: center;
-                    padding: 0 2rem;
+                    padding-top: 1rem;
                     .payment-total-price{
                         font-size: 2.5rem;
-                        font-weight: 550;
+                        font-weight: 500;
                         color: $color-point;
                     }
                     .payment-division-button{
                         background-color: $color-white;
-                        color: $color-point;
-                        border: 1px solid $color-point;  
+                        border: 1px solid $color-border;
                         border-radius: 0.5rem;
+                        font-weight: 600;
                         cursor: pointer;
                         font-size: 1rem;
                         width: 10rem;
                         height: 4rem;
+                        filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
+
                     }
-                    .payment-division-button:hover {
-                        background-color: $color-point;
-                        color: white;
-                        transition: 0.3s;
-                      }
+                    
                 }
 
-                .payment-method-container{
-                    .payment-method-top{
-                        .payment-method-discount, .payment-method-point{
-                            background-color: $color-white;
-                            border: 1px solid $color-border;
-                            font-size: 1rem;
-                            font-weight: 600;
-                            width: 20rem;
-                            height: 10rem;
-                            border-radius: 0.5rem;
-                            filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
-                        }
-                       
+            .payment-method-container2{
+                width: 100%;
+                margin-top: 9rem;
+                .payment-method-top{
+                    display: flex;
+                    gap: 1rem;
+                    .payment-method-discount, .payment-method-point{
+                        background-color: $color-white;
+                        border: 1px solid $color-border;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        width: 20rem;
+                        height: 10rem;
+                        border-radius: 0.5rem;
+                        filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
                     }
+                    
+                }
                     .payment-method-bottom{
-                        .payment-method-cardpay{
+                        gap: 1rem;
+                        display: flex;
+                        margin-top: 1rem;
+                        .payment-method-cardpay, .payment-method-cashpay{
+                            background-color: $color-main;
+                            border: 1px solid $color-main;
+                            color: $color-white;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            width: 13rem;
+                            height: 7rem;
+                            border-radius: 0.5rem;
+                            filter: drop-shadow(1px 1px 2px rgba($color-gray, $alpha: 0.5));
                             
                         }
-                        .payment-method-cashpay{
-
-                        }
+                       
                         .payment-method-etcpay{
-
+                            background-color: #4e5059;
+                            
+                            color: $color-white;
+                            font-size: 1rem;
+                            font-weight: 500;
+                            width: 13rem;
+                            height: 7rem;
+                            border-radius: 0.5rem;
+                            filter: drop-shadow(1px 1px 2px rgba($color-gray, $alpha: 0.5));
                         }
                     }
 
@@ -131,3 +154,4 @@
             }
         }
     }
+}
