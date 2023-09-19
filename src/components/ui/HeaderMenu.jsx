@@ -1,15 +1,43 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import menuDatas from '../../assets/datas/menuDatas.json';
 import logo from '../../assets/svg/possg_logo.svg';
-import Logout from 'components/convenience/Logout';
+import axios from 'axios';
 
 function HeaderMenu() {
+  const accesstoken = localStorage.getItem("accesstoken");
+  const navi = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMenu = () => {
     setIsOpen(!isOpen);
+  }
+
+  const handleLogout = () => {
+    console.log("dd")
+    axios.get("http://10.10.10.205:3000/logout",
+        {
+            headers: {
+                accessToken: `Bearer ${accesstoken}`, 
+                Authorization: `Bearer ${accesstoken}`
+            }
+        }
+        )
+        .then((res)=>{
+          console.log("res >>> ", res);
+            if(res.data==="YES"){
+                console.log("로그아웃 성공");
+                localStorage.removeItem("accessToken");
+                navi("/login");
+            }else{
+                console.log("로그아웃 실패")
+            }
+        })
+        .catch((err)=>{
+          console.error("캐치 에러")
+            console.log(err)
+        })
   }
 
   return (
@@ -59,9 +87,11 @@ function HeaderMenu() {
 
         <hr />
         <div className='header-menu-logout'>
-          <Logout />
+          <button onClick={handleLogout}>로그아웃</button>
         </div>
       </div>
+
+      <button onClick={handleLogout}>로그아웃테스트</button>
 
     </div>
   )

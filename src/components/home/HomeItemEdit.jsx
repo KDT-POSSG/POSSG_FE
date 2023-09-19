@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import HomeModal from './HomeModal';
 import Modal from 'components/Modal';
 
-function HomeItemEdit() {
+function HomeItemEdit({ homeMenu, isChange, setIsChange }) {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalOpen = () => {
-    console.log("modalClose");
     setIsModalOpen(true);
   }
 
   const modalClose = () => {
-    console.log("modalClose");
     setIsModalOpen(false);
   }
 
@@ -25,10 +23,9 @@ function HomeItemEdit() {
       
       <Modal isOpen={isModalOpen} onClose={modalClose}
              style={{ content: { width: '50rem', height: '40rem', padding: '0' } }}>
-        <HomeModal modalClose={modalClose} />
+        <HomeModal modalClose={modalClose} homeMenu={homeMenu} isChange={isChange} setIsChange={setIsChange} />
       </Modal>
     </>
-
   )
 }
 

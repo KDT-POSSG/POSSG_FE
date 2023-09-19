@@ -27,3 +27,10 @@ option {
 .tossface {
   font-family: Tossface;
 }
+
+.common-toast {
+  color: $color-gray;
+  font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: -0.025rem;
+  font-size: 1rem;
+}

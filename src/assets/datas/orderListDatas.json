@@ -1,0 +1,41 @@
+[
+  {
+      "callSeq": 0,
+      "userId": null,
+      "productSeq": 0,
+      "amount": 0,
+      "rpName": null,
+      "bName": null,
+      "price": 0,
+      "callDate": "2023-09-05 13:33:19",
+      "productName": null,
+      "callRef": "20230905133319",
+      "callStatus": 1
+  },
+  {
+      "callSeq": 0,
+      "userId": null,
+      "productSeq": 0,
+      "amount": 0,
+      "rpName": null,
+      "bName": null,
+      "price": 0,
+      "callDate": "2023-09-05 00:00:00",
+      "productName": null,
+      "callRef": "202309051811",
+      "callStatus": 2
+  },
+  {
+    "callSeq": 0,
+    "userId": null,
+    "productSeq": 0,
+    "amount": 0,
+    "rpName": null,
+    "bName": null,
+    "price": 0,
+    "callDate": "2023-09-05 00:00:00",
+    "productName": null,
+    "callRef": "123123",
+    "callStatus": 3
+}
+]
