@@ -27,7 +27,7 @@ import Home from 'pages/Home';
 import FindPw from 'components/convenience/FindPw';
 import Order from 'pages/Order';
 import OrderDetail from 'pages/OrderDetail';
-import CustomerRegister from 'components/customer/CustomerRegister';
+import RegisterCustomer from 'components/customer/RegisterCustomer';
 
 function App() {
   return (
@@ -53,7 +53,8 @@ function App() {
         <Route path='/order' element={<Order />}/>
         <Route path='/order/:seq' element={<OrderDetail />} />
         <Route path='/paymenttest' element={<Paymenttest />} />
-        <Route path='/customerRegister' element={<CustomerRegister />} />
+        <Route path='/customerRegister' element={<RegisterCustomer />} />
+
       </Routes>
     </BrowserRouter>
   );

@@ -11,7 +11,8 @@
     .customerRegi-title{
         font-size: 2rem;
         text-align: center;
-        margin: 3.75rem;
+        margin: 30px;
+        
     }
 
     // content
@@ -19,14 +20,16 @@
         width: 100vw;
         display: flex;
         justify-content: center;
+        margin: 50px;
 
         .customerRegi-info{
             margin-right: 60px;
+            padding-top: 20px;
         }
 
         .info-container {
             position: relative;
-            margin: 3.75rem 0;
+            margin: 2.5rem 0;
             height: 60px;
             
         }
@@ -60,15 +63,30 @@
             left: 20px;
             padding: 0 4px;
             font-size: 1rem;
-            // font-weight: bold;
             color: $color-main;
             background: linear-gradient($color-back, $color-white);
         }
 
+        .info-container button {
+            padding: 15px 1rem;
+            background-color: $color-main;
+            color: $color-white;
+            font-weight: bold;
+            border-radius: 32px;
+            width: 20vw;
+        }
+
         .customerRegi-keypad{
             margin-left: 60px;
+            padding-top: 40px;
+            // background-color: $color-white;
+            // border-radius: 1rem;
+            // border: 1px solid $color-border;
+
+            .button-common {
+                background-color: $color-white;
+            }
         }
-        
     }
 }
 
