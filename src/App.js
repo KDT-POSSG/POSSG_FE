@@ -27,7 +27,6 @@ import Home from 'pages/Home';
 import FindPw from 'components/convenience/FindPw';
 import Order from 'pages/Order';
 import OrderDetail from 'pages/OrderDetail';
-import Logout from 'components/convenience/Logout';
 
 function App() {
   return (
@@ -53,7 +52,6 @@ function App() {
         <Route path='/order' element={<Order />}/>
         <Route path='/order/:seq' element={<OrderDetail />} />
         <Route path='/paymenttest' element={<Paymenttest />} />
-        <Route path='/logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );
