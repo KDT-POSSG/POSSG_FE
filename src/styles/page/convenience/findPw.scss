@@ -31,6 +31,8 @@
         .input-container {
             position: relative;
             margin: 1.5rem 0;
+            height: 60px;
+            // background-color: aqua;
         }
 
         .input-container input {
@@ -77,9 +79,16 @@
             border-radius: 32px;
             font-size: 14px;
         }
+
+        .p-text{
+            color: $color-point;
+            // font-size: 12px;
+            text-align: left;
+            margin: 10px 20px;
+            background-color: $color-back;
+        }
         
         // button
-
         .btn-container button{
             position: relative;
             margin-top: 1.5rem;
