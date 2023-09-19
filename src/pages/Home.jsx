@@ -1,45 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import homeMenuDatas from '../assets/datas/homeMenuDatas'
 import HomeItem from 'components/home/HomeItem';
 import HomeItemEdit from 'components/home/HomeItemEdit';
 import axios from 'axios';
+import AttendanceCehck from 'components/employees/AttendanceCheck';
 
 function Home() {
 
-  const [homeMenu, setHomeMenu] = useState();
+  const [isChange, setIsChange] = useState(false);
+  const [homeMenu, setHomeMenu] = useState([]);
 
   useEffect(() => {
 
-    setHomeMenu(homeMenuDatas);
+    axios.get("http://10.10.10.196:3000/favoritePageList", {
+        params: {
+          convSeq: 1
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        setHomeMenu(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
 
-    // axios.get("http://10.10.10.81:3000//favoritePageList", {
-    //     params: {
-    //       convSeq: 1
-    //     }
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setHomeMenu(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   })
-
-  }, []);
+  }, [isChange]);
 
   return (
     <div className='home-page'>
       
       <div className='home-container'>
         {
-          homeMenuDatas && homeMenuDatas.map((item) => (
+          homeMenu && homeMenu.map((item) => (
             item.favoriteEnable === "enable" ?
             (<HomeItem key={item.seq} item={item} />)
             :
             (<React.Fragment key={item.seq}></React.Fragment>)
           ))
         }
-        <HomeItemEdit />
+        <HomeItemEdit homeMenu={homeMenu} isChange={isChange} setIsChange={setIsChange} />
       </div>
 
     </div>

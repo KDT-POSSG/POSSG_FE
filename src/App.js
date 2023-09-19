@@ -33,7 +33,7 @@ import CustomerRegister from 'components/customer/CustomerRegister';
 function App() {
   return (
     <BrowserRouter>
-      <Toaster />
+      <Toaster toastOptions={{ className: 'common-toast' }} />
       <Header />
       <Routes>
         {/* <Route path='/' element={<AttendaceCheck />} /> */}

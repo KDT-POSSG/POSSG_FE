@@ -1,6 +1,6 @@
 .home-page {
-  min-height: calc(100vh - 4rem);
   background-color: $color-back;
+  min-height: calc(100vh - 4rem);
 
   .home-container {
     width: 100%;
@@ -23,6 +23,7 @@
       text-align: center;
       font-size: 1.5rem;
       font-weight: bold;
+      word-break: keep-all;
       transition: $transition-cb2;
       padding: 1.5rem;
       border: 1px solid rgba($color-border, $alpha: 0.5);
