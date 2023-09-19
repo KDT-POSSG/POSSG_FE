@@ -62,9 +62,10 @@ function UpdateMyPage(){
 
     const getUserData = (accesstoken) => {
         //console.log("b");
-        axios.get("http://10.10.10.220:3000/myPage", {
+        axios.get("http://10.10.10.205:3000/myPage", {
             headers: {
                 accessToken: `Bearer ${accesstoken}`,
+                Authorization: `Bearer ${accesstoken}`
             },
         })
         .then( (res)=>{
