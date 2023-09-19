@@ -27,7 +27,6 @@ import Home from 'pages/Home';
 import FindPw from 'components/convenience/FindPw';
 import Order from 'pages/Order';
 import OrderDetail from 'pages/OrderDetail';
-import Logout from 'components/convenience/Logout';
 import CustomerRegister from 'components/customer/CustomerRegister';
 
 function App() {
@@ -54,7 +53,6 @@ function App() {
         <Route path='/order' element={<Order />}/>
         <Route path='/order/:seq' element={<OrderDetail />} />
         <Route path='/paymenttest' element={<Paymenttest />} />
-        <Route path='/logout' element={<Logout />} />
         <Route path='/customerRegister' element={<CustomerRegister />} />
       </Routes>
     </BrowserRouter>
