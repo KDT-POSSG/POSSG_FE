@@ -15,22 +15,21 @@ function InvenModal (props) {
     const handleInputFocus = (index) => {
       setSelectedInputIndex(index);
     };
-    // NumberPad 컴포넌트에서 값이 변경될 경우 실행되는 함수
+
     const handleNumberPadInput = (value) => {
       const newInputValues = [...inputValues];
       newInputValues[selectedInputIndex] = value;
       setInputValues(newInputValues);
     };
-    // 총 금액을 계산하는 함수
+    
     const calculateTotal = () => {
       return inputValues.reduce((acc, curr, index) => {
         return acc + (parseInt(curr || "0", 10) * prices[index]);
       }, 0);
     };
-    // 선택된 입력 필드의 값을 가져옴
     const selectedInputValue = selectedInputIndex !== null ? inputValues[selectedInputIndex] : "";
 
-    const handleMemoChange = (e) => { // memo 입력 처리 함수
+    const handleMemoChange = (e) => { 
       setMemo(e.target.value);
     }
 
