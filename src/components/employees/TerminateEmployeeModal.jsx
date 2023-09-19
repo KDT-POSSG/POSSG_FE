@@ -8,7 +8,7 @@ function TerminateEmployeeModal({ employeeSeq, empName }){
     const [terminateemployee, setTerminateEmployee] = useState('');  // 퇴사 직원 번호
     
     const handleTerminate = () => {
-        axios.post('http://10.10.10.36:3000/terminateEmployee', null, {params: {employeeSeq : employeeSeq}})
+        axios.post('http://10.10.10.196:3000/terminateEmployee', null, {params: {employeeSeq : employeeSeq}})
         .then((res) => {
             setTerminateEmployee(res.data.terminateemployee);
             console.log('직원 퇴사 성공');

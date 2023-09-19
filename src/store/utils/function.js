@@ -1,5 +1,9 @@
 export const addComma = (price) => {
-  return price.toLocaleString();
+
+  price = price + "";
+  
+  const removedCommaValue = Number(price.replaceAll(",", ""));
+  return removedCommaValue.toLocaleString();
 };
 
 export const promotion = (promotionInfo) => {

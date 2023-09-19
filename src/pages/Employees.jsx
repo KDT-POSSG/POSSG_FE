@@ -23,7 +23,7 @@ function Employees() {
      };
  
      const fetchEmployees = () => {
-      axios.get('http://10.10.10.36:3000/findallemployee', {params: {convSeq :1}})
+      axios.get('http://10.10.10.196:3000/findallemployee', {params: {convSeq :1}})
         .then((res) => {
             setEmployeeList(res.data);
             setTotalCnt(res.data.cnt);

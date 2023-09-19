@@ -25,7 +25,7 @@ function EmployeeInfo() {
        };
 
     useEffect(() => {
-        axios.get('http://10.10.10.36:3000/selectOneAttendance', { params: { employeeSeq } })
+        axios.get('http://10.10.10.196:3000/selectOneAttendance', { params: { employeeSeq } })
         .then((response) => {
             setAttendanceData(response.data);
             const employeeData = response.data[0];
