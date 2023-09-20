@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { handlePayment } from '../components/payment/Cardpay';
 
 import Modal from '../components/Modal';
 import Cardpay from '../components/payment/Cardpay'
@@ -15,6 +16,11 @@ function Payment() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentType, setPaymentType] = useState(null);
     const [isReceiptOpen, setIsReceiptOpen] = useState(false);
+    const [paymentResponse, setPaymentResponse] = useState(null);
+
+    const startPayment = async () => {
+        await handlePayment(setPaymentResponse);
+    };
 
     const openModal = (type) => {
         setPaymentType(type);
@@ -33,6 +39,7 @@ function Payment() {
     const closeReceiptModal = () => {
         setIsReceiptOpen(false);
     };
+
 
     return (
         <div className="payment-container">
@@ -99,7 +106,7 @@ function Payment() {
                                 <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
                             </div>
                             <div className='payment-method-bottom'>
-                                <button className='payment-method-cardpay' onClick={() => openModal('card')}>카드 결제</button>
+                                <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
                                 <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
                                 <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
                             </div>
@@ -110,7 +117,6 @@ function Payment() {
             
             <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{padding:'1.5rem',}}}>
             
-                {paymentType === 'card' && <Cardpay />}
                 {paymentType === 'cash' && <Cashpay onPaymentComplete={handlePaymentComplete} />}
                 {paymentType === 'etc' && <Etcpay />}
                 {paymentType === 'discount' && <Discount />}
