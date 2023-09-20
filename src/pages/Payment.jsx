@@ -14,7 +14,9 @@ import CashpayReceipt from '../components/payment/CashpayReceipt';
 function Payment() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentType, setPaymentType] = useState(null);
-    const [isReceiptOpen, setIsReceiptOpen] = useState(false);
+    const [inputValue, setInputValue] = useState(""); 
+    const [changeAmount, setChangeAmount] = useState(0); 
+    const [totalAmount, setTotalAmount] = useState(5900); 
 
     const openModal = (type) => {
         setPaymentType(type);
@@ -25,14 +27,23 @@ function Payment() {
         setModalIsOpen(false);
     };
 
-    const handlePaymentComplete = () => {
-        closeModal();
-        setIsReceiptOpen(true);
+    const getModalStyle = () => {
+        if (paymentType === 'receipt') {
+            return {
+                content: {
+                    padding: '1.5rem',
+                    width: '500px',  // CashpayReceipt 모달의 넓이를 설정
+                },
+            };
+        }
+        return {
+            content: {
+                padding: '1.5rem',
+            },
+        };
     };
-
-    const closeReceiptModal = () => {
-        setIsReceiptOpen(false);
-    };
+  
+    
 
     return (
         <div className="payment-container">
@@ -108,19 +119,16 @@ function Payment() {
                 </div>
             </div>
             
-            <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{padding:'1.5rem',}}}>
-            
+            <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()}>
                 {paymentType === 'card' && <Cardpay />}
-                {paymentType === 'cash' && <Cashpay onPaymentComplete={handlePaymentComplete} />}
+                {paymentType === 'cash' && <Cashpay openModal={openModal} closeModal={closeModal} setInputValue={setInputValue} setChangeAmount={setChangeAmount} totalAmount={totalAmount} setTotalAmount={setTotalAmount}/>}
+                {paymentType === 'receipt' && <CashpayReceipt closeModal={closeModal} inputValue={inputValue} changeAmount={changeAmount} totalAmount={totalAmount}/>} 
                 {paymentType === 'etc' && <Etcpay />}
                 {paymentType === 'discount' && <Discount />}
                 {paymentType === 'point' && <Point />}
                 {paymentType === 'division' && <Division />}
             </Modal>
 
-            <Modal isOpen={isReceiptOpen} onClose={closeReceiptModal} style={{ content: { width: '500px' } }}>
-                <CashpayReceipt />
-            </Modal>
         </div>
     )
 }
