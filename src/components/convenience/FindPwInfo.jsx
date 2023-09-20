@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function FindPwInfo({id, setModalIsOpen}){
-
     const navi = useNavigate();
 
     // 상태관리 초기값 세팅
@@ -32,16 +31,15 @@ function FindPwInfo({id, setModalIsOpen}){
         const currentPw = e.target.value;
         setChangePw(currentPw);
         checkFormValidity();
-        const pwRegExp =
-          /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+        const pwRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
         if (!pwRegExp.test(currentPw)) {
-          setPwMsg("비밀번호 형식을 확인해주세요");
-          setIsPw(false);
+            setPwMsg("비밀번호 형식을 확인해주세요");
+            setIsPw(false);
         } else {
-          setPwMsg("");
-          setIsPw(true);
+            setPwMsg("");
+            setIsPw(true);
         }
-      };
+    };
 
     // 비밀번호 확인 유효성
     const onChangePwCheck=(e)=>{
@@ -49,13 +47,13 @@ function FindPwInfo({id, setModalIsOpen}){
         setPwCheck(currentPwCheck);
         checkFormValidity();
         if (changePw !== currentPwCheck) {
-          setPwCheckMsg("비밀번호가 일치하지 않습니다");
-          setIsPwCheck(false);
+            setPwCheckMsg("비밀번호가 일치하지 않습니다");
+            setIsPwCheck(false);
         } else {
-          setPwCheckMsg("");
-          setIsPwCheck(true);
+            setPwCheckMsg("");
+            setIsPwCheck(true);
         }
-      };
+    };
 
     const cancleBtnClick = () => {
         setModalIsOpen(false);
@@ -63,7 +61,7 @@ function FindPwInfo({id, setModalIsOpen}){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.220:3000/changePassword",{
+        axios.post("http://10.10.10.205:3000/NoSecurityZoneController/findPassword",{
             "userId" : id,
             "newPwd" : changePw
         })
@@ -85,10 +83,11 @@ function FindPwInfo({id, setModalIsOpen}){
 
     return(
         <div className="pw-content-wrap">
-            <div className="pw-title">비밀번호 변경 </div>
+            <div className="pw-title">비밀번호 변경</div>
 
             <div className="pw-content">
                 <form id="pwForm" method="post" autoComplete="off" onSubmit={onSubmit}>
+                    <input type="hidden" value={id} />
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="changePw" name="changePw" value={changePw} onChange={onChangePw} required />
