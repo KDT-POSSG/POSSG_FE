@@ -15,29 +15,30 @@ function HeaderMenu() {
   }
 
   const handleLogout = () => {
-    console.log("dd")
+    // console.log("dd")
     axios.get("http://10.10.10.205:3000/logout",
         {
             headers: {
                 accessToken: `Bearer ${accesstoken}`, 
-                Authorization: `Bearer ${accesstoken}`
             }
         }
-        )
-        .then((res)=>{
-          console.log("res >>> ", res);
-            if(res.data==="YES"){
-                console.log("로그아웃 성공");
-                localStorage.removeItem("accessToken");
-                navi("/login");
-            }else{
-                console.log("로그아웃 실패")
-            }
-        })
-        .catch((err)=>{
-          console.error("캐치 에러")
-            console.log(err)
-        })
+    )
+    .then((res)=>{
+      // console.log("res >>> ", res);
+      if(res.status===200){
+          // console.log("로그아웃 성공");
+          localStorage.removeItem("accesstoken");
+          localStorage.removeItem("convSeq");
+          localStorage.removeItem("branchName");
+          navi("/login");
+      }else{
+          console.log("로그아웃 실패")
+      }
+    })
+    .catch((err)=>{
+      console.error("캐치 에러")
+        console.log(err)
+    })
   }
 
   return (
@@ -90,9 +91,6 @@ function HeaderMenu() {
           <button onClick={handleLogout}>로그아웃</button>
         </div>
       </div>
-
-      <button onClick={handleLogout}>로그아웃테스트</button>
-
     </div>
   )
 }
