@@ -1,6 +1,5 @@
 
 import { Bootpay } from '@bootpay/client-js';
-import React, { useState, useEffect } from 'react'; // React 라이브러리 import 추가
 import axios from 'axios';
 
   export const handlePayment = async (setPaymentResponse) => {

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { handlePayment } from '../components/payment/Cardpay';
 
 import Modal from '../components/Modal';
-import Cardpay from '../components/payment/Cardpay'
 import Cashpay from '../components/payment/Cashpay'
 import Etcpay from '../components/payment/Etcpay'
 import Discount from '../components/payment/Discount'
 import Point from '../components/payment/Point'
 import Division from '../components/payment/Division'
 import CashpayReceipt from '../components/payment/CashpayReceipt';
+import { handlePayment } from 'store/utils/cardpay.js';
 
 
 
@@ -18,7 +17,11 @@ function Payment() {
     const [inputValue, setInputValue] = useState(""); 
     const [changeAmount, setChangeAmount] = useState(0); 
     const [totalAmount, setTotalAmount] = useState(5900); 
+    const [paymentResponse, setPaymentResponse] = useState(null);
 
+    const startPayment = async () => {
+        await handlePayment(setPaymentResponse);
+    };
 
     const openModal = (type) => {
         setPaymentType(type);
@@ -124,7 +127,6 @@ function Payment() {
             
 
             <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()}>
-                {paymentType === 'card' && <Cardpay />}
                 {paymentType === 'cash' && <Cashpay openModal={openModal} closeModal={closeModal} setInputValue={setInputValue} setChangeAmount={setChangeAmount} totalAmount={totalAmount} setTotalAmount={setTotalAmount}/>}
                 {paymentType === 'receipt' && <CashpayReceipt closeModal={closeModal} inputValue={inputValue} changeAmount={changeAmount} totalAmount={totalAmount}/>} 
                 {paymentType === 'etc' && <Etcpay />}
