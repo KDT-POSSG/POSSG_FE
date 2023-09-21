@@ -1,0 +1,104 @@
+/* addCost-content-wrap */
+.addCost-content-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $color-back;
+    padding: 5vw 10vw;
+    min-height: 100vh;
+
+    // title
+    .addCost-title{
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    // content
+    .addCost-content {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        margin: 50px;
+        // background-color: aquamarine;
+
+        .addCost-info{
+            margin-right: 60px;
+            // background-color: aquamarine;
+        }
+
+        .info-container {
+            position: relative;
+            margin: .625rem 0;
+            height: 60px;  
+        }
+
+        input {
+            border: 1px solid $color-border;
+            border-radius: 32px;
+            padding: 1rem 1.25rem;
+            width: 20vw;
+            transition: all 0.2s;
+        }
+
+        input:focus {
+            border-color: $color-main;
+        }
+
+        label span {
+            position: absolute;
+            top: 18px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            color: rgba($color: $color-gray, $alpha: 0.5);
+            transition: all 0.2s;
+        }
+
+        input:focus + label span,
+        input:valid + label span {
+            position: absolute;
+            top: -4px;
+            left: 20px;
+            padding: 0 4px;
+            font-size: 1rem;
+            color: $color-main;
+            background: linear-gradient($color-back, $color-white);
+        }
+
+        .info-container button {
+            padding: 15px 1rem;
+            background-color: $color-main;
+            color: $color-white;
+            font-weight: bold;
+            border-radius: 32px;
+            width: 20vw;
+        }
+
+        .addCost-keypad{
+            margin-left: 60px;
+            padding-top: 25px;
+
+            .button-common {
+                background-color: $color-white;
+            }
+        }
+
+        .keypad-container{
+            // background-color: burlywood;
+            display: flex;
+            justify-content: center;
+
+            .save-btn{
+                padding: 15px 1rem;
+                background-color: $color-main;
+                color: $color-white;
+                font-weight: bold;
+                border-radius: 32px;
+                width: 15vw;
+            }
+        }
+
+        
+    }
+}
+
