@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { handlePayment } from '../components/payment/Cardpay';
 
 import Modal from '../components/Modal';
 import Cardpay from '../components/payment/Cardpay'
@@ -17,6 +18,7 @@ function Payment() {
     const [inputValue, setInputValue] = useState(""); 
     const [changeAmount, setChangeAmount] = useState(0); 
     const [totalAmount, setTotalAmount] = useState(5900); 
+
 
     const openModal = (type) => {
         setPaymentType(type);
@@ -44,6 +46,7 @@ function Payment() {
     };
   
     
+
 
     return (
         <div className="payment-container">
@@ -110,7 +113,7 @@ function Payment() {
                                 <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
                             </div>
                             <div className='payment-method-bottom'>
-                                <button className='payment-method-cardpay' onClick={() => openModal('card')}>카드 결제</button>
+                                <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
                                 <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
                                 <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
                             </div>
@@ -119,6 +122,7 @@ function Payment() {
                 </div>
             </div>
             
+
             <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()}>
                 {paymentType === 'card' && <Cardpay />}
                 {paymentType === 'cash' && <Cashpay openModal={openModal} closeModal={closeModal} setInputValue={setInputValue} setChangeAmount={setChangeAmount} totalAmount={totalAmount} setTotalAmount={setTotalAmount}/>}
