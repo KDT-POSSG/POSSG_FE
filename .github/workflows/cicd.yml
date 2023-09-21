@@ -4,9 +4,17 @@ on:
   push:
     branches:
       - 'main'
-
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: false
+        default: 'warning'
+      tags:
+        description: 'dispatch'  
+  
 jobs:
-  build:
+  cicd:
     runs-on: ubuntu-latest
     steps:
     -
@@ -30,4 +38,18 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: possg/possg-fe:latest
-          
+    - 
+      name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.4        
+      with:
+          host: 52.79.198.243         
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          timeout: 40s  # 30초 기본        
+          script: |
+              docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+              docker pull possg/possg-fe:latest
+              docker rm -f frontend-test
+              docker run -d -p 80:80 --name frontend-test possg/possg-fe:latest
+      
