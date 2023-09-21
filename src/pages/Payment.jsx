@@ -108,7 +108,7 @@ function Payment() {
                         <div className='payment-total'>결제 금액</div>
                         <div className='payment-total-container'>
                             <div className='payment-total-price'>2,000 원</div>
-                            <button className='payment-division-button' onClick={() => openModal('division')}>분할 결제</button>
+                            <button className='payment-division-button' onClick={() => openModal('cash')}>현금 결제</button>
                         </div>
                         <div className='payment-method-container2'>
                             <div className='payment-method-top'>
@@ -117,7 +117,7 @@ function Payment() {
                             </div>
                             <div className='payment-method-bottom'>
                                 <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
-                                <button className='payment-method-cashpay' onClick={() => openModal('cash')}>현금 결제</button>
+                                <button className='payment-method-cashpay' onClick={() => openModal('cash')}></button>
                                 <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
                             </div>
                         </div>
@@ -132,7 +132,6 @@ function Payment() {
                 {paymentType === 'etc' && <Etcpay />}
                 {paymentType === 'discount' && <Discount />}
                 {paymentType === 'point' && <Point />}
-                {paymentType === 'division' && <Division />}
             </Modal>
 
         </div>

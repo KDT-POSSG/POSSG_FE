@@ -1,0 +1,9 @@
+{
+    "productSeq" : 1,
+    "productName" : "아이셔",
+    "price" : 1000,
+    "priceDiscount": 900,
+    "expirationDate": "2023-11-02 18:00:00",
+    "discountRate": 10,
+    "promotionInfo": 2
+}

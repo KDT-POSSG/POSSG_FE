@@ -17,13 +17,13 @@ function Cashpay({ openModal, closeModal, totalAmount, setTotalAmount }) {
   
 
   const handleInputValueChange = (value) => {
-    setInputValue(value); 
-    const receivedAmount = parseInt(value, 10); 
-    const change = receivedAmount - totalAmount; 
-    if (change >= 0) {
-        setChangeAmount(change); 
-    }
-};
+      setInputValue(value); 
+      const receivedAmount = parseInt(value, 10); 
+      const change = receivedAmount - totalAmount; 
+      if (change >= 0) {
+          setChangeAmount(change); 
+      }
+  };
 
   const shuffleString = (str) => {
       const arr = str.split('');
