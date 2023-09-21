@@ -84,20 +84,24 @@ function FindPw(){
         //alert("클릭")
         const currentId = id;   // 아이디 가져오기
         const currentNum = phoneNum; // 휴대폰번호 가져오기
-        console.log(currentId);
-        console.log(currentNum);
-        try{//to - 번호 / content - 아디
-            const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/send`, { to: currentNum, content : currentId });
-            console.log("res >>> " + res);
-            console.log("res.data >>> " + res.data);
-            if(res.data.statusCode === "202" && res.data.statusName === "success"){
-                toast.success("인증번호가 발송되었습니다");
-            }else{
-                toast.error("휴대폰번호를 확인해주세요");
-                //setIsPhoneNum(false);
+        // console.log(currentId);
+        // console.log(currentNum);
+        if(!phoneNum){
+            toast.error("휴대폰 번호를 입력해주세요")
+        }else{
+            try{//to - 번호 / content - 아디
+                const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/send`, { to: currentNum, content : currentId });
+                console.log("res >>> " + res);
+                console.log("res.data >>> " + res.data);
+                if(res.data.statusCode === "202" && res.data.statusName === "success"){
+                    toast.success("인증번호가 발송되었습니다");
+                }else{
+                    toast.error("휴대폰번호를 확인해주세요");
+                    //setIsPhoneNum(false);
+                }
+            }catch(err){
+                console.log(err);
             }
-        }catch(err){
-            console.log(err);
         }
     }
 
@@ -123,23 +127,26 @@ function FindPw(){
     const onCheckNum = async (e) => {
         const currentNum = num;
         //console.log(currentNum);
-        try{
-            const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
-            if(res.data==="YES"){
-                //alert("성공");
-                toast.success("휴대폰 인증에 성공하였습니다")
-                setVerificationCode(true);
-            }else if(res.data==="NO"){
-                // 인증 실패 처리
-                toast.error("인증번호를 확인해주세요");
-                setVerificationCode(false);
+        if(!num){
+            toast.error("인증번호를 입력해주세요")
+        }else{
+            try{
+                const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
+                if(res.data==="YES"){
+                    //alert("성공");
+                    toast.success("휴대폰 인증에 성공하였습니다")
+                    setVerificationCode(true);
+                }else if(res.data==="NO"){
+                    // 인증 실패 처리
+                    toast.error("인증번호를 확인해주세요");
+                    setVerificationCode(false);
+                }
+            }catch(err){
+                console.log(err);
             }
-        }catch(err){
-            console.log(err);
+
         }
     }
-
-
 
     return(
         <div className="find-content-wrap">
@@ -172,7 +179,7 @@ function FindPw(){
                     </div>
                     <div className="form-row">
                         <div className="btn-container">
-                            <button type="button" onClick={() => openModal()}>찾기</button>
+                            <button type="button" disabled={!formIsValid} onClick={() => openModal()}>찾기</button>
                             {/* disabled={!formIsValid} */}
                         </div>
                     </div>
@@ -184,7 +191,7 @@ function FindPw(){
                     </div>
                     <Modal isOpen={modalIsOpen} onClose={closeModal}
                         style={{ content: { width: '30rem', height: 'auto' } }}>
-                        <FindPwInfo setModalIsOpen={setModalIsOpen} />
+                        <FindPwInfo id={id} setModalIsOpen={setModalIsOpen} />
                     </Modal>
             </div>
         </div>
