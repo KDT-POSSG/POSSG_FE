@@ -1,4 +1,7 @@
 /* 모달 스타일 */
+
+
+
 .modal-content {
   position: absolute;
   top: 50%;
@@ -53,7 +56,7 @@
 
 .ReactModal__Overlay {
   opacity: 0;
-  transition: all 0.2s;
+  transition: all 0.3s;
 }
 
 .ReactModal__Overlay--after-open{
