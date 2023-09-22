@@ -42,14 +42,14 @@ jobs:
       name: SSH Remote Commands
       uses: appleboy/ssh-action@v0.1.4        
       with:
-          host: 52.79.198.243         
+          host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_PASSWORD }}
           port: 22
           timeout: 40s
           script: |
               docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
               docker pull ${{ secrets.DOCKERHUB_USERNAME }}/possg-fe:latest
-              docker rm -f frontend-test
-              docker run -d -p 80:80 --name frontend-test ${{ secrets.DOCKERHUB_USERNAME }}/possg-fe:latest
+              docker rm -f possg-fe
+              docker run -d -p 80:80 --name possg-fe ${{ secrets.DOCKERHUB_USERNAME }}/possg-fe:latest
       
