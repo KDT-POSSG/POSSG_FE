@@ -39,7 +39,6 @@ function Home() {
           ))
         }
         <HomeItemEdit homeMenu={homeMenu} isChange={isChange} setIsChange={setIsChange} />
-        파이프라인 테스트
       </div>
 
     </div>
