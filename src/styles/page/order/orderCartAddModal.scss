@@ -1,0 +1,56 @@
+.order-cart-add-modal {
+  padding-left: 1rem;
+  padding-right: 3rem;
+
+  .stock-search {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+
+    > input {
+      background-color: $color-white;
+      border: 1px solid $color-border;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      transition: $transition-cb2;
+      width: 100%;
+    }
+
+    > input::placeholder {
+      opacity: 0.8;
+    }
+
+    > input:focus {
+      border: 1px solid $color-main;
+    }
+
+    > button {
+      position: absolute;
+      top: 0.5rem;
+      right: 8px;
+    }
+  }
+
+  .ordercart-search {
+    padding: 0 0.5rem;
+
+    hr {
+      height: 0;
+      border: none;
+      border-top: 1px solid $color-border;
+    }
+
+    .ordercart-search-item {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      padding: 0 0.25rem;
+      // background-color: skyblue;
+      transition: $transition-cb2;
+
+      &:hover {
+        color: $color-main;
+        cursor: pointer;
+      }
+    }
+  }
+}
