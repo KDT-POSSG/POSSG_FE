@@ -15,7 +15,7 @@ function HeaderMenu() {
   }
 
   const handleLogout = () => {
-    // console.log("dd")
+
     axios.get("http://10.10.10.205:3000/logout",
         {
             headers: {
@@ -24,9 +24,7 @@ function HeaderMenu() {
         }
     )
     .then((res)=>{
-      // console.log("res >>> ", res);
       if(res.status===200){
-          // console.log("로그아웃 성공");
           localStorage.removeItem("accesstoken");
           localStorage.removeItem("convSeq");
           localStorage.removeItem("branchName");
@@ -69,7 +67,7 @@ function HeaderMenu() {
         <ul>
         {
           menuDatas.map((item) => (
-            item.id === 5 || item.id === 7 ? 
+            item.id === 11 || item.id === 7 ? 
             <React.Fragment key={item.id}>
               <Link to={item.link} onClick={handleMenu}>
                 <li>{item.name}</li>

@@ -29,6 +29,7 @@ import Order from 'pages/Order';
 import OrderDetail from 'pages/OrderDetail';
 import RegisterCustomer from 'components/customer/RegisterCustomer';
 import AddCost from 'components/analysis/AddCost';
+import OrderCart from 'pages/OrderCart';
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
         <Route path='/paymenttest' element={<Paymenttest />} />
         <Route path='/customerRegister' element={<RegisterCustomer />} />
         <Route path='/addCost' element={<AddCost />} />
+        <Route path='/ordercart' element={<OrderCart />} />
       </Routes>
     </BrowserRouter>
   );
