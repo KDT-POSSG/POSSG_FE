@@ -49,7 +49,7 @@ function StockListItemMain({ stock, idx }) {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={modalClose}
-             style={{ content: { width: '30rem', height: 'auto' } }}>
+             style={{ content: { width: '30rem', height: 'auto', backgroundColor: '#ffffff' } }}>
         <StockAddModal 
           product_name={stock.product_name} 
           img_url={stock.img_url} 
