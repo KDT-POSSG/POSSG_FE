@@ -28,13 +28,11 @@ function AddCost(){
         setSelectedInputIndex(index);
     };
     
-    const handleNumberPadInput = (value) => {   // 숫자패드에서 숫자를 입력할 때 호출되는 함수, selectedInputIndex 상태를 사용
+    const handleNumberPadInput = (value) => {
         if (selectedInputIndex !== null) {
             const currentInputField = inputFields[selectedInputIndex];
-            if (/^\d+$/.test(value.replace(/,/g, ''))) {
-                const addCommaValue = addComma(value.replace(/,/g, '')); // 콤마 제거 후 처리
-                currentInputField.setState(addCommaValue);
-            }
+            const addCommaValue = addComma(value); 
+            currentInputField.setState(addCommaValue);
         }
     };
 
