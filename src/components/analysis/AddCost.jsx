@@ -2,6 +2,7 @@ import axios from "axios";
 import NumberPad from "components/NumberPad";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { addComma } from "store/utils/function";
 
 function AddCost(){
 
@@ -27,18 +28,17 @@ function AddCost(){
         setSelectedInputIndex(index);
     };
     
-    const handleNumberPadInput = (value) => {   // 숫자패드에서 숫자를 입력할 때 호출되는 함수, selectedInputIndex 상태를 사용
+    const handleNumberPadInput = (value) => {
         if (selectedInputIndex !== null) {
             const currentInputField = inputFields[selectedInputIndex];
-            if (value === "0" || /^\d{0,12}$/.test(value)) {
-            currentInputField.setState(value);
-            }
+            const addCommaValue = addComma(value); 
+            currentInputField.setState(addCommaValue);
         }
     };
 
     return(
         <div className="addCost-content-wrap">
-            <div className="addCost-title">금액 입력</div>
+            <div className="addCost-title">비용 입력</div>
             <div className="addCost-content">
                 <div className="addCost-info">
                 {inputFields.map((inputField, index) => (
