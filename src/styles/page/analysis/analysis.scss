@@ -1,17 +1,19 @@
 .analysis-content-wrap{
-    display: flex;
     background-color: $color-back;
-    padding: 5vw 10vw;
-    // min-height: 100vh;
-    // align-items: center;
+    min-height: calc(100vh - 4rem);
 
     .analysis-content{
-        display: flex;
-        width: 100vw;
-        justify-content: space-around;
+        width: 100%;
+        max-width: 1400px;
+        padding: 10rem 10rem;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-row-gap: 2rem;
+        grid-column-gap: 2rem;
 
         .analysis{
-            padding: 3rem 2.5rem;
+            padding: 1.5rem;
             background-color: $color-white;
             border-radius: 2rem;
             aspect-ratio: 1;
