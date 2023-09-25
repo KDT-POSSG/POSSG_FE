@@ -29,6 +29,7 @@ import Order from 'pages/Order';
 import OrderDetail from 'pages/OrderDetail';
 import RegisterCustomer from 'components/customer/RegisterCustomer';
 import AddCost from 'components/analysis/AddCost';
+import Analysis from 'components/analysis/Analysis';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
         <Route path='/order/:seq' element={<OrderDetail />} />
         <Route path='/paymenttest' element={<Paymenttest />} />
         <Route path='/customerRegister' element={<RegisterCustomer />} />
+        <Route path='/analysis' element={<Analysis />} />
         <Route path='/addCost' element={<AddCost />} />
       </Routes>
     </BrowserRouter>
