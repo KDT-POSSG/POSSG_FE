@@ -31,6 +31,10 @@ import RegisterCustomer from 'components/customer/RegisterCustomer';
 import AddCost from 'components/analysis/AddCost';
 import OrderCart from 'pages/OrderCart';
 import Analysis from 'components/analysis/Analysis';
+import SalesReport from 'components/analysis/SalesReport';
+import DailySales from 'components/analysis/DailySales';
+import MonthlySales from 'components/analysis/MonthlySales';
+import WeeklySales from 'components/analysis/WeeklySales';
 
 function App() {
   return (
@@ -59,6 +63,12 @@ function App() {
         <Route path='/customerRegister' element={<RegisterCustomer />} />
         <Route path='/analysis' element={<Analysis />} />
         <Route path='/addCost' element={<AddCost />} />
+        <Route path='/salesReport' element={<SalesReport />}>
+          <Route index element={<DailySales />} />
+          <Route path='daily' element={<DailySales />} />
+          <Route path='weeklySales' element={<WeeklySales />} />
+          <Route path='monthlySales' element={<MonthlySales />} />
+        </Route>
         <Route path='/ordercart' element={<OrderCart />} />
       </Routes>
     </BrowserRouter>
