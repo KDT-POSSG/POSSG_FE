@@ -1,9 +1,19 @@
 {
-    "productSeq" : 1,
-    "productName" : "아이셔",
-    "price" : 1000,
-    "priceDiscount": 900,
-    "expirationDate": "2023-11-02 18:00:00",
-    "discountRate": 10,
-    "promotionInfo": 2
+    "productSeq": 2,
+    "convSeq": 1,
+    "categoryId": 1,
+    "productName": "농심)튀김우동큰사발",
+    "productRomanName": "Nongsim)Twigimudongkeunsabal",
+    "productTranslationName": null,
+    "price": 1400,
+    "priceDiscount": 1400,
+    "stockQuantity": 7,
+    "expirationDate": "2023-10-05 18:00:00",
+    "discountRate": 0.0,
+    "promotionInfo": 3,
+    "barcode": "8801043016070",
+    "imgUrl": "https://www.emart24.co.kr/image/NDA5ODE=",
+    "totalStock": 0,
+    "amount": 0,
+    "callDate": null
 }

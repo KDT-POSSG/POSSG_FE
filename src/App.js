@@ -36,7 +36,7 @@ function App() {
       <Toaster toastOptions={{ className: 'common-toast' }} />
       <Header />
       <Routes>
-        {/* <Route path='/' element={<AttendaceCheck />} /> */}
+        <Route path='/check' element={<AttendaceCheck />} />
         <Route path='/' element={<Home />} />
         <Route path='/payment' element={<Payment />} />
         <Route path='/paymentlist' element={<Paymentlist />} />

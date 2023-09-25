@@ -7,6 +7,10 @@
         padding-left: 2rem;
         display: flex;
         align-items: center;
+
+        .input-barcode{
+            opacity: 0;
+        }
     }
     
     .payment-body{

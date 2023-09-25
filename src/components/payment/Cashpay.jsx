@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 
 
 
-function Cashpay({ openModal, closeModal, totalAmount, setTotalAmount }) {
+function Cashpay({ openModal, closeModal, totalAmount }) {
   const [totalAmountState, setTotalAmountState] = useState(5900); 
   const [inputValue, setInputValue] = useState("");
   const [changeAmount, setChangeAmount] = useState(0);
@@ -88,12 +88,12 @@ function Cashpay({ openModal, closeModal, totalAmount, setTotalAmount }) {
 
   const handlePayment = async () => {
     try {
-        const response = await axios.post("http://10.10.10.205:3000/addpayment", paymentData);
+        const response = await axios.post("http://10.10.10.65:3000/addpayment", paymentData);
         console.log("결제 정보 전송 완료", response.data);
         
         if(response.data === "YES") {
             setPaymentSuccess(true);
-            const itemResponse = await axios.post('http://10.10.10.205:3000/addItems', items);
+            const itemResponse = await axios.post('http://10.10.10.65:3000/addItems', items);
             console.log("결제 상품 목록 전송 완료", itemResponse.data);
 
             closeModal();
