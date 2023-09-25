@@ -31,6 +31,7 @@ import RegisterCustomer from 'components/customer/RegisterCustomer';
 import AddCost from 'components/analysis/AddCost';
 import OrderCart from 'pages/OrderCart';
 import Analysis from 'components/analysis/Analysis';
+import Delivery from 'pages/Delivery';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <Route path='/analysis' element={<Analysis />} />
         <Route path='/addCost' element={<AddCost />} />
         <Route path='/ordercart' element={<OrderCart />} />
+        <Route path='/delivery' element={<Delivery />} />
       </Routes>
     </BrowserRouter>
   );
