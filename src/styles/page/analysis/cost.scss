@@ -1,18 +1,18 @@
-.analysis-content-wrap{
+.cost-content-wrap{
     background-color: $color-back;
     min-height: calc(100vh - 4rem);
 
-    .analysis-content{
+    .cost-content{
         width: 100%;
         max-width: 1400px;
-        padding: 10rem 10rem;
+        padding: 10rem 20rem;
         margin: 0 auto;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-row-gap: 2rem;
         grid-column-gap: 2rem;
 
-        .analysis{
+        .cost{
             padding: 1.5rem;
             background-color: $color-white;
             border-radius: 2rem;
@@ -30,7 +30,7 @@
             filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
         }
 
-        .analysis:hover {
+        .cost:hover {
             color: $color-main;
             transform: translate(-2px, -2px);
             border: 1px dashed $color-main;
