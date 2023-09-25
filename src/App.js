@@ -32,6 +32,7 @@ import AddCost from 'components/analysis/AddCost';
 import OrderCart from 'pages/OrderCart';
 import Analysis from 'components/analysis/Analysis';
 import Delivery from 'pages/Delivery';
+import Cost from 'components/analysis/Cost';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
         <Route path='/paymenttest' element={<Paymenttest />} />
         <Route path='/customerRegister' element={<RegisterCustomer />} />
         <Route path='/analysis' element={<Analysis />} />
+        <Route path='/cost' element={<Cost />} />
         <Route path='/addCost' element={<AddCost />} />
         <Route path='/ordercart' element={<OrderCart />} />
         <Route path='/delivery' element={<Delivery />} />
