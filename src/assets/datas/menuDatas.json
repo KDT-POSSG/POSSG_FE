@@ -26,13 +26,18 @@
   },
   {
     "id": 5,
-    "name": "발주 페이지",
+    "name": "발주 내역",
     "link": "/order"
+  },
+  {
+    "id": 11,
+    "name": "발주 바구니",
+    "link": "/ordercart"
   },
   {
     "id": 6,
     "name": "회원 페이지",
-    "link": "myPage"
+    "link": "/myPage"
   },
   {
     "id": 7,

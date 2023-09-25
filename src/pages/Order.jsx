@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import orderListDatas from '../assets/datas/orderListDatas.json';
 import OrderListItem from 'components/order/OrderListItem';
 import axios from 'axios';
+import Pagination from 'react-js-pagination';
 
 function Order() {
 
   const [orderList, setOrderList] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setOrderList(orderListDatas);
@@ -20,18 +22,20 @@ function Order() {
     //   })
   }, []);
 
+  const handlePage = (pageNumber) => {
+    setPage(pageNumber);
+  }
+
   return (
     <div className='order-page'>
 
       <div className='order-top'>
-        
-        <div className='page-title order-page-title'>발주 내역 페이지</div>
+        <div className='page-title order-page-title'>발주 내역</div>
 
         <div className='order-top-filter'>
           <button className='active-btn order-filter-btn'>점주 발주 목록</button>
           <button className='order-filter-btn'>고객 요청 목록</button>
         </div>
-
       </div>
 
       <div className='order-grid-container'>
@@ -51,6 +55,18 @@ function Order() {
         }
 
       </div>
+
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={1}
+        totalItemsCount={1}
+        pageRangeDisplayed={5}
+        firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
+        prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
+        nextPageText={<span className="material-symbols-rounded page-btn">chevron_right</span>}
+        lastPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_right</span>}
+        onChange={handlePage}
+      />
 
     </div>
   )

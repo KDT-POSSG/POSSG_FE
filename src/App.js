@@ -29,6 +29,7 @@ import Order from 'pages/Order';
 import OrderDetail from 'pages/OrderDetail';
 import RegisterCustomer from 'components/customer/RegisterCustomer';
 import AddCost from 'components/analysis/AddCost';
+import OrderCart from 'pages/OrderCart';
 import Analysis from 'components/analysis/Analysis';
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
         <Route path='/customerRegister' element={<RegisterCustomer />} />
         <Route path='/analysis' element={<Analysis />} />
         <Route path='/addCost' element={<AddCost />} />
+        <Route path='/ordercart' element={<OrderCart />} />
       </Routes>
     </BrowserRouter>
   );

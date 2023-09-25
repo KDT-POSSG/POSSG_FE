@@ -1,7 +1,5 @@
 /* 모달 스타일 */
 
-
-
 .modal-content {
   position: absolute;
   top: 50%;
@@ -16,6 +14,10 @@
   height: 650px;
   overflow-y: auto;
   background-color: $color-back;
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none;
 }
 
 .modal-overlay {
