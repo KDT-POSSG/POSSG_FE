@@ -12,6 +12,7 @@ function Employees() {
     const [employeeType, setEmployeeType] = useState(null);
     const [employeeList, setEmployeeList] = useState([]);
     const [totalCnt, setTotalCnt] = useState(0);
+    const accesstoken = localStorage.getItem("accesstoken");
 
     //모달
     const openModal = (type) => {
@@ -23,10 +24,12 @@ function Employees() {
      };
  
      const fetchEmployees = () => {
-      axios.get('http://10.10.10.196:3000/findallemployee', {params: {convSeq :1}})
+      axios.get('http://10.10.10.108:3000/findallemployee', {params: {convSeq :31}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setEmployeeList(res.data);
             setTotalCnt(res.data.cnt);
+            console.log('직원 리스트 불러오기 성공');
+            console.log(res.data);
         })
         .catch((err) => {
             console.log(err);
