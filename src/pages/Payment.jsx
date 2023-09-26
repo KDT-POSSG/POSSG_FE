@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef} from 'react';
 import axios from 'axios';
 import Modal from '../components/Modal';
 import Cashpay from '../components/payment/Cashpay'
@@ -18,9 +18,12 @@ function Payment() {
     const [paymentResponse, setPaymentResponse] = useState(null);
     const [barcodeInput, setBarcodeInput] = useState("");
     const [products, setProducts] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const [changeAmount, setChangeAmount] = useState(0);
+    const barcodeInputRef = useRef(null);
 
     
-
+    // input에 바코드가 제대로 입력됐는지 확인
     const handleBarcode = () => {
         const barcodeInput = document.querySelector('.input-barcode').value;
         if(!barcodeInput) {
@@ -32,7 +35,7 @@ function Payment() {
         .then((res) => {
             const productData = res.data;
             const existingProduct = products.find(p => p.productSeq === productData.productSeq);
-    
+            //현재 상품의 시퀀스와 들어오는 상품의 시퀀스가 같으면 상품의 수량을 1개씩 더해줌
             if (existingProduct) {
                 setProducts(prevProducts => {
                     return prevProducts.map(p => {
@@ -44,7 +47,7 @@ function Payment() {
                 });
             } else {
                 productData.amount = 1;
-                setProducts(prevProducts => [...prevProducts, productData]);
+                setProducts(prevProducts => [...prevProducts, productData]); //그렇지 않으면 상품 1개로 
             }
     
         })
@@ -55,6 +58,7 @@ function Payment() {
         setBarcodeInput("");
     }
 
+    // 총 결제 금액 계산
     const getTotalAmount = () => {
         return products.reduce((total, product) => {
             return total + (product.priceDiscount) * product.amount;
@@ -62,20 +66,21 @@ function Payment() {
     };
     
 
-
+    // 부트페이 결제 함수 시작
     const startPayment = async () => {
         await handlePayment(setPaymentResponse);
     };
 
+    //모달창 열고 닫기
     const openModal = (type) => {
         setPaymentType(type);
         setModalIsOpen(true);
        };
-   
     const closeModal = () => {
         setModalIsOpen(false);
     };
 
+    //paymentType에 따라 모달창의 크기를 다르게 설정, 결제 영수증 모달의 넓이 조절을 위해 추가함
     const getModalStyle = () => {
         if (paymentType === 'receipt') {
             return {
@@ -92,19 +97,15 @@ function Payment() {
         };
     };
     
-
-    /* 사용자가 어느부분을 클릭해도 INPUT에 포커스 되도록 하는 함수 구현 해야 함 */
    
 
     return (
-        <div className="payment-container">
+        // payment-container를 클릭하면 바코드 입력창에 포커스가 가도록 함 (사용자가 다른 곳을 클릭했을 때 input창에 포커스가 해제되는 것 방지용)
+        <div className="payment-container" onClick={() => barcodeInputRef.current.focus()}>
             <div className='payment-header'>
                 <div className='page-title'>결제</div>
-                <input className='input-barcode' placeholder='여기에 바코드를 입력' value={barcodeInput} onChange={(e) => setBarcodeInput(e.target.value)} 
-                    autoFocus onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleBarcode();
-                        } }}/>
+                <input ref={barcodeInputRef} className='input-barcode' placeholder='여기에 바코드를 입력' value={barcodeInput} 
+                    onChange={(e) => setBarcodeInput(e.target.value)} autoFocus onKeyDown={(e) => { if (e.key === 'Enter') {handleBarcode();}}}/>
 
 
             </div>
@@ -117,13 +118,17 @@ function Payment() {
                             <div className='payment-list-row' key={product.productSeq}>
                                 <div className='payment-list-row-info'>
                                     <div className='payment-list-name'>{product.productName}</div>
-                                    {/*  <div className='payment-list-amount'>x {product.amount}</div>  amount 사용하면 안됨 수정*/}
+                                     <div className='payment-list-amount'>x {product.amount}</div>
                                     <div className='payment-list-price'>{addComma(product.price * product.amount)} 원</div>
                                 </div>
+
+                                {/* 할인율이 0이 아닐 때만 할인 정보를 보여줌 */}
+                                {product.discountRate !== 0.0 && (
                                 <div className='payment-list-discount-info'>
                                     <div className='payment-list-discount'>할인</div>
                                     <div className='payment-list-discount2'>-{addComma((product.price - product.priceDiscount) * product.amount)} 원</div>
                                 </div>
+                                )}
                             </div>
                         ))}
                     </div>
@@ -159,12 +164,28 @@ function Payment() {
             
 
             <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()}>
-                {paymentType === 'cash' && <Cashpay openModal={openModal} closeModal={closeModal} totalAmount={getTotalAmount()}/>}
-                {paymentType === 'receipt' && <CashpayReceipt closeModal={closeModal}/>} 
-                {paymentType === 'etc' && <Etcpay />}
-                {paymentType === 'discount' && <Discount />}
-                {paymentType === 'point' && <Point />}
-            </Modal>
+            {paymentType === 'cash' && 
+                <Cashpay 
+                    openModal={openModal} 
+                    closeModal={closeModal} 
+                    totalAmount={getTotalAmount()} 
+                    products={products}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    changeAmount={changeAmount}
+                    setChangeAmount={setChangeAmount}
+                />}
+            {paymentType === 'receipt' && 
+                <CashpayReceipt 
+                    closeModal={closeModal} 
+                    totalAmount={getTotalAmount()} 
+                    inputValue={inputValue}
+                    changeAmount={changeAmount}
+                />} 
+            {paymentType === 'etc' && <Etcpay />}
+            {paymentType === 'discount' && <Discount />}
+            {paymentType === 'point' && <Point />}
+        </Modal>
 
         </div>
     )
