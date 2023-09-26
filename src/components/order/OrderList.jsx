@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { addComma } from 'store/utils/function';
 
-function OrderList({ type }) {
+function OrderList({ type, orderList }) {
 
   const [addStock, setAddStock] = useState(1);
 
@@ -46,8 +46,8 @@ function OrderList({ type }) {
           <div>총 금액</div>
         </div>
 
-        {/* {
-          orderCart && orderCart.length === 0 ? 
+        {
+          orderList && orderList.length === 0 ? 
           (
             <div className='ordercart-empty'>
               <span className='tossface ordercart-icon'>📦</span>
@@ -56,9 +56,58 @@ function OrderList({ type }) {
           )
           :
           (<></>)
-        } */}
+        }
 
-        <div className='ordercart-grid ordercart-grid-item'>
+        {
+          orderList && orderList.map((item) => (
+            <div className='ordercart-grid ordercart-grid-item'>
+
+              <div>
+                {
+                  type === "before" ?
+                  <input type="checkbox" className='ordercart-check' value={1} />
+                  :
+                  <div>1</div>
+                }
+              </div>
+
+              <div className='ordercart-image'>
+                <img src={item.imgUrl} alt={item.productName} />
+              </div>
+
+              <div className='ordercart-product-name'>
+                <div className='ordercart-product-title'>
+                  <div className='top'>{item.productName}</div>
+                  <div className='bottom'>개당 가격 : {addComma(item.price / item.amount)} 원</div>
+                </div>
+              </div>
+
+              {
+                type === "before" ?
+                <div>
+                  <div className='ordercart-process'>
+                    <button value="minus" onClick={handleAddStock} className='minus'>
+                      <span className="material-symbols-rounded stock-calc">remove</span>
+                    </button>
+
+                    <input type="text" placeholder='수량' value={item.amount} onChange={handleAddStock} /><br/>
+                    
+                    <button value="plus" onClick={handleAddStock} className='plus'>
+                      <span className="material-symbols-rounded stock-calc">add</span>
+                    </button>
+                  </div>
+                </div>
+                :
+                <div>1</div>
+              }
+              
+              <div>{addComma(item.price)} 원</div>
+
+            </div>
+          ))
+        }
+
+        {/* <div className='ordercart-grid ordercart-grid-item'>
 
           <div>
             {
@@ -101,7 +150,7 @@ function OrderList({ type }) {
           
           <div>{addComma(11900 * 1)} 원</div>
 
-        </div>
+        </div> */}
 
       </div>
 
