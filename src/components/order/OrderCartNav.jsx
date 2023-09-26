@@ -36,7 +36,6 @@ function OrderCartNav() {
         else {
           toast.error("발주 실패");
         }
-        
       })
       .catch((error) => {
         console.error(error);
