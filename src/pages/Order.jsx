@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import orderListDatas from '../assets/datas/orderListDatas.json';
-import OrderListItem from 'components/order/OrderListItem';
+import OrderItem from 'components/order/OrderItem';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
 
@@ -10,16 +10,22 @@ function Order() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    setOrderList(orderListDatas);
+    // setOrderList(orderListDatas);
 
-    // axios.post('http://10.10.10.208:3000/getAllConvOrderList', null)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setOrderList(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   })
+    axios.get('http://10.10.10.140:3000/getAllConvOrderList', {
+        params: {
+          convSeq: 1,
+          pageNumber: page - 1,
+          pageSize: 20
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+        setOrderList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   }, []);
 
   const handlePage = (pageNumber) => {
@@ -50,7 +56,7 @@ function Order() {
 
         {
           orderList && orderList.map((item) => (
-            <OrderListItem key={item.callRef} item={item} />
+            <OrderItem key={item.callRef} item={item} />
           ))
         }
 

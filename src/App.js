@@ -60,7 +60,7 @@ function App() {
         <Route path='/findId' element={<FindId />} />
         <Route path='/findPw' element={<FindPw />} />
         <Route path='/order' element={<Order />}/>
-        <Route path='/order/:seq' element={<OrderDetail />} />
+        <Route path='/order/:callRef' element={<OrderDetail />} />
         <Route path='/paymenttest' element={<Paymenttest />} />
         <Route path='/customerRegister' element={<RegisterCustomer />} />
         <Route path='/analysis' element={<Analysis />} />
