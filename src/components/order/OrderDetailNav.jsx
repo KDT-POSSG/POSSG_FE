@@ -2,6 +2,9 @@ import React from 'react';
 import { orderState } from 'store/utils/function';
 
 function OrderDetailNav() {
+
+  let orderStateTest = 2;
+
   return (
     <div className='order-detail-middle'>
       <div>
@@ -20,8 +23,14 @@ function OrderDetailNav() {
       </div>
 
       <div>
-        <button className='order-cancel'>발주 취소</button>
+        {
+          orderStateTest === 1 ?
+          <button className='order-cancel'>발주 취소</button>
+          :
+          <button className='order-cancel' disabled>발주 취소</button>
+        }
       </div>
+
     </div>
   )
 }
