@@ -1,7 +1,7 @@
 import CheckmarkComponent from "../CheckMark";
 import { addComma } from "store/utils/function";
 
-function CashpayReceipt({ closeModal , inputValue , changeAmount , totalAmount}){
+function CashpayReceipt({ closeModal, inputValue, changeAmount, totalAmount}){
    
 
     return(

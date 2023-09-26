@@ -8,14 +8,10 @@ import { toast } from "react-hot-toast";
 
 
 
-function Cashpay({ openModal, closeModal, totalAmount }) {
-  const [totalAmountState, setTotalAmountState] = useState(5900); 
-  const [inputValue, setInputValue] = useState("");
-  const [changeAmount, setChangeAmount] = useState(0);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalAmount, products }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   
-
+  //넘버패드로 받은 금액 입력
   const handleInputValueChange = (value) => {
       setInputValue(value); 
       const receivedAmount = parseInt(value, 10); 
@@ -25,15 +21,7 @@ function Cashpay({ openModal, closeModal, totalAmount }) {
       }
   };
 
-  const shuffleString = (str) => {
-      const arr = str.split('');
-      for (let i = arr.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr.join('');
-  }
-
+  //현재시간을 이용해 영수증 id 생성(ms까지 사용)
   const generateReceiptId = () => {
       const now = new Date();
       const datePart = now.toISOString().slice(0, 19).replace(/[-T:]/g, '');
@@ -43,58 +31,59 @@ function Cashpay({ openModal, closeModal, totalAmount }) {
       return shuffleString(combinedPart);
   };
 
+  //생선된 영수증 id를 랜덤으로 섞기
+  const shuffleString = (str) => {
+    const arr = str.split('');
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr.join('');
+  }
 
-
-
+  //전송될 현금 결제 정보 
   const paymentData = {
     receiptId: generateReceiptId(),
     userSeq: 1,
     convSeq: 1,
     pg: "현금",
     method: "현금 결제",
-    discountInfo: '',
-    price: "26000",
-    purchasedAt: new Date().toISOString().slice(0, 19).replace('T', ' '), // new Date().toISOString().slice(0, 19).replace('T', ' '), // 현재 시간 설정
+    discountInfo: products.length > 0 ? products[0].promotionInfo : '',
+    price: totalAmount.toString(),
+    purchasedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
     receiptUrl: "",
-    cardNum: '', // card_data가 존재하면 card_approve_no를 사용, 아니면 null
+    cardNum: '',
     cardCompany: ''
   };
 
-  const items = [
-    { 
-      "receiptId": paymentData.receiptId,
-      "itemId": 1001,
-      "itemName": "초코파이",
-      "qty": 1,
-      "price": 4000
-    },
-     { 
-      "receiptId": paymentData.receiptId,
-      "itemId": 1001,
-      "itemName": "마시멜로",
-      "qty": 2,
-      "price": 1000
-    },
-    { 
-      "receiptId": paymentData.receiptId,
-      "itemId": 1001,
-      "itemName": "김현민",
-      "qty": 2,
-      "price": 10000
-    }
-  ];
+  //전솔될 현금 결제 상품 매핑
+  const items = products.map(product => ({
+    receiptId: paymentData.receiptId,
+    itemId: product.productSeq,
+    itemName: product.productName,
+    qty: product.amount,
+    price: product.price.toString()
+  }));
 
 
-
+  //수행되는 결제 함수, 완료 후 영수증 모달창 열고, payment 컴포넌트에게 받은 금액, 거스름 돈 전달
   const handlePayment = async () => {
     try {
-        const response = await axios.post("http://10.10.10.65:3000/addpayment", paymentData);
+      if(paymentData.price === "0") {
+        toast.error("결제할 상품이 없습니다.");
+        return;
+      }
+      
+        const response = await axios.post("http://10.10.10.140:3000/addpayment", paymentData);
         console.log("결제 정보 전송 완료", response.data);
         
         if(response.data === "YES") {
             setPaymentSuccess(true);
-            const itemResponse = await axios.post('http://10.10.10.65:3000/addItems', items);
+            const itemResponse = await axios.post('http://10.10.10.140:3000/addItems', items);
             console.log("결제 상품 목록 전송 완료", itemResponse.data);
+
+            setInputValue(inputValue);
+            setChangeAmount(changeAmount);
 
             closeModal();
             openModal('receipt');
@@ -102,8 +91,8 @@ function Cashpay({ openModal, closeModal, totalAmount }) {
     } catch (error) {
         console.error('결제 정보 에러', error);
         toast.error("결제 실패")
-    }
-};
+      }
+  };
 
   
       
