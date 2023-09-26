@@ -13,6 +13,7 @@
 @import './page/order/orderCartAddModal.scss';
 @import './page/stock/stock.scss';
 @import './page/stock/stockModal.scss';
+@import './page/delivery/delivery.scss';
 
 @import './page/convenience/register.scss';
 @import './page/convenience/login.scss';
@@ -39,7 +40,9 @@
 @import './page/customer/customerRegister.scss';
 
 @import './page/analysis/analysis.scss';
+@import './page/analysis/cost.scss';
 @import './page/analysis/addCost.scss';
+@import './page/analysis/salesReport.scss';
 
 @import './Modal.scss';
 @import './numberPad.scss';
