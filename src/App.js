@@ -37,6 +37,8 @@ import MonthlySales from 'components/analysis/MonthlySales';
 import WeeklySales from 'components/analysis/WeeklySales';
 import Delivery from 'pages/Delivery';
 import Cost from 'components/analysis/Cost';
+import DeliveryDetail from 'components/delivery/DeliveryDetail';
+import DeliveryList from 'components/delivery/DeliveryList';
 
 function App() {
   return (
@@ -73,7 +75,10 @@ function App() {
           <Route path='monthlySales' element={<MonthlySales />} />
         </Route>
         <Route path='/ordercart' element={<OrderCart />} />
-        <Route path='/delivery' element={<Delivery />} />
+        <Route path='/delivery' element={<Delivery />}>
+          <Route index element={<DeliveryList />} />
+          <Route path=':seq' element={<DeliveryDetail />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

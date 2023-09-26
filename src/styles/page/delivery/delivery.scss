@@ -82,7 +82,6 @@
 
       .item-top, .item-middle, .item-bottom {
         padding: 0 1.75rem;
-        // border: 1px solid blue;
       }
 
       .item-top {
@@ -95,7 +94,6 @@
 
         > div {
           color: $color-white;
-          // color: $color-main;
           font-weight: bold;
         }
       }
@@ -110,10 +108,6 @@
 
         .item-product-container {
 
-          > div {
-            // border: 1px solid blue;
-          }
-
           .item-product {
             display: flex;
             justify-content: space-between;
@@ -123,9 +117,6 @@
 
           .item-product-more {
             text-align: center;
-            // display: flex;
-            // justify-content: center;
-            // align-items: start;
           }
         }
       }
