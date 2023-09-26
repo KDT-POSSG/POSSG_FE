@@ -4,9 +4,12 @@ import Calendar from './Calendar';
 function DailySales(){
     return(
         <div className="daily-content-wrap">
-            <div className="daily-content-title">일별 매출</div>
-            <div className="daily-content-top">
-                <Calendar />
+            <div className="daily-nav">
+                <div className="daily-title">일별 매출</div>
+                <div className="daily-calendar-container">
+                    <Calendar dateRange="daily" />
+                    <button className="calendar-button" type="button">조회</button>
+                </div>
             </div>
         </div>
     )
