@@ -1,44 +1,47 @@
 .salesReport-content-wrap{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background-color: $color-back;
-    padding: 5vw 0;
+    padding: 3vw 10vw;
+    min-height: 100vh;
 
-    .salesReport-content-nav{
-        display: flex;
-        width: 80vw;
-        justify-content: space-around;
+    .salesReport-sort {
+        border-radius: 1rem;
         background-color: $color-white;
-        padding: 1.25rem;
-        text-align: center;
-        border-radius: 2rem;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 1rem 0;
         margin-bottom: 1.5rem;
-        filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
-
-
-        .salesReport{
-            font-weight: bold;
-            padding: 1.25rem 10rem;
-            border: 1px solid $color-main;
-            border-radius: 1.25rem;
-            // background-color: burlywood;
-        }
-
-        .salesReport-link {
-            font-weight: bold;
-            display: inline-block;
-            padding: 1.25rem 10rem;
-            border: 1px solid $color-main;
-            border-radius: 1.25rem;
-            transition: background-color 0.3s ease; 
-        }
-        
-        .salesReport-link.active {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        z-index: 0;
+        border: 1px solid $color-border;
+    
+        .salesReport-sort-active {
+            position: absolute;
             background-color: $color-main;
-            color: #fff; 
+            border-radius: 1rem;
+            width: 33.33%;
+            height: 100%;
+            top: 0;
+            z-index: -1;
+            transition: all 0.5s;
         }
-        
+    
+        .status-01 {
+            left: 0;
+        }
+        .status-02 {
+            left: 33.33%;
+        }
+        .status-03 {
+            left: 66.66%;
+        }
+    
+        .salesReport-status {
+            cursor: pointer;
+        }
     }
 
     .salesReport-content{
@@ -46,3 +49,12 @@
         height: 100%;
     }
 }
+.react-datepicker__input-container input {
+    border-radius: 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    padding: 1rem 32px 1rem 8px;
+    width: 20vw;
+    text-align: center;
+}
+
