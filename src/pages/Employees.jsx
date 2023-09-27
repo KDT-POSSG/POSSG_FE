@@ -24,7 +24,7 @@ function Employees() {
      };
  
      const fetchEmployees = () => {
-      axios.get('http://10.10.10.108:3000/findallemployee', {params: {convSeq :31}, headers:{ accessToken: `Bearer ${accesstoken}`}})
+      axios.get('http://10.10.10.148:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setEmployeeList(res.data);
             setTotalCnt(res.data.cnt);

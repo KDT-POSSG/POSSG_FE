@@ -1,5 +1,4 @@
 import NumberPad from "components/NumberPad";
-import CashpayReceipt from "./CashpayReceipt";
 import { useState } from "react";
 import { addComma } from '../../store/utils/function';
 import axios from 'axios';
@@ -56,7 +55,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
     cardCompany: ''
   };
 
-  //전솔될 현금 결제 상품 매핑
+  //전송될 현금 결제 상품 매핑
   const items = products.map(product => ({
     receiptId: paymentData.receiptId,
     itemId: product.productSeq,
@@ -74,19 +73,19 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
         return;
       }
       
-        const response = await axios.post("http://10.10.10.140:3000/addpayment", paymentData);
+        const response = await axios.post("http://10.10.10.148:3000/addpayment", paymentData);
         console.log("결제 정보 전송 완료", response.data);
         
         if(response.data === "YES") {
             setPaymentSuccess(true);
-            const itemResponse = await axios.post('http://10.10.10.140:3000/addItems', items);
+            const itemResponse = await axios.post('http://10.10.10.148:3000/addItems', items);
             console.log("결제 상품 목록 전송 완료", itemResponse.data);
 
             setInputValue(inputValue);
             setChangeAmount(changeAmount);
 
             closeModal();
-            openModal('receipt');
+            openModal('cashpayreceipt');
         }
     } catch (error) {
         console.error('결제 정보 에러', error);

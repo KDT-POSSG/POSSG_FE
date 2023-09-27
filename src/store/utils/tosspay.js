@@ -2,14 +2,23 @@
 import { Bootpay } from '@bootpay/client-js';
 import axios from 'axios';
 
-  export const handlePayment = async (setPaymentResponse) => {
+  export const handlePayment = async (totalAmount, products, setPaymentResponse) => {
     try {
+
+      const items = products.map(product => ({
+        id: product.productSeq, // 현금 결제의 itemId에 해당
+        name: product.productName, // 현금 결제의 itemName에 해당
+        qty: product.amount, // 현금 결제의 qty에 해당
+        price: product.priceDiscount.toString() // 현금 결제의 price에 해당
+      }));
+
+
       const response = await Bootpay.requestPayment({
         application_id: "64f673d8e57a7e001bbb128a", //가맹점ID
-        price: 500, // 총액 = items의 가격 합 
-        order_name: "결제 상품 명", // 상품명 
+        price: totalAmount.toString(), // 총액 = items의 가격 합 
+        order_name: products.map(p => p.productName).join(", "), // 상품명 
         comapny_name: "Emart24 신세계센텀시티점",
-        order_id: "TEST_ORDER_ID", // 고유 주문번호
+        order_id: "미구현", // 고유 주문번호
         pg: "토스", // 카카오, 토스 2개 회사는 확인
         //method: "간편", // 카카오 - 간편, 토스 - 카드, 
         tax_free: 0,
@@ -20,20 +29,7 @@ import axios from 'axios';
           email: "qwer@naver.com"
         },
         // 아이템이 JSON으로 담기면 됨. id는 product_id 써야할듯, qty price 맞아야함 
-        items: [ 
-          { 
-            id: "item_id",
-            name: "먹태깡",
-            qty: 1,
-            price: 100
-          },
-          {
-            id: "item_id2",
-            name: "테스트아이템2",
-            qty: 2,
-            price: 200
-          }
-        ],
+        items: items,
         extra: {
           open_type: "iframe",
           card_quota: "0,2,3",
@@ -42,12 +38,12 @@ import axios from 'axios';
       });
       //console.log(items);
       console.log(response);
-
+      
 
       // 결제 응답을 백엔드로 보냅니다.
       if (response.event === "done") {
         setPaymentResponse(response);
-
+        
         // 결제 정보 폼 생성
         const paymentData = {
           receiptId: response.data.receipt_id,
@@ -55,7 +51,7 @@ import axios from 'axios';
           convSeq: 1,
           pg: response.data.pg,
           method: response.data.method,
-          discountInfo: '',
+          discountInfo: products.length > 0 ? products[0].promotionInfo : '',
           price: response.data.price,
           purchasedAt: response.data.purchased_at.slice(0, 19).replace('T', ' '), // new Date().toISOString().slice(0, 19).replace('T', ' '), // 현재 시간 설정
           receiptUrl: response.data.receipt_url,
@@ -64,33 +60,25 @@ import axios from 'axios';
         };
 
         // 결제 폼 전송
-        axios.post('http://10.10.10.196:3000/addpayment', paymentData)
+        await axios.post('http://10.10.10.148:3000/addpayment', paymentData)
           .then((response) => {
             console.log("결제 정보 전송 완료", response.data);
             
             // 결제가 완료되면 다시 axios
             if(response.data === "YES") {
-              const items = [ 
-                { 
-                  "receiptId": paymentData.receiptId,
-                  "itemId": 1001,
-                  "itemName": "먹태깡",
-                  "qty": 1,
-                  "price": 100
-                },
-                 { 
-                  "receiptId": paymentData.receiptId,
-                  "itemId": 1001,
-                  "itemName": "오렌지 음료",
-                  "qty": 4,
-                  "price": 100
-                }
-              ];
+              const items = products.map(product => ({
+                receiptId: paymentData.receiptId,
+                itemId: product.productSeq,
+                itemName: product.productName,
+                qty: product.amount,
+                price: product.price.toString()
+              }));
       
               // 결제 된 상품 목록 전송
-              axios.post('http://10.10.10.196:3000/addItems', items)
+              axios.post('http://10.10.10.148:3000/addItems', items)
                 .then((response) => {
                   console.log("결제 상품 목록 전송 완료", response.data);
+                  return "SUCCESS";
                 })
                 .catch((error) => {
                   console.error('결제 상품 목록 에러', error);
