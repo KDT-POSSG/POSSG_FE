@@ -16,6 +16,13 @@
         .daily-calendar-container{
             position: relative;
             
+            .material-symbols-rounded{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                left: 10px;
+                // background-color: cadetblue;
+            }
             .calendar-button{
                 position: absolute;
                 padding: 10px 20px;

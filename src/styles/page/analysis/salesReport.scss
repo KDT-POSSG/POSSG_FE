@@ -49,13 +49,12 @@
         height: 100%;
     }
 }
-
-
-.example-custom-input{
+.react-datepicker__input-container input {
     border-radius: 1rem;
     background-color: $color-white;
     border: 1px solid $color-border;
     padding: 1rem 32px 1rem 8px;
     width: 20vw;
+    text-align: center;
 }
 
