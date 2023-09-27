@@ -26,14 +26,14 @@
             font-weight: bold;
             word-break: keep-all;
             transition: $transition-cb2;
-            border: 1px dashed #4e5059;
+            border: 1px solid #4e5059;
             filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
         }
 
         .analysis:hover {
             color: $color-main;
             transform: translate(-2px, -2px);
-            border: 1px dashed $color-main;
+            border: 1px solid $color-main;
             filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
             cursor: pointer;
         }
