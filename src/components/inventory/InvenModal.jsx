@@ -42,7 +42,7 @@ function InvenModal (props) {
         "memo": memo
       };
     
-    axios.post('http://10.10.10.152:3000/addsettlement', data)
+    axios.post('http://10.10.10.108:3000/addsettlement', data)
     .then((res) => {
       console.log(res.data);
       console.log('보내기 성공');

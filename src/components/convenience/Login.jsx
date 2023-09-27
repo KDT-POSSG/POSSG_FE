@@ -29,7 +29,7 @@ function Login(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.205:3000/NoSecurityZoneController/login", {
+        axios.post("http://10.10.10.108:3000/NoSecurityZoneController/login", {
             "userId": id,
             "pwd": pw,
         },)

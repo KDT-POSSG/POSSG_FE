@@ -1,37 +1,86 @@
-import React, { useState } from 'react';
-
+import React, { useState, useRef} from 'react';
+import axios from 'axios';
 import Modal from '../components/Modal';
 import Cashpay from '../components/payment/Cashpay'
 import Etcpay from '../components/payment/Etcpay'
 import Discount from '../components/payment/Discount'
 import Point from '../components/payment/Point'
-import Division from '../components/payment/Division'
 import CashpayReceipt from '../components/payment/CashpayReceipt';
 import { handlePayment } from 'store/utils/cardpay.js';
+import { addComma } from 'store/utils/function.js';
+import { toast } from 'react-hot-toast';
 
 
 
 function Payment() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentType, setPaymentType] = useState(null);
-    const [inputValue, setInputValue] = useState(""); 
-    const [changeAmount, setChangeAmount] = useState(0); 
-    const [totalAmount, setTotalAmount] = useState(5900); 
     const [paymentResponse, setPaymentResponse] = useState(null);
+    const [barcodeInput, setBarcodeInput] = useState("");
+    const [products, setProducts] = useState([]);
+    const [inputValue, setInputValue] = useState("");
+    const [changeAmount, setChangeAmount] = useState(0);
+    const barcodeInputRef = useRef(null);
 
+    
+    // input에 바코드가 제대로 입력됐는지 확인
+    const handleBarcode = () => {
+        const barcodeInput = document.querySelector('.input-barcode').value;
+        if(!barcodeInput) {
+            toast.error("바코드 인식 에러");
+            return;
+        }
+    
+        axios.get('http://10.10.10.140:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}})
+        .then((res) => {
+            const productData = res.data;
+            const existingProduct = products.find(p => p.productSeq === productData.productSeq);
+            //현재 상품의 시퀀스와 들어오는 상품의 시퀀스가 같으면 상품의 수량을 1개씩 더해줌
+            if (existingProduct) {
+                setProducts(prevProducts => {
+                    return prevProducts.map(p => {
+                        if (p.productSeq === productData.productSeq) {
+                            return { ...p, amount: p.amount + 1 };
+                        }
+                        return p;
+                    });
+                });
+            } else {
+                productData.amount = 1;
+                setProducts(prevProducts => [...prevProducts, productData]); //그렇지 않으면 상품 1개로 
+            }
+    
+        })
+        .catch((err) => {
+            console.log(err);
+            toast.error('상품을 찾을 수 없습니다.');
+        })
+        setBarcodeInput("");
+    }
+
+    // 총 결제 금액 계산
+    const getTotalAmount = () => {
+        return products.reduce((total, product) => {
+            return total + (product.priceDiscount) * product.amount;
+        }, 0);
+    };
+    
+
+    // 부트페이 결제 함수 시작
     const startPayment = async () => {
         await handlePayment(setPaymentResponse);
     };
 
+    //모달창 열고 닫기
     const openModal = (type) => {
         setPaymentType(type);
         setModalIsOpen(true);
        };
-   
     const closeModal = () => {
         setModalIsOpen(false);
     };
 
+    //paymentType에 따라 모달창의 크기를 다르게 설정, 결제 영수증 모달의 넓이 조절을 위해 추가함
     const getModalStyle = () => {
         if (paymentType === 'receipt') {
             return {
@@ -47,59 +96,47 @@ function Payment() {
             },
         };
     };
-  
     
-
+   
 
     return (
-        <div className="payment-container">
+        // payment-container를 클릭하면 바코드 입력창에 포커스가 가도록 함 (사용자가 다른 곳을 클릭했을 때 input창에 포커스가 해제되는 것 방지용)
+        <div className="payment-container" onClick={() => barcodeInputRef.current.focus()}>
             <div className='payment-header'>
                 <div className='page-title'>결제</div>
+                <input ref={barcodeInputRef} className='input-barcode' placeholder='여기에 바코드를 입력' value={barcodeInput} 
+                    onChange={(e) => setBarcodeInput(e.target.value)} autoFocus onKeyDown={(e) => { if (e.key === 'Enter') {handleBarcode();}}}/>
+
+
             </div>
             
             <div className='payment-body'>
                 <div className='payment-list'>
                     <div className='payment-list-list'>
-                        <div className='payment-list-row'>
-                            <div className='payment-list-row-info'>
-                                <div className='payment-list-name'>아메리카노</div>
-                                <div className='payment-list-amount'>x 1</div>
-                                <div className='payment-list-price'>2,500 원</div>
-                            </div>
-                            <div className='payment-list-discount-info'>
-                                <div className='payment-list-discount'>할인</div>
-                                <div className='payment-list-discount2'>-500 원</div>
-                            </div>
-                        </div>
+                       
+                        {products.map(product => (
+                            <div className='payment-list-row' key={product.productSeq}>
+                                <div className='payment-list-row-info'>
+                                    <div className='payment-list-name'>{product.productName}</div>
+                                     <div className='payment-list-amount'>x {product.amount}</div>
+                                    <div className='payment-list-price'>{addComma(product.price * product.amount)} 원</div>
+                                </div>
 
-                        <div className='payment-list-row'>
-                            <div className='payment-list-row-info'>
-                                <div className='payment-list-name'>바닐라 라떼</div>
-                                <div className='payment-list-amount'>x 3</div>
-                                <div className='payment-list-price'>10,500 원</div>
+                                {/* 할인율이 0이 아닐 때만 할인 정보를 보여줌 */}
+                                {product.discountRate !== 0.0 && (
+                                <div className='payment-list-discount-info'>
+                                    <div className='payment-list-discount'>할인</div>
+                                    <div className='payment-list-discount2'>-{addComma((product.price - product.priceDiscount) * product.amount)} 원</div>
+                                </div>
+                                )}
                             </div>
-                            <div className='payment-list-discount-info'>
-                                <div className='payment-list-discount'>정재원 할인</div>
-                                <div className='payment-list-discount2'>-500 원</div>
-                            </div>
-                        </div>
-
-                        <div className='payment-list-row'>
-                            <div className='payment-list-row-info'>
-                                <div className='payment-list-name'>프로틴 쉐이크</div>
-                                <div className='payment-list-amount'>x 2</div>
-                                <div className='payment-list-price'>8,000 원</div>
-                            </div>
-                            <div className='payment-list-discount-info'>
-                                <div className='payment-list-discount'>할인</div>
-                                <div className='payment-list-discount2'>-500 원</div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
+
                     
                     <div className='payment-list-result'>
                         <div className='payment-list-total'>총액</div>
-                        <div className='payment-list-total2'>2000 원</div>
+                        <div className='payment-list-total2'>{addComma(getTotalAmount())} 원</div>
                     </div> 
                 </div>
 
@@ -107,7 +144,7 @@ function Payment() {
                     <div className='container'>
                         <div className='payment-total'>결제 금액</div>
                         <div className='payment-total-container'>
-                            <div className='payment-total-price'>2,000 원</div>
+                            <div className='payment-total-price'>{addComma(getTotalAmount())} 원</div>
                             <button className='payment-division-button' onClick={() => openModal('cash')}>현금 결제</button>
                         </div>
                         <div className='payment-method-container2'>
@@ -118,21 +155,37 @@ function Payment() {
                             <div className='payment-method-bottom'>
                                 <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
                                 <button className='payment-method-cashpay' onClick={() => openModal('cash')}></button>
-                                <button className='payment-method-etcpay' onClick={() => openModal('etc')}>기타 결제</button>
+                                <button className='payment-method-etcpay'>테스트</button>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
             </div>
             
 
             <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()}>
-                {paymentType === 'cash' && <Cashpay openModal={openModal} closeModal={closeModal} setInputValue={setInputValue} setChangeAmount={setChangeAmount} totalAmount={totalAmount} setTotalAmount={setTotalAmount}/>}
-                {paymentType === 'receipt' && <CashpayReceipt closeModal={closeModal} inputValue={inputValue} changeAmount={changeAmount} totalAmount={totalAmount}/>} 
-                {paymentType === 'etc' && <Etcpay />}
-                {paymentType === 'discount' && <Discount />}
-                {paymentType === 'point' && <Point />}
-            </Modal>
+            {paymentType === 'cash' && 
+                <Cashpay 
+                    openModal={openModal} 
+                    closeModal={closeModal} 
+                    totalAmount={getTotalAmount()} 
+                    products={products}
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
+                    changeAmount={changeAmount}
+                    setChangeAmount={setChangeAmount}
+                />}
+            {paymentType === 'receipt' && 
+                <CashpayReceipt 
+                    closeModal={closeModal} 
+                    totalAmount={getTotalAmount()} 
+                    inputValue={inputValue}
+                    changeAmount={changeAmount}
+                />} 
+            {paymentType === 'etc' && <Etcpay />}
+            {paymentType === 'discount' && <Discount />}
+            {paymentType === 'point' && <Point />}
+        </Modal>
 
         </div>
     )
