@@ -6,7 +6,8 @@ import Etcpay from '../components/payment/Etcpay'
 import Discount from '../components/payment/Discount'
 import Point from '../components/payment/Point'
 import CashpayReceipt from '../components/payment/CashpayReceipt';
-import { handlePayment } from 'store/utils/cardpay.js';
+import TosspayReceipt from 'components/payment/TosspayReceipt';
+import { handlePayment } from 'store/utils/tosspay.js';
 import { addComma } from 'store/utils/function.js';
 import { toast } from 'react-hot-toast';
 
@@ -31,10 +32,10 @@ function Payment() {
             return;
         }
     
-        axios.get('http://10.10.10.140:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}})
+        axios.get('http://10.10.10.148:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}})
         .then((res) => {
             const productData = res.data;
-            const existingProduct = products.find(p => p.productSeq === productData.productSeq);
+            const existingProduct = products.find(p => p.productSeq === productData.productSeq); 
             //현재 상품의 시퀀스와 들어오는 상품의 시퀀스가 같으면 상품의 수량을 1개씩 더해줌
             if (existingProduct) {
                 setProducts(prevProducts => {
@@ -66,10 +67,24 @@ function Payment() {
     };
     
 
-    // 부트페이 결제 함수 시작
-    const startPayment = async () => {
-        await handlePayment(setPaymentResponse);
+     // 부트페이 결제 함수 시작
+     const startPayment = async () => {
+        try {
+            const totalAmount = getTotalAmount();
+            await handlePayment(totalAmount, products, setPaymentResponse);
+            console.log("토스페이 영수증 오픈 성공");
+            if(paymentResponse === "SUCCESS"){
+                openModal('tosspayreceipt');
+            }
+            
+            
+        } catch (error) {
+            console.error("Payment failed:", error);
+        }
     };
+    
+    
+    
 
     //모달창 열고 닫기
     const openModal = (type) => {
@@ -82,7 +97,7 @@ function Payment() {
 
     //paymentType에 따라 모달창의 크기를 다르게 설정, 결제 영수증 모달의 넓이 조절을 위해 추가함
     const getModalStyle = () => {
-        if (paymentType === 'receipt') {
+        if (paymentType === 'cashpayreceipt' || paymentType === 'tosspayreceipt') {
             return {
                 content: {
                     padding: '1.5rem',
@@ -154,7 +169,7 @@ function Payment() {
                             </div>
                             <div className='payment-method-bottom'>
                                 <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
-                                <button className='payment-method-cashpay' onClick={() => openModal('cash')}></button>
+                                <button className='payment-method-cashpay' onClick={() => openModal('cash')}>테스트</button>
                                 <button className='payment-method-etcpay'>테스트</button>
                             </div>
                         </div>
@@ -175,13 +190,19 @@ function Payment() {
                     changeAmount={changeAmount}
                     setChangeAmount={setChangeAmount}
                 />}
-            {paymentType === 'receipt' && 
+            {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
                     closeModal={closeModal} 
                     totalAmount={getTotalAmount()} 
                     inputValue={inputValue}
                     changeAmount={changeAmount}
                 />} 
+            {paymentType === 'tosspayreceipt' && 
+                    <TosspayReceipt
+                    closeModal={closeModal}
+                    totalAmount={getTotalAmount()}
+                    
+                />}
             {paymentType === 'etc' && <Etcpay />}
             {paymentType === 'discount' && <Discount />}
             {paymentType === 'point' && <Point />}
