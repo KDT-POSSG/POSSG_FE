@@ -74,12 +74,6 @@
       transition: $transition-cb2;
       filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
 
-      // &:hover {
-      //   transform: translate(-2px, -2px);
-      //   filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
-      //   cursor: pointer;
-      // }
-
       .item-top, .item-middle, .item-bottom {
         padding: 0 1.75rem;
       }
@@ -89,6 +83,7 @@
         justify-content: space-between;
         align-items: center;
         background-color: $color-main;
+        // background-color: $color-border;
         border-radius: 2rem 2rem 0 0;
         border-bottom: 1px solid $color-border;
 

@@ -33,9 +33,34 @@ function DeliveryDetail() {
               <div>{addComma(5)}</div>
               <div>{addComma(2000 * 5)}</div>
             </div>
+            <>
+            <div className='item-product'>
+              <div className='item-product-name'>
+                센카)퍼펙트휩비타민C포어리스글로우100g
+              </div>
+              <div>{addComma(2000)}</div>
+              <div>{addComma(5)}</div>
+              <div>{addComma(2000 * 5)}</div>
+            </div>
+            <div className='item-product'>
+              <div className='item-product-name'>
+                센카)퍼펙트휩비타민C포어리스글로우100g
+              </div>
+              <div>{addComma(2000)}</div>
+              <div>{addComma(5)}</div>
+              <div>{addComma(2000 * 5)}</div>
+            </div>
+            <div className='item-product'>
+              <div className='item-product-name'>
+                센카)퍼펙트휩비타민C포어리스글로우100g
+              </div>
+              <div>{addComma(2000)}</div>
+              <div>{addComma(5)}</div>
+              <div>{addComma(2000 * 5)}</div>
+            </div>
+            </>
 
           </div>
-
         </div>
 
         <div className='item-bottom'>
