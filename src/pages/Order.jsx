@@ -12,7 +12,7 @@ function Order() {
   useEffect(() => {
     // setOrderList(orderListDatas);
 
-    axios.get('http://10.10.10.140:3000/getAllConvOrderList', {
+    axios.get('http://54.180.60.149:3000/getAllConvOrderList', {
         params: {
           convSeq: 1,
           pageNumber: page - 1,

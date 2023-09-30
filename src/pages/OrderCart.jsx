@@ -9,7 +9,7 @@ function OrderCart() {
 
   useEffect(() => {
     
-    axios.get("http://10.10.10.140:3000/getAllCallProductConvList", {
+    axios.get("http://54.180.60.149:3000/getAllCallProductConvList", {
         params: {
           convSeq: 1
         }

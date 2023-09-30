@@ -44,12 +44,25 @@
       margin-top: 1rem;
       margin-bottom: 1rem;
       padding: 0 0.25rem;
-      // background-color: skyblue;
       transition: $transition-cb2;
 
       &:hover {
         color: $color-main;
         cursor: pointer;
+      }
+    }
+
+    .order-cart-add-empty {
+      width: 100%;
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-left: 2rem;
+
+      .order-cart-add-icon {
+        font-size: 5rem;
       }
     }
   }

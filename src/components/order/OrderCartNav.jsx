@@ -21,10 +21,8 @@ function OrderCartNav() {
 
   const handleOrderSend = () => {
 
-    axios.post("http://10.10.10.140:3000/addConvOrderList", {
-        params: {
-          convSeq: 1
-        }
+    axios.post("http://54.180.60.149:3000/addConvOrderList", {
+        convSeq: 1
       })
       .then((response) => {
         console.log(response.data);
