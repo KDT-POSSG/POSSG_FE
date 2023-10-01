@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css');
 @import "react-datepicker/dist/react-datepicker.css" ;
+
 * {
   color: $color-gray;
   font-family: 'Noto Sans KR', sans-serif;
@@ -33,4 +34,11 @@ option {
   font-family: 'Noto Sans KR', sans-serif;
   letter-spacing: -0.025rem;
   font-size: 1rem;
+}
+
+body {
+  background-color: $color-back;
+  min-width: 1200px;
+  min-height: 100vh;
+  height: 100vh;
 }
