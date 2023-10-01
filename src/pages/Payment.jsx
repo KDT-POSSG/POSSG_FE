@@ -59,6 +59,12 @@ function Payment() {
         setBarcodeInput("");
     }
 
+    //결제 완료 후, 결제 상품 목록 초기화
+    const handlePaymentSuccess = () => {
+        setProducts([]);
+    };
+
+
     // 총 결제 금액 계산
     const getTotalAmount = () => {
         return products.reduce((total, product) => {
@@ -67,15 +73,11 @@ function Payment() {
     };
     
 
-     // 부트페이 결제 함수 시작
+     //결제 함수 시작
      const startPayment = async () => {
         try {
             const totalAmount = getTotalAmount();
-            await handlePayment(totalAmount, products, setPaymentResponse);
-            console.log("토스페이 영수증 오픈 성공");
-            if(paymentResponse === "SUCCESS"){
-                openModal('tosspayreceipt');
-            }
+            await handlePayment(totalAmount, products, setPaymentResponse, handlePaymentSuccess, openModal);
             
             
         } catch (error) {
@@ -170,12 +172,12 @@ function Payment() {
                         </div>
                         <div className='payment-method-container2'>
                             <div className='payment-method-top'>
-                                <button className='payment-method-discount' onClick={() => openModal('discount')}>할인 / 쿠폰</button>
+                                <button className='payment-method-discount' onClick={() => openModal('discount')}>테스트</button>
                                 <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
                             </div>
                             <div className='payment-method-bottom'>
                                 <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
-                                <button className='payment-method-cashpay' onClick={() => openModal('cash')}>테스트</button>
+                                <button className='payment-method-cashpay' onClick={() => openModal('tosspayreceipt')}>테스트</button>
                                 <button className='payment-method-etcpay'>테스트</button>
                             </div>
                         </div>
@@ -195,6 +197,7 @@ function Payment() {
                     setInputValue={setInputValue}
                     changeAmount={changeAmount}
                     setChangeAmount={setChangeAmount}
+                    PaymentSuccess={handlePaymentSuccess}
                 />}
             {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
@@ -205,6 +208,7 @@ function Payment() {
                 />} 
             {paymentType === 'tosspayreceipt' && 
                     <TosspayReceipt
+                    openModal={openModal}
                     closeModal={closeModal}
                     totalAmount={getTotalAmount()}
                     

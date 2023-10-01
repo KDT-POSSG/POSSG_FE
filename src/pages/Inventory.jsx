@@ -128,7 +128,7 @@ function Inventory() {
             />
 
             <Modal isOpen={modalIsOpen} onClose={ closeModal } >
-                <InvenModal updateLastTime={ updateLastTime } closeModal={ closeModal }/>
+                <InvenModal updateLastTime={ updateLastTime }/>
             </Modal>
         </div>
     )

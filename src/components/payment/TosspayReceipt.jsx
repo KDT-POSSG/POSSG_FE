@@ -1,7 +1,18 @@
 import CheckmarkComponent from "../CheckMark";
-import { addComma } from "store/utils/function";
+import { addComma  } from "store/utils/function";
+import { useState } from "react";
+import Modal from "../Modal";
+import TosspayReceiptInfoModal from "./TosspayReceiptInfoModal"
 
-function TosspayReceipt({ closeModal, totalAmount }){
+
+function TosspayReceipt({  closeModal, totalAmount }){
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+        setModalIsOpen(true);
+       };
+    
    
 
     return(
@@ -23,19 +34,23 @@ function TosspayReceipt({ closeModal, totalAmount }){
                 <div className="cashpayreceipt-body-bottom">
                     <div className="cashpayreceipt-input-price">
                         <div className="cashpayreceipt-body-input-price">부가세</div>
-                        <div className="cashpayreceipt-body-input-price2">{addComma(Math.round(totalAmount()*10/110))} 원</div>
+                        <div className="cashpayreceipt-body-input-price2">{addComma(Math.round(totalAmount*10/110))} 원</div>
                     </div>
                     <div className="cashpayreceipt-change">
                         <div className="cashpayreceipt-body-change">과세 금액</div>
-                        <div className="cashpayreceipt-body-change2">{addComma(totalAmount -(Math.round(totalAmount()*10/110)))} 원</div>
+                        <div className="cashpayreceipt-body-change2">{addComma(totalAmount -(Math.round(totalAmount*10/110)))} 원</div>
                     </div>
                 </div>
             </div>
 
             <div className="cashpayreceipt-buttons">
-                <button className="cashpayreceipt-btn">영수증 출력</button>
+                <button className="cashpayreceipt-btn" onClick={openModal}>영수증 보기</button>
                 <button className="cashpayreceipt-complete-btn" onClick={closeModal}>확인</button>
             </div>
+
+            <Modal isOpen={modalIsOpen} onClose={ closeModal }>
+                <TosspayReceiptInfoModal/>
+            </Modal>
         </div>
     );
     
