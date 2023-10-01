@@ -73,12 +73,12 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
         return;
       }
       
-        const response = await axios.post("http://10.10.10.148:3000/addpayment", paymentData);
+        const response = await axios.post("http://54.180.60.149:3000/addpayment", paymentData);
         console.log("결제 정보 전송 완료", response.data);
         
         if(response.data === "YES") {
             setPaymentSuccess(true);
-            const itemResponse = await axios.post('http://10.10.10.148:3000/addItems', items);
+            const itemResponse = await axios.post('http://54.180.60.149:3000/addItems', items);
             console.log("결제 상품 목록 전송 완료", itemResponse.data);
 
             setInputValue(inputValue);
