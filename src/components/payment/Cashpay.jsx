@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 
 
 
-function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalAmount, products }) {
+function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalAmount, products, PaymentSuccess }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   
   //넘버패드로 받은 금액 입력
@@ -83,13 +83,14 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
 
             setInputValue(inputValue);
             setChangeAmount(changeAmount);
-
+            PaymentSuccess(); //결제 상품 목록 초기화 (추가)
             closeModal();
             openModal('cashpayreceipt');
         }
     } catch (error) {
         console.error('결제 정보 에러', error);
         toast.error("결제 실패")
+        
       }
   };
 

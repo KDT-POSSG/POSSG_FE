@@ -26,7 +26,7 @@ function Payment() {
     
     // input에 바코드가 제대로 입력됐는지 확인
     const handleBarcode = () => {
-        const barcodeInput = document.querySelector('.input-barcode').value;
+        const barcodeInput = barcodeInputRef.current.value;
         if(!barcodeInput) {
             toast.error("바코드 인식 에러");
             return;
@@ -59,6 +59,12 @@ function Payment() {
         setBarcodeInput("");
     }
 
+    //결제 완료 후, 결제 상품 목록 초기화
+    const handlePaymentSuccess = () => {
+        setProducts([]);
+    };
+
+
     // 총 결제 금액 계산
     const getTotalAmount = () => {
         return products.reduce((total, product) => {
@@ -67,15 +73,11 @@ function Payment() {
     };
     
 
-     // 부트페이 결제 함수 시작
+     //결제 함수 시작
      const startPayment = async () => {
         try {
             const totalAmount = getTotalAmount();
-            await handlePayment(totalAmount, products, setPaymentResponse);
-            console.log("토스페이 영수증 오픈 성공");
-            if(paymentResponse === "SUCCESS"){
-                openModal('tosspayreceipt');
-            }
+            await handlePayment(totalAmount, products, setPaymentResponse, handlePaymentSuccess, openModal);
             
             
         } catch (error) {
@@ -128,8 +130,10 @@ function Payment() {
             <div className='payment-body'>
                 <div className='payment-list'>
                     <div className='payment-list-list'>
-                       
-                        {products.map(product => (
+                    {products.length === 0 ? (
+                        <div className='payment-list-empty'>바코드를 스캔해주세요</div>
+                        ) : (
+                        products.map(product => (
                             <div className='payment-list-row' key={product.productSeq}>
                                 <div className='payment-list-row-info'>
                                     <div className='payment-list-name'>{product.productName}</div>
@@ -145,7 +149,8 @@ function Payment() {
                                 </div>
                                 )}
                             </div>
-                        ))}
+                        ))
+                        )}
                     </div>
 
                     
@@ -164,12 +169,12 @@ function Payment() {
                         </div>
                         <div className='payment-method-container2'>
                             <div className='payment-method-top'>
-                                <button className='payment-method-discount' onClick={() => openModal('discount')}>할인 / 쿠폰</button>
+                                <button className='payment-method-discount' onClick={() => openModal('discount')}>테스트</button>
                                 <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
                             </div>
                             <div className='payment-method-bottom'>
                                 <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
-                                <button className='payment-method-cashpay' onClick={() => openModal('cash')}>테스트</button>
+                                <button className='payment-method-cashpay' onClick={() => openModal('tosspayreceipt')}>테스트</button>
                                 <button className='payment-method-etcpay'>테스트</button>
                             </div>
                         </div>
@@ -189,6 +194,7 @@ function Payment() {
                     setInputValue={setInputValue}
                     changeAmount={changeAmount}
                     setChangeAmount={setChangeAmount}
+                    PaymentSuccess={handlePaymentSuccess}
                 />}
             {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
@@ -199,6 +205,7 @@ function Payment() {
                 />} 
             {paymentType === 'tosspayreceipt' && 
                     <TosspayReceipt
+                    openModal={openModal}
                     closeModal={closeModal}
                     totalAmount={getTotalAmount()}
                     
