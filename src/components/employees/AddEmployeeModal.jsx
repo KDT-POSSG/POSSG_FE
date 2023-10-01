@@ -30,7 +30,7 @@ function AddEmployeeModal({onAdd}) {
       salary
     };
 
-    axios.post('http://10.10.10.108:3000/addemployee', employeeData, {
+    axios.post('http://54.180.60.149:3000/addemployee', employeeData, {
       headers: { accessToken: `Bearer ${accesstoken}`,}
     })
       .then(response => {

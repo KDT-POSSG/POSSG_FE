@@ -51,7 +51,7 @@ function Inventory() {
 
     //시재 리스트 불러오기
     useEffect(() => {
-        axios.get('http://10.10.10.152:3000/settlementlist', {params: {convSeq :1, page : page}}) //convSeq는 나중에 로그인한 지점의 seq로 변경
+        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page}}) //convSeq는 나중에 로그인한 지점의 seq로 변경
         .then((res) => {
             setInventoryList(res.data.settlement);
             setTotalCnt(res.data.cnt);
