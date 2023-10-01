@@ -9,7 +9,7 @@ function LeaveWork({onClose}) {
     const [leavework, setLeaveWork] = useState('');
 
     const handleclickLeaveWork = () =>{
-        axios.post('http://10.10.10.36:3000/leavework',null,{params:{employeeSeq:employeeSeq}})
+        axios.post('http://54.180.60.149:3000/leavework',null,{params:{employeeSeq:employeeSeq}})
         .then((res)=> {
             setLeaveWork(res.data.leavework);
             console.log('퇴근 성공');

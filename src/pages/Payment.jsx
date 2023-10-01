@@ -32,7 +32,7 @@ function Payment() {
             return;
         }
     
-        axios.get('http://10.10.10.148:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}})
+        axios.get('http://54.180.60.149:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}})
         .then((res) => {
             const productData = res.data;
             const existingProduct = products.find(p => p.productSeq === productData.productSeq); 
@@ -131,25 +131,28 @@ function Payment() {
                 <div className='payment-list'>
                     <div className='payment-list-list'>
                     {products.length === 0 ? (
-                        <div className='payment-list-empty'>바코드를 스캔해주세요</div>
+                        <div>
+                            <div className='payment-list-empty'>바코드를 스캔해주세요.</div>
+                            
+                        </div>
                         ) : (
-                        products.map(product => (
-                            <div className='payment-list-row' key={product.productSeq}>
-                                <div className='payment-list-row-info'>
-                                    <div className='payment-list-name'>{product.productName}</div>
-                                     <div className='payment-list-amount'>x {product.amount}</div>
-                                    <div className='payment-list-price'>{addComma(product.price * product.amount)} 원</div>
-                                </div>
+                            products.map(product => (
+                                <div className='payment-list-row' key={product.productSeq}>
+                                    <div className='payment-list-row-info'>
+                                        <div className='payment-list-name'>{product.productName}</div>
+                                        <div className='payment-list-amount'>x {product.amount}</div>
+                                        <div className='payment-list-price'>{addComma(product.price * product.amount)} 원</div>
+                                    </div>
 
-                                {/* 할인율이 0이 아닐 때만 할인 정보를 보여줌 */}
-                                {product.discountRate !== 0.0 && (
-                                <div className='payment-list-discount-info'>
-                                    <div className='payment-list-discount'>할인</div>
-                                    <div className='payment-list-discount2'>-{addComma((product.price - product.priceDiscount) * product.amount)} 원</div>
+                                    {/* 할인율이 0이 아닐 때만 할인 정보를 보여줌 */}
+                                    {product.discountRate !== 0.0 && (
+                                    <div className='payment-list-discount-info'>
+                                        <div className='payment-list-discount'>할인</div>
+                                        <div className='payment-list-discount2'>-{addComma((product.price - product.priceDiscount) * product.amount)} 원</div>
+                                    </div>
+                                    )}
                                 </div>
-                                )}
-                            </div>
-                        ))
+                            ))
                         )}
                     </div>
 

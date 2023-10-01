@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import OrderCartAddModal from './OrderCartAddModal';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function OrderCartNav() {
 
@@ -19,8 +20,24 @@ function OrderCartNav() {
   }
 
   const handleOrderSend = () => {
-    toast.success("발주 완료");
-    navi("/order");
+
+    axios.post("http://54.180.60.149:3000/addConvOrderList", {
+        convSeq: 1
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("발주 완료");
+          navi("/order");
+        }
+        else {
+          toast.error("발주 실패");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   }
 
   return (

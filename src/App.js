@@ -34,9 +34,11 @@ import Analysis from 'components/analysis/Analysis';
 import SalesReport from 'components/analysis/SalesReport';
 import DailySales from 'components/analysis/DailySales';
 import MonthlySales from 'components/analysis/MonthlySales';
-import WeeklySales from 'components/analysis/WeeklySales';
 import Delivery from 'pages/Delivery';
 import Cost from 'components/analysis/Cost';
+import YearSales from 'components/analysis/YearSales';
+import DeliveryDetail from 'components/delivery/DeliveryDetail';
+import DeliveryList from 'components/delivery/DeliveryList';
 
 function App() {
   return (
@@ -60,7 +62,7 @@ function App() {
         <Route path='/findId' element={<FindId />} />
         <Route path='/findPw' element={<FindPw />} />
         <Route path='/order' element={<Order />}/>
-        <Route path='/order/:seq' element={<OrderDetail />} />
+        <Route path='/order/:callRef' element={<OrderDetail />} />
         <Route path='/paymenttest' element={<Paymenttest />} />
         <Route path='/customerRegister' element={<RegisterCustomer />} />
         <Route path='/analysis' element={<Analysis />} />
@@ -69,11 +71,14 @@ function App() {
         <Route path='/salesReport' element={<SalesReport />}>
           <Route index element={<DailySales />} />
           <Route path='daily' element={<DailySales />} />
-          <Route path='weeklySales' element={<WeeklySales />} />
           <Route path='monthlySales' element={<MonthlySales />} />
+          <Route path='yearSales' element={<YearSales />} />
         </Route>
         <Route path='/ordercart' element={<OrderCart />} />
-        <Route path='/delivery' element={<Delivery />} />
+        <Route path='/delivery' element={<Delivery />}>
+          <Route index element={<DeliveryList />} />
+          <Route path=':seq' element={<DeliveryDetail />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -4,16 +4,24 @@
 
 @import './layout/header';
 
+@import './Modal.scss';
+@import './numberPad.scss';
+
 @import './page/home/home.scss';
 @import './page/home/homeModal.scss';
+
 @import './page/product.scss';
+
 @import './page/order/order.scss';
 @import './page/order/orderDetail.scss';
 @import './page/order/orderList.scss';
 @import './page/order/orderCartAddModal.scss';
+
 @import './page/stock/stock.scss';
 @import './page/stock/stockModal.scss';
+
 @import './page/delivery/delivery.scss';
+@import './page/delivery/deliveryDetail.scss';
 
 @import './page/convenience/register.scss';
 @import './page/convenience/login.scss';
@@ -43,9 +51,7 @@
 @import './page/analysis/cost.scss';
 @import './page/analysis/addCost.scss';
 @import './page/analysis/salesReport.scss';
-
-@import './Modal.scss';
-@import './numberPad.scss';
+@import './page/analysis/dailySales.scss';
 
 @import './page/employees/employeesinfo.scss';
 @import './page/employees/employees.scss';

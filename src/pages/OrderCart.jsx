@@ -9,18 +9,18 @@ function OrderCart() {
 
   useEffect(() => {
     
-    // axios.get("http://10.10.10.54:3000/getAllCallProductConvList", {
-    //     params: {
-    //       convSeq: 1
-    //     }
-    //   })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     setOrderCart(response.data[0]);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   })
+    axios.get("http://54.180.60.149:3000/getAllCallProductConvList", {
+        params: {
+          convSeq: 1
+        }
+      })
+      .then((response) => {
+        console.log(response.data.convList);
+        setOrderCart(response.data.convList);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
 
   }, []);
 
@@ -31,7 +31,7 @@ function OrderCart() {
 
       <div>
         <OrderCartNav />
-        <OrderList type={"before"} />
+        <OrderList type={"before"} orderList={orderCart} />
       </div>
 
     </div>

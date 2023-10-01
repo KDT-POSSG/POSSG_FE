@@ -1,0 +1,38 @@
+.daily-content-wrap{
+    background-color: $color-back;
+    padding: 3vw 10vw;
+    min-height: 100vh;
+
+    .daily-nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .daily-title {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .daily-calendar-container{
+            position: relative;
+            
+            .material-symbols-rounded{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                left: 10px;
+                // background-color: cadetblue;
+            }
+            .calendar-button{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                right: 5px;
+                background-color: $color-main;
+                color: $color-white;
+                border-radius: 1rem;
+            }
+        }
+
+    }
+}

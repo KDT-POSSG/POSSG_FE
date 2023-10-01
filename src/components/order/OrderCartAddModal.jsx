@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 function OrderCartAddModal({ setIsModalOpen }) {
 
@@ -11,24 +12,53 @@ function OrderCartAddModal({ setIsModalOpen }) {
   }
 
   const handleSearch = () => {
-    console.log("handleSearch");
 
-    axios.get("http://10.10.10.54:3000/productList", {
+    axios.get("http://54.180.60.149:3000/productList", {
       params: {
         convSeq: 1,
-        search: keyword
+        search: keyword,
+        pageSize: 65534,
+        pageNumber: 0,
+        choice: "productName",
+        sortOrder: "newest",
+        promotionInfo: 0
       }
     })
       .then((response) => {
         console.log(response.data);
+        setSearchList(response.data.ProductList);
+        console.log("searchList >> ", searchList);
       })
       .catch((error) => {
         console.error(error);
       })
   }
 
-  const handleAdd = () => {
-    setIsModalOpen(false);
+  const handleAddProduct = (item) => {
+    
+    axios.post("http://54.180.60.149:3000/addCallProductConv", {
+          convSeq: 1,
+          productSeq: item.productSeq, 
+          // primePrice: 1,
+          price: item.price,
+          productName: item.productName,
+          imgUrl: item.imgUrl,
+          amount: 1
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("상품이 추가되었습니다");
+        }
+        else {
+          toast.error("상품 추가에 실패했습니다");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("상품 추가에 실패했습니다");
+      })
   }
 
   return (
@@ -42,14 +72,22 @@ function OrderCartAddModal({ setIsModalOpen }) {
       </div>
 
       <div className='ordercart-search'>
-        <hr />
-        <div className='ordercart-search-item' onClick={handleAdd}>상품명 상품명 상품명 상품명 상품명</div>
-        <hr />
-        <div className='ordercart-search-item' onClick={handleAdd}>상품명 상품명 상품명 상품명 상품명</div>
-        <hr />
-        <div className='ordercart-search-item' onClick={handleAdd}>상품명 상품명 상품명 상품명 상품명</div>
-        <hr />
-        <div className='ordercart-search-item' onClick={handleAdd}>상품명 상품명 상품명 상품명 상품명</div>
+        {
+          searchList ?
+          searchList.map((item) => (
+            <React.Fragment key={item.productSeq}>
+              <hr />
+              <div className='ordercart-search-item' onClick={() => handleAddProduct(item)}>{item.productName}</div>
+            </React.Fragment>
+          ))
+          :
+          <React.Fragment>
+            <div className='order-cart-add-empty'>
+              <span className='tossface order-cart-add-icon'>📦</span>
+              <br /><br />해당하는 상품이 없습니다
+            </div>
+          </React.Fragment>
+        }
       </div>
 
     </div>
