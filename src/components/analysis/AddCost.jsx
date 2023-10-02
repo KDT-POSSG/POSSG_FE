@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
 
 function AddCost(){
+    const accesstoken = localStorage.getItem("accesstoken");
 
     const [rent, setRent] = useState("");
     const [waterBill, setWaterBill] = useState("");
@@ -12,6 +13,8 @@ function AddCost(){
     const [gasBill, setGasBill] = useState("");
     const [totalLaborCost, setTotalLaborCost] = useState("");
     const [securityMaintenanceFee, setSecurityMaintenanceFee] = useState("");
+    const [costYear, setCostYear] = useState("2023"); // 임시로 입력
+    const [costMonth, setCostMonth] = useState("2023");
 
     const inputFields = [
         { state: rent, setState: setRent, name:"월세" },
@@ -35,6 +38,40 @@ function AddCost(){
             currentInputField.setState(addCommaValue);
         }
     };
+
+    const onClick = () => {
+        alert("클릭");
+        console.log("a");
+        axios.post("http://54.180.60.149:3000/addcost", {
+            rent: rent,
+            waterBill: waterBill,
+            electricityBill: electricityBill,
+            gasBill: gasBill,
+            totalLaborCost: totalLaborCost,
+            securityMaintenanceFee: securityMaintenanceFee,
+            costYear: costYear,
+            costMonth: costMonth,
+        }, {
+            headers: {
+            accessToken: `Bearer ${accesstoken}`,
+            Authorization: `Bearer ${accesstoken}`,
+            },
+        })
+        .then((res)=>{
+            console.log("b");
+            console.log("res >>> ", res);
+            if(res.data==="YES"){
+                toast.success("입력 완료");
+            }else{
+                console.log("c");
+                toast.error("입력 실패");
+            }
+        })
+        .catch((err) => {
+            console.error(err);  
+            console.log("catch 에러");
+        })
+    }
 
     return(
         <div className="addCost-content-wrap">
@@ -68,7 +105,7 @@ function AddCost(){
                                 : ""
                             }/>
                     <div className="keypad-container">
-                        <button className="save-btn" type="button">저장하기</button>
+                        <button className="save-btn" type="button" onClick={onClick}>저장하기</button>
                     </div>
                 </div>
             </div>
