@@ -86,7 +86,7 @@ function Register(){
         const currentId = id;
         //console.log("currentId >> ", currentId);
         try {
-            const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/idCheck?userId=${currentId}`);
+            const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/idcheck?userId=${currentId}`);
             //console.log(res);
             if (res.data==="YES") {
                 console.log(res.data);
