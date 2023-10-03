@@ -26,7 +26,7 @@ function MyPage(){
 
     const getUserData = (accesstoken) => {
         //console.log("b");
-        axios.get("http://10.10.10.205:3000/myPage", {
+        axios.get("http://54.180.60.149:3000/myPage", {
             headers: {
                 accessToken: `Bearer ${accesstoken}`,
                 Authorization: `Bearer ${accesstoken}`

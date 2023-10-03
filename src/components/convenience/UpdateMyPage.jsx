@@ -62,7 +62,7 @@ function UpdateMyPage(){
 
     const getUserData = (accesstoken) => {
         //console.log("b");
-        axios.get("http://10.10.10.205:3000/myPage", {
+        axios.get("http://54.180.60.149:3000/myPage", {
             headers: {
                 accessToken: `Bearer ${accesstoken}`,
                 Authorization: `Bearer ${accesstoken}`
@@ -78,7 +78,7 @@ function UpdateMyPage(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.220:3000/updateMypage", {
+        axios.post("http://54.180.60.149:3000/updateMypage", {
             "representativeName": userData.repreName,
             "phoneNumber": userData.phoneNum,
         },{
