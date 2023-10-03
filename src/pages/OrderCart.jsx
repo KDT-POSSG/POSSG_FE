@@ -20,23 +20,12 @@ function OrderCart() {
         }
       })
       .then((response) => {
-
         console.log(response.data);
         console.log(response.data.convList);
-
-        if(response.data.convList === undefined) {
-          console.log("들어옴");
-          setOrderCart([]);
-          setTotalAmount(0);
-          setTotalProduct(0);
-          setTotalPrice(0);
-        }
-        else {
-          setOrderCart(response.data.convList);
-          setTotalAmount(response.data.amount);
-          setTotalProduct(response.data.product);
-          setTotalPrice(response.data.price);
-        }
+        setOrderCart(response.data.convList);
+        setTotalAmount(response.data.amount);
+        setTotalProduct(response.data.product);
+        setTotalPrice(response.data.price);
       })
       .catch((error) => {
         console.error(error);
