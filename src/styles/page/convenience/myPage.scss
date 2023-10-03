@@ -70,6 +70,10 @@
             background: linear-gradient($color-back, $color-white);
         }
 
+        .readonly-input {
+            pointer-events: none; /* 입력 이벤트 비활성화 */
+            border: 1px solid $color-main;
+          }
 
         .form-row button {
             position: absolute;
