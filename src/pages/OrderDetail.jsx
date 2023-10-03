@@ -9,6 +9,9 @@ function OrderDetail() {
   const { callRef } = useParams();
 
   const [orderDetail, setOrderDetail] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
 
@@ -20,7 +23,10 @@ function OrderDetail() {
       })
       .then((response) => {
         console.log(response.data);
-        setOrderDetail(response.data);
+        setOrderDetail(response.data.convList);
+        setTotalAmount(response.data.amount);
+        setTotalProduct(response.data.product);
+        setTotalPrice(response.data.price);
       })
       .catch((error) => {
         console.error(error);
@@ -35,8 +41,19 @@ function OrderDetail() {
         <div className='page-title order-page-title'>발주 내역 상세</div>
       </div>
 
-      <OrderDetailNav />
-      <OrderList type={"after"} orderList={orderDetail} />
+      {
+        orderDetail[0] &&
+        <>
+          <OrderDetailNav callStatus={orderDetail[0].callStatus} callRef={orderDetail[0].callRef} callDate={orderDetail[0].callDate} />
+          <OrderList 
+            type={"after"} 
+            orderList={orderDetail} 
+            totalAmount={totalAmount}
+            totalProduct={totalProduct}
+            totalPrice={totalPrice}
+          />
+        </>
+      }
 
     </div>
   )

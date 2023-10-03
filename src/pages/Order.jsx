@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import orderListDatas from '../assets/datas/orderListDatas.json';
 import OrderItem from 'components/order/OrderItem';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
@@ -8,9 +7,9 @@ function Order() {
 
   const [orderList, setOrderList] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
 
   useEffect(() => {
-    // setOrderList(orderListDatas);
 
     axios.get('http://54.180.60.149:3000/getAllConvOrderList', {
         params: {
@@ -21,7 +20,8 @@ function Order() {
       })
       .then((response) => {
         console.log(response.data);
-        setOrderList(response.data);
+        setOrderList(response.data.orderList);
+        setTotalPage(response.data.pageProduct);
       })
       .catch((error) => {
         console.error(error);
@@ -50,7 +50,7 @@ function Order() {
           <div>발주 상태</div>
           <div>발주 번호</div>
           <div>발주 날짜</div>
-          <div>총 발주 상품 수</div>
+          <div>총 발주 상품 종류</div>
           <div>총 발주 금액</div>
         </div>
 
@@ -65,7 +65,7 @@ function Order() {
       <Pagination
         activePage={page}
         itemsCountPerPage={1}
-        totalItemsCount={1}
+        totalItemsCount={totalPage}
         pageRangeDisplayed={5}
         firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
         prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
