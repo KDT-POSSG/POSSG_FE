@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { addComma } from 'store/utils/function';
 import OrderListItem from './OrderListItem';
 
-function OrderList({ type, orderList }) {
+function OrderList({ type, orderList, selectedItems, setSelectedItems }) {
+
+  // const [selectedItems, setSelectedItems] = useState([]);
+
+  const handleAllCheck = (e) => {
+    console.log("handleAllCheck >> ", e.target.checked);
+
+    if (e.target.checked) {
+      setSelectedItems((prevSelectedItems) => orderList.map((item) => item.productName));
+    } else {
+      setSelectedItems([]);
+    }
+  }
+
+  const handleCheck = (e) => {
+  
+    if (e.target.checked) {
+      setSelectedItems((prevSelectedItems) => [...prevSelectedItems, e.target.value,]);
+    } else {
+      setSelectedItems((prevSelectedItems) => prevSelectedItems.filter((item) => item !== e.target.value));
+    }
+  };
+
   return (
     <>
       <div className='ordercart-grid-container'>
@@ -11,7 +33,7 @@ function OrderList({ type, orderList }) {
           <div>
             {
               type === "before" ?
-              <input type="checkbox" className='ordercart-check' value="all" />
+              <input type="checkbox" className='ordercart-check' value="all" checked={selectedItems.length === orderList.length} onChange={handleAllCheck} />
               :
               <p>번호</p>
             }
@@ -36,7 +58,7 @@ function OrderList({ type, orderList }) {
 
         {
           orderList && orderList.map((item) => (
-            <OrderListItem key={item.productSeq} type={type} item={item} />
+            <OrderListItem key={item.productSeq} type={type} item={item} handleCheck={handleCheck} selectedItems={selectedItems} />
           ))
         }
 

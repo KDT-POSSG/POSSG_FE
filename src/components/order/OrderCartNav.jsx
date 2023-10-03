@@ -5,7 +5,7 @@ import OrderCartAddModal from './OrderCartAddModal';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function OrderCartNav() {
+function OrderCartNav({ isDone, setIsDone, selectedItems }) {
 
   const navi = useNavigate();
 
@@ -17,6 +17,28 @@ function OrderCartNav() {
 
   const modalClose = () => {
     setIsModalOpen(false);
+    setIsDone(!isDone);
+  }
+
+  const handleProductDelete = () => {
+
+    if(selectedItems.length === 0) {
+      toast.error("선택된 상품이 없습니다");
+    }
+
+    axios
+      .post("http://54.180.60.149:3000/deleteCallProduct", {
+        convSeq: 1,
+        productName: selectedItems,
+        callRef: 0
+      })
+      .then((response) => {
+        console.log(response.data);
+        setIsDone(!isDone);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   }
 
   const handleOrderSend = () => {
@@ -43,7 +65,7 @@ function OrderCartNav() {
   return (
     <>
       <div className='ordercart-nav'>
-        <button className='ordercart-delete-btn'>선택 상품 삭제</button>
+        <button className='ordercart-delete-btn' onClick={handleProductDelete}>선택 상품 삭제</button>
         <div>
           <button className='ordercart-add-btn' onClick={modalOpen}>상품 추가</button>
           <button className='ordercart-confirm-btn' onClick={handleOrderSend}>발주하기</button>
