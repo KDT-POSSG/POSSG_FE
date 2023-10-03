@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
+import MyChart from './MyChart';
 
 function DailySales(){
     const [selectedDate, setSelectedDate] = useState(null);
@@ -17,7 +18,7 @@ function DailySales(){
             // API 호출 및 데이터 가져오기
             // 예: const response = await fetch(`/api/sales?date=${selectedDate}`);
             // const data = await response.json();
-            // axios.post("http://54.180.60.149:3000/dailySales")
+            // axios.post("http://54.180.60.149:3000//selectSales")
 
             // 가상의 데이터 (실제 데이터로 대체)
             // const data = {
@@ -56,6 +57,12 @@ function DailySales(){
                     <div className="material-symbols-rounded">calendar_month</div>
                     <button className="calendar-button" type="button" onClick={onClick}>조회</button>
                 </div>
+            </div>
+
+            <div className="sales-chart"> 
+                {/* 차트 */}
+                {/* 예: <ChartComponent data={salesData} /> 이런식으로 */}
+                <MyChart />
             </div>
         </div>
     )
