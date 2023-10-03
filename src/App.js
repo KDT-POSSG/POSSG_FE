@@ -39,6 +39,7 @@ import Cost from 'components/analysis/Cost';
 import YearSales from 'components/analysis/YearSales';
 import DeliveryDetail from 'components/delivery/DeliveryDetail';
 import DeliveryList from 'components/delivery/DeliveryList';
+import UpdateCost from 'components/analysis/UpdateCost';
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
         <Route path='/analysis' element={<Analysis />} />
         <Route path='/cost' element={<Cost />} />
         <Route path='/addCost' element={<AddCost />} />
+        <Route path='/updateCost' element={<UpdateCost />} />
         <Route path='/salesReport' element={<SalesReport />}>
           <Route index element={<DailySales />} />
           <Route path='daily' element={<DailySales />} />
