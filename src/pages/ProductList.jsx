@@ -35,25 +35,6 @@ function ProductList() {
     
   }, [keyword]);
 
-  const target = useRef(null);
-
-  useEffect(() => {
-    observer.observe(target.current);
-  }, []);
-
-  const options = {
-    threshold: 0.8
-  };
-
-  const callback = () => {
-    console.log("관측");
-    setPage(page + 1);
-    console.log("머임?");
-    console.log(page);
-  };
-
-  const observer = new IntersectionObserver(callback, options);
-
   return (
     <div className='product-page'>
 
@@ -83,8 +64,6 @@ function ProductList() {
             ))
           }
         </div>
-
-        <div ref={target}>test</div>
       </div>
 
     </div>
