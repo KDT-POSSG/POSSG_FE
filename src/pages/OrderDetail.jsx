@@ -8,11 +8,11 @@ function OrderDetail() {
 
   const { callRef } = useParams();
 
-  const [OrderDetail, setOrderDetail] = useState([]);
+  const [orderDetail, setOrderDetail] = useState([]);
 
   useEffect(() => {
 
-    axios.get("http://10.10.10.140:3000/getRefCallProductConvList", {
+    axios.get("http://54.180.60.149:3000/getRefCallProductConvList", {
         params: {
           convSeq: 1,
           callRef: callRef
@@ -36,7 +36,7 @@ function OrderDetail() {
       </div>
 
       <OrderDetailNav />
-      <OrderList type={"after"} orderList={OrderDetail} />
+      <OrderList type={"after"} orderList={orderDetail} />
 
     </div>
   )

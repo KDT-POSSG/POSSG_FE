@@ -11,7 +11,7 @@ function Home() {
 
   useEffect(() => {
 
-    axios.get("http://10.10.10.196:3000/favoritePageList", {
+    axios.get("http://54.180.60.149:3000/favoritePageList", {
         params: {
           convSeq: 1
         }
