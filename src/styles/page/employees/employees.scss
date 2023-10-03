@@ -2,7 +2,7 @@
     background-color: $color-back;
     .employee-header{
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         
             .employee-btn {
                 background-color: $color-white;
@@ -14,12 +14,13 @@
                 font-size: 1rem;
                 width: 200px;
                 margin-top: 15px;
+                margin-right: 11rem;
               }
-                .employee-btn:hover {
-                  background-color: $color-point;
-                  color: white;
-                  transition: 0.3s;
-                }
+              .employee-btn:hover {
+                background-color: $color-point;
+                color: white;
+                transition: 0.3s;
+              }
         
     }
 
@@ -40,7 +41,7 @@
               filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
               border-collapse: collapse;
               border-radius: 5px;
-              width: 65%;
+              width: 80%;
               overflow: hidden;
             }
             

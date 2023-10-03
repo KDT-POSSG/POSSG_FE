@@ -5,7 +5,7 @@ import Modal from "../Modal";
 import TosspayReceiptInfoModal from "./TosspayReceiptInfoModal"
 
 
-function TosspayReceipt({  closeModal, totalAmount }){
+function TosspayReceipt({  closeModal, totalAmount, receiptURL }){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -49,7 +49,7 @@ function TosspayReceipt({  closeModal, totalAmount }){
             </div>
 
             <Modal isOpen={modalIsOpen} onClose={ closeModal }>
-                <TosspayReceiptInfoModal/>
+                <TosspayReceiptInfoModal receiptURL={receiptURL}/>
             </Modal>
         </div>
     );

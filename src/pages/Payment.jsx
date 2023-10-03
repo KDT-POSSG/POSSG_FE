@@ -211,7 +211,7 @@ function Payment() {
                     openModal={openModal}
                     closeModal={closeModal}
                     totalAmount={getTotalAmount()}
-                    
+                    receiptURL={paymentResponse}
                 />}
             {paymentType === 'etc' && <Etcpay />}
             {paymentType === 'discount' && <Discount />}

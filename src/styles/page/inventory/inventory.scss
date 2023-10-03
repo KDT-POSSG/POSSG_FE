@@ -1,9 +1,17 @@
 .inventory{
   background-color: $color-back;
+  min-height: calc(100vh - 4rem);
+
+    
     .inven-content {
-      padding: 1rem;
+      padding: 5vh 10vw;
       font-size: 1.5rem;
       text-align: center;
+      .page-title{
+        
+        display: flex;
+        justify-content: left;
+      }
     }
 
     .btn-container{
@@ -20,7 +28,8 @@
       cursor: pointer;
       font-size: 1rem;
       width: 200px;
-      margin-top: 15px;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
   }
     .inven-btn:hover {
       background-color: $color-point;
@@ -30,7 +39,6 @@
   }
 
     .inventory-table {
-      padding :1em;
       display: flex;
       justify-content: center;
       width: 100%;
@@ -39,10 +47,19 @@
         border: 1px #a39485 solid;
         font-size: 1rem;
         box-shadow: 0 2px 5px rgba(0,0,0,.25);
-        width: 80%;
+        width: 100%;
         border-collapse: collapse;
         border-radius: 5px;
         overflow: hidden;
+
+        tbody{
+          .inventory-empty{
+            height: 300px;
+            td{
+              font-size: 5rem;
+            }
+          }
+        }
       }
       
       th {

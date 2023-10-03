@@ -74,9 +74,10 @@ function Inventory() {
 
     return (
         <div className='inventory'>
-            <h1 className='page-title'>시재 관리</h1>
+            
             <div className='inven-content'>
-                <h2 className='present-time'>현재 시간 : { formattedTime }</h2>
+                <div className='page-title'>시재 관리</div>
+                <div className='present-time'>현재 시간 : { formattedTime }</div>
             <div className='btn-container'>
                 <button className='inven-btn' onClick={ openModal }>시재 입력</button>
             </div>
@@ -92,23 +93,29 @@ function Inventory() {
                     </thead>
                     <tbody>
                         {
-                            currentPageData.map((item, index) => (
-                                <>
-                                <tr key={index} onClick={() => handleRowClick(index)}>
-                                    <td>{item.seq}</td>
-                                    <td>{item.convName}</td>
-                                    <td>{item.rdate}</td>
-                                    <td>{addComma(item.cash)}</td>
+                            currentPageData.length === 0 ? (
+                                <tr className='inventory-empty'>
+                                    <td colSpan="4">📝</td>
                                 </tr>
-                                {selectedRow === index && (
-                                        <tr className='drop-memo-container'>
-                                            <td colSpan="4">
-                                                <div className='drop-memo'>┗  {item.memo}</div>
-                                            </td>
-                                        </tr>
-                                    )}
-                                </>
-                            ))
+                            ) : (
+                                currentPageData.map((item, index) => (
+                                    <>
+                                    <tr key={index} onClick={() => handleRowClick(index)}>
+                                        <td>{item.seq}</td>
+                                        <td>{item.convName}</td>
+                                        <td>{item.rdate}</td>
+                                        <td>{addComma(item.cash)}</td>
+                                    </tr>
+                                    {selectedRow === index && (
+                                            <tr className='drop-memo-container'>
+                                                <td colSpan="4">
+                                                    <div className='drop-memo'>┗  {item.memo}</div>
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </>
+                                ))
+                            )
                         }
                     </tbody>
                 </table>
