@@ -1,16 +1,20 @@
 .employeesinfo{
-
+  padding: 5vh 10vw;
+  .employeeinfo-header{
+    .page-title{
+      display: flex;
+      justify-content: left;
+    }
   .employee-information{
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    margin-top: 50px;
+    margin-top: 1rem;
     
 
     .employee-img{
-      height: 300px;
-      width: 300px;
+      height: 200px;
+      width: 200px;
       border: 1px #a39485 solid;
       box-shadow: 0 2px 5px rgba(0,0,0,.25);
       border-collapse: collapse;
@@ -19,8 +23,8 @@
 
 
       img{
-        height: 300px;
-        width: 300px;
+        height: 200px;
+        width: 200px;
         border-radius: 1rem;
       }
       
@@ -33,9 +37,9 @@
       margin-left: 50px;
       font-weight: bold;
       width: 600px;
-  
+    }
     h2{
-      padding: 12px;
+      padding: 10px;
     }
     .employee-name{
       font-size: 2.3rem;
@@ -56,7 +60,7 @@
     flex-direction: column;
     align-items: center;
     justify-self: center;
-    margin-top: 30px;
+    margin-top: 1.5rem;
 
     .employee-btn {
       background-color: $color-white;
@@ -67,7 +71,7 @@
       cursor: pointer;
       font-size: 1rem;
       width: 200px;
-      margin-top: 15px;
+      margin-top: 1.5rem;
     }
       .employee-btn:hover {
         background-color: red;
@@ -78,8 +82,7 @@
   
 
   .employee-table {
-    padding :1rem;
-    width: 70%;
+    width: 100%;
 
 
     table {
@@ -90,6 +93,12 @@
       border-radius: 5px;
       width: 100%;
       overflow: hidden;
+
+      tbody{
+        .employeeinfo-empty{
+          font-size: 5rem;
+        }
+      }
     }
     
     th {
