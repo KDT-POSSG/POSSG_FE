@@ -44,23 +44,24 @@ function EmployeeInfo() {
 
     return (
         <div className='employeesinfo'>
-            <div className='page-title'>{empName}님의 정보</div>
-            <div className="employee-information">
-                
-                <div className='employee-img'>
-                    <img src='https://i.namu.wiki/i/zekLiDSe20sTxWfFJ0kmbeJh7yI0o_Fz7cWmu1r2P7bfYTvUJxW8P5MHyMWukE1UCMeCRJdzNL2kjw-pZEzUYA.webp'/>
-                </div>
-                <div className='employee-info-container'>
-                    <h2 className='employee-name'>{empName}</h2>
-                    <hr/>
-                    <div className='employee-branch-title'>
-                        <h2 className='employee-branch'>지점 : {branchName}</h2>
-                        <h2 className='employee-number'>사원번호 : {employeeSeq}</h2>
+            <div className='employeeinfo-header'>
+                <div className='page-title'>{empName}님의 정보</div>
+                <div className="employee-information">
+                    <div className='employee-img'>
+                        <img src='https://i.namu.wiki/i/zekLiDSe20sTxWfFJ0kmbeJh7yI0o_Fz7cWmu1r2P7bfYTvUJxW8P5MHyMWukE1UCMeCRJdzNL2kjw-pZEzUYA.webp'/>
                     </div>
-                    <h2 className='employee-info'>생년월일 : {birthDate}</h2>
-                    <h2 className='employee-info'>성별 : {gender}</h2>
-                    <h2 className='employee-info'>연락처 : {phoneNumber}</h2>
-                    <h2 className='employee-info'>시급 : {new Intl.NumberFormat('ko-KR').format(salary)}</h2>
+                    <div className='employee-info-container'>
+                        <h2 className='employee-name'>{empName}</h2>
+                        <hr/>
+                        <div className='employee-branch-title'>
+                            <h2 className='employee-branch'>지점 : {branchName}</h2>
+                            <h2 className='employee-number'>사원번호 : {employeeSeq}</h2>
+                        </div>
+                        <h2 className='employee-info'>생년월일 : {birthDate}</h2>
+                        <h2 className='employee-info'>성별 : {gender}</h2>
+                        <h2 className='employee-info'>연락처 : {phoneNumber}</h2>
+                        <h2 className='employee-info'>시급 : {new Intl.NumberFormat('ko-KR').format(salary)}</h2>
+                    </div>
                 </div>
             </div>
 
@@ -80,17 +81,21 @@ function EmployeeInfo() {
                     </tr>
                 </thead>
                 <tbody>
-                    {attendanceData.map((data, index) => (
+                    {attendanceData.length === 0 ? (
+                        <tr>
+                            <td className='tossface employeeinfo-empty' colSpan='5'>🏷️</td>
+                        </tr>
+                        ) : (
+                        attendanceData.map((data, index) => (
                         <tr key={index}>
-                            
-                            
                             <td>{data.attendance}</td>
                             <td>{data.leaveWork}</td>
                             <td>{data.workHours}</td>
                             <td>{data.remark}</td>
                             <td>{data.matter}</td>
                         </tr>
-                    ))}
+                        ))
+                    )}
                 </tbody>
             </table>
             </div>
