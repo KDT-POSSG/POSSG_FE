@@ -40,9 +40,9 @@ function AddCost(){
     };
 
     const onClick = () => {
-        alert("클릭");
+        // alert("클릭");
         console.log("a");
-        axios.post("http://54.180.60.149:3000/addcost", {
+        axios.post("http://54.180.60.149:3000/addCost", {
             rent: rent,
             waterBill: waterBill,
             electricityBill: electricityBill,
