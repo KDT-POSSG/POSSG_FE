@@ -29,15 +29,23 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
     axios
       .post("http://54.180.60.149:3000/deleteCallProduct", {
         convSeq: 1,
-        productName: selectedItems,
+        nameList: selectedItems,
         callRef: 0
       })
       .then((response) => {
         console.log(response.data);
-        setIsDone(!isDone);
+
+        if(response.data === "YES") {
+          toast.success("선택한 상품이 삭제되었습니다");
+          setIsDone(!isDone);
+        }
+        else {
+          toast.error("선택한 상품 삭제에 실패했습니다");
+        }
       })
       .catch((error) => {
         console.error(error);
+        toast.error("선택한 상품 삭제에 실패했습니다");
       })
   }
 
