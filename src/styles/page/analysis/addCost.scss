@@ -7,23 +7,54 @@
     padding: 5vw 10vw;
     min-height: 100vh;
 
-    // title
-    .addCost-title{
-        font-size: 2rem;
-        text-align: center;
+    .addCost-nav{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 80%;
+
+        // title
+        .addCost-title{
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .addCost-calendar-container{
+            position: relative;
+
+            .react-datepicker__input-container input {
+                border-radius: 1rem;
+                background-color: $color-white;
+                border: 1px solid $color-border;
+                padding: 1rem 20px 1rem 20px;
+                width: 15vw;
+                text-align: center;
+            }
+
+            .material-symbols-rounded{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                left: 10px;
+            }
+        }
+
     }
 
     // content
     .addCost-content {
-        width: 100vw;
         display: flex;
         justify-content: center;
         margin: 50px;
-        // background-color: aquamarine;
+        padding: 2rem;
+        text-align: center;
+        border-radius: 1rem;
+        margin-bottom: 1.5rem;
+        filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
+        background-color: $color-white;
 
         .addCost-info{
             margin-right: 60px;
-            // background-color: aquamarine;
         }
 
         .info-container {
@@ -34,7 +65,7 @@
 
         input {
             border: 1px solid $color-border;
-            border-radius: 32px;
+            border-radius: 12px;
             padding: 1rem 1.25rem;
             width: 20vw;
             transition: all 0.2s;
@@ -93,7 +124,7 @@
                 background-color: $color-main;
                 color: $color-white;
                 font-weight: bold;
-                border-radius: 32px;
+                border-radius: 12px;
                 width: 15vw;
             }
         }
