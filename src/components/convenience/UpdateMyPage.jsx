@@ -14,8 +14,8 @@ function UpdateMyPage(){
 
     const [accesstoken, setAccesstoken] = useState("");
     const [userData, setUserData] = useState({
-        repreName: "", // 초기값을 빈 문자열로 설정
-        phoneNum: "",  // 초기값을 빈 문자열로 설정
+        // repreName: "", // 초기값을 빈 문자열로 설정
+        // phoneNum: "",  // 초기값을 빈 문자열로 설정
     });
 
     const [formIsValid, setFormIsValid] = useState(false);
@@ -27,15 +27,22 @@ function UpdateMyPage(){
         setFormIsValid(repreNameIsValid && phoneNumIsValid );
     };
 
-    // 대표자명 입력 필드의 값이 변경될 때 호출되는 함수
     const onChangeRepreName = (e) => {
-        setUserData({ ...userData, repreName: e.target.value });
+        // setUserData({ ...userData, repreName: e.target.value });
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            repreName: e.target.value
+        }));
+
         checkFormValidity();
     };
 
-    // 휴대폰번호 입력 필드의 값이 변경될 때 호출되는 함수
     const onChangePhoneNum = (e) => {
-        setUserData({ ...userData, phoneNum: e.target.value });
+        // setUserData({ ...userData, phoneNum: e.target.value });
+        setUserData((prevUserData) => ({
+            ...prevUserData,
+            phoneNum: e.target.value
+        }));
         checkFormValidity();
     };
     
@@ -46,15 +53,15 @@ function UpdateMyPage(){
     const openModal = (type) => {
         setChangePw(type);
         setModalIsOpen(true);
-       };
-   
-       const closeModal = () => {
-       setModalIsOpen(false);
-       };
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
 
     useEffect(() => {
         if(accesstokenStorage){
-            // // 로컬스토리지에서 토큰가져오기
+            // 로컬스토리지에서 토큰가져오기
             setAccesstoken(accesstokenStorage);
             getUserData(accesstokenStorage);
         }
@@ -62,7 +69,7 @@ function UpdateMyPage(){
 
     const getUserData = (accesstoken) => {
         //console.log("b");
-        axios.get("http://10.10.10.205:3000/myPage", {
+        axios.get("http://54.180.60.149:3000/myPage", {
             headers: {
                 accessToken: `Bearer ${accesstoken}`,
                 Authorization: `Bearer ${accesstoken}`
@@ -78,7 +85,7 @@ function UpdateMyPage(){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.220:3000/updateMypage", {
+        axios.post("http://54.180.60.149:3000/updateMypage", {
             "representativeName": userData.repreName,
             "phoneNumber": userData.phoneNum,
         },{
@@ -109,20 +116,20 @@ function UpdateMyPage(){
             <form id="regiForm" method="post" autoComplete="off" onSubmit={onSubmit}>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="id" name="id" value={userData && userData.userId}  />
+                            <input type="text" className="input-text readonly-input" id="id" name="id" value={userData && userData.userId}  />
                             <label className="label-helper" htmlFor="id"><span>아이디</span></label>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="password" className="input-text" id="pw" name="pw" value="********" />
+                            <input type="password" className="input-text readonly-input" id="pw" name="pw" value="********" />
                             <label className="label-helper" htmlFor="pw"><span>비밀번호</span></label>
                             <button className="input-button" type="button" onClick={() => openModal('changePw')}>비밀번호 변경</button>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="branchName" name="branchName" value={userData && userData.branchName} />
+                            <input type="text" className="input-text readonly-input" id="branchName" name="branchName" value={userData && userData.branchName} />
                             <label className="label-helper" htmlFor="branchName"><span>지점명</span></label>
                         </div>
                     </div>
