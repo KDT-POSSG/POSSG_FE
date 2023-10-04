@@ -38,6 +38,8 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/possg-fe:latest
+        build-args: |
+          "REACT_APP_KAKAO_MAP_JS_KEY=${{ secrets.REACT_APP_KAKAO_MAP_JS_KEY }}"
     - 
       name: SSH Remote Commands
       uses: appleboy/ssh-action@v1.0.0
