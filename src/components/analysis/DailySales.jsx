@@ -4,6 +4,8 @@ import ReactDatePicker from 'react-datepicker';
 import MyChart from './MyChart';
 
 function DailySales(){
+    const accesstoken = localStorage.getItem("accesstoken");
+
     const [selectedDate, setSelectedDate] = useState(null);
     const [salesData, setSalesData] = useState([]); // 매출 데이터 저장
     const [expenseData, setExpenseData] = useState([]); // 지출 데이터 저장
@@ -15,38 +17,30 @@ function DailySales(){
 
     const onClick = async () => {   
         try {
-            // API 호출 및 데이터 가져오기
-            // 예: const response = await fetch(`/api/sales?date=${selectedDate}`);
-            // const data = await response.json();
-            // axios.post("http://54.180.60.149:3000//selectSales")
-
-            // 가상의 데이터 (실제 데이터로 대체)
-            // const data = {
-            //     sales: [/* sales 데이터 배열 */],
-            //     expenses: [/* 지출 데이터 배열 */],
-            //     profit: [/* 순이익 데이터 배열 */],
-            // };
-
-            // setSalesData(data.sales);
-            // setExpenseData(data.expenses);
-            // setProfitData(data.profit);
-
+            const res = await axios.get("http://54.180.60.149:3000//selectSales", {
+                params: {
+                    date: "2023년07월20일", // 임시로 받는 데이터
+                    choice: 0 // 일별 매출 0번
+                }
+            } ,{
+                headers: {
+                    accessToken: `Bearer ${accesstoken}`,
+                },
+            })
+            const resData = res.data;
+            setSalesData(resData.sales);
+            setExpenseData(resData.expenses);
+            setProfitData(resData.profit);
         } catch (error) {
-            console.error('데이터 가져오기 오류:', error);
+            console.error('try-catch 데이터 가져오기 오류:', error);
         }
     }
 
-    // useEffect(() => {
-    //     if (selectedDate) {
-    //         fetchData();
-    //     }
-    // }, [selectedDate]);
-
     return(
-        <div className="daily-content-wrap">
-            <div className="daily-nav">
-                <div className="daily-title">일별 매출</div>
-                <div className="daily-calendar-container">           
+        <div className="sales-content-wrap">
+            <div className="sales-nav">
+                <div className="sales-title">일별 매출</div>
+                <div className="sales-calendar-container">           
                     <ReactDatePicker
                         selected={selectedDate}
                         onChange={handleDateChange}
@@ -60,9 +54,7 @@ function DailySales(){
             </div>
 
             <div className="sales-chart"> 
-                {/* 차트 */}
-                {/* 예: <ChartComponent data={salesData} /> 이런식으로 */}
-                <MyChart />
+                <MyChart salesData={salesData} expenseData={expenseData} profitData={profitData} />
             </div>
         </div>
     )
