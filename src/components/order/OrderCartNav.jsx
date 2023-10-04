@@ -24,6 +24,7 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
 
     if(selectedItems.length === 0) {
       toast.error("선택된 상품이 없습니다");
+      return;
     }
 
     axios
