@@ -4,7 +4,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
 
-function AddCost(){
+function UpdateCost(){
     const accesstoken = localStorage.getItem("accesstoken");
 
     const [rent, setRent] = useState("");
@@ -42,7 +42,7 @@ function AddCost(){
     const onClick = () => {
         // alert("클릭");
         console.log("a");
-        axios.post("http://54.180.60.149:3000/addCost", {
+        axios.post("http://54.180.60.149:3000//updateCost", {
             rent: rent,
             waterBill: waterBill,
             electricityBill: electricityBill,
@@ -51,22 +51,20 @@ function AddCost(){
             securityMaintenanceFee: securityMaintenanceFee,
             costYear: costYear,
             costMonth: costMonth,
-        }, 
-        // {
-        //     headers: {
-        //     accessToken: `Bearer ${accesstoken}`,
-        //     Authorization: `Bearer ${accesstoken}`,
-        //     },
-        // }
-        )
+        }, {
+            headers: {
+            accessToken: `Bearer ${accesstoken}`,
+            Authorization: `Bearer ${accesstoken}`,
+            },
+        })
         .then((res)=>{
             console.log("b");
             console.log("res >>> ", res);
             if(res.data==="YES"){
-                toast.success("입력 완료");
+                toast.success("수정 완료");
             }else{
                 console.log("c");
-                toast.error("입력 실패");
+                toast.error("수정 실패");
             }
         })
         .catch((err) => {
@@ -77,7 +75,7 @@ function AddCost(){
 
     return(
         <div className="addCost-content-wrap">
-            <div className="addCost-title">비용 입력</div>
+            <div className="addCost-title">비용 수정</div>
             <div className="addCost-content">
                 <div className="addCost-info">
                 {inputFields.map((inputField, index) => (
@@ -114,4 +112,4 @@ function AddCost(){
         </div>
     )
 }
-export default AddCost;
+export default UpdateCost;
