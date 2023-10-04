@@ -42,7 +42,7 @@ function HomeModal({ modalClose, homeMenu, isChange, setIsChange }) {
       menuSeq.push(enabledItems[i].seq);
     }
 
-    axios.post('http://10.10.10.196:3000/addFavoritePage', {
+    axios.post('http://54.180.60.149:3000/addFavoritePage', {
       convSeq: 1,
       seqList: menuSeq
     })
