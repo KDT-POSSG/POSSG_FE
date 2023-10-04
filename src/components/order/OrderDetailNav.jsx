@@ -19,9 +19,12 @@ function OrderDetailNav({ callStatus, callRef, callDate }) {
         console.log(response.data);
 
         if(response.data === "YES") {
-          toast.success("해당 발주가 취소되었습니다");
+          toast("해당 발주가 취소되었습니다", {
+            icon: <span className='tossface'>✏️</span>,
+          });
           setTimeout(() => {
             navi("/ordercart");
+            toast.remove();
             toast.success("상품이 발주 바구니로 이동되었습니다");
           }, 500);
         }
