@@ -9,10 +9,10 @@ function YearSales(){
     };
     
     return(
-        <div className="daily-content-wrap">
-            <div className="daily-nav">
-                <div className="daily-title">연별 매출</div>
-                <div className="daily-calendar-container">
+        <div className="sales-content-wrap">
+            <div className="sales-nav">
+                <div className="sales-title">연별 매출</div>
+                <div className="sales-calendar-container">
                     <DatePicker
                         selected={selectedDate}
                         onChange={handleDateChange}

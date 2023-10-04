@@ -100,16 +100,6 @@ function DeliveryList() {
           <div className='item-product-container'>
 
             <div className='item-product'>
-              <div>먹태깡</div>
-              <div>5</div>
-            </div>
-
-            <div className='item-product'>
-              <div>피죤</div>
-              <div>5</div>
-            </div>
-
-            <div className='item-product'>
               <div>감자깡</div>
               <div>5</div>
             </div>
