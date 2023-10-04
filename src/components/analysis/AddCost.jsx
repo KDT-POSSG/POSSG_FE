@@ -3,6 +3,7 @@ import NumberPad from "components/NumberPad";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
+import DatePicker from 'react-datepicker';
 
 function AddCost(){
     const accesstoken = localStorage.getItem("accesstoken");
@@ -39,9 +40,14 @@ function AddCost(){
         }
     };
 
-    const onClick = () => {
-        // alert("클릭");
-        console.log("a");
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    const handleDateChange = (date) => {
+    setSelectedDate(date);
+    };
+
+    const onClick = (e) => {
+        e.preventDefault();
         axios.post("http://54.180.60.149:3000/addCost", {
             rent: rent,
             waterBill: waterBill,
@@ -54,17 +60,16 @@ function AddCost(){
         }, {
             headers: {
             accessToken: `Bearer ${accesstoken}`,
-            Authorization: `Bearer ${accesstoken}`,
             },
         })
         .then((res)=>{
-            console.log("b");
+            // console.log("b");
             console.log("res >>> ", res);
             if(res.data==="YES"){
-                toast.success("입력 완료");
+                toast.success("입력이 완료되었습니다");
             }else{
-                console.log("c");
-                toast.error("입력 실패");
+                // console.log("c");
+                toast.error("입력에 실패되었습니다");
             }
         })
         .catch((err) => {
@@ -75,7 +80,20 @@ function AddCost(){
 
     return(
         <div className="addCost-content-wrap">
-            <div className="addCost-title">비용 입력</div>
+            <div className="addCost-nav">
+                <div className="addCost-title">비용 입력</div>
+                <div className="addCost-calendar-container">
+                    <DatePicker
+                            selected={selectedDate}
+                            onChange={handleDateChange}
+                            showMonthYearPicker
+                            dateFormat="yyyy년 MM월"
+                            minDate={new Date(2000, 0)} 
+                            maxDate={new Date()} 
+                        />
+                    <div className="material-symbols-rounded">calendar_month</div>
+                </div>
+            </div>
             <div className="addCost-content">
                 <div className="addCost-info">
                 {inputFields.map((inputField, index) => (
