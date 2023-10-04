@@ -1,19 +1,19 @@
-.daily-content-wrap{
+.sales-content-wrap{
     background-color: $color-back;
     padding: 3vw 10vw;
     min-height: 100vh;
 
-    .daily-nav{
+    .sales-nav{
         display: flex;
         justify-content: space-between;
         align-items: center;
 
-        .daily-title {
+        .sales-title {
             font-size: 2rem;
             text-align: center;
         }
 
-        .daily-calendar-container{
+        .sales-calendar-container{
             position: relative;
             
             .material-symbols-rounded{
