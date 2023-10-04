@@ -1,7 +1,39 @@
+import axios from 'axios';
 import React from 'react';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { orderState } from 'store/utils/function';
 
 function OrderDetailNav({ callStatus, callRef, callDate }) {
+
+  const navi = useNavigate();
+
+  const handleOrderCancel = () => {
+
+    axios
+      .post("http://54.180.60.149:3000/cancelConvOrderList", {
+        convSeq: 1,
+        callRef: callRef
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("해당 발주가 취소되었습니다");
+          setTimeout(() => {
+            navi("/ordercart");
+            toast.success("상품이 발주 바구니로 이동되었습니다");
+          }, 500);
+        }
+        else {
+          toast.error("해당 발주 취소에 실패했습니다");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("해당 발주 취소에 실패했습니다");
+      })
+  }
 
   return (
     <div className='order-detail-middle'>
@@ -23,9 +55,9 @@ function OrderDetailNav({ callStatus, callRef, callDate }) {
       <div>
         {
           callStatus === 1 ?
-          <button className='order-cancel'>발주 취소</button>
+          <button className='order-cancel' onClick={handleOrderCancel}>발주 취소</button>
           :
-          <button className='order-cancel' disabled>발주 취소</button>
+          <></>
         }
       </div>
 
