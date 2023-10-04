@@ -1,6 +1,6 @@
 import axios from "axios";
 import NumberPad from "components/NumberPad";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
 import DatePicker from 'react-datepicker';
@@ -14,8 +14,8 @@ function AddCost(){
     const [gasBill, setGasBill] = useState("");
     const [totalLaborCost, setTotalLaborCost] = useState("");
     const [securityMaintenanceFee, setSecurityMaintenanceFee] = useState("");
-    const [costYear, setCostYear] = useState("2023"); // 임시로 입력
-    const [costMonth, setCostMonth] = useState("2023");
+    const [costYear, setCostYear] = useState("");
+    const [costMonth, setCostMonth] = useState("");
 
     const inputFields = [
         { state: rent, setState: setRent, name:"월세" },
@@ -43,7 +43,19 @@ function AddCost(){
     const [selectedDate, setSelectedDate] = useState(null);
 
     const handleDateChange = (date) => {
-    setSelectedDate(date);
+        setSelectedDate(date);
+        if(date){
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            setCostYear(String(year));
+            setCostMonth(String(month).padStart(2, "0"));
+        }else {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth() + 1;
+            setCostYear(String(currentYear));
+            setCostMonth(String(currentMonth).padStart(2, "0"));
+        }
     };
 
     const onClick = (e) => {
@@ -77,6 +89,10 @@ function AddCost(){
             console.log("catch 에러");
         })
     }
+
+    useEffect(() => {
+        handleDateChange(null);
+    }, []);
 
     return(
         <div className="addCost-content-wrap">
