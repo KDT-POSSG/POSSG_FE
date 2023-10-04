@@ -10,22 +10,15 @@ function MyPage(){
     const [userData, setUserData] = useState({});
 
     const accesstokenStorage = localStorage.getItem("accesstoken");
-    //console.log("accesstokenStorage >>> " , accesstokenStorage); // 토큰
-
-    // const handleInputChange = (e) => {
-    //     setInputValue(e.target.value);
-    //   };
 
     useEffect(() => {
         if(accesstokenStorage){
-            // // 로컬스토리지에서 토큰가져오기
             setAccesstoken(accesstokenStorage);
             getUserData(accesstokenStorage);
         }
-    }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 실행
+    }, []);
 
     const getUserData = (accesstoken) => {
-        //console.log("b");
         axios.get("http://54.180.60.149:3000/myPage", {
             headers: {
                 accessToken: `Bearer ${accesstoken}`,
