@@ -3,6 +3,7 @@ import NumberPad from "components/NumberPad";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
+import DatePicker from 'react-datepicker';
 
 function UpdateCost(){
     const accesstoken = localStorage.getItem("accesstoken");
@@ -36,6 +37,24 @@ function UpdateCost(){
             const currentInputField = inputFields[selectedInputIndex];
             const addCommaValue = addComma(value); 
             currentInputField.setState(addCommaValue);
+        }
+    };
+
+    const [selectedDate, setSelectedDate] = useState(null);
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        if(date){
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            setCostYear(String(year));
+            setCostMonth(String(month).padStart(2, "0"));
+        }else {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            const currentMonth = currentDate.getMonth() + 1;
+            setCostYear(String(currentYear));
+            setCostMonth(String(currentMonth).padStart(2, "0"));
         }
     };
 
@@ -74,10 +93,24 @@ function UpdateCost(){
     }
 
     return(
-        <div className="addCost-content-wrap">
-            <div className="addCost-title">비용 수정</div>
-            <div className="addCost-content">
-                <div className="addCost-info">
+        <div className="updateCost-content-wrap">
+            <div className="updateCost-nav">
+                <div className="updateCost-title">비용 수정</div>
+                <div className="updateCost-calendar-container">
+                    <DatePicker
+                        selected={selectedDate}
+                        onChange={handleDateChange}
+                        showMonthYearPicker
+                        dateFormat="yyyy년 MM월"
+                        minDate={new Date(2000, 0)} 
+                        maxDate={new Date()} 
+                    />
+                    <div className="material-symbols-rounded">calendar_month</div>
+                    <button className="calendar-button" type="button" onClick={onClick}>조회</button>
+                </div>
+            </div>
+            <div className="updateCost-content">
+                <div className="updateCost-info">
                 {inputFields.map((inputField, index) => (
                     <div className="info-container" key={index}>
                     <input
@@ -95,7 +128,7 @@ function UpdateCost(){
                     </div>
                 ))}
                 </div>
-                <div className="addCost-keypad">
+                <div className="updateCost-keypad">
                         {/* 숫자패드 */}
                         <NumberPad 
                             onInputValueChange={handleNumberPadInput}

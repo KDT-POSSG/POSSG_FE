@@ -49,6 +49,10 @@ function AddCost(){
             const month = date.getMonth() + 1;
             setCostYear(String(year));
             setCostMonth(String(month).padStart(2, "0"));
+
+            console.log("date >> ", date);
+            console.log("year >> ", year);
+            console.log("month >> ", month);
         }else {
             const currentDate = new Date();
             const currentYear = currentDate.getFullYear();
@@ -59,6 +63,7 @@ function AddCost(){
     };
 
     const onClick = (e) => {
+        console.log(inputFields);
         e.preventDefault();
         axios.post("http://54.180.60.149:3000/addCost", {
             rent: rent,
@@ -69,7 +74,8 @@ function AddCost(){
             securityMaintenanceFee: securityMaintenanceFee,
             costYear: costYear,
             costMonth: costMonth,
-        }, {
+        }, 
+        {
             headers: {
             accessToken: `Bearer ${accesstoken}`,
             },
