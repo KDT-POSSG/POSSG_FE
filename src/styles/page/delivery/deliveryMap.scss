@@ -1,0 +1,70 @@
+.delivery-map {
+  // background-color: rgb(190, 190, 190);
+  height: 100%;
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  display: grid;
+  grid-template-rows: 5fr 1fr;
+
+  > div {
+    // border: 1px solid blue;
+  }
+  
+  .delivery-map-top {
+    // border: 1px solid blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    .delivery-map-search, .delivery-map-image {
+      padding: 1rem;
+    }
+
+    .delivery-map-search {
+      height: 100%;
+
+      .delivery-daum {
+        // height: 100%;
+      }
+    }
+
+    .delivery-map-image {
+      background-color: $color-gray;
+    }
+  }
+
+  .delivery-map-bottom {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    > div {
+      margin: 0.5rem 0;
+    }
+
+    .delivery-map-title {
+      font-weight: bold;
+    }
+
+    .delivery-map-data {
+      font-size: .875rem;
+      margin-top: 0.5rem;
+    }
+
+    .delivery-regi-btn {
+      background-color: $color-main;
+      color: $color-white;
+      border: 1px solid $color-main;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      transition: $transition-cb2;
+
+      &:hover {
+        background-color: #F0A20A;
+        border-color: #F0A20A;
+      }
+    }
+  }
+
+}

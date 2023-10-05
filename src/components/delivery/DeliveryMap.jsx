@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import DaumPostcodeEmbed from 'react-daum-postcode';
 
 function DeliveryMap() {
 
-  const [searchAddress, setSearchAddress] = useState("");
+  const [address, setAddress] = useState("");
   const [mapData, setMapData] = useState({
     La: 33.450701,
     Ma: 126.570667
@@ -28,17 +29,13 @@ function DeliveryMap() {
     const map = new window.kakao.maps.Map(container, options);
     return map;
   }
-
-  const handleSearchAddress = (e) => {
-    setSearchAddress(e.target.value);
-  }
-
-  const handleSearch = () => {
+  
+  const handleSearch = (address) => {
 
     const map = createMap();
     const geocoder = new window.kakao.maps.services.Geocoder();
 
-    geocoder.addressSearch(searchAddress, function(result, status) {
+    geocoder.addressSearch(address, function(result, status) {
 
       console.log("result >> ", result);
       console.log("status >> ", status);
@@ -72,20 +69,55 @@ function DeliveryMap() {
     }); 
   }
 
-  return (
-    <div>
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = '';
 
-      <div>
-        <input type="text" placeholder='주소를 입력해주세요' value={searchAddress} onChange={handleSearchAddress} />
-        <button onClick={handleSearch}>검색</button>
+    if (data.addressType === 'R') {
+      if (data.bname !== '') {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== '') {
+        extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+    }
+
+    console.log(fullAddress);
+    setAddress(fullAddress);
+    handleSearch(fullAddress);
+  };
+
+  return (
+    <div className='delivery-map'>
+
+      <div className='delivery-map-top'>
+
+        <div className='delivery-map-search'>
+          <DaumPostcodeEmbed 
+            className='delivery-daum'
+            style={{ height: "100%" }}
+            onComplete={handleComplete} 
+            autoClose={false} 
+            onResize={{height : '100%'}}
+          />
+        </div>
+
+        <div className='delivery-map-image' ref={mapRef}>
+        </div>
+
       </div>
 
-      searchAddress : {searchAddress}<br/>
-      {mapData.La} / {mapData.Ma}
-
-      <div ref={mapRef} style={{ width: "100%", height: "50vh", backgroundColor: "gray", borderRadius: "1rem", border: "1px solid #ebebeb" }}></div>
-
-      <button>배달 점포 등록하기</button>
+      <div className='delivery-map-bottom'>
+        <div>
+          <p className='delivery-map-title'>{address}</p>
+          <p className='delivery-map-data'>위도 {mapData.La} / 경도 {mapData.Ma}</p>
+        </div>
+        
+        <div>
+          <button className='delivery-regi-btn'>배달 점포 등록하기</button>
+        </div>
+      </div>
 
     </div>
   )
