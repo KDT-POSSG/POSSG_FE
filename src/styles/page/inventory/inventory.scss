@@ -42,6 +42,7 @@
       display: flex;
       justify-content: center;
       width: 100%;
+      
 
       table {
         border: 1px #a39485 solid;
@@ -53,6 +54,17 @@
         overflow: hidden;
 
         tbody{
+          .drop-memo-td{
+            height: 2.5rem;
+            padding: 8px;
+            font-size: 1rem;
+            .drop-memo{
+            color: $color-point;
+            }
+          }
+          .inventory-cash{
+            width: 200px;
+          }
           .inventory-empty{
             height: 300px;
             td{
@@ -66,7 +78,7 @@
         text-align: center;
         padding: 1em .5em;
         font-weight: 500;
-        font-size: 16px;
+        font-size: 1.2rem;
         color: #000000;
         text-transform: uppercase;
       }
@@ -82,7 +94,8 @@
         background: #fff;
         cursor: pointer;
         vertical-align: middle;
-        padding: 1em .5em;
+        padding: 1em 1em;
+        height: 3.75rem;
       }
 
       tr:hover td{
@@ -104,22 +117,8 @@
       }
       
       .drop-memo-visible {
-        height: auto;
         padding: 0.5rem;
       }
     }
   
-}
-  
-.drop-memo-container {
-  font-size: 1rem;
-  padding: 10px;
-
-  .drop-memo{
-    display: flex;  
-    margin-left: 60px;
-    cursor: default;
-  }
-
-
 }
