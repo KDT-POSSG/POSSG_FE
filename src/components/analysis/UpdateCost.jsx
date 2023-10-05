@@ -58,10 +58,48 @@ function UpdateCost(){
         }
     };
 
+    const onSearch = async () => {
+        // alert("클릭");
+        try {
+            if(selectedDate){
+                const year = selectedDate.getFullYear();
+                const month = selectedDate.getMonth() + 1;
+                setCostYear(String(year));
+                setCostMonth(String(month).padStart(2, "0"));
+                console.log("year >>> ",year)
+                console.log("month >>> ",month)
+                const res = await axios.post("http://54.180.60.149:3000/callSelectCost", {
+                    costYear: String(year),
+                    costMonth: String(month).padStart(2, "0"),
+                },{
+                    headers: {
+                        accessToken: `Bearer ${accesstoken}`,
+                    },
+                })
+                const resData = res.data;
+                console.log("resData >>> ", resData);
+                setRent(resData.rent);
+                setWaterBill(resData.waterBill);
+                setElectricityBill(resData.electricityBill);
+                setGasBill(resData.gasBill);
+                setTotalLaborCost(resData.totalLaborCost);
+                setSecurityMaintenanceFee(resData.securityMaintenanceFee);
+
+                toast.success("조회 완료");
+            }else{
+                toast.error("날짜를 선택해주세요.");
+            }
+
+        }catch(err){
+            console.error('조회 오류:', err);
+            toast.error("조회 중 오류가 발생했습니다.");
+        }
+    }
+
     const onClick = () => {
         // alert("클릭");
         console.log("a");
-        axios.post("http://54.180.60.149:3000//updateCost", {
+        axios.post("http://54.180.60.149:3000/updateCost", {
             rent: rent,
             waterBill: waterBill,
             electricityBill: electricityBill,
@@ -106,7 +144,7 @@ function UpdateCost(){
                         maxDate={new Date()} 
                     />
                     <div className="material-symbols-rounded">calendar_month</div>
-                    <button className="calendar-button" type="button" onClick={onClick}>조회</button>
+                    <button className="calendar-button" type="button" onClick={onSearch}>조회</button>
                 </div>
             </div>
             <div className="updateCost-content">
