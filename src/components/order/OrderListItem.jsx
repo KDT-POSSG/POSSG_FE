@@ -72,7 +72,10 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx }) {
       <div className='ordercart-product-name'>
         <div className='ordercart-product-title'>
           <div className='top'>{item.productName}</div>
-          <div className='bottom'>개당 가격 : {addComma(item.price / item.amount)} 원</div>
+          <div className='bottom'>
+            원가 : {addComma(item.priceOrigin)} 원 <br/>
+            판매가 : {addComma(item.price)} 원
+          </div>
         </div>
       </div>
 
@@ -95,7 +98,7 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx }) {
         <div>{addComma(item.amount)}</div>
       }
       
-      <div>{addComma((item.price / item.amount) * addStock)} 원</div>
+      <div>{addComma(item.priceOrigin * addStock)} 원</div>
 
     </div>
   )

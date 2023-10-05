@@ -25,7 +25,7 @@ function OrderCart() {
         setOrderCart(response.data.convList);
         setTotalAmount(response.data.amount);
         setTotalProduct(response.data.product);
-        setTotalPrice(response.data.price);
+        setTotalPrice(response.data.priceOrigin);
       })
       .catch((error) => {
         console.error(error);
