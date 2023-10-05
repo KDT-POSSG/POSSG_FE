@@ -66,12 +66,13 @@ function AddCost(){
         console.log(inputFields);
         e.preventDefault();
         axios.post("http://54.180.60.149:3000/addCost", {
-            rent: rent,
-            waterBill: waterBill,
-            electricityBill: electricityBill,
-            gasBill: gasBill,
-            totalLaborCost: totalLaborCost,
-            securityMaintenanceFee: securityMaintenanceFee,
+            // 숫자로 보내고 , 제거 작업필요!
+            rent: parseInt(rent.replace(/,/g, ''), 10),
+            waterBill: parseInt(waterBill.replace(/,/g, ''), 10),
+            electricityBill: parseInt(electricityBill.replace(/,/g, ''), 10),
+            gasBill: parseInt(gasBill.replace(/,/g, ''), 10),
+            totalLaborCost: parseInt(totalLaborCost.replace(/,/g, ''), 10),
+            securityMaintenanceFee: parseInt(securityMaintenanceFee.replace(/,/g, ''), 10),
             costYear: costYear,
             costMonth: costMonth,
         }, 
