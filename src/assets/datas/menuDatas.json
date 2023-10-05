@@ -1,67 +1,62 @@
 [
   {
-    "id": 0,
+    "id": 1,
     "name": "홈",
     "link": "/"
   },
   {
-    "id": 1,
-    "name": "결제 페이지",
+    "id": 2,
+    "name": "결제",
     "link": "/payment"
   },
   {
-    "id": 2,
-    "name": "시재 페이지",
-    "link": "/inventory"
-  },
-  {
     "id": 3,
-    "name": "재고 관리 페이지",
-    "link": "/stock"
+    "name": "결제 내역",
+    "link": "/paymentlist"
   },
   {
     "id": 4,
-    "name": "상품 페이지",
-    "link": "/product"
+    "name": "시재",
+    "link": "/inventory"
   },
   {
     "id": 5,
-    "name": "발주 내역",
-    "link": "/order"
+    "name": "상품",
+    "link": "/product"
   },
   {
-    "id": 11,
+    "id": 6,
+    "name": "재고 관리",
+    "link": "/stock"
+  },
+  {
+    "id": 7,
     "name": "발주 바구니",
     "link": "/ordercart"
   },
   {
-    "id": 6,
-    "name": "회원 페이지",
-    "link": "/myPage"
-  },
-  {
-    "id": 7,
-    "name": "고객 페이지",
-    "link": "#"
-  },
-  {
     "id": 8,
-    "name": "직원 페이지",
-    "link": "/employees"
+    "name": "발주 내역",
+    "link": "/order"
   },
   {
     "id": 9,
-    "name": "분석 페이지",
-    "link": "/analysis"
+    "name": "배달",
+    "link": "/delivery"
   },
   {
     "id": 10,
-    "name": "결제 내역 페이지",
-    "link": "/paymentlist"
+    "name": "분석",
+    "link": "/analysis"
+  },
+  {
+    "id": 11,
+    "name": "직원",
+    "link": "/employees"
   },
   {
     "id": 12,
-    "name": "배달 페이지",
-    "link": "/delivery"
+    "name": "고객",
+    "link": "#"
   }
 ]

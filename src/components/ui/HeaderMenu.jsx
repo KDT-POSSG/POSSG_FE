@@ -5,6 +5,7 @@ import logo from '../../assets/svg/possg_logo.svg';
 import axios from 'axios';
 
 function HeaderMenu() {
+
   const accesstoken = localStorage.getItem("accesstoken");
   const navi = useNavigate();
 
@@ -16,27 +17,24 @@ function HeaderMenu() {
 
   const handleLogout = () => {
 
-    axios.get("http://10.10.10.205:3000/logout",
-        {
-            headers: {
-                accessToken: `Bearer ${accesstoken}`, 
-            }
+    axios.get("http://10.10.10.205:3000/logout", {
+        headers: {
+          accessToken: `Bearer ${accesstoken}`, 
         }
-    )
-    .then((res)=>{
-      if(res.status===200){
+      })
+      .then((res)=>{
+        if(res.status===200){
           localStorage.removeItem("accesstoken");
           localStorage.removeItem("convSeq");
           localStorage.removeItem("branchName");
           navi("/login");
-      }else{
-          console.log("로그아웃 실패")
-      }
-    })
-    .catch((err)=>{
-      console.error("캐치 에러")
-        console.log(err)
-    })
+        }else{
+          console.log("로그아웃 실패");
+        }
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
   }
 
   return (
@@ -67,7 +65,7 @@ function HeaderMenu() {
         <ul>
         {
           menuDatas.map((item) => (
-            item.id === 11 || item.id === 7 ? 
+            item.id === 3 || item.id === 9 ? 
             <React.Fragment key={item.id}>
               <Link to={item.link} onClick={handleMenu}>
                 <li>{item.name}</li>

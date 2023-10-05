@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import HomeItem from 'components/home/HomeItem';
 import HomeItemEdit from 'components/home/HomeItemEdit';
 import axios from 'axios';
-import AttendanceCehck from 'components/employees/AttendanceCheck';
 
 function Home() {
 

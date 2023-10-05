@@ -35,4 +35,12 @@ option {
   color: $color-gray;
   font-family: 'Noto Sans KR', sans-serif;
   letter-spacing: -0.025rem;
+  font-size: 1rem;
+}
+
+body {
+  background-color: $color-back;
+  min-width: 1200px;
+  min-height: 100vh;
+  height: 100vh;
 }
