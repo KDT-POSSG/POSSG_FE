@@ -31,7 +31,6 @@ function Payment() {
             toast.error("바코드 인식 에러");
             return;
         }
-    
         axios.get('http://54.180.60.149:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}})
         .then((res) => {
             const productData = res.data;
@@ -50,7 +49,6 @@ function Payment() {
                 productData.amount = 1;
                 setProducts(prevProducts => [...prevProducts, productData]); //그렇지 않으면 상품 1개로 
             }
-    
         })
         .catch((err) => {
             console.log(err);
@@ -60,11 +58,7 @@ function Payment() {
     }
 
     //결제 완료 후, 결제 상품 목록 초기화
-    const handlePaymentSuccess = () => {
-        setProducts([]);
-    };
-
-
+    
     // 총 결제 금액 계산
     const getTotalAmount = () => {
         return products.reduce((total, product) => {
@@ -77,15 +71,17 @@ function Payment() {
      const startPayment = async () => {
         try {
             const totalAmount = getTotalAmount();
-            await handlePayment(totalAmount, products, setPaymentResponse, handlePaymentSuccess, openModal);
-            
-            
+            await handlePayment(totalAmount, products, setPaymentResponse, openModal);
         } catch (error) {
             console.error("Payment failed:", error);
         }
     };
     
-    
+    const handlePaymentSuccess = () => {
+        setProducts([]);
+        setInputValue("");
+        setChangeAmount(0);
+    };
     
 
     //모달창 열고 닫기
@@ -172,13 +168,13 @@ function Payment() {
                         </div>
                         <div className='payment-method-container2'>
                             <div className='payment-method-top'>
-                                <button className='payment-method-discount' onClick={() => openModal('discount')}>테스트</button>
-                                <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
+                                <button className='payment-method-discount' onClick={() => openModal('discount')}>X</button>
+                                <button className='payment-method-point' onClick={() => openModal('point')}>X</button>
                             </div>
                             <div className='payment-method-bottom'>
                                 <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
-                                <button className='payment-method-cashpay' onClick={() => openModal('tosspayreceipt')}>테스트</button>
-                                <button className='payment-method-etcpay'>테스트</button>
+                                <button className='payment-method-cashpay' onClick={() => openModal('tosspayreceipt')}>X</button>
+                                <button className='payment-method-etcpay'>X</button>
                             </div>
                         </div>
                     </div>
@@ -197,7 +193,6 @@ function Payment() {
                     setInputValue={setInputValue}
                     changeAmount={changeAmount}
                     setChangeAmount={setChangeAmount}
-                    PaymentSuccess={handlePaymentSuccess}
                 />}
             {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
@@ -205,13 +200,15 @@ function Payment() {
                     totalAmount={getTotalAmount()} 
                     inputValue={inputValue}
                     changeAmount={changeAmount}
+                    handlePaymentSuccess={handlePaymentSuccess}
                 />} 
             {paymentType === 'tosspayreceipt' && 
                     <TosspayReceipt
                     openModal={openModal}
                     closeModal={closeModal}
                     totalAmount={getTotalAmount()}
-                    receiptURL={paymentResponse}
+                    handlePaymentSuccess={handlePaymentSuccess}
+                    paymentResponse={paymentResponse}
                 />}
             {paymentType === 'etc' && <Etcpay />}
             {paymentType === 'discount' && <Discount />}

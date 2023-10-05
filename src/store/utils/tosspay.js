@@ -3,7 +3,7 @@ import { Bootpay } from '@bootpay/client-js';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-  export const handlePayment = async (totalAmount, products, setPaymentResponse, handlePaymentSuccess, openModal) => {
+  export const handlePayment = async (totalAmount, products, setPaymentResponse, openModal) => {
     try {
 
       const items = products.map(product => ({
@@ -79,7 +79,6 @@ import toast from 'react-hot-toast';
               axios.post('http://54.180.60.149:3000/addItems', items)
                 .then((response) => {
                   console.log("결제 상품 목록 전송 완료", response.data);
-                  handlePaymentSuccess();
                   openModal('tosspayreceipt');
                 })
                 .catch((error) => {

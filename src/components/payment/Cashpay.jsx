@@ -7,8 +7,8 @@ import { toast } from "react-hot-toast";
 
 
 
-function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalAmount, products, PaymentSuccess }) {
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalAmount, products }) {
+ 
   
   //넘버패드로 받은 금액 입력
   const handleInputValueChange = (value) => {
@@ -71,21 +71,18 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
       if(paymentData.price === "0") {
         toast.error("결제할 상품이 없습니다.");
         return;
-      }
-      
+      }    
         const response = await axios.post("http://54.180.60.149:3000/addpayment", paymentData);
         console.log("결제 정보 전송 완료", response.data);
         
         if(response.data === "YES") {
-            setPaymentSuccess(true);
             const itemResponse = await axios.post('http://54.180.60.149:3000/addItems', items);
             console.log("결제 상품 목록 전송 완료", itemResponse.data);
-
             setInputValue(inputValue);
             setChangeAmount(changeAmount);
-            PaymentSuccess(); //결제 상품 목록 초기화 (추가)
             closeModal();
             openModal('cashpayreceipt');
+            
         }
     } catch (error) {
         console.error('결제 정보 에러', error);
