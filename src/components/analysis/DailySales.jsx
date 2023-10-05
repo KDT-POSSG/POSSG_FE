@@ -15,24 +15,33 @@ function DailySales(){
         setSelectedDate(date);
     };
 
-    const onClick = async () => {   
+    const fetchData = async (selectedDate) => {   
         try {
-            const res = await axios.get("http://54.180.60.149:3000//selectSales", {
-                params: {
-                    date: "2023년07월20일", // 임시로 받는 데이터
-                    choice: 0 // 일별 매출 0번
-                }
-            } ,{
+
+            const year = selectedDate.getFullYear();
+            const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+            const day = String(selectedDate.getDate()).padStart(2, '0');
+            const dailySalesdDate = `${year}년${month}월${day}일`;
+            console.log("dailySalesdDate >>> ", dailySalesdDate)
+            const res = await axios.get(`http://54.180.60.149:3000/selectSales?date=${dailySalesdDate}&choice=0`,
+            {
                 headers: {
                     accessToken: `Bearer ${accesstoken}`,
                 },
             })
+            console.log("DailySales res >>> ", res);
             const resData = res.data;
             setSalesData(resData.sales);
             setExpenseData(resData.expenses);
             setProfitData(resData.profit);
         } catch (error) {
             console.error('try-catch 데이터 가져오기 오류:', error);
+        }
+    }
+    const onClick = () => {
+        if (selectedDate) {
+            // API 호출
+            fetchData(selectedDate);
         }
     }
 
