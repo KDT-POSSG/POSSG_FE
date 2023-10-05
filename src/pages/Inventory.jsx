@@ -15,7 +15,7 @@ function Inventory() {
     const [selectedRow, setSelectedRow] = useState(null);  // 선택된 행의 인덱스를 저장
     const [totalCnt, setTotalCnt] = useState(0);
     const [page, setPage] = useState(1);  // 현재 페이지
-    const [itemsPerPage, setItemsPerPage] = useState(5);  // 한 페이지에 5개 아이템
+    const [itemsPerPage, setItemsPerPage] = useState(7);  // 한 페이지에 5개 아이템
     const [currentPageData, setCurrentPageData] = useState([]);
     
 
@@ -50,18 +50,22 @@ function Inventory() {
     };
 
     //시재 리스트 불러오기
-    useEffect(() => {
-        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page}}) //convSeq는 나중에 로그인한 지점의 seq로 변경
+    const loadInventoryData = () => {
+        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page}})
         .then((res) => {
             setInventoryList(res.data.settlement);
             setTotalCnt(res.data.cnt);
-            
         })
         .catch((err) => {
             console.log(err);
             console.log('시재 리스트 불러오기 실패');
         });
+    };
+
+    useEffect(() => {
+        loadInventoryData();
     }, [page]);
+    
 
    //시재 리스트 메모 드롭다운
     const handleRowClick = (index) => {
@@ -101,15 +105,15 @@ function Inventory() {
                                 currentPageData.map((item, index) => (
                                     <>
                                     <tr key={index} onClick={() => handleRowClick(index)}>
-                                        <td>{item.seq}</td>
+                                        <td>{(page - 1) * itemsPerPage + index + 1}</td>
                                         <td>{item.convName}</td>
                                         <td>{item.rdate}</td>
-                                        <td>{addComma(item.cash)}</td>
+                                        <td className='inventory-cash'>{addComma(item.cash)}</td>
                                     </tr>
                                     {selectedRow === index && (
                                             <tr className='drop-memo-container'>
-                                                <td colSpan="4">
-                                                    <div className='drop-memo'>┗  {item.memo}</div>
+                                                <td className="drop-memo-td" colSpan="4">
+                                                    <div className='drop-memo'>{item.memo ? item.memo : '특이사항이 없습니다'}</div>
                                                 </td>
                                             </tr>
                                         )}
@@ -122,11 +126,10 @@ function Inventory() {
                 </div>
             </div>
 
-            <Pagination
+            <Pagination className="pagination"
                 activePage={page}
                 itemsCountPerPage={itemsPerPage}
                 totalItemsCount={totalCnt}
-                pageRangeDisplayed={5}
                 onChange={(pageNumber) => setPage(pageNumber)}
                 firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
                 prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
@@ -135,7 +138,7 @@ function Inventory() {
             />
 
             <Modal isOpen={modalIsOpen} onClose={ closeModal } >
-                <InvenModal updateLastTime={ updateLastTime }/>
+                <InvenModal updateLastTime={ updateLastTime } closeModal={closeModal} reloadInventoryData={loadInventoryData}/>
             </Modal>
         </div>
     )

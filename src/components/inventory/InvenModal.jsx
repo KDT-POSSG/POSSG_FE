@@ -42,17 +42,18 @@ function InvenModal (props) {
         "memo": memo
       };
     
-    axios.post('http://54.180.60.149:3000/addsettlement', data)
-    .then((res) => {
-      console.log(res.data);
-      console.log('보내기 성공');
-      props.updateLastTime(new Date(currentDateTime));
-      props.closeModal(); 
-      toast.success("시재 추가 완료");
-    }).catch((err) => {
-      console.log(err);
-      console.log('보내기 실패');
-    });
+      axios.post('http://54.180.60.149:3000/addsettlement', data)
+      .then((res) => {
+        console.log(res.data);
+        console.log('보내기 성공');
+        props.updateLastTime(new Date(currentDateTime));
+        props.closeModal(); 
+        props.reloadInventoryData();
+        toast.success("시재 입력 완료");
+      }).catch((err) => {
+        console.log(err);
+        console.log('보내기 실패');
+      });
   };
 
     return(
