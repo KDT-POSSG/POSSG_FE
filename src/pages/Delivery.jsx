@@ -81,7 +81,7 @@ function Delivery() {
             </div>
 
             <Modal isOpen={isModalOpen} onClose={modalClose}
-                  style={{ content: { width: '40vw', height: '80vh' } }}>
+                  style={{ content: { width: '80vw', height: '80vh', backgroundColor: '#fff' } }}>
               <DeliveryMap />
             </Modal>
           </>
