@@ -1,7 +1,5 @@
 
 function TosspayReceiptInfoModal({ receiptURL }) {
-
-      console.log("영수증",receiptURL);
       
       return (
         <div className="cashpayreceipt">

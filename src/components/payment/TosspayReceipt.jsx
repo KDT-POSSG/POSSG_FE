@@ -5,13 +5,18 @@ import Modal from "../Modal";
 import TosspayReceiptInfoModal from "./TosspayReceiptInfoModal"
 
 
-function TosspayReceipt({  closeModal, totalAmount, receiptURL }){
+function TosspayReceipt({  closeModal, totalAmount, paymentResponse, handlePaymentSuccess }){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const openModal = () => {
         setModalIsOpen(true);
        };
+
+    const handlePaymentComplete = () => {
+        handlePaymentSuccess();
+        closeModal();
+    }
     
    
 
@@ -45,11 +50,11 @@ function TosspayReceipt({  closeModal, totalAmount, receiptURL }){
 
             <div className="cashpayreceipt-buttons">
                 <button className="cashpayreceipt-btn" onClick={openModal}>영수증 보기</button>
-                <button className="cashpayreceipt-complete-btn" onClick={closeModal}>확인</button>
+                <button className="cashpayreceipt-complete-btn" onClick={handlePaymentComplete}>확인</button>
             </div>
 
             <Modal isOpen={modalIsOpen} onClose={ closeModal }>
-                <TosspayReceiptInfoModal receiptURL={receiptURL}/>
+                <TosspayReceiptInfoModal receiptURL={paymentResponse}/>
             </Modal>
         </div>
     );
