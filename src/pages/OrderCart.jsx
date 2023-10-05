@@ -6,6 +6,11 @@ import React, { useEffect, useState } from 'react';
 function OrderCart() {
 
   const [orderCart, setOrderCart] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalProduct, setTotalProduct] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [isDone, setIsDone] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   useEffect(() => {
     
@@ -15,14 +20,18 @@ function OrderCart() {
         }
       })
       .then((response) => {
+        console.log(response.data);
         console.log(response.data.convList);
         setOrderCart(response.data.convList);
+        setTotalAmount(response.data.amount);
+        setTotalProduct(response.data.product);
+        setTotalPrice(response.data.price);
       })
       .catch((error) => {
         console.error(error);
       })
 
-  }, []);
+  }, [isDone]);
 
   return (
     <div className='order-cart-page'>
@@ -30,8 +39,16 @@ function OrderCart() {
       <div className='page-title ordercart-title'>발주 바구니</div>
 
       <div>
-        <OrderCartNav />
-        <OrderList type={"before"} orderList={orderCart} />
+        <OrderCartNav isDone={isDone} setIsDone={setIsDone} selectedItems={selectedItems} />
+        <OrderList 
+          type={"before"} 
+          orderList={orderCart} 
+          selectedItems={selectedItems} 
+          setSelectedItems={setSelectedItems} 
+          totalAmount={totalAmount}
+          totalProduct={totalProduct}
+          totalPrice={totalPrice}
+        />
       </div>
 
     </div>

@@ -1,11 +1,10 @@
 import axios from "axios";
 import NumberPad from "components/NumberPad";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
-import DatePicker from 'react-datepicker';
 
-function AddCost(){
+function UpdateCost(){
     const accesstoken = localStorage.getItem("accesstoken");
 
     const [rent, setRent] = useState("");
@@ -14,8 +13,8 @@ function AddCost(){
     const [gasBill, setGasBill] = useState("");
     const [totalLaborCost, setTotalLaborCost] = useState("");
     const [securityMaintenanceFee, setSecurityMaintenanceFee] = useState("");
-    const [costYear, setCostYear] = useState("");
-    const [costMonth, setCostMonth] = useState("");
+    const [costYear, setCostYear] = useState("2023"); // 임시로 입력
+    const [costMonth, setCostMonth] = useState("09");
 
     const inputFields = [
         { state: rent, setState: setRent, name:"월세" },
@@ -40,27 +39,10 @@ function AddCost(){
         }
     };
 
-    const [selectedDate, setSelectedDate] = useState(null);
-
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-        if(date){
-            const year = date.getFullYear();
-            const month = date.getMonth() + 1;
-            setCostYear(String(year));
-            setCostMonth(String(month).padStart(2, "0"));
-        }else {
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth() + 1;
-            setCostYear(String(currentYear));
-            setCostMonth(String(currentMonth).padStart(2, "0"));
-        }
-    };
-
-    const onClick = (e) => {
-        e.preventDefault();
-        axios.post("http://54.180.60.149:3000/addCost", {
+    const onClick = () => {
+        // alert("클릭");
+        console.log("a");
+        axios.post("http://54.180.60.149:3000//updateCost", {
             rent: rent,
             waterBill: waterBill,
             electricityBill: electricityBill,
@@ -72,16 +54,17 @@ function AddCost(){
         }, {
             headers: {
             accessToken: `Bearer ${accesstoken}`,
+            Authorization: `Bearer ${accesstoken}`,
             },
         })
         .then((res)=>{
-            // console.log("b");
+            console.log("b");
             console.log("res >>> ", res);
             if(res.data==="YES"){
-                toast.success("입력이 완료되었습니다");
+                toast.success("수정 완료");
             }else{
-                // console.log("c");
-                toast.error("입력에 실패되었습니다");
+                console.log("c");
+                toast.error("수정 실패");
             }
         })
         .catch((err) => {
@@ -90,26 +73,9 @@ function AddCost(){
         })
     }
 
-    useEffect(() => {
-        handleDateChange(null);
-    }, []);
-
     return(
         <div className="addCost-content-wrap">
-            <div className="addCost-nav">
-                <div className="addCost-title">비용 입력</div>
-                <div className="addCost-calendar-container">
-                    <DatePicker
-                            selected={selectedDate}
-                            onChange={handleDateChange}
-                            showMonthYearPicker
-                            dateFormat="yyyy년 MM월"
-                            minDate={new Date(2000, 0)} 
-                            maxDate={new Date()} 
-                        />
-                    <div className="material-symbols-rounded">calendar_month</div>
-                </div>
-            </div>
+            <div className="addCost-title">비용 수정</div>
             <div className="addCost-content">
                 <div className="addCost-info">
                 {inputFields.map((inputField, index) => (
@@ -146,4 +112,4 @@ function AddCost(){
         </div>
     )
 }
-export default AddCost;
+export default UpdateCost;

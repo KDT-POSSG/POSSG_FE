@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from '../components/Modal';
 import AddEmployeeModal from '../components/employees/AddEmployeeModal'
 import ModifyEmployeeModal from '../components/employees/ModifyEmployeeModal'
+import Pagination from "react-js-pagination";
 
 function Employees() {
     const navigate = useNavigate();
@@ -13,6 +14,7 @@ function Employees() {
     const [employeeList, setEmployeeList] = useState([]);
     const [totalCnt, setTotalCnt] = useState(0);
     const accesstoken = localStorage.getItem("accesstoken");
+
 
     //모달
     const openModal = (type) => {
@@ -24,7 +26,7 @@ function Employees() {
      };
  
      const fetchEmployees = () => {
-      axios.get('http://10.10.10.148:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
+      axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setEmployeeList(res.data);
             setTotalCnt(res.data.cnt);
@@ -49,12 +51,12 @@ function Employees() {
 
     return(
         <div className="employee">
-          <div className="employee-header">
-            <div className='page-title'>직원 관리</div>
-            <button className='employee-btn' onClick={() => openModal('add')} >직원 추가</button>
-          </div>
+          
           <div className="employee-content">
-            
+            <div className="employee-header">
+              <div className='page-title'>직원 관리</div>
+              <button className='employee-btn' onClick={() => openModal('add')} >직원 추가</button>
+            </div>
 
                   <div className="employee-table">
                     
@@ -72,17 +74,24 @@ function Employees() {
                       </thead>
                       
                       <tbody className="employee-list">
-                        
-                        {employeeList.map((employee, index) => ( // employeeList를 이용하여 테이블에 행을 추가
-                        <tr key={index}>
-                          <td>{employee.employeeSeq}</td>
-                          <td>{employee.empName}</td>
-                          
-                          <td>{employee.phoneNumber}</td>
-                          <td>{employee.hireDate}</td>
-                          <td>{employee.terminationDate}</td>
-                          <td><button className='employee-info-btn' onClick={() => navigate(`/employeeInfo/${employee.employeeSeq}`)}>정보 보기</button></td>
-                        </tr>))}
+                        {employeeList.length === 0 ? (
+                          <tr>
+                            <td className="tossface employee-empty" colSpan="6">🪪</td>
+                          </tr>
+                          ) : (
+                          employeeList.map((employee, index) => ( // employeeList를 이용하여 테이블에 행을 추가
+                          <tr key={index}>
+                            <td>{employee.employeeSeq}</td>
+                            <td>{employee.empName}</td>
+                            
+                            <td>{employee.phoneNumber}</td>
+                            <td>{employee.hireDate}</td>
+                            <td>{employee.terminationDate ? employee.terminationDate : "-"}</td>
+                            <td><button className='employee-info-btn' onClick={() => navigate(`/employeeInfo/${employee.employeeSeq}`)}>정보 보기</button></td>
+                          </tr>
+                          ))
+                        )
+                      }
                       </tbody>
                       
                     </table>

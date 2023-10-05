@@ -22,7 +22,7 @@ function Paymentlist()  {
 
 
   useEffect(() => {
-    axios.get('http://10.10.10.36:3000/paymentlist', { params: { convSeq: 1 } })
+    axios.get('http://54.180.60.149:3000/paymentlist', { params: { convSeq: 1 } })
         .then((response) => {
             setPaymentlist(response.data);
             console.log('결제내역 불러오기 성공');

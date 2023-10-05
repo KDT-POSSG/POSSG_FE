@@ -14,9 +14,10 @@ input,
 textarea,
 select,
 option {
+  font-size: 1rem;
   color: $color-gray;
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 1rem;
+  letter-spacing: -0.025rem;
 }
 
 .page-title {
@@ -30,6 +31,7 @@ option {
 }
 
 .common-toast {
+  font-size: 1rem;
   color: $color-gray;
   font-family: 'Noto Sans KR', sans-serif;
   letter-spacing: -0.025rem;

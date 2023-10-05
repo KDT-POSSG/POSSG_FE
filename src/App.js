@@ -40,6 +40,8 @@ import YearSales from 'components/analysis/YearSales';
 import DeliveryDetail from 'components/delivery/DeliveryDetail';
 import DeliveryList from 'components/delivery/DeliveryList';
 import PrivateRoutes from 'components/PrivateRoutes';
+import UpdateCost from 'components/analysis/UpdateCost';
+import ImcomeReport from 'components/analysis/ImcomeReport';
 
 function App() {
   return (
@@ -84,8 +86,10 @@ function App() {
             <Route index element={<DeliveryList />} />
             <Route path=':seq' element={<DeliveryDetail />} />
           </Route>
+          <Route path='/updateCost' element={<UpdateCost />} />
+          <Route path='/imcomeReport' element={<ImcomeReport />} />
         {/* </Route> */}
-
+        
       </Routes>
     </BrowserRouter>
   );

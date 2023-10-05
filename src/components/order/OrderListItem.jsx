@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { addComma } from 'store/utils/function';
 
-function OrderListItem({ type, item }) {
+function OrderListItem({ type, item, handleCheck, selectedItems, idx }) {
 
   const [addStock, setAddStock] = useState(item.amount);
 
@@ -12,7 +12,7 @@ function OrderListItem({ type, item }) {
     console.log("addStock >> ", addStock);
     console.log("amountTemp >> ", amountTemp);
 
-    axios.post("http://10.10.10.140:3000/updateCallProductConv", {
+    axios.post("http://54.180.60.149:3000/updateCallProductConv", {
         convSeq: 1,
         productName: item.productName,
         amount: amountTemp,
@@ -59,9 +59,9 @@ function OrderListItem({ type, item }) {
       <div>
         {
           type === "before" ?
-          <input type="checkbox" className='ordercart-check' value={1} />
+          <input type="checkbox" className='ordercart-check' value={item.productName} onChange={handleCheck} checked={selectedItems.includes(item.productName)} />
           :
-          <div>1</div>
+          <div>{addComma(idx + 1)}</div>
         }
       </div>
 
@@ -92,7 +92,7 @@ function OrderListItem({ type, item }) {
           </div>
         </div>
         :
-        <div>1</div>
+        <div>{addComma(item.amount)}</div>
       }
       
       <div>{addComma((item.price / item.amount) * addStock)} 원</div>

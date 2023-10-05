@@ -1,8 +1,9 @@
 
 import { Bootpay } from '@bootpay/client-js';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
-  export const handlePayment = async (totalAmount, products, setPaymentResponse) => {
+  export const handlePayment = async (totalAmount, products, setPaymentResponse, handlePaymentSuccess, openModal) => {
     try {
 
       const items = products.map(product => ({
@@ -60,7 +61,7 @@ import axios from 'axios';
         };
 
         // 결제 폼 전송
-        await axios.post('http://10.10.10.148:3000/addpayment', paymentData)
+        await axios.post('http://54.180.60.149:3000/addpayment', paymentData)
           .then((response) => {
             console.log("결제 정보 전송 완료", response.data);
             
@@ -75,10 +76,11 @@ import axios from 'axios';
               }));
       
               // 결제 된 상품 목록 전송
-              axios.post('http://10.10.10.148:3000/addItems', items)
+              axios.post('http://54.180.60.149:3000/addItems', items)
                 .then((response) => {
                   console.log("결제 상품 목록 전송 완료", response.data);
-                  return "SUCCESS";
+                  handlePaymentSuccess();
+                  openModal('tosspayreceipt');
                 })
                 .catch((error) => {
                   console.error('결제 상품 목록 에러', error);
@@ -87,6 +89,7 @@ import axios from 'axios';
           })
           .catch((error) => {
             console.error('결제 정보 에러', error);
+            toast.error('결제에 실패했습니다. 다시 시도해주세요.');
           });
 
       }

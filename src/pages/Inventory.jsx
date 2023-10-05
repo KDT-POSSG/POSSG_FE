@@ -51,7 +51,7 @@ function Inventory() {
 
     //시재 리스트 불러오기
     useEffect(() => {
-        axios.get('http://10.10.10.152:3000/settlementlist', {params: {convSeq :1, page : page}}) //convSeq는 나중에 로그인한 지점의 seq로 변경
+        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page}}) //convSeq는 나중에 로그인한 지점의 seq로 변경
         .then((res) => {
             setInventoryList(res.data.settlement);
             setTotalCnt(res.data.cnt);
@@ -74,9 +74,10 @@ function Inventory() {
 
     return (
         <div className='inventory'>
-            <h1 className='page-title'>시재 관리</h1>
+            
             <div className='inven-content'>
-                <h2 className='present-time'>현재 시간 : { formattedTime }</h2>
+                <div className='page-title'>시재 관리</div>
+                <div className='present-time'>현재 시간 : { formattedTime }</div>
             <div className='btn-container'>
                 <button className='inven-btn' onClick={ openModal }>시재 입력</button>
             </div>
@@ -92,23 +93,29 @@ function Inventory() {
                     </thead>
                     <tbody>
                         {
-                            currentPageData.map((item, index) => (
-                                <>
-                                <tr key={index} onClick={() => handleRowClick(index)}>
-                                    <td>{item.seq}</td>
-                                    <td>{item.convName}</td>
-                                    <td>{item.rdate}</td>
-                                    <td>{addComma(item.cash)}</td>
+                            currentPageData.length === 0 ? (
+                                <tr className='inventory-empty'>
+                                    <td colSpan="4">📝</td>
                                 </tr>
-                                {selectedRow === index && (
-                                        <tr className='drop-memo-container'>
-                                            <td colSpan="4">
-                                                <div className='drop-memo'>┗  {item.memo}</div>
-                                            </td>
-                                        </tr>
-                                    )}
-                                </>
-                            ))
+                            ) : (
+                                currentPageData.map((item, index) => (
+                                    <>
+                                    <tr key={index} onClick={() => handleRowClick(index)}>
+                                        <td>{item.seq}</td>
+                                        <td>{item.convName}</td>
+                                        <td>{item.rdate}</td>
+                                        <td>{addComma(item.cash)}</td>
+                                    </tr>
+                                    {selectedRow === index && (
+                                            <tr className='drop-memo-container'>
+                                                <td colSpan="4">
+                                                    <div className='drop-memo'>┗  {item.memo}</div>
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </>
+                                ))
+                            )
                         }
                     </tbody>
                 </table>
@@ -128,7 +135,7 @@ function Inventory() {
             />
 
             <Modal isOpen={modalIsOpen} onClose={ closeModal } >
-                <InvenModal updateLastTime={ updateLastTime } closeModal={ closeModal }/>
+                <InvenModal updateLastTime={ updateLastTime }/>
             </Modal>
         </div>
     )

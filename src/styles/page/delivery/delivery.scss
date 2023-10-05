@@ -8,8 +8,48 @@
     margin: 0 auto;
   }
 
-  .delivery-title {
+  .delivery-top {
     margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    .delivery-top-address {
+      font-size: .875rem;
+      padding-right: 0.5rem;
+    }
+  }
+
+  .delivery-none {
+    text-align: center;
+    background-color: $color-white;
+    border-radius: 1rem;
+    padding: 10vw 2vw;
+    filter: drop-shadow(2px 2px 4px rgba(235, 235, 235, 0.8));
+
+    .delivery-icon {
+      font-size: 5rem;
+    }
+
+    .delivery-regi-text {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .delivery-regi-btn {
+      background-color: $color-main;
+      color: $color-white;
+      border: 1px solid $color-main;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      transition: $transition-cb2;
+
+      &:hover {
+        background-color: #F0A20A;
+        border-color: #F0A20A;
+      }
+    }
   }
 
   .delivery-sort {
