@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import DaumPostcodeEmbed from 'react-daum-postcode';
+import axios from 'axios';
+import { ACCESS_TOKEN } from 'store/apis/base';
 
-function DeliveryMap() {
+function DeliveryMap({ setIsRegi }) {
+
+  const mapRef = useRef(null);
 
   const [address, setAddress] = useState("");
   const [mapData, setMapData] = useState({
@@ -10,13 +14,43 @@ function DeliveryMap() {
     Ma: 126.570667
   });
 
-  const mapRef = useRef(null);
-
   useEffect(() => {
 
     createMap();
 
   }, []);
+
+  const handleDeliveryRegiConfirm = () => {
+    console.log("handleDeliveryRegiConfirm");
+    console.log(address, mapData.La, mapData.Ma);
+
+    axios
+      .post("http://54.180.60.149:3000/convAddDelivery", {
+        convLocation: address,
+        latitude: mapData.La,
+        longtitude: mapData.Ma
+      }, 
+      {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`,
+        },
+      })
+      .then((response)=>{
+        console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("배달 점포로 등록되었습니다");
+          setIsRegi(true);
+        }
+        else {
+          toast.error("배달 점포 등록에 실패했습니다");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("배달 점포 등록에 실패했습니다");
+      })
+  }
 
   const createMap = () => {
 
@@ -93,29 +127,34 @@ function DeliveryMap() {
 
       <div className='delivery-map-top'>
 
+        <div className='delivery-map-image' ref={mapRef}>
+        </div>
+
         <div className='delivery-map-search'>
           <DaumPostcodeEmbed 
-            className='delivery-daum'
-            style={{ height: "100%" }}
+            style={{ height: "100%", border: "1px solid #ebebeb", borderRadius: "1rem" }}
             onComplete={handleComplete} 
             autoClose={false} 
             onResize={{height : '100%'}}
           />
         </div>
 
-        <div className='delivery-map-image' ref={mapRef}>
-        </div>
-
       </div>
 
       <div className='delivery-map-bottom'>
+        {
+          address === "" ?
+          <></>
+          :
+          <>
+            <div>
+              <p className='delivery-map-title'>{address}</p>
+              <p className='delivery-map-data'>위도 {mapData.La} / 경도 {mapData.Ma}</p>
+            </div>
+          </>
+        }
         <div>
-          <p className='delivery-map-title'>{address}</p>
-          <p className='delivery-map-data'>위도 {mapData.La} / 경도 {mapData.Ma}</p>
-        </div>
-        
-        <div>
-          <button className='delivery-regi-btn'>배달 점포 등록하기</button>
+          <button className='delivery-regi-btn' disabled={address === ""} onClick={handleDeliveryRegiConfirm}>배달 점포 등록하기</button>
         </div>
       </div>
 
