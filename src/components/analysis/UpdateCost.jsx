@@ -1,11 +1,14 @@
 import axios from "axios";
 import NumberPad from "components/NumberPad";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
 import DatePicker from 'react-datepicker';
+import { useNavigate } from "react-router-dom";
 
 function UpdateCost(){
+    const navi = useNavigate();
+
     const accesstoken = localStorage.getItem("accesstoken");
 
     const [rent, setRent] = useState("");
@@ -37,7 +40,7 @@ function UpdateCost(){
             const currentInputField = inputFields[selectedInputIndex];
             const addCommaValue = addComma(value); 
             currentInputField.setState(addCommaValue);
-        }
+        }   
     };
 
     const [selectedDate, setSelectedDate] = useState(null);
@@ -66,8 +69,8 @@ function UpdateCost(){
                 const month = selectedDate.getMonth() + 1;
                 setCostYear(String(year));
                 setCostMonth(String(month).padStart(2, "0"));
-                console.log("year >>> ",year)
-                console.log("month >>> ",month)
+                // console.log("year >>> ",year)
+                // console.log("month >>> ",month)
                 const res = await axios.post("http://54.180.60.149:3000/callSelectCost", {
                     costYear: String(year),
                     costMonth: String(month).padStart(2, "0"),
@@ -77,13 +80,13 @@ function UpdateCost(){
                     },
                 })
                 const resData = res.data;
-                console.log("resData >>> ", resData);
-                setRent(resData.rent);
-                setWaterBill(resData.waterBill);
-                setElectricityBill(resData.electricityBill);
-                setGasBill(resData.gasBill);
-                setTotalLaborCost(resData.totalLaborCost);
-                setSecurityMaintenanceFee(resData.securityMaintenanceFee);
+                // console.log("resData >>> ", resData);
+                setRent(addComma(resData.rent));
+                setWaterBill(addComma(resData.waterBill));
+                setElectricityBill(addComma(resData.electricityBill));
+                setGasBill(addComma(resData.gasBill));
+                setTotalLaborCost(addComma(resData.totalLaborCost));
+                setSecurityMaintenanceFee(addComma(resData.securityMaintenanceFee));
 
                 toast.success("조회 완료");
             }else{
@@ -98,6 +101,7 @@ function UpdateCost(){
 
     const onClick = () => {
         // alert("클릭");
+        console.log(inputFields);
         console.log("a");
         axios.post("http://54.180.60.149:3000/updateCost", {
             rent: rent,
@@ -111,17 +115,17 @@ function UpdateCost(){
         }, {
             headers: {
             accessToken: `Bearer ${accesstoken}`,
-            Authorization: `Bearer ${accesstoken}`,
             },
         })
         .then((res)=>{
-            console.log("b");
+            // console.log("b");
             console.log("res >>> ", res);
             if(res.data==="YES"){
-                toast.success("수정 완료");
+                toast.success("수정이 완료되었습니다");
+                navi("/cost");
             }else{
                 console.log("c");
-                toast.error("수정 실패");
+                toast.error("수정에 실패되었습니다");
             }
         })
         .catch((err) => {
@@ -129,6 +133,10 @@ function UpdateCost(){
             console.log("catch 에러");
         })
     }
+
+    useEffect(() => {
+        handleDateChange(null);
+    }, []);
 
     return(
         <div className="updateCost-content-wrap">
@@ -176,7 +184,7 @@ function UpdateCost(){
                                 : ""
                             }/>
                     <div className="keypad-container">
-                        <button className="save-btn" type="button" onClick={onClick}>저장하기</button>
+                        <button className="save-btn" type="button" onClick={onClick}>수정하기</button>
                     </div>
                 </div>
             </div>
