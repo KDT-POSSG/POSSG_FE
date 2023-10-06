@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { addComma } from 'store/utils/function';
 import OrderListItem from './OrderListItem';
 
-function OrderList({ type, orderList, selectedItems, setSelectedItems, totalAmount, totalProduct, totalPrice }) {
+function OrderList({ type, orderList, selectedItems, setSelectedItems, totalAmount, totalProduct, totalPrice, isDone, setIsDone }) {
 
   const handleAllCheck = (e) => {
     console.log("handleAllCheck >> ", e.target.checked);
@@ -56,7 +56,16 @@ function OrderList({ type, orderList, selectedItems, setSelectedItems, totalAmou
 
         {
           orderList && orderList.map((item, idx) => (
-            <OrderListItem key={item.productSeq} type={type} item={item} handleCheck={handleCheck} selectedItems={selectedItems} idx={idx} />
+            <OrderListItem 
+              key={item.productSeq} 
+              type={type} 
+              item={item} 
+              handleCheck={handleCheck} 
+              selectedItems={selectedItems} 
+              idx={idx} 
+              isDone={isDone} 
+              setIsDone={setIsDone}
+            />
           ))
         }
 

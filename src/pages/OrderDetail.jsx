@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import OrderDetailNav from 'components/order/OrderDetailNav';
 import OrderList from 'components/order/OrderList';
+import { ACCESS_TOKEN } from 'store/apis/base';
 
 function OrderDetail() {
 
@@ -19,6 +20,9 @@ function OrderDetail() {
         params: {
           convSeq: 1,
           callRef: callRef
+        }, 
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
         }
       })
       .then((response) => {

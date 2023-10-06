@@ -2,6 +2,7 @@ import axios from 'axios';
 import OrderList from 'components/order/OrderList';
 import OrderCartNav from 'components/order/OrderCartNav';
 import React, { useEffect, useState } from 'react';
+import { ACCESS_TOKEN } from 'store/apis/base';
 
 function OrderCart() {
 
@@ -17,6 +18,9 @@ function OrderCart() {
     axios.get("http://54.180.60.149:3000/getAllCallProductConvList", {
         params: {
           convSeq: 1
+        },
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
         }
       })
       .then((response) => {
@@ -25,7 +29,7 @@ function OrderCart() {
         setOrderCart(response.data.convList);
         setTotalAmount(response.data.amount);
         setTotalProduct(response.data.product);
-        setTotalPrice(response.data.price);
+        setTotalPrice(response.data.priceOrigin);
       })
       .catch((error) => {
         console.error(error);
@@ -48,6 +52,8 @@ function OrderCart() {
           totalAmount={totalAmount}
           totalProduct={totalProduct}
           totalPrice={totalPrice}
+          isDone={isDone} 
+          setIsDone={setIsDone}
         />
       </div>
 
