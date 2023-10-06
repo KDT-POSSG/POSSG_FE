@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import OrderCartAddModal from './OrderCartAddModal';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 
 function OrderCartNav({ isDone, setIsDone, selectedItems }) {
 
@@ -28,10 +29,14 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
     }
 
     axios
-      .post("http://54.180.60.149:3000/deleteCallProduct", {
+      .post(`${baseURL}/deleteCallProductConv`, {
         convSeq: 1,
         nameList: selectedItems,
         callRef: 0
+      }, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
+        }
       })
       .then((response) => {
         console.log(response.data);
@@ -52,8 +57,12 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
 
   const handleOrderSend = () => {
 
-    axios.post("http://54.180.60.149:3000/addConvOrderList", {
+    axios.post(`${baseURL}/addConvOrderList`, {
         convSeq: 1
+      }, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
+        }
       })
       .then((response) => {
         console.log(response.data);

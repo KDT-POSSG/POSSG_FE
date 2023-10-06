@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import OrderItem from 'components/order/OrderItem';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
+import { ACCESS_TOKEN } from 'store/apis/base';
 
 function Order() {
 
@@ -16,6 +17,9 @@ function Order() {
           convSeq: 1,
           pageNumber: page - 1,
           pageSize: 20
+        },
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
         }
       })
       .then((response) => {

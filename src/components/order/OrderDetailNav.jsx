@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { ACCESS_TOKEN } from 'store/apis/base';
 import { orderState } from 'store/utils/function';
 
 function OrderDetailNav({ callStatus, callRef, callDate }) {
@@ -14,6 +15,10 @@ function OrderDetailNav({ callStatus, callRef, callDate }) {
       .post("http://54.180.60.149:3000/cancelConvOrderList", {
         convSeq: 1,
         callRef: callRef
+      }, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
+        }
       })
       .then((response) => {
         console.log(response.data);
