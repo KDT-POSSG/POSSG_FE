@@ -1,9 +1,10 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
 
-function OrderListItem({ type, item, handleCheck, selectedItems, idx }) {
+function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, setIsDone }) {
 
   const [addStock, setAddStock] = useState(item.amount);
 
@@ -12,15 +13,20 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx }) {
     console.log("addStock >> ", addStock);
     console.log("amountTemp >> ", amountTemp);
 
-    axios.post("http://54.180.60.149:3000/updateCallProductConv", {
+    axios.post(`${baseURL}/updateCallProductConv`, {
         convSeq: 1,
         productName: item.productName,
         amount: amountTemp,
-        priceDiscount: item.price,
+        priceOrigin: item.priceOrigin,
         callRef: item.callRef
+      }, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
+        }
       })
       .then((response) => {
         console.log(response.data);
+        setIsDone(!isDone);
       })
       .catch((error) => {
         console.error(error);
@@ -52,6 +58,10 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx }) {
     setAddStock(amountTemp);
     changeAmount(amountTemp);
   }
+
+  useEffect(() => {
+    console.log("OrderListItem 도는중 ", item.productName);
+  });
 
   return (
     <div className='ordercart-grid ordercart-grid-item'>
@@ -104,4 +114,10 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx }) {
   )
 }
 
-export default OrderListItem;
+export default React.memo(OrderListItem, areEqual);
+
+function areEqual(prev, next) {
+  return (
+    prev.amount === next.amount && prev.selectedItems === next.selectedItems
+  );
+}
