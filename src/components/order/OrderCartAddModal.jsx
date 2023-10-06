@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 
 function OrderCartAddModal({ setIsModalOpen }) {
 
@@ -13,7 +14,7 @@ function OrderCartAddModal({ setIsModalOpen }) {
 
   const handleSearch = () => {
 
-    axios.get("http://54.180.60.149:3000/productList", {
+    axios.get(`${baseURL}/productList`, {
       params: {
         convSeq: 1,
         search: keyword,
@@ -22,6 +23,9 @@ function OrderCartAddModal({ setIsModalOpen }) {
         choice: "productName",
         sortOrder: "newest",
         promotionInfo: 0
+      },
+      headers: {
+        accessToken: `Bearer ${ACCESS_TOKEN}`
       }
     })
       .then((response) => {
@@ -36,14 +40,18 @@ function OrderCartAddModal({ setIsModalOpen }) {
 
   const handleAddProduct = (item) => {
     
-    axios.post("http://54.180.60.149:3000/addCallProductConv", {
+    axios.post(`${baseURL}/addCallProductConv`, {
           convSeq: 1,
           productSeq: item.productSeq, 
-          // primePrice: 1,
+          priceOrigin: item.priceOrigin,
           price: item.price,
           productName: item.productName,
           imgUrl: item.imgUrl,
           amount: 1
+      }, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`
+        }
       })
       .then((response) => {
         console.log(response.data);
