@@ -37,9 +37,10 @@ function DeliveryProgress() {
     <>
       <div className='delivery-sort'>
         <div className={`delivery-sort-active status-0${activeSort}`}></div>
-        <div className='delivery-status delivery-status-01' onClick={() => handleActiveSort(1)}>대기<span>&nbsp;&nbsp;4</span></div>
-        <div className='delivery-status delivery-status-02' onClick={() => handleActiveSort(2)}>접수<span>&nbsp;&nbsp;5</span></div>
-        <div className='delivery-status delivery-status-03' onClick={() => handleActiveSort(3)}>완료<span>&nbsp;&nbsp;20</span></div>
+        <div className='delivery-status' onClick={() => handleActiveSort(1)}>주문접수<span>4</span></div>
+        <div className='delivery-status' onClick={() => handleActiveSort(2)}>배달접수<span>5</span></div>
+        <div className='delivery-status' onClick={() => handleActiveSort(3)}>배송중<span>20</span></div>
+        <div className='delivery-status' onClick={() => handleActiveSort(4)}>배송완료<span>12</span></div>
       </div>
 
       <Outlet />

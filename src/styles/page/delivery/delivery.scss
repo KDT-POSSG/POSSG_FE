@@ -57,7 +57,8 @@
     background-color: $color-white;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    // grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     padding: 1rem 0;
     margin-bottom: 1.5rem;
     justify-content: center;
@@ -71,7 +72,8 @@
       position: absolute;
       background-color: $color-main;
       border-radius: 1rem;
-      width: 33.33%;
+      // width: 33.33%;
+      width: 25%;
       height: 100%;
       top: 0;
       z-index: -1;
@@ -82,14 +84,22 @@
       left: 0;
     }
     .status-02 {
-      left: 33.33%;
+      left: 25%;
     }
     .status-03 {
-      left: 66.66%;
+      left: 50%;
+    }
+    .status-04 {
+      left: 75%;
     }
 
     .delivery-status {
       cursor: pointer;
+
+      > span {
+        color: $color-point;
+        margin-left: 0.5rem;
+      }
     }
   }
 
@@ -123,13 +133,15 @@
         justify-content: space-between;
         align-items: center;
         background-color: $color-main;
-        // background-color: $color-border;
         border-radius: 2rem 2rem 0 0;
-        border-bottom: 1px solid $color-border;
 
-        > div {
-          color: $color-white;
+        .convenience-name {
           font-weight: bold;
+        }
+
+        .delivery-time {
+          font-weight: bold;
+          font-size: .875rem;
         }
       }
 
