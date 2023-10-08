@@ -46,7 +46,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
     userSeq: 1,
     convSeq: 1,
     pg: "현금",
-    method: "현금 결제",
+    method: "현금",
     discountInfo: products.length > 0 ? products[0].promotionInfo : '',
     price: totalAmount.toString(),
     purchasedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),

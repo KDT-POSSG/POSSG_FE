@@ -22,6 +22,7 @@ function Payment() {
     const [inputValue, setInputValue] = useState("");
     const [changeAmount, setChangeAmount] = useState(0);
     const barcodeInputRef = useRef(null);
+    const accesstoken = localStorage.getItem("accesstoken");
 
     
     // input에 바코드가 제대로 입력됐는지 확인
@@ -31,7 +32,7 @@ function Payment() {
             toast.error("바코드 인식 에러");
             return;
         }
-        axios.get('http://54.180.60.149:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}})
+        axios.get('http://54.180.60.149:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             const productData = res.data;
             const existingProduct = products.find(p => p.productSeq === productData.productSeq); 

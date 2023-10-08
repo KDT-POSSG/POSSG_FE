@@ -28,8 +28,7 @@ function Employees() {
      const fetchEmployees = () => {
       axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
-            setEmployeeList(res.data);
-            setTotalCnt(res.data.cnt);
+            setEmployeeList(res.data.employee);
             console.log('직원 리스트 불러오기 성공');
             console.log(res.data);
         })
