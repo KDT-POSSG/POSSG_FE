@@ -7,6 +7,7 @@ export const baseURL = "http://54.180.60.149:3000";
 export const ACCESS_TOKEN = localStorage.getItem("accesstoken");
 // export const CONV_SEQ = localStorage.getItem("convSeq");
 export const CONV_SEQ = 1;
+export const BRANCH_NAME = localStorage.getItem("branchName");
 
 // TOKEN X 
 export const nonTokenRequest = axios.create({

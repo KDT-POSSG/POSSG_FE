@@ -1,68 +1,54 @@
-.menu-container {
-    // position: relative;
+.menu-icon, .close-btn {
+  cursor: pointer;
+}
 
-    .menu-icon, .close-btn {
-      cursor: pointer;
+.menu-left {
+  padding: 2rem;
+  padding-top: 1.75rem;
+
+  hr {
+    border: none;
+    background-color: $color-gray;
+    height: 1px;
+  }
+
+  .logo-container {
+    width: 40%;
+
+    > img {
+      object-fit: cover;
     }
+  }
   
-    // .menu-back {
-    //   position: fixed;
-    //   top: 0;
-    //   left: 0;
-    //   width: 110vw;
-    //   height: 110vh;
-    //   background-color: rgba($color-gray, $alpha: 0.5);
-    //   transition: all 0.5s;
-    //   z-index: 99;
-    //   overflow: hidden;
-    // }
-  
-    // .menu-back-nonview {
-    //   display: none;
-    // }
-  
-    // .menu-left {
-    //   position: fixed;
-    //   top: 0;
-    //   left: 0;
-    //   background-color: $color-white;
-    //   width: 22.5rem;
-    //   min-height: 100vh;
-    //   padding: 1.875rem;
-    //   transition: all 0.5s;
-    //   z-index: 100;
-    //   box-shadow: 0px 2px 16px 2px rgba($color-gray, $alpha: 0.2);
-  
-      hr {
-        border: none;
-        background-color: $color-gray;
-        height: 1px;
-      }
-  
-      .logo-container {
-        display: flex;
-        justify-content: space-between;
-        margin: 1rem 0 3rem 0;
-  
-        .close-btn {
-          color: $color-gray;
-        }
-      }
-  
-      hr, li {
-        margin-bottom: 1.5rem;
-      }
-  
-      li {
-        padding-left: 4px;
-      }
-  
-      .header-menu-logout {
-        padding-left: 4px;
-      }
+  .menu-branch {
+    display: flex;
+    align-items: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    
+    > span {
+      transition: $transition-cb2;
     }
-  
-    // .menu-left-nonview {
-    //   left: -22.5rem;
-    // }
-  // }
+
+    &:hover > span {
+      color: $color-main;
+    }
+  }
+
+  hr, .menu-name {
+    margin-bottom: 1.5rem;
+  }
+
+  .menu-name,
+  .header-menu-logout {
+    padding-left: .25rem;
+  }
+
+  .menu-name {
+    transition: $transition-cb2;
+
+    &:hover {
+      color: $color-main;
+    }
+  }
+}
