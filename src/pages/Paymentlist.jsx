@@ -3,33 +3,60 @@ import { useEffect, useState } from "react";
 import Modal from '../components/Modal';
 import ReceiptModal from '../components/paymentlist/ReceiptModal'
 import RefundModal from "../components/paymentlist/RefundModal";
+import { addComma } from "store/utils/function";
+import { ACCESS_TOKEN } from "store/apis/base";
 
 function Paymentlist()  {
   
-  const [paymentlist, setPaymentlist] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [paymentlistType, setPaymentListType] = useState(null);
+    const [paymentlistdetail, setPaymentlistdetail] = useState([]);
+    const [paymentlist, setPaymentlist] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [paymentlistType, setPaymentListType] = useState(null);
 
 
-  const openModal = (type) => {
-    setPaymentListType(type);
-    setModalIsOpen(true);
-   };
+    const openModal = (type) => {
+        setPaymentListType(type);
+        setModalIsOpen(true);
+    };
 
-   const closeModal = () => {
-   setModalIsOpen(false);
-   };
+    const closeModal = () => {
+    setModalIsOpen(false);
+    };
 
 
-  useEffect(() => {
-    axios.get('http://54.180.60.149:3000/paymentlist', { params: { convSeq: 1 } })
+    // 전체 결제내역을 불러오는 함수
+    const getPaymentList = () => {
+        axios.get('http://54.180.60.149:3000/paymentlist', { params: { convSeq: 1 }, 
+        headers : { 
+            accessToken: `Bearer ${ACCESS_TOKEN}`
+        }})
         .then((response) => {
-            setPaymentlist(response.data);
+            setPaymentlist(response.data.list);
             console.log('결제내역 불러오기 성공');
         })
         .catch((error) => {
             console.log('결제내역 불러오기 실패:', error);
         });
+    };
+
+    // 단일 상세 결제내역 불러오는 함수
+    const getPaymentListDetail = (receiptId) => {
+        axios.get('http://54.180.60.149:3000/paymentOneList', { params: { receiptId : receiptId },
+        headers : { 
+            accessToken: `Bearer ${ACCESS_TOKEN}`
+        }})
+        .then((response) => {
+            setPaymentlistdetail(response.data);
+            console.log('결제내역 상세 불러오기 성공');
+            
+        })
+        .catch((error) => {
+            console.log('결제내역 상세 불러오기 실패:', error);
+        });
+    };
+
+    useEffect(() => {
+        getPaymentList();
     }, []);
   
   
@@ -45,180 +72,98 @@ function Paymentlist()  {
                         <button className="paymentlist-search-btn">조회</button>
                     </div>
                     <div className="paymentlist-content">
-
-                        <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">5,000 원</div>
-                            <div className="paymentlist-content-date">17:56</div>
-                        </div>
-                       
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">현금</div>
-                            <div className="paymentlist-content-price">10,000 원</div>
-                            <div className="paymentlist-content-date">13:22</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">12,000 원</div>
-                            <div className="paymentlist-content-date">15:36</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">53,000 원</div>
-                            <div className="paymentlist-content-date">02:50</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">2,000 원</div>
-                            <div className="paymentlist-content-date">12:40</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">5,000 원</div>
-                            <div className="paymentlist-content-date">17:56</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">5,000원</div>
-                            <div className="paymentlist-content-date">17:56</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">5,000원</div>
-                            <div className="paymentlist-content-date">17:56</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">5,000원</div>
-                            <div className="paymentlist-content-date">17:56</div>
-                        </div>
-
-                       <div className="paymentlist-content-row">
-                            <div className="paymentlist-content-method">카드</div>
-                            <div className="paymentlist-content-price">5,000원</div>
-                            <div className="paymentlist-content-date">17:56</div>
-                        </div>
-                        
+                        {paymentlist.map((payment, index) => (
+                            <div key={index} className="paymentlist-content-row" onClick={() => getPaymentListDetail(payment.receiptId)}>
+                                <div className="paymentlist-content-method">{payment.pg}</div>
+                                <div className="paymentlist-content-price">{addComma(payment.price)} 원</div>
+                                <div className="paymentlist-content-date">{payment.purchasedAt.split(" ")[1].substring(0,5)}</div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
 
                 <div className="paymentlist-information">
-                    <div className="paymentlist-information-header">
-                        <div className="title">
-                            <div className="paymentlist-information-header-del">결제 완료</div>
-                            <div className="paymentlist-information-header-date">2023-09-01 19:35</div>
-                        </div>
-                        <div className="body"> 
-                            <div className="paymentlist-information-header-price">총 결제 금액</div>
-                            <div className="paymentlist-information-header-price2">5,000 원</div>
-                        </div>
-                        <hr/>
-                        <div className="paymentlist-information-body">
-                            <button className="paymentlist-information-body-btn" onClick={() => openModal('refund')}>환불</button>
-                            <button className="paymentlist-information-body-btn" onClick={() => openModal('receipt')}>영수증 보기</button>
-                        </div>
-                    </div>
+                    {paymentlistdetail.param ? (
+                        <>
+                        <div className="paymentlist-information-header">
+                            <div className="title">
+                            <div className={`paymentlist-information-header-del ${paymentlistdetail.param.del === '결제완료' ? 'color-complete' : paymentlistdetail.param.del === '결제취소' ? 'color-cancel' : ''}`}>
+                                {paymentlistdetail.param.del}
+                            </div>
 
+                                <div className="paymentlist-information-header-date">{paymentlistdetail.param.purchasedAt}</div>
+                            </div>
+                            <div className="body"> 
+                                <div className="paymentlist-information-header-price">총 결제 금액</div>
+                                <div className="paymentlist-information-header-price2">{addComma(paymentlistdetail.param.price)} 원</div>
+                            </div>
+                            <hr/>
+                            <div className="paymentlist-information-body">
+                                <button className="paymentlist-information-body-btn" onClick={() => openModal('refund')}>환불</button>
+                                <button className="paymentlist-information-body-btn" onClick={() => openModal('receipt')}>영수증 보기</button>
+                            </div>
+                        </div>
 
-                    <div className="body2">
-                        <div className="paymentlist-information-body-method">결제 수단</div>
-                        <div className="paymentlist-information-body-method2">카드</div>
-                    </div>
-                    
+                        <div className="body2">
+                            <div className="paymentlist-information-body-method">결제 수단</div>
+                            <div className="paymentlist-information-body-method2">{paymentlistdetail.param.method}</div>
+                        </div>
+                        
+                        <div className="paymentlist-list">
+                            <div className="paymentlist-list-title">결제 내역</div>
+                            {paymentlistdetail.list?.map((item, idx) => (
+                                <div key={idx} className="paymentlist-list-row">
+                                    <div className="paymentlist-list-row-name">{item.itemName} x{item.qty}</div>
+                                    <div className="paymentlist-list-row-price">{addComma((item.price)*(item.qty))} 원</div>
+                                </div>         
+                            ))}
+                        </div>
+                        </>
+                    ) : ( // 결제 내역을 선택하지 않았을때 렌더링
+                        <div className="paymentlist-information-empty">
+                            <div className="paymentlist-information-header">
+                                <div className="title">
+                                    <div className="paymentlist-information-header-del">결제완료</div>
+                                    <div className="paymentlist-information-header-date">결제 시간</div>
+                                </div>
+                                <div className="body"> 
+                                    <div className="paymentlist-information-header-price">총 결제 금액</div>
+                                    <div className="paymentlist-information-header-price2">0 원</div>
+                                </div>
+                                <hr/>
+                                <div className="paymentlist-information-body">
+                                    <button className="paymentlist-information-body-btn" >환불</button>
+                                    <button className="paymentlist-information-body-btn" >영수증 보기</button>
+                                </div>
+                            </div>
 
-                    <div className="paymentlist-list">
-                        <div className="paymentlist-list-title">결제 내역</div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
-                            <div className="paymentlist-list-row-price">3,000 원</div>
-                            
+                            <div className="body2">
+                                <div className="paymentlist-information-body-method">결제 수단</div>
+                                <div className="paymentlist-information-body-method2">카드</div>
+                            </div>
+
+                            <div className="paymentlist-list">
+                                <div className="paymentlist-list-title">결제 내역</div>
+                                <div className="paymentlist-list-row">
+                                    <div className="paymentlist-list-row-name"></div>
+                                    <div className="paymentlist-list-row-price">0 원</div>
+                                </div>     
+                            </div>
                         </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">자유시간</div>
-                            <div className="paymentlist-list-row-price">1,000 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">바나나맛 우유</div>
-                            <div className="paymentlist-list-row-price">2,000 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">파워에이드</div>
-                            <div className="paymentlist-list-row-price">1,900 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">새우깡</div>
-                            <div className="paymentlist-list-row-price">1,800 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
-                            <div className="paymentlist-list-row-price">3,000 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
-                            <div className="paymentlist-list-row-price">3,000 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
-                            <div className="paymentlist-list-row-price">3,000 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
-                            <div className="paymentlist-list-row-price">3,000 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
-                            <div className="paymentlist-list-row-price">3,000 원</div>
-                            
-                        </div>
-                        <div className="paymentlist-list-row">
-                            <div className="paymentlist-list-row-name">먹태깡 x2</div>
-                            <div className="paymentlist-list-row-price">3,000 원</div>
-                            
-                        </div>               
-                    </div>
+                    )}
                 </div>
+
 
                 
                 
             </div>
-            {/* <h1>Paymentlist</h1>
-            <ul>
-                {paymentlist.map((payment, index) => (
-                    <li key={index}>
-                        <div>고객 번호: {payment.customerSeq}</div>
-                        <div>고객 이름: {payment.customerName}</div>
-                        <div>지점명: {payment.branchName}</div>
-                        <div>대표자명: {payment.representativeName}</div>
-                        <div>영수증 ID: {payment.receiptId}</div>
-                        <div>PG: {payment.pg}</div>
-                        <div>결제 방법: {payment.method}</div>
-                        <div>가격: {payment.price}</div>
-                        <div>구매 시간: {payment.purchasedAt}</div>
-                        <div>카드 회사: {payment.cardCompany}</div>
-                        <div>카드 번호: {payment.cardNum}</div>
-                        <div>상태: {payment.del}</div>
-                    </li>
-                ))}
-            </ul> */}
         
         <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{width:'40%' } }}>
-                {paymentlistType === 'refund' && <RefundModal />}
+                {paymentlistType === 'refund' &&
+                <RefundModal 
+                    paymentlistdetail={paymentlistdetail}
+                />}
                 {paymentlistType === 'receipt' && <ReceiptModal />}
         </Modal>
         </div>
