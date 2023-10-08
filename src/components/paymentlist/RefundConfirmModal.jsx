@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 function RefundConfirmModal({ closeModal, paymentlistdetail}){
 
     const Refund = () => {
-        if(paymentlistdetail.param.del === 0){
+        if(paymentlistdetail.param.del === '결제취소'){
             toast.error('이미 환불된 내역입니다.');
             return;
         }

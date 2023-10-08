@@ -48,7 +48,7 @@ function Paymentlist()  {
         .then((response) => {
             setPaymentlistdetail(response.data);
             console.log('결제내역 상세 불러오기 성공');
-            
+            console.log(response.data);
         })
         .catch((error) => {
             console.log('결제내역 상세 불러오기 실패:', error);
@@ -164,7 +164,10 @@ function Paymentlist()  {
                 <RefundModal 
                     paymentlistdetail={paymentlistdetail}
                 />}
-                {paymentlistType === 'receipt' && <ReceiptModal />}
+                {paymentlistType === 'receipt' && 
+                <ReceiptModal 
+                    paymentlistdetail={paymentlistdetail}
+                />}
         </Modal>
         </div>
     )
