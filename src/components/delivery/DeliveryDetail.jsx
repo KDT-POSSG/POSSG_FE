@@ -1,7 +1,33 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
 
 function DeliveryDetail() {
+
+  const { ref } = useParams();
+
+  useEffect(() => {
+
+    axios
+      .post(`${baseURL}/allDeliveryList`, null, {
+        params: {
+          ref: ref
+        },
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`,
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+    
+  }, []);
+
   return (
     <div className='delivery-detail-page'>
 

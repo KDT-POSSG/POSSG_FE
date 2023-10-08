@@ -84,7 +84,7 @@ function App() {
           <Route path='/ordercart' element={<OrderCart />} />
           <Route path='/delivery' element={<Delivery />}>
             <Route index element={<DeliveryList />} />
-            <Route path=':seq' element={<DeliveryDetail />} />
+            <Route path=':ref' element={<DeliveryDetail />} />
           </Route>
           <Route path='/updateCost' element={<UpdateCost />} />
           <Route path='/imcomeReport' element={<ImcomeReport />} />
