@@ -1,13 +1,19 @@
 import axios from 'axios';
-import DeliveryProgress from 'components/delivery/DeliveryProgress';
 import DeliveryRegister from 'components/delivery/DeliveryRegister';
 import React, { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { ACCESS_TOKEN } from 'store/apis/base';
 
 function Delivery() {
 
   const [isRegi, setIsRegi] = useState(false);
   const [convAddress, setConvAddress] = useState("");
+  const [activeSort, setActiveSort] = useState(1);
+
+  const handleActiveSort = (status) => {
+    console.log("status >> ", status);
+    setActiveSort(status);
+  }
 
   useEffect(() => {
 
@@ -42,8 +48,17 @@ function Delivery() {
         </div>
 
         {
-          isRegi ? 
-          <DeliveryProgress />
+          isRegi ?
+          <>
+            <div className='delivery-sort'>
+              <div className={`delivery-sort-active status-0${activeSort}`}></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(1)}>주문접수<span>4</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(2)}>배달접수<span>5</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(3)}>배송중<span>20</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(4)}>배송완료<span>12</span></div>
+            </div>
+            <Outlet context={activeSort} />
+          </>
           :
           <DeliveryRegister setIsRegi={setIsRegi} />
         }

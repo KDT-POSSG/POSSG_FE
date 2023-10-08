@@ -1,7 +1,7 @@
 .delivery-page {
   background-color: $color-back;
   padding: 3vw 10vw;
-  min-height: 100vh;
+  // min-height: 100vh;
 
   .delivery-test {
     max-width: 1200px;
@@ -158,8 +158,12 @@
           .item-product {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: start;
             margin-bottom: 0.75vw;
+
+            .product-name {
+              margin-right: 1.5rem;
+            }
           }
 
           .item-product-more {
@@ -190,5 +194,9 @@
         }
       }
     }
+  }
+
+  .delivery-paging {
+    margin: 2rem 0;
   }
 }
