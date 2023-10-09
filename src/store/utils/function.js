@@ -40,3 +40,12 @@ export const orderState = (orderStateNumber) => {
   }
 
 }
+
+export const dateString = (delDate) => {
+
+  let month = delDate.slice(5, 7);
+  let day = delDate.slice(8, 10);
+  let time = delDate.slice(11, 16);
+
+  return `${month}월 ${day}일 ${time}`;
+}

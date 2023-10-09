@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
 import { ACCESS_TOKEN } from 'store/apis/base';
-import { addComma } from 'store/utils/function';
+import { addComma, dateString } from 'store/utils/function';
 import { Link, useOutletContext } from 'react-router-dom';
 
 function DeliveryList() {
@@ -42,15 +42,6 @@ function DeliveryList() {
     
   }, [page, activeSort]);
 
-  const date = (delDate) => {
-
-    let month = delDate.slice(5, 7);
-    let day = delDate.slice(8, 10);
-    let time = delDate.slice(11, 16);
-
-    return `${month}월 ${day}일 ${time}`;
-  }
-
   return (
     <>
       <div className='delivery-list-container'>
@@ -60,7 +51,7 @@ function DeliveryList() {
 
               <div className='item-top'>
                 <div className='convenience-name'>emart24</div>
-                <div className='delivery-time'>{date(item.delDate)}</div>
+                <div className='delivery-time'>{dateString(item.delDate)}</div>
               </div>
 
               <div className='item-middle'>
@@ -73,7 +64,7 @@ function DeliveryList() {
                     item.details.slice(0, 3).map((product) => (
                       <div className='item-product' key={product.product_seq}>
                         <div className='product-name'>{product.product_name}</div>
-                        <div>{product.quantity}</div>
+                        <div className='product-quantity'>{product.quantity}</div>
                       </div>
                     ))
                   }
