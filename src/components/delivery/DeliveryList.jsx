@@ -2,20 +2,17 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
 import { ACCESS_TOKEN } from 'store/apis/base';
-import { addComma, dateString } from 'store/utils/function';
-import { Link, useOutletContext } from 'react-router-dom';
+import { addComma, dateString, deliveryStatus } from 'store/utils/function';
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 
 function DeliveryList() {
 
   const activeSort = useOutletContext();
+  const navi = useNavigate();
 
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [deliveryList, setDeliveryList] = useState([]);
-
-  const handlePage = (pageNumber) => {
-    setPage(pageNumber);
-  }
 
   useEffect(() => {
 
@@ -42,12 +39,20 @@ function DeliveryList() {
     
   }, [page, activeSort]);
 
+  const handlePage = (pageNumber) => {
+    setPage(pageNumber);
+  }
+
+  const handleLink = (ref) => {
+    navi(`/delivery/${ref}`);
+  }
+
   return (
     <>
       <div className='delivery-list-container'>
         {
           deliveryList && deliveryList.map((item) => (
-            <div className='delivery-list-item' key={item.ref}>
+            <div className='delivery-list-item' key={item.ref} onClick={() => handleLink(item.ref)}>
 
               <div className='item-top'>
                 <div className='convenience-name'>emart24</div>
@@ -82,10 +87,7 @@ function DeliveryList() {
               </div>
 
               <div className='item-bottom'>
-                <button className='receipt-btn'>배달접수</button>
-                <Link to={`/delivery/${item.ref}`}>
-                  <button className='detail-btn'>상세보기</button>
-                </Link>
+                <button className='receipt-btn'>{deliveryStatus(item.orderStatus)}</button>
               </div>
 
             </div>

@@ -83,7 +83,6 @@ function DeliveryDetail() {
 
         <div className='item-bottom'>
           <button className='receipt-btn'>배달접수</button>
-          {/* <button className='detail-btn'>상세보기</button> */}
         </div>
 
       </div>

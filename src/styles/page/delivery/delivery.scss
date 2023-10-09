@@ -123,6 +123,11 @@
       grid-template-rows: 1fr 4fr 1fr;
       transition: $transition-cb2;
       filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+      cursor: pointer;
+
+      &:hover {
+        transform: translate(-2px, -2px);
+      }
 
       .item-top, .item-middle, .item-bottom {
         padding: 0 1.75rem;
@@ -199,12 +204,8 @@
         }
 
         .receipt-btn {
-          margin-right: .25rem;
-          background-color: $color-border;
-        }
-
-        .detail-btn {
-          margin-left: .25rem;
+          border: 1px solid $color-main;
+          color: $color-main;
         }
       }
     }

@@ -38,7 +38,7 @@
       margin-bottom: 2rem;
 
       .item-info {
-        margin-bottom: 2rem;
+        margin-bottom: 2.25rem;
 
         .total-price {
           font-weight: bold;
@@ -68,7 +68,9 @@
 
         .item-index {
           font-weight: bold;
+          padding-top: 1rem;
           padding-bottom: 1rem;
+          border-top: 1px solid $color-border;
           border-bottom: 1px solid $color-border;
         }
 
@@ -100,12 +102,8 @@
       }
 
       .receipt-btn {
-        margin-right: 0.5rem;
-        background-color: $color-border;
-      }
-
-      .detail-btn {
-        margin-left: 0.5rem;
+        border: 1px solid $color-main;
+        color: $color-main;
       }
     }
   }
