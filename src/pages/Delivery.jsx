@@ -1,17 +1,20 @@
 import axios from 'axios';
 import DeliveryRegister from 'components/delivery/DeliveryRegister';
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ACCESS_TOKEN } from 'store/apis/base';
 
 function Delivery() {
 
+  const navi = useNavigate();
+  
   const [isRegi, setIsRegi] = useState(false);
   const [convAddress, setConvAddress] = useState("");
   const [activeSort, setActiveSort] = useState(1);
 
   const handleActiveSort = (status) => {
     console.log("status >> ", status);
+    navi("/delivery");
     setActiveSort(status);
   }
 
