@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { ACCESS_TOKEN, BRANCH_NAME, baseURL } from 'store/apis/base';
 import menuDatas from '../../assets/datas/menuDatas.json';
 import logo from '../../assets/svg/possg_logo.svg';
-import axios from 'axios';
 import Modal from 'components/Modal';
-import { ACCESS_TOKEN, BRANCH_NAME } from 'store/apis/base';
 
 function HeaderMenu() {
 
@@ -35,18 +35,21 @@ function HeaderMenu() {
 
   const handleLogout = () => {
 
-    axios.get("http://10.10.10.205:3000/logout", {
+    modalClose();
+
+    axios.get(`${baseURL}/logout`, {
         headers: {
           accessToken: `Bearer ${ACCESS_TOKEN}`, 
         }
       })
       .then((res)=>{
-        if(res.status===200){
+        if(res.status === 200){
           localStorage.removeItem("accesstoken");
           localStorage.removeItem("convSeq");
           localStorage.removeItem("branchName");
           navi("/login");
-        }else{
+        }
+        else{
           console.log("로그아웃 실패");
         }
       })
