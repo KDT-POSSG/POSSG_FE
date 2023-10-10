@@ -1,4 +1,4 @@
-import Modal from 'components/Modal';
+import Modal from 'components/ui/Modal';
 import React, { useState } from 'react';
 import DeliveryMap from './DeliveryMap';
 

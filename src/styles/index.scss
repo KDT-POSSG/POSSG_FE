@@ -5,8 +5,9 @@
 @import './layout/header.scss';
 @import './layout/headerMenu.scss';
 
-@import './Modal.scss';
-@import './numberPad.scss';
+@import './ui/commonModal.scss';
+@import './ui/numberPad.scss';
+@import './ui/checkmark.scss';
 
 @import './page/home/home.scss';
 @import './page/home/homeModal.scss';
@@ -32,7 +33,6 @@
 @import './page/convenience/findIdInfo.scss';
 @import './page/convenience/findPw.scss';
 @import './page/convenience/changePw.scss';
-
 
 @import './page/inventory/invenModal.scss';
 @import './page/inventory/inventory.scss';

@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import Modal from "components/Modal";
+import Modal from "components/ui/Modal";
 import FindIdInfo from "./FindIdInfo";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";

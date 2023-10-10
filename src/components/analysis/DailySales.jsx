@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
-import MyChart from './MyChart';
+import MyChart from '../../store/apis/MyChart';
 
 function DailySales(){
     const accesstoken = localStorage.getItem("accesstoken");

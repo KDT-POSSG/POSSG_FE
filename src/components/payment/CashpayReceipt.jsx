@@ -1,4 +1,4 @@
-    import CheckmarkComponent from "../CheckMark";
+    import CheckmarkComponent from "../ui/CheckMark";
     import { addComma } from "store/utils/function";
 
     function CashpayReceipt({ closeModal, inputValue, changeAmount, totalAmount, handlePaymentSuccess}){

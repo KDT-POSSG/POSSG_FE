@@ -1,4 +1,4 @@
-import Modal from 'components/Modal';
+import Modal from 'components/ui/Modal';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import OrderCartAddModal from './OrderCartAddModal';

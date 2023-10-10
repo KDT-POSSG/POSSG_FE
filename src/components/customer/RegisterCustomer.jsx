@@ -1,5 +1,5 @@
 import axios from "axios";
-import NumberPad from "components/NumberPad";
+import NumberPad from "components/ui/NumberPad";
 import { useState } from "react";
 import toast from "react-hot-toast";
 

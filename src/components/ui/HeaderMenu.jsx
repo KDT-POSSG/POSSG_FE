@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ACCESS_TOKEN, BRANCH_NAME, baseURL } from 'store/apis/base';
 import menuDatas from '../../assets/datas/menuDatas.json';
 import logo from '../../assets/svg/possg_logo.svg';
-import Modal from 'components/Modal';
+import Modal from 'components/ui/Modal';
 
 function HeaderMenu() {
 

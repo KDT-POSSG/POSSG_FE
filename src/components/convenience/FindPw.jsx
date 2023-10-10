@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-import Modal from "components/Modal";
+import Modal from "components/ui/Modal";
 import FindPwInfo from "./FindPwInfo";
 
 function FindPw(){

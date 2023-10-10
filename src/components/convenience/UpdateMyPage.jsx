@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 
-import Modal from "components/Modal";
+import Modal from "components/ui/Modal";
 import ChangePw from "./ChangePw";
 
 function UpdateMyPage(){
