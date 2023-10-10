@@ -21,14 +21,14 @@ function ProductList() {
     const timer = setTimeout(() => {
 
       getProductList(keyword)
-      .then((response) => {
-        console.log(response.data);
-        console.log(response.data.ProductList);
-        setProduct(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
+        .then((response) => {
+          console.log(response.data);
+          console.log(response.data.ProductList);
+          setProduct(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        })
 
     }, 300); 
     return () => clearTimeout(timer);

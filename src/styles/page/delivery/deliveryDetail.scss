@@ -27,7 +27,7 @@
       border-bottom: 1px solid $color-border;
 
       > div {
-        color: $color-white;
+        // color: $color-white;
         font-weight: bold;
         font-size: 1.25rem;
       }
@@ -37,17 +37,40 @@
       margin-top: 3rem;
       margin-bottom: 2rem;
 
-      .total-price {
-        font-weight: bold;
-        font-size: 2rem;
-        margin-bottom: 3rem;
+      .item-info {
+        margin-bottom: 2.25rem;
+
+        .total-price {
+          font-weight: bold;
+          font-size: 2rem;
+          margin-bottom: 2rem;
+        }
+
+        .delivery-ref {
+          margin-bottom: 0.5rem;
+
+          > span {
+            font-weight: bold;
+            margin-right: 1rem;
+          }
+        }
+
+        .delivery-location {
+
+          > span {
+            font-weight: bold;
+            margin-right: 2.7rem;
+          }
+        }
       }
 
       .item-product-container {
 
         .item-index {
           font-weight: bold;
+          padding-top: 1rem;
           padding-bottom: 1rem;
+          border-top: 1px solid $color-border;
           border-bottom: 1px solid $color-border;
         }
 
@@ -79,12 +102,8 @@
       }
 
       .receipt-btn {
-        margin-right: 0.5rem;
-        background-color: $color-border;
-      }
-
-      .detail-btn {
-        margin-left: 0.5rem;
+        border: 1px solid $color-main;
+        color: $color-main;
       }
     }
   }
