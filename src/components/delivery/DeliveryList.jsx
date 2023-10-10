@@ -3,7 +3,9 @@ import axios from 'axios';
 import Pagination from 'react-js-pagination';
 import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 import { addComma, dateString, deliveryStatus } from 'store/utils/function';
-import { Link, useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import DeliveryButton from './DeliveryButton';
 
 function DeliveryList() {
 
@@ -13,11 +15,12 @@ function DeliveryList() {
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [deliveryList, setDeliveryList] = useState([]);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   useEffect(() => {
 
     axios
-      .get("http://54.180.60.149:3000/convenienceDeliveryList", {
+      .get(`${baseURL}/convenienceDeliveryList`, {
         params: {
           pageNumber: page - 1,
           orderStatus: activeSort
@@ -35,42 +38,70 @@ function DeliveryList() {
         console.error(error);
       })
     
-  }, [page, activeSort]);
+  }, [page, activeSort, isUpdate]);
 
   const handlePage = (pageNumber) => {
     setPage(pageNumber);
   }
 
   const handleLink = (ref) => {
+    console.log("ref >> ", ref);
     navi(`/delivery/${ref}`);
   }
 
-  const handleOrderStatus = () => {
+  const handleOrderStatus = (e, ref) => {
+
+    console.log("handleOrderStatus >> ", ref);
+    e.stopPropagation();
 
     axios
-      .post(`${baseURL}/statusUpdate`, null, {
+      .post(`${baseURL}/statusUpdate`, {
+        ref: ref
+      }, {
         headers: {
           accessToken: `Bearer ${ACCESS_TOKEN}`,
         }
       })
       .then((response) => {
         console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("배달 상태가 업데이트되었습니다");
+          setIsUpdate(!isUpdate);
+        }
+        else {
+          toast.error("배달 상태 업데이트에 실패했습니다");
+        }
       })
       .catch((error) => {
         console.error(error);
+        toast.error("배달 상태 업데이트에 실패했습니다");
       })
   }
 
-  const handleOrderCancel = () => {
+  const handleOrderCancel = (e, ref) => {
+
+    console.log("handleOrderCancel >> ", ref);
+    e.stopPropagation();
 
     axios
-      .post(`${baseURL}/refuseDelivery`, null, {
+      .post(`${baseURL}/refuseDelivery`, {
+        ref: ref
+      }, {
         headers: {
           accessToken: `Bearer ${ACCESS_TOKEN}`,
         }
       })
       .then((response) => {
         console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("배달 주문이 취소되었습니다");
+          setIsUpdate(!isUpdate);
+        }
+        else {
+          toast.error("배달 주문 취소에 실패했습니다");
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -104,7 +135,7 @@ function DeliveryList() {
                     ))
                   }
                   {
-                    item.details.length > 3 ?
+                    item.details.length > 2 ?
                     <div className='item-product-more'>
                       <div>…</div>
                     </div>
@@ -117,13 +148,7 @@ function DeliveryList() {
               </div>
 
               <div className='item-bottom'>
-                <button className='receipt-btn'>{deliveryStatus(item.orderStatus)}</button>
-                {
-                  item.orderStatus === 1 ? 
-                  <button className='cancel-btn'>주문취소</button>
-                  :
-                  <></>
-                }
+                <DeliveryButton deliveryRef={item.ref} delStatus={item.delStatus} handleOrderStatus={handleOrderStatus} handleOrderCancel={handleOrderCancel} />
               </div>
 
             </div>
@@ -132,17 +157,22 @@ function DeliveryList() {
       </div>
 
       <div className='delivery-paging'>
-        <Pagination
-          activePage={page}
-          itemsCountPerPage={1}
-          totalItemsCount={totalPage}
-          pageRangeDisplayed={5}
-          firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
-          prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
-          nextPageText={<span className="material-symbols-rounded page-btn">chevron_right</span>}
-          lastPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_right</span>}
-          onChange={handlePage}
-        />
+        {
+          deliveryList && deliveryList.length > 0 ?
+          <Pagination
+            activePage={page}
+            itemsCountPerPage={1}
+            totalItemsCount={totalPage}
+            pageRangeDisplayed={5}
+            firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
+            prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
+            nextPageText={<span className="material-symbols-rounded page-btn">chevron_right</span>}
+            lastPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_right</span>}
+            onChange={handlePage}
+          />
+          :
+          <></>
+        }
       </div>
     </>
   )

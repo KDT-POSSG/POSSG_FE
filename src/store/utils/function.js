@@ -47,13 +47,15 @@ export const deliveryStatus = (deliveryStatusNumber) => {
     case 0:
       return "장바구니";
     case 1:
-      return "주문접수하기";
+      return "주문접수";
     case 2:
-      return "배달접수하기";
+      return "픽업완료";
     case 3:
-      return "배송중";
+      return "배달완료하기";
     case 4:
-      return "배송완료";
+      return "배달완료";
+    case -1:
+      return "취소완료";
     default:
       break;
   }

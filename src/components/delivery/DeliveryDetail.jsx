@@ -2,7 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
-import { addComma, deliveryStatus } from 'store/utils/function';
+import { addComma, dateString, deliveryStatus } from 'store/utils/function';
+import DeliveryButton from './DeliveryButton';
 
 function DeliveryDetail() {
 
@@ -22,8 +23,8 @@ function DeliveryDetail() {
         }
       })
       .then((response) => {
-        console.log(response.data[0]);
-        setDeliveryDetail(response.data[0]);
+        console.log(response.data);
+        setDeliveryDetail(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -38,13 +39,13 @@ function DeliveryDetail() {
 
         <div className='item-top'>
           <div>emart24</div>
-          <div>14:06</div>
+          <div>{deliveryDetail.delDate && dateString(deliveryDetail.delDate)}</div>
         </div>
 
         <div className='item-middle'>
 
           <div className='item-info'>
-            <div className='total-price'>{addComma(32000)} 원</div>
+            <div className='total-price'>{addComma(deliveryDetail.delTotalPrice)} 원</div>
 
             <div className='delivery-ref'>
               <span>주문번호</span>
@@ -82,13 +83,14 @@ function DeliveryDetail() {
         </div>
 
         <div className='item-bottom'>
-          <button className='receipt-btn'>{deliveryStatus(deliveryDetail.orderStatus)}</button>
+          {/* <button className='receipt-btn'>{deliveryStatus(deliveryDetail.delStatus)}</button>
           {
-            deliveryDetail.orderStatus === 1 ? 
+            deliveryDetail.delStatus === 1 ? 
             <button className='cancel-btn'>주문취소</button>
             :
             <></>
-          }
+          } */}
+          <DeliveryButton deliveryRef={deliveryDetail.ref} delStatus={deliveryDetail.delStatus} />
         </div>
 
       </div>
