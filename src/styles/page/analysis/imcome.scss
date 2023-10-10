@@ -1,0 +1,38 @@
+.imcome-content-wrap{
+    background-color: $color-back;
+    padding: 3vw 10vw;
+    min-height: 100vh;
+
+    .imcome-nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .imcome-title {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .imcome-calendar-container{
+            position: relative;
+            
+            .material-symbols-rounded{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                left: 10px;
+            }
+
+            .calendar-button{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                right: 5px;
+                background-color: $color-main;
+                color: $color-white;
+                border-radius: 1rem;
+            }
+        }
+
+    }
+}

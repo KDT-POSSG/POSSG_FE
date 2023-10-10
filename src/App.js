@@ -42,6 +42,8 @@ import DeliveryList from 'components/delivery/DeliveryList';
 import PrivateRoutes from 'components/PrivateRoutes';
 import UpdateCost from 'components/analysis/UpdateCost';
 import ImcomeReport from 'components/analysis/ImcomeReport';
+import MonthlyImcome from 'components/analysis/MonthlyImcome';
+import YearImcome from 'components/analysis/YearImcome';
 
 function App() {
   return (
@@ -87,7 +89,11 @@ function App() {
             <Route path=':ref' element={<DeliveryDetail />} />
           </Route>
           <Route path='/updateCost' element={<UpdateCost />} />
-          <Route path='/imcomeReport' element={<ImcomeReport />} />
+          <Route path='/imcomeReport' element={<ImcomeReport />}>
+            <Route index element={<MonthlyImcome />} />
+            <Route path='monthlyImcome' element={<MonthlyImcome />} />
+            <Route path='yearImcome' element={<YearImcome />} />
+          </Route>
         {/* </Route> */}
         
       </Routes>

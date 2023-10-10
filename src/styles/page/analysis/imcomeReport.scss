@@ -1,46 +1,99 @@
-.imcome-content-wrap{
+.imcomeReport-content-wrap{
     background-color: $color-back;
     padding: 3vw 10vw;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: $color-back;
 
-    // title
-    .imcome-title{
-        font-size: 2rem;    
-        margin: 2.5rem;
-    }
-
-    // content
-    .imcome-content{
-        background-color: $color-white;
-        padding: 2rem;
-        text-align: center;
+    .imcomeReport-sort {
         border-radius: 1rem;
-        filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
-        width: 80%;
-        height: 100%;
-
-        .imcome-data-container{
-            padding-bottom: 30px;
-
-            .imcome-data{
-                padding-bottom: 20px;
-                
-
-                .imcome-data-input{
-                    border-radius: 10px;
-                    outline: 1px solid $color-main;
-                    border: 0;
-                    margin-top: 1rem;
-                    width: 20vw;
-                    height: 3rem;
-                    text-align: center;
-                }
-                
-            }
+        background-color: $color-white;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1rem 0;
+        margin-bottom: 1.5rem;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-weight: bold;
+        z-index: 0;
+        border: 1px solid $color-border;
+    
+        .imcomeReport-sort-active {
+            position: absolute;
+            background-color: $color-main;
+            border-radius: 1rem;
+            width: 50%;
+            height: 100%;
+            top: 0;
+            z-index: -1;
+            transition: all 0.5s;
+        }
+    
+        .status-01 {
+            left: 0;
+        }
+        .status-02 {
+            left: 50%;
+        }
+        // .status-03 {
+        //     left: 66.66%;
+        // }
+    
+        .imcomeReport-status {
+            cursor: pointer;
         }
     }
+
+    .imcomeReport-content{
+        width: 80vw;
+        height: 100%;
+    }
 }
+
+
+// .imcome-content-wrap{
+//     background-color: $color-back;
+//     padding: 3vw 10vw;
+//     min-height: 100vh;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     background-color: $color-back;
+
+//     // title
+//     .imcome-title{
+//         font-size: 2rem;    
+//         margin: 2.5rem;
+//     }
+
+//     // content
+//     .imcome-content{
+//         background-color: $color-white;
+//         padding: 2rem;
+//         text-align: center;
+//         border-radius: 1rem;
+//         filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
+//         width: 80%;
+//         height: 100%;
+
+//         .imcome-data-container{
+//             padding-bottom: 30px;
+
+//             .imcome-data{
+//                 padding-bottom: 20px;
+                
+
+//                 .imcome-data-input{
+//                     border-radius: 10px;
+//                     outline: 1px solid $color-main;
+//                     border: 0;
+//                     margin-top: 1rem;
+//                     width: 20vw;
+//                     height: 3rem;
+//                     text-align: center;
+//                 }
+                
+//             }
+//         }
+//     }
+// }
