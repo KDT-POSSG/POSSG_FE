@@ -196,7 +196,7 @@
         justify-content: center;
         align-items: start;
 
-        .receipt-btn, .detail-btn {
+        .receipt-btn, .cancel-btn {
           border: 1px solid $color-border;
           border-radius: 1rem;
           font-size: .75rem;
@@ -204,8 +204,28 @@
         }
 
         .receipt-btn {
+          background-color: $color-white;
           border: 1px solid $color-main;
           color: $color-main;
+          transition: $transition-cb2;
+
+          &:hover {
+            background-color: $color-main;
+            color: $color-white;
+          }
+        }
+
+        .cancel-btn {
+          margin-left: 0.5rem;
+          background-color: $color-white;
+          border: 1px solid $color-point;
+          color: $color-point;
+          transition: $transition-cb2;
+
+          &:hover {
+            background-color: $color-point;
+            color: $color-white;
+          }
         }
       }
     }

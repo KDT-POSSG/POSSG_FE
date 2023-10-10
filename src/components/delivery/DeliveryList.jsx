@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
-import { ACCESS_TOKEN } from 'store/apis/base';
+import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 import { addComma, dateString, deliveryStatus } from 'store/utils/function';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 
@@ -15,8 +15,6 @@ function DeliveryList() {
   const [deliveryList, setDeliveryList] = useState([]);
 
   useEffect(() => {
-
-    console.log("activeSort >> ", activeSort);
 
     axios
       .get("http://54.180.60.149:3000/convenienceDeliveryList", {
@@ -45,6 +43,38 @@ function DeliveryList() {
 
   const handleLink = (ref) => {
     navi(`/delivery/${ref}`);
+  }
+
+  const handleOrderStatus = () => {
+
+    axios
+      .post(`${baseURL}/statusUpdate`, null, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`,
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }
+
+  const handleOrderCancel = () => {
+
+    axios
+      .post(`${baseURL}/refuseDelivery`, null, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`,
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
   }
 
   return (
@@ -88,6 +118,12 @@ function DeliveryList() {
 
               <div className='item-bottom'>
                 <button className='receipt-btn'>{deliveryStatus(item.orderStatus)}</button>
+                {
+                  item.orderStatus === 1 ? 
+                  <button className='cancel-btn'>주문취소</button>
+                  :
+                  <></>
+                }
               </div>
 
             </div>

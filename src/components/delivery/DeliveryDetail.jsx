@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
-import { addComma } from 'store/utils/function';
+import { addComma, deliveryStatus } from 'store/utils/function';
 
 function DeliveryDetail() {
 
@@ -82,7 +82,13 @@ function DeliveryDetail() {
         </div>
 
         <div className='item-bottom'>
-          <button className='receipt-btn'>배달접수</button>
+          <button className='receipt-btn'>{deliveryStatus(deliveryDetail.orderStatus)}</button>
+          {
+            deliveryDetail.orderStatus === 1 ? 
+            <button className='cancel-btn'>주문취소</button>
+            :
+            <></>
+          }
         </div>
 
       </div>
