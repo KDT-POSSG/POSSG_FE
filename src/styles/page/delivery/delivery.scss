@@ -187,6 +187,7 @@
 
           .item-product-more {
             text-align: center;
+            font-weight: bold;
           }
         }
       }
@@ -196,16 +197,53 @@
         justify-content: center;
         align-items: start;
 
-        .receipt-btn, .detail-btn {
+        .delivery-text {
+          // font-size: .875rem;
+          font-weight: bold;
+        }
+
+        .status-4 {
+          color: $color-green;
+          // color: $color-white;
+          // background-color: $color-green;
+        }
+        .status--1 {
+          color: $color-red;
+          // color: $color-white;
+          // background-color: $color-red;
+        }
+
+        .receipt-btn, .cancel-btn {
           border: 1px solid $color-border;
           border-radius: 1rem;
-          font-size: .75rem;
+          // font-size: .75rem;
+          font-size: .875rem;
           padding: 0.25rem 0.75rem;
         }
 
         .receipt-btn {
+          background-color: $color-white;
           border: 1px solid $color-main;
           color: $color-main;
+          transition: $transition-cb2;
+
+          &:hover {
+            background-color: $color-main;
+            color: $color-white;
+          }
+        }
+
+        .cancel-btn {
+          margin-left: 0.5rem;
+          background-color: $color-white;
+          border: 1px solid $color-point;
+          color: $color-point;
+          transition: $transition-cb2;
+
+          &:hover {
+            background-color: $color-point;
+            color: $color-white;
+          }
         }
       }
     }

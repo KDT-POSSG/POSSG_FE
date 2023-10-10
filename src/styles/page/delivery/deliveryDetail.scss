@@ -95,15 +95,55 @@
       justify-content: center;
       align-items: start;
 
-      .receipt-btn, .detail-btn {
+      .delivery-text {
+        // font-size: .875rem;
+        font-weight: bold;
+      }
+
+      .status-4, .status--1 {
+        font-size: 1.5rem;
+      }
+
+      .status-4 {
+        color: $color-green;
+        // color: $color-white;
+        // background-color: $color-green;
+      }
+      .status--1 {
+        color: $color-red;
+        // color: $color-white;
+        // background-color: $color-red;
+      }
+
+      .receipt-btn, .cancel-btn {
         border: 1px solid $color-border;
         border-radius: 2rem;
         padding: 0.5rem 1.5rem;
       }
 
       .receipt-btn {
+        background-color: $color-white;
         border: 1px solid $color-main;
         color: $color-main;
+        transition: $transition-cb2;
+
+        &:hover {
+          background-color: $color-main;
+          color: $color-white;
+        }
+      }
+
+      .cancel-btn {
+        margin-left: 0.5rem;
+        background-color: $color-white;
+        border: 1px solid $color-point;
+        color: $color-point;
+        transition: $transition-cb2;
+
+        &:hover {
+          background-color: $color-point;
+          color: $color-white;
+        }
       }
     }
   }
