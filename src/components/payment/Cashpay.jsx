@@ -1,8 +1,8 @@
-import NumberPad from "components/NumberPad";
+import NumberPad from "components/ui/NumberPad";
 import { useState } from "react";
 import { addComma } from '../../store/utils/function';
 import axios from 'axios';
-import Modal from "../Modal";
+import Modal from "../ui/Modal";
 import { toast } from "react-hot-toast";
 
 

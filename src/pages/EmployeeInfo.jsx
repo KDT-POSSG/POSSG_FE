@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Modal from '../Modal';
-import TerminateEmployeeModal from './TerminateEmployeeModal';
+import Modal from '../components/ui/Modal';
+import TerminateEmployeeModal from '../components/employees/TerminateEmployeeModal';
 
 
 function EmployeeInfo() {

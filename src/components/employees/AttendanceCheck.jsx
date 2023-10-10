@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 
-import Modal from '../Modal';
+import Modal from '../ui/Modal';
 import EmployeeSeq from './EmployeeSeq';
 import Attendace from './Attendance';
 import LeaveWork from './LeaveWork';

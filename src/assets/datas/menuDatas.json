@@ -16,17 +16,17 @@
   },
   {
     "id": 4,
-    "name": "시재",
+    "name": "시재 관리",
     "link": "/inventory"
   },
   {
     "id": 5,
-    "name": "상품",
+    "name": "편의점 상품",
     "link": "/product"
   },
   {
     "id": 6,
-    "name": "재고 관리",
+    "name": "상품 재고 관리",
     "link": "/stock"
   },
   {
@@ -46,17 +46,17 @@
   },
   {
     "id": 10,
-    "name": "분석",
+    "name": "편의점 분석",
     "link": "/analysis"
   },
   {
     "id": 11,
-    "name": "직원",
+    "name": "직원 관리",
     "link": "/employees"
   },
   {
     "id": 12,
-    "name": "고객",
+    "name": "고객 가입 페이지",
     "link": "#"
   }
 ]

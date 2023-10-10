@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DatePicker from 'react-datepicker';
-import MyChart from "./MyChart";
+import MyChart from "../../store/apis/MyChart";
 import axios from "axios";
 
 function MonthlyImcome(){

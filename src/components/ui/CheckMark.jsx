@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/checkmark.scss';
+// import '../styles/checkmark.scss';
 
 function CheckmarkComponent() {
   return (

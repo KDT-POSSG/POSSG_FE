@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Modal from '../components/Modal';
+import Modal from '../components/ui/Modal';
 import ReceiptModal from '../components/paymentlist/ReceiptModal'
 import RefundModal from "../components/paymentlist/RefundModal";
 import { addComma } from "store/utils/function";

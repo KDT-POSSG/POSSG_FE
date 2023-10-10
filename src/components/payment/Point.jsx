@@ -1,5 +1,5 @@
 import React from 'react';
-import NumberPad from '../NumberPad';
+import NumberPad from '../ui/NumberPad';
 import { useState } from 'react';
 
 function Point() {

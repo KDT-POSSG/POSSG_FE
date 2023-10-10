@@ -274,7 +274,7 @@ function Register(){
 
     return(
         <div className="regi-content-wrap">
-            <div className="regi-title">회원가입</div>
+            <div className="regi-title page-title">회원가입</div>
         
             <div className="regi-content">
                 <form id="regiForm" method="post" autoComplete="off" onSubmit={onSubmit}>
