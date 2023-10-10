@@ -55,8 +55,8 @@ function Delivery() {
             <div className='delivery-sort'>
               <div className={`delivery-sort-active status-0${activeSort}`}></div>
               <div className='delivery-status' onClick={() => handleActiveSort(1)}>주문접수<span>4</span></div>
-              <div className='delivery-status' onClick={() => handleActiveSort(2)}>배달접수<span>5</span></div>
-              <div className='delivery-status' onClick={() => handleActiveSort(3)}>배송중<span>20</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(2)}>배달픽업대기<span>5</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(3)}>배달중<span>20</span></div>
               <div className='delivery-status' onClick={() => handleActiveSort(4)}>완료<span>12</span></div>
             </div>
             <Outlet context={activeSort} />
