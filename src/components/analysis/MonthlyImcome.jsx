@@ -2,10 +2,11 @@ import { useState } from "react";
 import DatePicker from 'react-datepicker';
 import MyChart from "../../store/apis/MyChart";
 import axios from "axios";
+import { addComma } from "store/utils/function";
+import toast from "react-hot-toast";
+import { ACCESS_TOKEN, baseURL } from "store/apis/base";
 
 function MonthlyImcome(){
-    const accesstoken = localStorage.getItem("accesstoken");
-
     const [selectedDate, setSelectedDate] = useState(null);
     const [totalPrice, setTotalPrice] = useState([]); 
     const [totalLoss, setTotalLoss] = useState([]); 
@@ -22,25 +23,33 @@ function MonthlyImcome(){
             const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
             const day = String(selectedDate.getDate()).padStart(2, '0');
             const monthImcomeDate = `${year}년${month}월${day}일`;
-            // console.log("monthImcomeDate >>> ", monthImcomeDate)
-            const res = await axios.get(`http://54.180.60.149:3000/profitAndLoss?date=${monthImcomeDate}&choice=0`,
+            console.log("monthImcomeDate >>> ", monthImcomeDate)
+            const res = await axios.get(`${baseURL}/profitAndLoss?date=${monthImcomeDate}&choice=1`,
             {
                 headers: {
-                    accessToken: `Bearer ${accesstoken}`,
+                    accessToken: `Bearer ${ACCESS_TOKEN}`,
                 },
             })
             console.log("monthSalesdDate res >>> ", res);
+            // console.log("monthSalesdDate res.data >>> ", res.data);
             const resData = res.data;
-            setTotalPrice(resData.sales);
-            setTotalLoss(resData.expenses);
-            setProfit(resData.profit);
-        } catch (error) {
-            console.error('try-catch 오류:', error);
+            if(resData){
+                setTotalPrice(resData.totalPrice);
+                setTotalLoss(resData.totalLoss);
+                setProfit(resData.profit);
+                setData(true);
+            }else{
+                toast.error("조회하신 날짜의 데이터가 없습니다");
+                setData(false);
+            }
+            
+        } catch (err) {
+            console.error('try-catch 오류:', err);
+            setData(false);
         }
     }
     const onClick = () => {
         if (selectedDate) {
-            // API 호출
             fetchData(selectedDate);
         }
     }
@@ -48,7 +57,7 @@ function MonthlyImcome(){
     return(
         <div className="imcome-content-wrap">
             <div className="imcome-nav">
-                <div className="imcome-title">손익 보고서</div>
+                <div className="imcome-title page-title">월별 손익</div>
                 <div className="imcome-calendar-container">
                     <DatePicker
                         selected={selectedDate}
@@ -61,36 +70,31 @@ function MonthlyImcome(){
                     <div className="material-symbols-rounded">calendar_month</div>
                     <button className="calendar-button" type="button" onClick={onClick}>조회</button>
                 </div>
-                
             </div>
-            {/* {data && ( */} 
+            {data ? (
             <div className="imcome-content">
                 <div className="imcome-data-container">
                     <div className="imcome-data">
-                        <label>총 수익</label>
-                        <input type="text" className="imcome-data-input" value="1,500,000,000"/>
+                        <div className="imcome-data-title">총 수익</div>
+                        <div className="imcome-data-amount">{addComma(totalPrice)}</div>
                     </div>
                     <div className="imcome-data">
-                        <div className="imcome-data-content">
-                            <label>총 비용</label>
-                            <p>월세</p>
-                            <p>관리비(수도/전기/가스)</p>
-                            <p>인건비</p>
-                            <p>보안유지비</p>
-                            <input type="text" className="imcome-data-input" value="5,000,000" />
-
-                        </div>
+                        <div className="imcome-data-title">총 비용</div>
+                        <div className="imcome-data-amount">{addComma(totalLoss)}</div>
                     </div>
                     <div className="imcome-data">
-                        <label>총 이익</label>
-                        <input type="text" className="imcome-data-input" value="1,495,000,000" />
+                        <div className="imcome-data-title">총 이익</div>
+                        <div className="imcome-data-amount">{addComma(profit)}</div>
                     </div>
                 </div>
                 <div className="imcome-chart">
-                    <MyChart />
+                    <MyChart data={[totalPrice, totalLoss, profit]} />
+                    
                 </div>
             </div>
-            {/* )} */}
+            ) : (
+                <div className="no-data-message"></div>
+            )}
         </div>
     )
 }

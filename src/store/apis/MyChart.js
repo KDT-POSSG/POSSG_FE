@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
 
-const MyChart = () => {
+const MyChart = ({data}) => {
   const chartRef = useRef(null);
   let chartInstance = null;
 
@@ -17,7 +17,7 @@ const MyChart = () => {
           datasets: [
             {
               label: "",
-              data: [15, 20, 60, 10, 22, 30],
+              data: data,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
@@ -36,7 +36,7 @@ const MyChart = () => {
           scales: {
             y: {
               beginAtZero: true,
-              max: 100, // 최댓값
+              max: 10000000, // 최댓값
             },
           },
         },
@@ -56,7 +56,7 @@ const MyChart = () => {
     return () => {
       destroyChart(); // 컴포넌트가 unmount될 때 차트 파괴
     };
-  }, []);
+  }, [data]);
 
   return <canvas ref={chartRef} />;
 };

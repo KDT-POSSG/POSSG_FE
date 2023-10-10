@@ -2,10 +2,11 @@ import { useState } from "react";
 import DatePicker from 'react-datepicker';
 import MyChart from "../../store/apis/MyChart";
 import axios from "axios";
+import { addComma } from "store/utils/function";
+import toast from "react-hot-toast";
+import { ACCESS_TOKEN, baseURL } from "store/apis/base";
 
 function YearImcome(){
-    const accesstoken = localStorage.getItem("accesstoken");
-
     const [selectedDate, setSelectedDate] = useState(null);
     const [totalPrice, setTotalPrice] = useState([]); 
     const [totalLoss, setTotalLoss] = useState([]); 
@@ -23,24 +24,30 @@ function YearImcome(){
             const day = String(selectedDate.getDate()).padStart(2, '0');
             const yearImcomeDate = `${year}년${month}월${day}일`;
             console.log("yearImcomeDate >>> ", yearImcomeDate)
-            const res = await axios.get(`http://54.180.60.149:3000/profitAndLoss?date=${yearImcomeDate}&choice=1`,
+            const res = await axios.get(`${baseURL}/profitAndLoss?date=${yearImcomeDate}&choice=0`,
             {
                 headers: {
-                    accessToken: `Bearer ${accesstoken}`,
+                    accessToken: `Bearer ${ACCESS_TOKEN}`,
                 },
             })
-            console.log("monthSalesdDate res >>> ", res);
+            // console.log("monthSalesdDate res >>> ", res);
             const resData = res.data;
-            setTotalPrice(resData.sales);
-            setTotalLoss(resData.expenses);
-            setProfit(resData.profit);
-        } catch (error) {
-            console.error('try-catch 오류:', error);
+            if(resData){
+                setTotalPrice(addComma(resData.totalPrice));
+                setTotalLoss(addComma(resData.totalLoss));
+                setProfit(addComma(resData.profit));
+                setData(true);
+            }else{
+                toast.error("조회하신 날짜의 데이터가 없습니다");
+                setData(false);
+            }
+        } catch (err) {
+            console.error('try-catch 오류:', err);
+            setData(false);
         }
     }
     const onClick = () => {
         if (selectedDate) {
-            // API 호출
             fetchData(selectedDate);
         }
     }
@@ -48,7 +55,7 @@ function YearImcome(){
     return(
         <div className="imcome-content-wrap">
             <div className="imcome-nav">
-                <div className="imcome-title">손익 보고서</div>
+                <div className="imcome-title page-title">연도 손익</div>
                 <div className="imcome-calendar-container">
                     <DatePicker
                         selected={selectedDate}
@@ -62,29 +69,28 @@ function YearImcome(){
                     <div className="material-symbols-rounded">calendar_month</div>
                     <button className="calendar-button" type="button" onClick={onClick}>조회</button>
                 </div>
-                
             </div>
-            {/* {data && ( */} 
-            {/* <div className="imcome-content">
+            {data && ( 
+            <div className="imcome-content">
                 <div className="imcome-data-container">
                     <div className="imcome-data">
-                        <label>총 수익</label>
-                        <input type="text" className="imcome-data-input" />
+                        <div className="imcome-data-title">총 수익</div>
+                        <div className="imcome-data-amount">{totalPrice}</div>
                     </div>
                     <div className="imcome-data">
-                        <label>총 비용</label>
-                        <input type="text" className="imcome-data-input" />
+                        <div className="imcome-data-title">총 비용</div>
+                        <div className="imcome-data-amount">{totalLoss}</div>
                     </div>
                     <div className="imcome-data">
-                        <label>총 이익</label>
-                        <input type="text" className="imcome-data-input" />
+                        <div className="imcome-data-title">총 이익</div>
+                        <div className="imcome-data-amount">{profit}</div>
                     </div>
                 </div>
                 <div className="imcome-chart">
                     <MyChart />
                 </div>
-            </div> */}
-            {/* )} */}
+            </div>
+            )}
         </div>
     )
 }
