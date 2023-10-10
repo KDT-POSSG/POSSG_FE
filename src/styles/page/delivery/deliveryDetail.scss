@@ -95,6 +95,26 @@
       justify-content: center;
       align-items: start;
 
+      .delivery-text {
+        // font-size: .875rem;
+        font-weight: bold;
+      }
+
+      .status-4, .status--1 {
+        font-size: 1.5rem;
+      }
+
+      .status-4 {
+        color: $color-green;
+        // color: $color-white;
+        // background-color: $color-green;
+      }
+      .status--1 {
+        color: $color-red;
+        // color: $color-white;
+        // background-color: $color-red;
+      }
+
       .receipt-btn, .cancel-btn {
         border: 1px solid $color-border;
         border-radius: 2rem;
