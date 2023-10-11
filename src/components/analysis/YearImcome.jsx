@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { ACCESS_TOKEN, baseURL } from "store/apis/base";
 
 function YearImcome(){
-    const accesstokenStorage = localStorage.getItem("accesstoken");
+    const accesstoken = localStorage.getItem("accesstoken");
     
     const [selectedDate, setSelectedDate] = useState(null);
     const [totalPrice, setTotalPrice] = useState([]); 
@@ -17,6 +17,15 @@ function YearImcome(){
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
+    };
+
+    const chartOptions = {
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 5000000, // 임시로 설정
+            },
+        },
     };
 
     const fetchData = async (selectedDate) => {  
@@ -30,7 +39,7 @@ function YearImcome(){
             {
                 headers: {
                     // accessToken: `Bearer ${ACCESS_TOKEN}`,
-                    accessToken: `Bearer ${accesstokenStorage}`,
+                    accessToken: `Bearer ${accesstoken}`,
                 },
             })
             // console.log("monthSalesdDate res >>> ", res);
@@ -92,7 +101,7 @@ function YearImcome(){
                     </div>
                 </div>
                 <div className="imcome-chart">
-                    <MyChart data={[totalPrice, totalLoss, profit]} />
+                    <MyChart data={[totalPrice, totalLoss, profit]} labels={["총 수익", "총 비용", "총 이익"]} chartOptions={chartOptions} />
                 </div>
             </div>
             ) : (
