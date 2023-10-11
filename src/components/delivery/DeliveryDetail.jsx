@@ -1,15 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 import { addComma, dateString, deliveryStatus } from 'store/utils/function';
 import DeliveryButton from './DeliveryButton';
+import toast from 'react-hot-toast';
 
 function DeliveryDetail() {
 
   const { ref } = useParams();
+  const navi = useNavigate();
 
   const [deliveryDetail, setDeliveryDetail] = useState({});
+  // const [isDetailUpdate, setIsDetailUpdate] = useState(false);
 
   useEffect(() => {
 
@@ -31,6 +34,67 @@ function DeliveryDetail() {
       })
     
   }, []);
+
+  const handleOrderStatus = (e, ref) => {
+
+    console.log("handleOrderStatus >> ", ref);
+    e.stopPropagation();
+
+    axios
+      .post(`${baseURL}/statusUpdate`, {
+        ref: ref
+      }, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`,
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("배달 상태가 업데이트되었습니다");
+          // setIsDetailUpdate(!isDetailUpdate);
+          navi("/delivery");
+        }
+        else {
+          toast.error("배달 상태 업데이트에 실패했습니다");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("배달 상태 업데이트에 실패했습니다");
+      })
+  }
+
+  const handleOrderCancel = (e, ref) => {
+
+    console.log("handleOrderCancel >> ", ref);
+    e.stopPropagation();
+
+    axios
+      .post(`${baseURL}/refuseDelivery`, {
+        ref: ref
+      }, {
+        headers: {
+          accessToken: `Bearer ${ACCESS_TOKEN}`,
+        }
+      })
+      .then((response) => {
+        console.log(response.data);
+
+        if(response.data === "YES") {
+          toast.success("배달 주문이 취소되었습니다");
+          // setIsDetailUpdate(!isDetailUpdate);
+          navi("/delivery");
+        }
+        else {
+          toast.error("배달 주문 취소에 실패했습니다");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }
 
   return (
     <div className='delivery-detail-page'>
@@ -54,6 +118,10 @@ function DeliveryDetail() {
             <div className='delivery-location'>
               <span>주소</span>
               {deliveryDetail.location}
+            </div>
+            <div className='delivery-ref'>
+              <span>요청사항</span>
+              {deliveryDetail.ref}
             </div>
           </div>
 
@@ -83,14 +151,12 @@ function DeliveryDetail() {
         </div>
 
         <div className='item-bottom'>
-          {/* <button className='receipt-btn'>{deliveryStatus(deliveryDetail.delStatus)}</button>
-          {
-            deliveryDetail.delStatus === 1 ? 
-            <button className='cancel-btn'>주문취소</button>
-            :
-            <></>
-          } */}
-          <DeliveryButton deliveryRef={deliveryDetail.ref} delStatus={deliveryDetail.delStatus} />
+          <DeliveryButton 
+            deliveryRef={deliveryDetail.ref} 
+            delStatus={deliveryDetail.delStatus} 
+            handleOrderStatus={handleOrderStatus} 
+            handleOrderCancel={handleOrderCancel} 
+          />
         </div>
 
       </div>
