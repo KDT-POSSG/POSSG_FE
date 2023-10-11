@@ -59,7 +59,6 @@ function App() {
           {/* <Route element={<Header />} /> */}
           <Route path='/' element={<Home />} />
           <Route path='/product' element={<ProductList />} />
-          <Route path='/check' element={<AttendaceCheck />} />
           <Route path='/payment' element={<Payment />} />
           <Route path='/paymentlist' element={<Paymentlist />} />
           <Route path='/inventory' element={<Inventory />} />

@@ -15,20 +15,30 @@ function Employees() {
     const [totalCnt, setTotalCnt] = useState(0);
     const accesstoken = localStorage.getItem("accesstoken");
 
+    const [page, setPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [currentPageData, setCurrentPageData] = useState([]);
 
+    useEffect(() => {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      setCurrentPageData(employeeList.slice(start, end));
+    }, [employeeList, page, itemsPerPage]);
+  
     //모달
     const openModal = (type) => {
       setEmployeeType(type);
       setModalIsOpen(true);
-     };
-     const closeModal = () => {
-     setModalIsOpen(false);
-     };
+    };
+    const closeModal = () => {
+      setModalIsOpen(false);
+    };
  
      const fetchEmployees = () => {
       axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setEmployeeList(res.data.employee);
+            setTotalCnt(res.data.cnt);
             console.log('직원 리스트 불러오기 성공');
             console.log(res.data);
         })
@@ -54,7 +64,9 @@ function Employees() {
           <div className="employee-content">
             <div className="employee-header">
               <div className='page-title'>직원 관리</div>
+              <div className="btn-container">
               <button className='employee-btn' onClick={() => openModal('add')} >직원 추가</button>
+              </div>
             </div>
 
                   <div className="employee-table">
@@ -78,15 +90,14 @@ function Employees() {
                             <td className="tossface employee-empty" colSpan="6">🪪</td>
                           </tr>
                           ) : (
-                          employeeList.map((employee, index) => ( // employeeList를 이용하여 테이블에 행을 추가
-                          <tr key={index}>
+                            currentPageData.map((employee, index) => (
+                          <tr key={index} className={employee.terminationDate ? 'terminated' : ''}>
                             <td>{employee.employeeSeq}</td>
                             <td>{employee.empName}</td>
-                            
                             <td>{employee.phoneNumber}</td>
                             <td>{employee.hireDate}</td>
                             <td>{employee.terminationDate ? employee.terminationDate : "-"}</td>
-                            <td><button className='employee-info-btn' onClick={() => navigate(`/employeeInfo/${employee.employeeSeq}`)}>정보 보기</button></td>
+                            <td><button className='employee-info-btn' onClick={() => navigate(`/employeeInfo/${employee.employeeSeq}`)}>직원 정보</button></td>
                           </tr>
                           ))
                         )
@@ -98,10 +109,25 @@ function Employees() {
                 
             </div>
         
-        <Modal isOpen={modalIsOpen} onClose={closeModal}>
-          {employeeType === 'add' && <AddEmployeeModal onAdd={handleAddEmployee} />}
-          {employeeType === 'modify' && <ModifyEmployeeModal />}
-        </Modal>
+            <Pagination className="pagination"
+                activePage={page}
+                itemsCountPerPage={itemsPerPage}
+                totalItemsCount={totalCnt}
+                onChange={(pageNumber) => setPage(pageNumber)}
+                firstPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_left</span>}
+                prevPageText={<span className="material-symbols-rounded page-btn">chevron_left</span>}
+                nextPageText={<span className="material-symbols-rounded page-btn">chevron_right</span>}
+                lastPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_right</span>}
+            />
+
+            <Modal isOpen={modalIsOpen} onClose={closeModal} style={{
+              content: {
+                height: '78%',
+                width: '35%', 
+              }
+            }}>
+                {employeeType === 'add' && <AddEmployeeModal onAdd={handleAddEmployee} />}
+            </Modal>
         
         </div>
   );

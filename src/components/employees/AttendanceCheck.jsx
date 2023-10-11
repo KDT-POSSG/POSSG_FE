@@ -27,7 +27,12 @@ function AttendanceCehck(){
             <button onClick={() => openModal('attendance')}>출근</button>
             <button onClick={() => openModal('leavework')}>퇴근</button>
 
-        <Modal isOpen={modalIsOpen} onClose={closeModal}>
+        <Modal isOpen={modalIsOpen} onClose={closeModal} style={{
+            content : {
+                height : '25%',
+                width : '25%'
+            }}
+        }>
             {workType === 'attendance' && <Attendace onClose={closeModal} />}
             {workType === 'leavework' && <LeaveWork onClose={closeModal} />}
         </Modal>

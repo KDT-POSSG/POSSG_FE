@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import HomeItem from 'components/home/HomeItem';
 import HomeItemEdit from 'components/home/HomeItemEdit';
 import axios from 'axios';
+import Attendance from 'components/employees/Attendance';
+import LeaveWork from 'components/employees/LeaveWork';
+import AttendanceCehck from 'components/employees/AttendanceCheck';
 
 function Home() {
 
@@ -39,7 +42,7 @@ function Home() {
         }
         <HomeItemEdit homeMenu={homeMenu} isChange={isChange} setIsChange={setIsChange} />
       </div>
-
+      <AttendanceCehck />
     </div>
   )
 }
