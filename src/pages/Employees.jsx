@@ -14,7 +14,6 @@ function Employees() {
     const [employeeList, setEmployeeList] = useState([]);
     const [totalCnt, setTotalCnt] = useState(0);
     const accesstoken = localStorage.getItem("accesstoken");
-
     const [page, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPageData, setCurrentPageData] = useState([]);
@@ -35,7 +34,8 @@ function Employees() {
     };
  
      const fetchEmployees = () => {
-      axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
+      axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : 1}, 
+      headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setEmployeeList(res.data.employee);
             setTotalCnt(res.data.cnt);

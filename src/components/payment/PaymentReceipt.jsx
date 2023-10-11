@@ -2,12 +2,13 @@ import CheckmarkComponent from "../ui/CheckMark";
 import { addComma  } from "store/utils/function";
 import { useState } from "react";
 import Modal from "../ui/Modal";
-import TosspayReceiptInfoModal from "./TosspayReceiptInfoModal"
+import PaymentReceiptInfoModal from "./PaymentReceiptInfoModal"
 
 
-function TosspayReceipt({  closeModal, totalAmount, paymentResponse, handlePaymentSuccess }){
+function PaymentReceipt({  closeModal, totalAmount, paymentResponse, handlePaymentSuccess }){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalType, setModalType] = useState(null);
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -16,6 +17,12 @@ function TosspayReceipt({  closeModal, totalAmount, paymentResponse, handlePayme
     const handlePaymentComplete = () => {
         handlePaymentSuccess();
         closeModal();
+    }
+
+    const handleCheckReceipt = () => {
+        handlePaymentSuccess();
+        setModalType('paymentreceiptmodal');
+        openModal();
     }
     
    
@@ -49,16 +56,18 @@ function TosspayReceipt({  closeModal, totalAmount, paymentResponse, handlePayme
             </div>
 
             <div className="cashpayreceipt-buttons">
-                <button className="cashpayreceipt-btn" onClick={openModal}>영수증 보기</button>
+                <button className="cashpayreceipt-btn" onClick={handleCheckReceipt}>영수증 보기</button>
                 <button className="cashpayreceipt-complete-btn" onClick={handlePaymentComplete}>확인</button>
             </div>
 
-            <Modal isOpen={modalIsOpen} onClose={ closeModal }>
-                <TosspayReceiptInfoModal receiptURL={paymentResponse}/>
-            </Modal>
+            <Modal isOpen={modalIsOpen} onClose={ closeModal } style={{ content:{width:'40%' } }}>
+                {modalType === 'paymentreceiptmodal' &&
+                    <PaymentReceiptInfoModal receiptURL={paymentResponse}
+                />}
+                </Modal>
         </div>
     );
     
 }
 
-export default TosspayReceipt;  
+export default PaymentReceipt;  

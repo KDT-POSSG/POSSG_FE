@@ -6,8 +6,8 @@ import Etcpay from '../components/payment/Etcpay'
 import Discount from '../components/payment/Discount'
 import Point from '../components/payment/Point'
 import CashpayReceipt from '../components/payment/CashpayReceipt';
-import TosspayReceipt from 'components/payment/TosspayReceipt';
-import { handlePayment } from 'store/utils/tosspay.js';
+import PaymentReceipt from 'components/payment/PaymentReceipt';
+import { handlePayment } from 'store/utils/easypay.js';
 import { addComma } from 'store/utils/function.js';
 import { toast } from 'react-hot-toast';
 
@@ -69,10 +69,10 @@ function Payment() {
     
 
      //결제 함수 시작
-     const startPayment = async () => {
+     const startPayment = async (pgType) => {
         try {
             const totalAmount = getTotalAmount();
-            await handlePayment(totalAmount, products, setPaymentResponse, openModal);
+            await handlePayment(pgType, totalAmount, products, setPaymentResponse, openModal);
         } catch (error) {
             console.error("Payment failed:", error);
         }
@@ -96,7 +96,7 @@ function Payment() {
 
     //paymentType에 따라 모달창의 크기를 다르게 설정, 결제 영수증 모달의 넓이 조절을 위해 추가함
     const getModalStyle = () => {
-        if (paymentType === 'cashpayreceipt' || paymentType === 'tosspayreceipt') {
+        if (paymentType === 'cashpayreceipt' || paymentType === 'paymentreceipt') {
             return {
                 content: {
                     padding: '1.5rem',
@@ -165,16 +165,16 @@ function Payment() {
                         <div className='payment-total'>결제 금액</div>
                         <div className='payment-total-container'>
                             <div className='payment-total-price'>{addComma(getTotalAmount())} 원</div>
-                            <button className='payment-division-button' onClick={() => openModal('cash')}>현금 결제</button>
+                            <button className='payment-method-cash' onClick={() => openModal('cash')}>현금 결제</button>
                         </div>
                         <div className='payment-method-container2'>
                             <div className='payment-method-top'>
                                 <button className='payment-method-discount' onClick={() => openModal('discount')}>X</button>
-                                <button className='payment-method-point' onClick={() => openModal('point')}>X</button>
+                                <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
                             </div>
                             <div className='payment-method-bottom'>
-                                <button className='payment-method-cardpay' onClick={startPayment}>토스페이 결제</button>
-                                <button className='payment-method-cashpay' onClick={() => openModal('tosspayreceipt')}>X</button>
+                                <button className='payment-method-tosspay' onClick={() => startPayment("토스")}>토스페이 결제</button>
+                                <button className='payment-method-kakaopay' onClick={() => startPayment("카카오")}>카카오 결제</button>
                                 <button className='payment-method-etcpay'>X</button>
                             </div>
                         </div>
@@ -203,8 +203,8 @@ function Payment() {
                     changeAmount={changeAmount}
                     handlePaymentSuccess={handlePaymentSuccess}
                 />} 
-            {paymentType === 'tosspayreceipt' && 
-                    <TosspayReceipt
+            {paymentType === 'paymentreceipt' && 
+                    <PaymentReceipt
                     openModal={openModal}
                     closeModal={closeModal}
                     totalAmount={getTotalAmount()}
