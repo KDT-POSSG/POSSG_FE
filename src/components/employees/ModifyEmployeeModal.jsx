@@ -14,6 +14,7 @@ function ModifyEmployeeModal({ employeeSeq, closeModal }) {
     const [hireDate, setHireDate] = useState('');
     const [salary, setSalary] = useState(0);
     const navigate = useNavigate();
+    const accesstoken = localStorage.getItem("accesstoken");
 
     const updateEmployee = () => {
         const formatDate = (dateString) => {
@@ -34,10 +35,7 @@ function ModifyEmployeeModal({ employeeSeq, closeModal }) {
         };
 
         axios.post('http://54.180.60.149:3000/updateEmployee', employeeData, {
-            headers: { 
-                accessToken: `Bearer ${ACCESS_TOKEN}`
-            }
-        })
+            headers: { accessToken: `Bearer ${accesstoken}`,}})
         .then((res) => {
             if(res.data === "YES") {
                 console.log('직원 수정 성공');

@@ -63,7 +63,7 @@ function EmployeeInfo() {
             return {
                 content: {
                     height: '30%',
-                    width: '40%', 
+                    width: '37%', 
                 },
             };
         }
@@ -89,10 +89,12 @@ function EmployeeInfo() {
                         <div className='employee-info-container'>
                             <div className='employee-info-top'>
                                 <h2 className='employee-name'>{empName}</h2>
+                                {terminationDate === null ? (
                                     <div className='employee-btn-container'>
                                     <button className='employee-btn-update' onClick={() => openModal('updateEmp')}>정보 수정</button>
                                     <button className='employee-btn-terminate' onClick={() => openModal('terminateEmp')}>퇴사</button>
                                 </div>
+                                ) : (<div></div>)}
                             </div>
                             <div className='employee-line'>
                                 <div className='employee-info-left'>
