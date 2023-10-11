@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import HomeModal from './HomeModal';
-import Modal from 'components/Modal';
+import Modal from 'components/ui/Modal';
 
 function HomeItemEdit({ homeMenu, isChange, setIsChange }) {
 

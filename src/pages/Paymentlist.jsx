@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Modal from '../components/Modal';
+import Modal from '../components/ui/Modal';
 import ReceiptModal from '../components/paymentlist/ReceiptModal'
 import RefundModal from "../components/paymentlist/RefundModal";
 import { addComma } from "store/utils/function";
@@ -48,7 +48,7 @@ function Paymentlist()  {
         .then((response) => {
             setPaymentlistdetail(response.data);
             console.log('결제내역 상세 불러오기 성공');
-            
+            console.log(response.data);
         })
         .catch((error) => {
             console.log('결제내역 상세 불러오기 실패:', error);
@@ -164,7 +164,10 @@ function Paymentlist()  {
                 <RefundModal 
                     paymentlistdetail={paymentlistdetail}
                 />}
-                {paymentlistType === 'receipt' && <ReceiptModal />}
+                {paymentlistType === 'receipt' && 
+                <ReceiptModal 
+                    paymentlistdetail={paymentlistdetail}
+                />}
         </Modal>
         </div>
     )

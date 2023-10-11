@@ -1,4 +1,4 @@
-import Modal from '../Modal';
+import Modal from '../ui/Modal';
 import { useState } from 'react';
 import RefundConfirmModal from './RefundConfirmModal';
 import { addComma } from "store/utils/function";

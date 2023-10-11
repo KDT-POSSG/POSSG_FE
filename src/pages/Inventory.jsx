@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Modal from '../components/Modal';
+import Modal from '../components/ui/Modal';
 import InvenModal from '../components/inventory/InvenModal';
 import axios from 'axios';
 import Pagination from "react-js-pagination"; // npm i react-js-pagination

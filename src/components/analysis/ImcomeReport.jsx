@@ -1,28 +1,24 @@
-import MyChart from "./MyChart";
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import MyChart from "../../store/apis/MyChart";
 
 function ImcomeReport(){
+    const [activeSort, setActiveSort] = useState(1);
+
+    const handleActiveSort = (status) => {
+        // console.log("status >> ", status);
+        setActiveSort(status);
+    }
 
     return(
-        <div className="imcome-content-wrap">
-            <div className="imcome-title">손익 보고서</div>
-            <div className="imcome-content">
-                <div className="imcome-data-container">
-                    <div className="imcome-data">
-                        <label>총 수익</label>
-                        <input type="text" className="imcome-data-input" />
-                    </div>
-                    <div className="imcome-data">
-                        <label>총 비용</label>
-                        <input type="text" className="imcome-data-input" />
-                    </div>
-                    <div className="imcome-data">
-                        <label>총 이익</label>
-                        <input type="text" className="imcome-data-input" />
-                    </div>
-                </div>
-                <div className="imcome-chart">
-                    <MyChart />
-                </div>
+        <div className="imcomeReport-content-wrap">
+            <div className="imcomeReport-sort">
+                <div className={`imcomeReport-sort-active status-0${activeSort}`}></div>
+                <Link to="/imcomeReport/monthlyImcome" className="imcomeReport-status imcomeReport-status-01" onClick={() => handleActiveSort(1)}>월별</Link>
+                <Link to="yearImcome" className="imcomeReport-status imcomeReport-status-02" onClick={() => handleActiveSort(2)}>연별</Link>
+            </div>
+            <div className="imcomeReport-content">
+                <Outlet />
             </div>
         </div>
     )

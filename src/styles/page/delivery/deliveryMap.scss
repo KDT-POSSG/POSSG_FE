@@ -1,34 +1,30 @@
 .delivery-map {
-  // background-color: rgb(190, 190, 190);
   height: 100%;
-  padding-top: 3rem;
-  padding-bottom: 1.5rem;
+  padding: 3rem 1rem 1rem 1rem;
   display: grid;
-  grid-template-rows: 5fr 1fr;
-
-  > div {
-    // border: 1px solid blue;
-  }
+  grid-template-rows: 3fr 1fr;
   
   .delivery-map-top {
-    // border: 1px solid blue;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 
     .delivery-map-search, .delivery-map-image {
-      padding: 1rem;
+      width: 49%;
     }
 
     .delivery-map-search {
       height: 100%;
 
-      .delivery-daum {
-        // height: 100%;
+      > div > div {
+        border-radius: 1rem;
       }
     }
 
     .delivery-map-image {
       background-color: $color-gray;
+      border: 1px solid $color-border;
+      border-radius: 1rem;
     }
   }
 
@@ -64,7 +60,12 @@
         background-color: #F0A20A;
         border-color: #F0A20A;
       }
+
+      &:disabled {
+        background-color: $color-main;
+        // border-color: rgba($color-gray, $alpha: 0.5);
+        // border: none;
+      }
     }
   }
-
 }

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { ACCESS_TOKEN } from 'store/apis/base';
 import { useNavigate } from 'react-router-dom';
+import Modal from "../ui/Modal";
+import TerminateEmployeeModal from './TerminateEmployeeModal';
+
 
 function ModifyEmployeeModal({ employeeSeq, closeModal }) {
     const [empName, setEmpName] = useState('');

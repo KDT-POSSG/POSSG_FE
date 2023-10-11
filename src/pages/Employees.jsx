@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react"; 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Modal from '../components/Modal';
+import Modal from '../components/ui/Modal';
 import AddEmployeeModal from '../components/employees/AddEmployeeModal'
 import ModifyEmployeeModal from '../components/employees/ModifyEmployeeModal'
 import Pagination from "react-js-pagination";

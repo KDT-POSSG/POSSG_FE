@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import StockListItemSub from './StockListItemSub';
-import Modal from 'components/Modal';
+import Modal from 'components/ui/Modal';
 import StockAddModal from './StockAddModal';
 import { addComma } from 'store/utils/function';
 

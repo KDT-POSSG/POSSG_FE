@@ -1,0 +1,54 @@
+.menu-icon, .close-btn {
+  cursor: pointer;
+}
+
+.menu-left {
+  padding: 2rem;
+  padding-top: 1.75rem;
+
+  hr {
+    border: none;
+    background-color: $color-gray;
+    height: 1px;
+  }
+
+  .logo-container {
+    width: 40%;
+
+    > img {
+      object-fit: cover;
+    }
+  }
+  
+  .menu-branch {
+    display: flex;
+    align-items: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    
+    > span {
+      transition: $transition-cb2;
+    }
+
+    &:hover > span {
+      color: $color-main;
+    }
+  }
+
+  hr, .menu-name {
+    margin-bottom: 1.5rem;
+  }
+
+  .menu-name,
+  .header-menu-logout {
+    padding-left: .25rem;
+  }
+
+  .menu-name {
+    transition: $transition-cb2;
+
+    &:hover {
+      color: $color-main;
+    }
+  }
+}

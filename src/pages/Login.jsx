@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useCookies } from "react-cookie";
-import TokenRenewal from "./TokenRenewal";
+import TokenRenewal from "../components/convenience/TokenRenewal";
 
 function Login(){
 
@@ -68,7 +68,7 @@ function Login(){
     return(
         <div className="login-content-wrap">
             {/* <TokenRenewal /> */}
-            <div className="login-title">로그인</div>
+            <div className="login-title page-title">로그인</div>
 
             <div className="login-content">
                 <form id="loginForm" method="post" autoComplete="off" onSubmit={onSubmit}>

@@ -40,3 +40,33 @@ export const orderState = (orderStateNumber) => {
   }
 
 }
+
+export const deliveryStatus = (deliveryStatusNumber) => {
+
+  switch (deliveryStatusNumber) {
+    case 0:
+      return "장바구니";
+    case 1:
+      return "주문접수";
+    case 2:
+      return "픽업완료";
+    case 3:
+      return "배달완료하기";
+    case 4:
+      return "배달완료";
+    case -1:
+      return "취소완료";
+    default:
+      break;
+  }
+
+}
+
+export const dateString = (delDate) => {
+
+  let month = delDate.slice(5, 7);
+  let day = delDate.slice(8, 10);
+  let time = delDate.slice(11, 16);
+
+  return `${month}월 ${day}일 ${time}`;
+}

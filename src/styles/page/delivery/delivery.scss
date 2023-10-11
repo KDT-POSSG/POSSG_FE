@@ -1,7 +1,7 @@
 .delivery-page {
   background-color: $color-back;
   padding: 3vw 10vw;
-  min-height: 100vh;
+  // min-height: 100vh;
 
   .delivery-test {
     max-width: 1200px;
@@ -57,7 +57,8 @@
     background-color: $color-white;
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    // grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     padding: 1rem 0;
     margin-bottom: 1.5rem;
     justify-content: center;
@@ -71,7 +72,8 @@
       position: absolute;
       background-color: $color-main;
       border-radius: 1rem;
-      width: 33.33%;
+      // width: 33.33%;
+      width: 25%;
       height: 100%;
       top: 0;
       z-index: -1;
@@ -82,14 +84,22 @@
       left: 0;
     }
     .status-02 {
-      left: 33.33%;
+      left: 25%;
     }
     .status-03 {
-      left: 66.66%;
+      left: 50%;
+    }
+    .status-04 {
+      left: 75%;
     }
 
     .delivery-status {
       cursor: pointer;
+
+      > span {
+        color: $color-point;
+        margin-left: 0.5rem;
+      }
     }
   }
 
@@ -113,6 +123,11 @@
       grid-template-rows: 1fr 4fr 1fr;
       transition: $transition-cb2;
       filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+      cursor: pointer;
+
+      &:hover {
+        transform: translate(-2px, -2px);
+      }
 
       .item-top, .item-middle, .item-bottom {
         padding: 0 1.75rem;
@@ -123,18 +138,21 @@
         justify-content: space-between;
         align-items: center;
         background-color: $color-main;
-        // background-color: $color-border;
         border-radius: 2rem 2rem 0 0;
-        border-bottom: 1px solid $color-border;
 
-        > div {
-          color: $color-white;
+        .convenience-name {
           font-weight: bold;
+        }
+
+        .delivery-time {
+          font-weight: bold;
+          font-size: .875rem;
         }
       }
 
       .item-middle {
-        margin-top: 1.5vw;
+        padding-top: 1.5vw;
+        // padding-bottom: 1.5vw;
 
         .total-price {
           font-weight: bold;
@@ -142,16 +160,34 @@
         }
 
         .item-product-container {
+          display: grid;
+          grid-template-rows: repeat(4, 1fr);
 
           .item-product {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.75vw;
+            // margin-bottom: 0.5rem;
+            // display: grid;
+            // grid-template-columns: 80% 20%;
+
+            .product-name {
+              // margin-right: 1.5rem;
+              max-width: 160px;
+              line-height: 1.8;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+
+            .product-quantity {
+              text-align: right;
+            }
           }
 
           .item-product-more {
             text-align: center;
+            font-weight: bold;
           }
         }
       }
@@ -161,22 +197,59 @@
         justify-content: center;
         align-items: start;
 
-        .receipt-btn, .detail-btn {
+        .delivery-text {
+          // font-size: .875rem;
+          font-weight: bold;
+        }
+
+        .status-4 {
+          color: $color-green;
+          // color: $color-white;
+          // background-color: $color-green;
+        }
+        .status--1 {
+          color: $color-red;
+          // color: $color-white;
+          // background-color: $color-red;
+        }
+
+        .receipt-btn, .cancel-btn {
           border: 1px solid $color-border;
           border-radius: 1rem;
-          font-size: .75rem;
+          // font-size: .75rem;
+          font-size: .875rem;
           padding: 0.25rem 0.75rem;
         }
 
         .receipt-btn {
-          margin-right: .25rem;
-          background-color: $color-border;
+          background-color: $color-white;
+          border: 1px solid $color-main;
+          color: $color-main;
+          transition: $transition-cb2;
+
+          &:hover {
+            background-color: $color-main;
+            color: $color-white;
+          }
         }
 
-        .detail-btn {
-          margin-left: .25rem;
+        .cancel-btn {
+          margin-left: 0.5rem;
+          background-color: $color-white;
+          border: 1px solid $color-point;
+          color: $color-point;
+          transition: $transition-cb2;
+
+          &:hover {
+            background-color: $color-point;
+            color: $color-white;
+          }
         }
       }
     }
+  }
+
+  .delivery-paging {
+    margin: 2rem 0;
   }
 }

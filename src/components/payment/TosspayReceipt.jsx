@@ -1,7 +1,7 @@
-import CheckmarkComponent from "../CheckMark";
+import CheckmarkComponent from "../ui/CheckMark";
 import { addComma  } from "store/utils/function";
 import { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../ui/Modal";
 import TosspayReceiptInfoModal from "./TosspayReceiptInfoModal"
 
 

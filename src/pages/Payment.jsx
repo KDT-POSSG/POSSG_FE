@@ -1,6 +1,6 @@
 import React, { useState, useRef} from 'react';
 import axios from 'axios';
-import Modal from '../components/Modal';
+import Modal from '../components/ui/Modal';
 import Cashpay from '../components/payment/Cashpay'
 import Etcpay from '../components/payment/Etcpay'
 import Discount from '../components/payment/Discount'
