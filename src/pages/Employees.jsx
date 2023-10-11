@@ -14,7 +14,6 @@ function Employees() {
     const [employeeList, setEmployeeList] = useState([]);
     const [totalCnt, setTotalCnt] = useState(0);
     const accesstoken = localStorage.getItem("accesstoken");
-
     const [page, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPageData, setCurrentPageData] = useState([]);

@@ -22,9 +22,17 @@
             .payment-list-list{
                 border-bottom: 2px solid $color-border;
                 height: 36.3rem;
-                .payment-list-empty{
-                    padding-top: 60%;
-                    text-align: center;
+                .payment-list-empty-container{
+                    display: flex;
+                    flex-direction: column;
+                    padding-top: 13rem;
+                    align-items: center;
+                    .material-symbols-rounded{
+                        font-size: 7.5rem;
+                    }
+                    .payment-list-empty{
+                        font-weight: 500;
+                    }
                 }
                 .payment-list-row{
                     border-bottom: 1px solid $color-border;

@@ -17,7 +17,7 @@ function Inventory() {
     const [page, setPage] = useState(1);  // 현재 페이지
     const [itemsPerPage, setItemsPerPage] = useState(7);  // 한 페이지에 5개 아이템
     const [currentPageData, setCurrentPageData] = useState([]);
-    
+    const accesstoken = localStorage.getItem("accesstoken");
 
     //페이지
     useEffect(() => {
@@ -36,22 +36,25 @@ function Inventory() {
             clearInterval(timer);
         };
     }, []);
+
     const formattedTime = `${currentTime.getFullYear()}.${String(currentTime.getMonth() + 1).padStart(2, '0')}.${String(currentTime.getDate()).padStart(2, '0')} ${String(currentTime.getHours()).padStart(2, '0')}:${String(currentTime.getMinutes()).padStart(2, '0')}:${String(currentTime.getSeconds()).padStart(2, '0')}`;
+    
     const updateLastTime = (time) => {
         setLastUpdateTime(time);
     }
     
     //모달
     const openModal = () => {
-     setModalIsOpen(true);
+        setModalIsOpen(true);
     };
     const closeModal = () => {
-    setModalIsOpen(false);
+        setModalIsOpen(false);
     };
 
     //시재 리스트 불러오기
-    const loadInventoryData = () => {
-        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page}})
+    const fetchInventoryData = () => {
+        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page},
+        headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setInventoryList(res.data.settlement);
             setTotalCnt(res.data.cnt);
@@ -63,8 +66,13 @@ function Inventory() {
     };
 
     useEffect(() => {
-        loadInventoryData();
+        fetchInventoryData();
     }, [page]);
+
+    const handleLoadInventoryData = () => {
+        fetchInventoryData();
+        closeModal();
+    }
     
 
    //시재 리스트 메모 드롭다운
@@ -138,7 +146,7 @@ function Inventory() {
             />
 
             <Modal isOpen={modalIsOpen} onClose={ closeModal } >
-                <InvenModal updateLastTime={ updateLastTime } closeModal={closeModal} reloadInventoryData={loadInventoryData}/>
+                <InvenModal updateLastTime={ updateLastTime } closeModal={closeModal} onLoad={handleLoadInventoryData}/>
             </Modal>
         </div>
     )

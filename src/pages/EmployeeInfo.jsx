@@ -17,6 +17,7 @@ function EmployeeInfo() {
     const [birthDate, setBirthDate] = useState('');
     const [salary, setSalary] = useState(0);
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [hireDate, setHireDate] = useState('');
     const accesstoken = localStorage.getItem("accesstoken");
     const [employeeType, setEmployeeType] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +35,7 @@ function EmployeeInfo() {
        setModalIsOpen(false);
        };
 
-    useEffect(() => {
+    const fetchEmployeeInfo = () => {
         axios.get('http://54.180.60.149:3000/selectOneAttendance', { params: { employeeSeq },
         headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((response) => {
@@ -45,6 +46,7 @@ function EmployeeInfo() {
             setBranchName(employeeData.branchName);
             setGender(employeeData.gender);
             setBirthDate(employeeData.birthDate);
+            setHireDate(employeeData.hireDate);
             setSalary(employeeData.salary);
             setPhoneNumber(employeeData.phoneNumber);
             setAttendanceData(attendanceList);
@@ -56,8 +58,18 @@ function EmployeeInfo() {
         .catch((error) => {
             console.log('출퇴근 정보 불러오기 실패:', error);
         });
-    }, [employeeSeq]);
-    
+    }
+
+    useEffect(() => {
+        fetchEmployeeInfo();
+    }, []);
+
+    const handleUpdateEmployee = () => {
+        fetchEmployeeInfo();
+        closeModal();
+    }
+
+
     const getModalStyle = () => {
         if (employeeType === 'terminateEmp') {
             return {
@@ -111,7 +123,7 @@ function EmployeeInfo() {
                                     <div className='employee-info'>연락처</div>
                                     <div className='employee-info2'>{phoneNumber}</div>
                                     <div className='employee-info'>시급</div>
-                                    <div className='employee-info2'>{new Intl.NumberFormat('ko-KR').format(salary)}</div>
+                                    <div className='employee-info2'>{new Intl.NumberFormat('ko-KR').format(salary)} 원</div>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +185,7 @@ function EmployeeInfo() {
                     {employeeType === 'updateEmp' && 
                     <ModifyEmployeeModal 
                         employeeSeq={employeeSeq}
-                        closeModal={closeModal}
+                        onUpdate={handleUpdateEmployee}
                     />}
                 </Modal>
         </div>)}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ACCESS_TOKEN } from 'store/apis/base';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import Modal from "../ui/Modal";
 import TerminateEmployeeModal from './TerminateEmployeeModal';
 
 
-function ModifyEmployeeModal({ employeeSeq, closeModal }) {
+function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
     const [empName, setEmpName] = useState('');
     const [gender, setGender] = useState('남성');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -39,7 +39,7 @@ function ModifyEmployeeModal({ employeeSeq, closeModal }) {
         .then((res) => {
             if(res.data === "YES") {
                 console.log('직원 수정 성공');
-                closeModal();
+                onUpdate();
             } else {
                 console.log(res.data);
             }
