@@ -9,10 +9,10 @@ import DeliveryButton from './DeliveryButton';
 
 function DeliveryList() {
 
-  const activeSort = useOutletContext();
+  const { activeSort, page, setPage } = useOutletContext();
   const navi = useNavigate();
 
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [deliveryList, setDeliveryList] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -135,9 +135,9 @@ function DeliveryList() {
                     ))
                   }
                   {
-                    item.details.length > 2 ?
+                    item.details.length > 3 ?
                     <div className='item-product-more'>
-                      <div>…</div>
+                      <div>...</div>
                     </div>
                     :
                     <></>
@@ -148,7 +148,12 @@ function DeliveryList() {
               </div>
 
               <div className='item-bottom'>
-                <DeliveryButton deliveryRef={item.ref} delStatus={item.delStatus} handleOrderStatus={handleOrderStatus} handleOrderCancel={handleOrderCancel} />
+                <DeliveryButton 
+                  deliveryRef={item.ref} 
+                  delStatus={item.delStatus} 
+                  handleOrderStatus={handleOrderStatus} 
+                  handleOrderCancel={handleOrderCancel} 
+                />
               </div>
 
             </div>
@@ -171,7 +176,9 @@ function DeliveryList() {
             onChange={handlePage}
           />
           :
-          <></>
+          <div className='delivery-icon-container'>
+            <span className='tossface delivery-icon'>🏃🏃🏃</span>
+          </div>
         }
       </div>
     </>

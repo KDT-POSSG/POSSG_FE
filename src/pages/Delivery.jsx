@@ -11,10 +11,12 @@ function Delivery() {
   const [isRegi, setIsRegi] = useState(false);
   const [convAddress, setConvAddress] = useState("");
   const [activeSort, setActiveSort] = useState(1);
+  const [page, setPage] = useState(1);
 
   const handleActiveSort = (status) => {
     navi("/delivery");
     setActiveSort(status);
+    setPage(1);
   }
 
   useEffect(() => {
@@ -59,7 +61,7 @@ function Delivery() {
               <div className='delivery-status' onClick={() => handleActiveSort(3)}>배달중<span>20</span></div>
               <div className='delivery-status' onClick={() => handleActiveSort(4)}>완료<span>12</span></div>
             </div>
-            <Outlet context={activeSort} />
+            <Outlet context={{ activeSort, setActiveSort, page, setPage }} />
           </>
           :
           <DeliveryRegister setIsRegi={setIsRegi} />
