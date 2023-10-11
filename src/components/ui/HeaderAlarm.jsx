@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from './Modal';
 import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { EventSourcePolyfill } from 'event-source-polyfill';
 
 function HeaderAlarm() {
 
@@ -17,29 +18,31 @@ function HeaderAlarm() {
     },
   };
 
+  const accessToken = localStorage.getItem("accesstoken");
+
   const [alarmList, setAlarmList] = useState([]);
   const [isAlarm, setIsAlarm] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   const eventSource = new EventSource(`${baseURL}/notifications`, {
-  //     headers: {
-  //       accessToken: `Bearer ${ACCESS_TOKEN}`, // 여기에 실제 토큰을 추가하세요.
-  //   }});
+    const eventSource = new EventSourcePolyfill(`${baseURL}/notifications`, {
+      headers: {
+        accessToken: `Bearer ${accessToken}`, // 여기에 실제 토큰을 추가하세요.
+    }});
 
-  //   eventSource.onmessage = function(event) {
-  //     const product = JSON.parse(event.data);
-  //     console.log("event >> ", event);
-  //     console.log("event.data >> ", event.data);
-  //     console.log("product >> ", product);
-  //   };
+    eventSource.onmessage = function(event) {
+      const product = JSON.parse(event.data);
+      console.log("event >> ", event);
+      console.log("event.data >> ", event.data);
+      console.log("product >> ", product);
+    };
 
-  //   eventSource.onerror = function(error) {
-  //     console.error("SSE Error:", error);
-  //   };
+    eventSource.onerror = function(error) {
+      console.error("SSE Error:", error);
+    };
     
-  // }, []);
+  }, []);
 
   const modalOpen = () => {
     setIsModalOpen(true);
