@@ -9,7 +9,6 @@ function AddEmployeeModal({onAdd}) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [hireDate, setHireDate] = useState('');
   const [salary, setSalary] = useState(0);
-
   const accesstoken = localStorage.getItem("accesstoken");
 
   const handleSubmit = () => {

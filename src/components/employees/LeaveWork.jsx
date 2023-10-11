@@ -9,14 +9,12 @@ import { toast } from 'react-hot-toast';
 function LeaveWork({onClose}) {
     const [employeeSeq, setEmployeeSeq] = useState(0);
     const [leavework, setLeaveWork] = useState('');
+    const accesstoken = localStorage.getItem("accesstoken");
 
     const handleclickLeaveWork = () => {
         axios.post('http://54.180.60.149:3000/leavework', null, {
             params: { employeeSeq: employeeSeq },
-            headers: { 
-                accessToken: `Bearer ${ACCESS_TOKEN}`
-            }
-        })
+            headers: { accessToken: `Bearer ${accesstoken}`,}})
         .then((res) => {
             if (res.data === "YES") {
                 setLeaveWork(res.data.leavework);

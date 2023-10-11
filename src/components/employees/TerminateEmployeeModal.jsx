@@ -7,13 +7,11 @@ import { ACCESS_TOKEN } from 'store/apis/base';
 function TerminateEmployeeModal({ employeeSeq, empName }){
     const navigate = useNavigate();
     const [terminateemployee, setTerminateEmployee] = useState('');  // 퇴사 직원 번호
-    
+    const accesstoken = localStorage.getItem("accesstoken");
+
     const handleTerminate = () => {
         axios.post('http://54.180.60.149:3000/terminateEmployee', null, {params: {employeeSeq : employeeSeq},
-        headers: { 
-            accessToken: `Bearer ${ACCESS_TOKEN}`
-        }
-    })
+        headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setTerminateEmployee(res.data.terminateemployee);
             console.log('직원 퇴사 성공');

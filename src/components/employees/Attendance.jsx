@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 function Attendance({onClose}) {
     const [employeeSeq, setEmployeeSeq] = useState(0);
     const [attendance, setAttendance] = useState('');
+    const accesstoken = localStorage.getItem("accesstoken");
 
     const attendancedata = {
         employeeSeq
@@ -16,10 +17,7 @@ function Attendance({onClose}) {
 
     const handleclickAttendance = () =>{
         axios.post('http://54.180.60.149:3000/attendance', attendancedata, {
-            headers : { 
-              accessToken : `Bearer ${ACCESS_TOKEN}`
-            }
-        })
+            headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res)=> {
             if(res.data === "YES") {
                 setAttendance(res.data.attendance);
