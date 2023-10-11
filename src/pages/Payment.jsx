@@ -128,9 +128,9 @@ function Payment() {
                 <div className='payment-list'>
                     <div className='payment-list-list'>
                     {products.length === 0 ? (
-                        <div>
+                        <div className='payment-list-empty-container'>
+                            <span class="material-symbols-rounded">barcode</span>
                             <div className='payment-list-empty'>바코드를 스캔해주세요.</div>
-                            
                         </div>
                         ) : (
                             products.map(product => (

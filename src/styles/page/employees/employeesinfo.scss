@@ -21,7 +21,6 @@
         width: 270px;
         border-radius: 1rem;
         border: 1px $color-border solid;
-
       }
       
     }
@@ -123,20 +122,17 @@
 
   .employee-table {
     width: 100%;
-
-
     table {
       border: 1px #a39485 solid;
       font-size: 1rem;
       filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
       border-collapse: collapse;
-      border-radius: 5px;
+      border-radius: 1rem;
       width: 100%;
       overflow: hidden;
-
       tbody{
         .employeeinfo-empty{
-          font-size: 5rem;
+          font-size: 98px;
         }
       }
     }
@@ -148,6 +144,7 @@
       font-size: 16px;
       color: #000000;
       text-transform: uppercase;
+      border-bottom: 1px solid $color-border;
     }
       
     thead {
@@ -159,11 +156,12 @@
       
     td {
       text-align: center;
-      border-bottom: 1px solid rgba(0,0,0,.1);
+      border-bottom: 1px solid $color-back;
       background: #fff;
       cursor: pointer;
       vertical-align: middle;
       padding: 1em .5em;
+      transition: $transition-cb2;
     }
 
     tr:hover td{
