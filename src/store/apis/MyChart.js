@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Chart, registerables } from "chart.js";
 
-const MyChart = ({data}) => {
+const MyChart = ({data, labels, chartOptions}) => {
   const chartRef = useRef(null);
   let chartInstance = null;
 
@@ -13,7 +13,7 @@ const MyChart = ({data}) => {
       chartInstance = new Chart(ctx, {
         type: "bar",
         data: {
-          labels: ["매출", "지출", "순이익"], // 데이터명
+          labels: labels, // 데이터명
           datasets: [
             {
               label: "",
@@ -32,14 +32,16 @@ const MyChart = ({data}) => {
             },
           ],
         },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 10000000, // 최댓값
-            },
-          },
-        },
+        options: 
+          chartOptions,
+        // {
+        //   scales: {
+        //     y: {
+        //       beginAtZero: true,
+        //       max: 10000000, // 최댓값
+        //     },
+        //   },
+        // },
       });
     };
 
