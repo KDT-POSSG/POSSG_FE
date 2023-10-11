@@ -57,6 +57,7 @@ function App() {
         {/* <Route element={<PrivateRoutes />}> */}
           {/* <Route element={<Header />} /> */}
           <Route path='/' element={<Home />} />
+          <Route path='/product' element={<ProductList />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/updateMyPage' element={<UpdateMyPage />} />
           <Route path='/payment' element={<Payment />} />

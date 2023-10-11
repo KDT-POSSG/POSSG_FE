@@ -1,5 +1,5 @@
 .employeesinfo{
-  padding: 5vh 10vw;
+  padding: 5vh 15vw;
   .employeeinfo-header{
     .page-title{
       display: flex;
@@ -8,46 +8,109 @@
   .employee-information{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     margin-top: 1rem;
     
-
     .employee-img{
-      height: 200px;
-      width: 200px;
-      border: 1px #a39485 solid;
-      box-shadow: 0 2px 5px rgba(0,0,0,.25);
-      border-collapse: collapse;
-      border-radius: 5px;
+      height: 270px;
+      width: 270px;
       border-radius: 1rem;
 
-
       img{
-        height: 200px;
-        width: 200px;
+        height: 270px;
+        width: 270px;
         border-radius: 1rem;
+        border: 1px $color-border solid;
+
       }
       
     }
 
     .employee-info-container{
+      padding: 1rem 2rem 0 2rem;
       display: flex;
       flex-direction: column;
       font-size: 1rem;
-      margin-left: 50px;
-      font-weight: bold;
-      width: 600px;
-    }
-    h2{
-      padding: 10px;
-    }
-    .employee-name{
-      font-size: 2.3rem;
+      margin-left: 30px;
+      width: 100%;
+      background-color: white;
+      border-radius: 1rem;
 
-    }
-    .employee-branch-container{
-      display: flex;
+      filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+
+      .employee-info-top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .employee-btn-container{
+          .employee-btn-terminate {
+            background-color: $color-point;
+            color: $color-white;
+            border: 2px solid $color-point;  
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: $transition-cb2;
+          }
+          .employee-btn-terminate:hover {
+            background-color: #e94606;
+            border-color: #e94606;
+          }
       
+          .employee-btn-update {
+            background-color: $color-main;
+            color: $color-white;
+            border: 2px solid $color-main;  
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: $transition-cb2;
+            margin-right: 0.5rem;
+          }
+          .employee-btn-update:hover {
+            background-color: #F0A20A;
+            border-color: #F0A20A;
+          }
+        }
+      }
+      .employee-line{
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        // border-top: 1px solid $color-border;
+        display: flex;
+        height: 200px;
+        .employee-info-left{
+          .employee-info{
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px;
+          }
+          .employee-info2{
+            font-size: 1rem;
+            padding: 2px 0 8px 9px;
+          }
+        }
+        .employee-info-right{
+          margin-left: 12rem;
+          .employee-info{
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px;
+          }
+          .employee-info2{
+            font-size: 1rem;
+            padding: 2px 0 8px 9px;
+          }
+        }
+        
+      }
+    }
+
+    .employee-name{
+      font-size: 1.5rem;
+      font-weight: 600;
     }
     
 
@@ -61,24 +124,6 @@
     align-items: center;
     justify-self: center;
     margin-top: 1.5rem;
-
-    .employee-btn {
-      background-color: $color-white;
-      color: red;
-      border: 2px solid red;  
-      border-radius: 1rem;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 1rem;
-      width: 200px;
-      margin-top: 1.5rem;
-    }
-      .employee-btn:hover {
-        background-color: red;
-        color: white;
-        transition: 0.3s;
-        font-weight: bold;
-      }
   
 
   .employee-table {
@@ -88,7 +133,7 @@
     table {
       border: 1px #a39485 solid;
       font-size: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,.25);
+      filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
       border-collapse: collapse;
       border-radius: 5px;
       width: 100%;
@@ -136,14 +181,188 @@
       color: #73685d;
     }
   }
-  
-  // .employee-btn-container{
-  //   display: flex;
-  //   justify-content: center;
+}
+.pagination{
+  margin-top: 1.5rem;
+}
+}
+
+.terminated{
+  padding: 5vh 15vw;
+  .employeeinfo-header{
+    .page-title{
+      display: flex;
+      justify-content: left;
+    }
+  .employee-information{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-top: 1rem;
     
-  // }
+    .employee-img{
+      height: 270px;
+      width: 270px;
+      border-radius: 1rem;
+
+      img{
+        height: 270px;
+        width: 270px;
+        border-radius: 1rem;
+        border: 1px $color-border solid;
+        filter: grayscale(100%);  
+      }
+      
+    }
+
+    .employee-info-container{
+      padding: 1.7rem 2rem 0.7rem 2rem;
+      display: flex;
+      flex-direction: column;
+      font-size: 1rem;
+      margin-left: 30px;
+      width: 100%;
+      background-color: white;
+      border-radius: 1rem;
+
+      filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+
+      .employee-info-top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .employee-btn-container{
+          .employee-btn-terminate {
+            background-color: $color-point;
+            color: $color-white;
+            border: 2px solid $color-point;  
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: $transition-cb2;
+          }
+          .employee-btn-update {
+            background-color: $color-main;
+            color: $color-white;
+            border: 2px solid $color-main;  
+            border-radius: 1rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: $transition-cb2;
+            margin-right: 0.5rem;
+          }
+        }
+      }
+      .employee-line{
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        // border-top: 1px solid $color-border;
+        display: flex;
+        height: 200px;
+        .employee-info-left{
+          .employee-info{
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px;
+          }
+          .employee-info2{
+            font-size: 1rem;
+            padding: 2px 0 8px 9px;
+          }
+        }
+        .employee-info-right{
+          margin-left: 12rem;
+          .employee-info{
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px;
+          }
+          .employee-info2{
+            font-size: 1rem;
+            padding: 2px 0 8px 9px;
+          }
+        }
+        
+      }
+    }
+
+    .employee-name{
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+
+    }
+  }
   
+  .employee-content {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    margin-top: 1.5rem;
   
 
+  .employee-table {
+    width: 100%;
+
+
+    table {
+      border: 1px #a39485 solid;
+      font-size: 1rem;
+      filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+      border-collapse: collapse;
+      border-radius: 5px;
+      width: 100%;
+      overflow: hidden;
+
+      tbody{
+        .employeeinfo-empty{
+          font-size: 5rem;
+        }
+      }
+    }
+    
+    th {
+      text-align: center;
+      padding: 1em .5em;
+      font-weight: 500;
+      font-size: 16px;
+      color: #000000;
+      text-transform: uppercase;
+    }
+      
+    thead {
+      font-weight: bold;
+      color: #fff;
+      background: #ffffff;
+    }
+      
+      
+    td {
+      text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,.1);
+      background: #fff;
+      cursor: pointer;
+      vertical-align: middle;
+      padding: 1em .5em;
+    }
+
+    tr:hover td{
+      background-color: #f5f5f5;
+
+    }
+    
+    
+    a {
+      color: #73685d;
+    }
+  }
+}
+.pagination{
+  margin-top: 1.5rem;
 }
 }

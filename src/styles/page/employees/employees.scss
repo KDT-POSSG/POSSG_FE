@@ -15,7 +15,6 @@
                 font-size: 1rem;
                 width: 200px;
                 margin-top: 15px;
-                margin-right: 11rem;
               }
               .employee-btn:hover {
                 background-color: $color-point;
@@ -36,22 +35,23 @@
           }
           
           .employee-btn {
-              background-color: $color-white;
-              color: $color-point;
-              border: 1px solid $color-point;  
-              border-radius: 1rem;
-              padding: 10px 20px;
-              cursor: pointer;
-              font-size: 1rem;
-              width: 200px;
-              margin-top: 1rem;
-              margin-bottom: 1rem;
+            background-color: $color-white;
+            color: $color-point;
+            border: 1px solid $color-point;  
+            border-radius: 1rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 200px;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
             }
-              .employee-btn:hover {
-                background-color: $color-point;
-                color: white;
-                transition: 0.3s;
-              }
+            .employee-btn:hover {
+              background-color: $color-point;
+              color: white;
+              transition: 0.3s;
+            }
+          
           }
       
         .employee-table {
@@ -60,8 +60,7 @@
             align-items: center;
             flex-direction: column;
             width: 100%;
-        
-        
+
             table {
               border: 1px #a39485 solid;
               font-size: 1rem;
@@ -72,10 +71,18 @@
               width: 100%;
               overflow: hidden;
               .employee-list{
+                
                 .employee-empty{
                   height: 350px;
                   font-size: 5rem;
                 }
+
+                .terminated{
+                  td{
+                    color: rgba($color-gray, $alpha: 0.5);
+                  }
+                }
+                
               }
             }
             
@@ -106,7 +113,6 @@
         
             tr:hover td{
               background-color: #f5f5f5;
-        
             }
             
             
