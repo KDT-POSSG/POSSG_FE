@@ -5,14 +5,19 @@ import axios from 'axios';
 
 function Home() {
 
+  const accessToken = localStorage.getItem("accesstoken");
+
   const [isChange, setIsChange] = useState(false);
   const [homeMenu, setHomeMenu] = useState([]);
 
   useEffect(() => {
 
-    axios.get("http://54.180.60.149:3000/favoritePageList", {
+    axios.get(`http://54.180.60.149:3000/favoritePageList`, {
         params: {
           convSeq: 1
+        },
+        headers: {
+          accessToken: `Bearer ${accessToken}`
         }
       })
       .then((response) => {
