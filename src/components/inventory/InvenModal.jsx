@@ -4,12 +4,12 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 
-function InvenModal (props) {
+function InvenModal ({props, handleLoadInventoryData}) {
     const [selectedInputIndex, setSelectedInputIndex] = useState(null);
     const [inputValues, setInputValues] = useState(Array(8).fill(""));
     const [memo, setMemo] = useState("");
     const currentDateTime = new Date().toISOString();
-
+    const accesstoken = localStorage.getItem("accesstoken");
     const prices = [50000, 10000, 5000, 1000, 500, 100, 50, 10];
 
     const handleInputFocus = (index) => {
@@ -42,13 +42,13 @@ function InvenModal (props) {
         "memo": memo
       };
     
-      axios.post('http://54.180.60.149:3000/addsettlement', data)
+      axios.post('http://54.180.60.149:3000/addsettlement', data,{
+      headers:{ accessToken: `Bearer ${accesstoken}`}})
       .then((res) => {
         console.log(res.data);
         console.log('보내기 성공');
         props.updateLastTime(new Date(currentDateTime));
-        props.closeModal(); 
-        props.reloadInventoryData();
+        handleLoadInventoryData();
         toast.success("시재 입력 완료");
       }).catch((err) => {
         console.log(err);
