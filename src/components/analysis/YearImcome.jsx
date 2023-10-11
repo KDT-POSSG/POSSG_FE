@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { ACCESS_TOKEN, baseURL } from "store/apis/base";
 
 function YearImcome(){
+    const accesstokenStorage = localStorage.getItem("accesstoken");
+    
     const [selectedDate, setSelectedDate] = useState(null);
     const [totalPrice, setTotalPrice] = useState([]); 
     const [totalLoss, setTotalLoss] = useState([]); 
@@ -27,19 +29,22 @@ function YearImcome(){
             const res = await axios.get(`${baseURL}/profitAndLoss?date=${yearImcomeDate}&choice=0`,
             {
                 headers: {
-                    accessToken: `Bearer ${ACCESS_TOKEN}`,
+                    // accessToken: `Bearer ${ACCESS_TOKEN}`,
+                    accessToken: `Bearer ${accesstokenStorage}`,
                 },
             })
             // console.log("monthSalesdDate res >>> ", res);
             const resData = res.data;
-            if(resData){
-                setTotalPrice(addComma(resData.totalPrice));
-                setTotalLoss(addComma(resData.totalLoss));
-                setProfit(addComma(resData.profit));
+            if (JSON.stringify(resData) === '{}') {
+                setTotalPrice(0);
+                setTotalLoss(0);
+                setProfit(0);
                 setData(true);
-            }else{
-                toast.error("조회하신 날짜의 데이터가 없습니다");
-                setData(false);
+            } else {
+                setTotalPrice(resData.totalPrice);
+                setTotalLoss(resData.totalLoss);
+                setProfit(resData.profit);
+                setData(true);
             }
         } catch (err) {
             console.error('try-catch 오류:', err);
@@ -70,26 +75,30 @@ function YearImcome(){
                     <button className="calendar-button" type="button" onClick={onClick}>조회</button>
                 </div>
             </div>
-            {data && ( 
+            {data ? (
             <div className="imcome-content">
                 <div className="imcome-data-container">
                     <div className="imcome-data">
                         <div className="imcome-data-title">총 수익</div>
-                        <div className="imcome-data-amount">{totalPrice}</div>
+                        <div className="imcome-data-amount">{addComma(totalPrice)}</div>
                     </div>
                     <div className="imcome-data">
                         <div className="imcome-data-title">총 비용</div>
-                        <div className="imcome-data-amount">{totalLoss}</div>
+                        <div className="imcome-data-amount">{addComma(totalLoss)}</div>
                     </div>
                     <div className="imcome-data">
                         <div className="imcome-data-title">총 이익</div>
-                        <div className="imcome-data-amount">{profit}</div>
+                        <div className="imcome-data-amount">{addComma(profit)}</div>
                     </div>
                 </div>
                 <div className="imcome-chart">
-                    <MyChart />
+                    <MyChart data={[totalPrice, totalLoss, profit]} />
                 </div>
             </div>
+            ) : (
+                <div className="no-data-message">
+                    
+                </div>
             )}
         </div>
     )

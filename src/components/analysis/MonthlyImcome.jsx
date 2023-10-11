@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { ACCESS_TOKEN, baseURL } from "store/apis/base";
 
 function MonthlyImcome(){
+    const accesstokenStorage = localStorage.getItem("accesstoken");
+
     const [selectedDate, setSelectedDate] = useState(null);
     const [totalPrice, setTotalPrice] = useState([]); 
     const [totalLoss, setTotalLoss] = useState([]); 
@@ -27,22 +29,23 @@ function MonthlyImcome(){
             const res = await axios.get(`${baseURL}/profitAndLoss?date=${monthImcomeDate}&choice=1`,
             {
                 headers: {
-                    accessToken: `Bearer ${ACCESS_TOKEN}`,
+                    // accessToken: `Bearer ${ACCESS_TOKEN}`,
+                    accessToken: `Bearer ${accesstokenStorage}`,
                 },
             })
-            console.log("monthSalesdDate res >>> ", res);
-            // console.log("monthSalesdDate res.data >>> ", res.data);
+            console.log("accesstokenStorage >>> ",accesstokenStorage)
             const resData = res.data;
-            if(resData){
+            if (JSON.stringify(resData) === '{}') {
+                setTotalPrice(0);
+                setTotalLoss(0);
+                setProfit(0);
+                setData(true);
+            } else {
                 setTotalPrice(resData.totalPrice);
                 setTotalLoss(resData.totalLoss);
                 setProfit(resData.profit);
                 setData(true);
-            }else{
-                toast.error("조회하신 날짜의 데이터가 없습니다");
-                setData(false);
             }
-            
         } catch (err) {
             console.error('try-catch 오류:', err);
             setData(false);
@@ -93,7 +96,9 @@ function MonthlyImcome(){
                 </div>
             </div>
             ) : (
-                <div className="no-data-message"></div>
+                <div className="no-data-message">
+                    
+                </div>
             )}
         </div>
     )
