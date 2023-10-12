@@ -4,9 +4,9 @@ function Analysis(){
     return(
         <div className="analysis-content-wrap">
             <div className="analysis-content">
-                <div className="analysis"><Link to="/cost">월세 및 관리비</Link></div>
-                <div className="analysis"><Link to="/salesReport">매출 보고서</Link></div>
-                <div className="analysis"><Link to="/imcomeReport">손익 보고서</Link></div>
+                <Link to="/cost"><div className="analysis">월세 및 관리비</div></Link>
+                <Link to="/salesReport"><div className="analysis">매출 보고서</div></Link>
+                <Link to="/imcomeReport"><div className="analysis">손익 보고서</div></Link>
             </div>
         </div>
     )

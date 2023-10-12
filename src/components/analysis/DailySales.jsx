@@ -76,6 +76,7 @@ function DailySales(){
                     <button className="calendar-button" type="button" onClick={onClick}>조회</button>
                 </div>
             </div>
+            {data ? (
             <div className="sales-content">
                 <div className="sales-data-container">
                     <div className="sales-data">
@@ -86,7 +87,13 @@ function DailySales(){
                 <div className="sales-chart"> 
                     <MyChart data={[salesData]} labels={["매출"]} chartOptions={chartOptions} />
                 </div>
-            </div>    
+            </div>
+            ) : (
+                <div className="select-date-message">
+                    <span className="tossface select-icon">📆</span>
+                    <p className="select-date-text">조회할 날짜를 선택해주세요</p>
+                </div>
+            )}    
         </div>
     )
 }

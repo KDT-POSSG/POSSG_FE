@@ -10,11 +10,13 @@ function SalesReport(){
     }
     return(
         <div className="salesReport-content-wrap">
-            <div className="salesReport-sort">
-                <div className={`salesReport-sort-active status-0${activeSort}`}></div>
-                <Link to="/salesReport/daily" className="salesReport-status salesReport-status-01" onClick={() => handleActiveSort(1)}>일별</Link>
-                <Link to="monthlySales" className="salesReport-status salesReport-status-02" onClick={() => handleActiveSort(2)}>월별</Link>
-                <Link to="yearSales" className="salesReport-status salesReport-status-02" onClick={() => handleActiveSort(3)}>연별</Link>
+            <div className="salesReport-sort-wrap">
+                <div className="salesReport-sort">
+                    <div className={`salesReport-sort-active status-0${activeSort}`}></div>
+                    <Link to="/salesReport/daily" className="salesReport-status salesReport-status-01" onClick={() => handleActiveSort(1)}>일별</Link>
+                    <Link to="monthlySales" className="salesReport-status salesReport-status-02" onClick={() => handleActiveSort(2)}>월별</Link>
+                    <Link to="yearSales" className="salesReport-status salesReport-status-02" onClick={() => handleActiveSort(3)}>연별</Link>
+                </div>
             </div>
             <div className="salesReport-content">
                 <Outlet />
