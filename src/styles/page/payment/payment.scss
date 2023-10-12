@@ -103,7 +103,7 @@
                         font-weight: 500;
                         color: $color-point;
                     }
-                    .payment-division-button{
+                    .payment-method-cash{
                         background-color: $color-white;
                         border: 1px solid $color-border;
                         border-radius: 0.5rem;
@@ -140,7 +140,7 @@
                         gap: 1rem;
                         display: flex;
                         margin-top: 1rem;
-                        .payment-method-cardpay, .payment-method-cashpay{
+                        .payment-method-tosspay, .payment-method-kakaopay{
                             background-color: $color-main;
                             border: 1px solid $color-main;
                             color: $color-white;

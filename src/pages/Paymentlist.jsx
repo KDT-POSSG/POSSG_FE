@@ -12,6 +12,7 @@ function Paymentlist()  {
     const [paymentlist, setPaymentlist] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentlistType, setPaymentListType] = useState(null);
+    const accesstoken = localStorage.getItem("accesstoken");
 
 
     const openModal = (type) => {
@@ -20,16 +21,14 @@ function Paymentlist()  {
     };
 
     const closeModal = () => {
-    setModalIsOpen(false);
+        setModalIsOpen(false);
     };
 
 
     // 전체 결제내역을 불러오는 함수
     const getPaymentList = () => {
         axios.get('http://54.180.60.149:3000/paymentlist', { params: { convSeq: 1 }, 
-        headers : { 
-            accessToken: `Bearer ${ACCESS_TOKEN}`
-        }})
+        headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((response) => {
             setPaymentlist(response.data.list);
             console.log('결제내역 불러오기 성공');
@@ -40,11 +39,9 @@ function Paymentlist()  {
     };
 
     // 단일 상세 결제내역 불러오는 함수
-    const getPaymentListDetail = (receiptId) => {
-        axios.get('http://54.180.60.149:3000/paymentOneList', { params: { receiptId : receiptId },
-        headers : { 
-            accessToken: `Bearer ${ACCESS_TOKEN}`
-        }})
+    const fetchPaymentListDetail = (receiptId) => {
+        axios.get('http://54.180.60.149:3000/paymentOneList', { params: { receiptId : receiptId }, 
+        headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((response) => {
             setPaymentlistdetail(response.data);
             console.log('결제내역 상세 불러오기 성공');
@@ -57,23 +54,28 @@ function Paymentlist()  {
 
     useEffect(() => {
         getPaymentList();
+        fetchPaymentListDetail();
     }, []);
+
+    const handleLoadPaymentListDetail = () => {
+        getPaymentList();
+        fetchPaymentListDetail();
+        closeModal();
+    }
   
   
     return (
         <div className="paymentlist">
             <div className="paymentlist-container">
                 <div className="paymentlist-menu">
-                    <div className="paymentlist-title page-title">
-                        결제 내역
-                    </div>
+                    <div className="paymentlist-title page-title">결제 내역</div>
                     <div className="paymentlist-search">
                         <input className="paymentlist-search-input" type="text" placeholder="카드번호 앞 6자리"></input>
                         <button className="paymentlist-search-btn">조회</button>
                     </div>
                     <div className="paymentlist-content">
                         {paymentlist.map((payment, index) => (
-                            <div key={index} className="paymentlist-content-row" onClick={() => getPaymentListDetail(payment.receiptId)}>
+                            <div key={index} className="paymentlist-content-row" onClick={() => fetchPaymentListDetail(payment.receiptId)}>
                                 <div className="paymentlist-content-method">{payment.pg}</div>
                                 <div className="paymentlist-content-price">{addComma(payment.price)} 원</div>
                                 <div className="paymentlist-content-date">{payment.purchasedAt.split(" ")[1].substring(0,5)}</div>
@@ -140,14 +142,11 @@ function Paymentlist()  {
 
                             <div className="body2">
                                 <div className="paymentlist-information-body-method">결제 수단</div>
-                                <div className="paymentlist-information-body-method2">카드</div>
                             </div>
 
                             <div className="paymentlist-list">
                                 <div className="paymentlist-list-title">결제 내역</div>
                                 <div className="paymentlist-list-row">
-                                    <div className="paymentlist-list-row-name"></div>
-                                    <div className="paymentlist-list-row-price">0 원</div>
                                 </div>     
                             </div>
                         </div>
@@ -163,6 +162,8 @@ function Paymentlist()  {
                 {paymentlistType === 'refund' &&
                 <RefundModal 
                     paymentlistdetail={paymentlistdetail}
+                    onLoad={handleLoadPaymentListDetail}
+                    closeModal={closeModal}
                 />}
                 {paymentlistType === 'receipt' && 
                 <ReceiptModal 

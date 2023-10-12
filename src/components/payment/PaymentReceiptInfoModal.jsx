@@ -1,5 +1,5 @@
 
-function TosspayReceiptInfoModal({ receiptURL }) {
+function PaymentReceiptInfoModal({ receiptURL }) {
       
       return (
         <div className="cashpayreceipt">
@@ -12,4 +12,4 @@ function TosspayReceiptInfoModal({ receiptURL }) {
       )
     }
     
-    export default TosspayReceiptInfoModal;
+    export default PaymentReceiptInfoModal;

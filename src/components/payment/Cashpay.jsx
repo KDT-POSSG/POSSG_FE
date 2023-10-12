@@ -2,14 +2,10 @@ import NumberPad from "components/ui/NumberPad";
 import { useState } from "react";
 import { addComma } from '../../store/utils/function';
 import axios from 'axios';
-import Modal from "../ui/Modal";
 import { toast } from "react-hot-toast";
-
-
 
 function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalAmount, products }) {
  
-  
   //넘버패드로 받은 금액 입력
   const handleInputValueChange = (value) => {
       setInputValue(value); 
