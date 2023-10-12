@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ACCESS_TOKEN } from 'store/apis/base';
 import { useNavigate } from 'react-router-dom';
-import Modal from "../ui/Modal";
-import TerminateEmployeeModal from './TerminateEmployeeModal';
+import { toast } from "react-hot-toast";
 
 
 function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
@@ -40,12 +38,15 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
             if(res.data === "YES") {
                 console.log('직원 수정 성공');
                 onUpdate();
+                toast.success("직원 정보 수정 완료");
             } else {
                 console.log(res.data);
+                
             }
         })
         .catch((err) => {
             console.log('직원 수정 실패');
+            toast.error("직원 정보 수정 실패");
         });
     };
 
@@ -81,7 +82,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
         <div className="form-row">
             <div className="input-container">
                 <input type="text" className="input-text" onChange={(e) => setPhoneNumber(e.target.value)} required />
-                <label className="label-helper" htmlFor="repreName"><span>연락처 ex.01056852833</span></label>
+                <label className="label-helper" htmlFor="repreName"><span>연락처 ex.01012345678</span></label>
                 
             </div>
         </div>

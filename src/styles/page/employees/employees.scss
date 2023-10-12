@@ -32,27 +32,28 @@
           }
       
         .employee-table {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            width: 100%;
-            margin-top: 5px;
+          padding: .5rem 2rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          margin-top: 5px;
+          background-color: $color-white;
+          border-radius: 1rem;
+          filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
             table {
-              border: 1px #a39485 solid;
               font-size: 1rem;
-              filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
               border-collapse: collapse;
-              border-radius: 1rem;
               width: 100%;
               overflow: hidden;
               .employee-list{
-                
                 .employee-empty{
-                  height: 350px;
-                  font-size: 5rem;
+                  height: 33.25rem;
+                  font-size: 7rem;
+                  &:hover{
+                    background-color: $color-white;
+                  }
                 }
-
                 .terminated{
                   td{
                     color: rgba($color-gray, $alpha: 0.5);
@@ -64,17 +65,13 @@
             
             th {
               text-align: center;
-              padding: 1.5em .5em;
-              font-weight: 500;
-              font-size: 1rem;
+              padding: 1.5rem 0.5rem;
               font-weight: bold;
-              text-transform: uppercase;
+              font-size: 1rem;
               border-bottom: 1px solid $color-border;
-              
             }
               
             thead {
-              font-weight: bold;
               color: #fff;
               background: #ffffff;
             }
@@ -86,17 +83,15 @@
               background: #fff;
               cursor: pointer;
               vertical-align: middle;
-              padding: 1em .5em;
+              padding: 1rem 0.5rem;
               transition: $transition-cb2;
+              .employee-empty{
+                cursor: default;
+              }
             }
             
             tr:hover td{
               background-color: #f5f5f5;
-            }
-            
-            
-            a {
-              color: #73685d;
             }
 
             .employee-info-btn {
@@ -116,6 +111,6 @@
           }
     }
     .pagination{
-      margin-top: 27px;
+      margin-top: 1rem;
     }
 }
