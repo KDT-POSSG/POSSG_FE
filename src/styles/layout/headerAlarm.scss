@@ -25,5 +25,9 @@
         color: $color-point;
       }
     }
+
+    .alarm-info-text {
+      word-break: keep-all;
+    }
   }
 }

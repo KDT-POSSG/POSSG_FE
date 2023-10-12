@@ -110,10 +110,10 @@
 
     .alarm-dot {
       position: absolute;
-      top: 0;
-      right: 0;
-      width: 8px;
-      height: 8px;
+      top: 2px;
+      right: 2px;
+      width: 12px;
+      height: 12px;
       border-radius: 50px;
       background-color: $color-point;
     }
