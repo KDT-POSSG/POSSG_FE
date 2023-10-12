@@ -7,7 +7,7 @@ function RefundConfirmModal({ closeModal, paymentlistdetail, onLoad}){
     const accesstoken = localStorage.getItem("accesstoken");
 
     const Refund = () => {
-        if(paymentlistdetail.param.del === '결제취소'){
+        if(paymentlistdetail.param.del === '결제 취소'){
             toast.error('이미 환불된 내역입니다.');
             return;
         }

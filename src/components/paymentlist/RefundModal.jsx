@@ -46,7 +46,7 @@ function RefundModal({ paymentlistdetail, onLoad }) {
             <button className="refund-button-cancel" onClick={ openModal }>환불</button>
         </div>
     
-        <Modal isOpen={modalIsOpen} onClose={ closeModal } style={{ content:{width:'30%',height:'32%' } }}>
+        <Modal isOpen={modalIsOpen} onClose={ closeModal } style={{ content:{width:'30%',height:'30%' } }}>
             <RefundConfirmModal 
                 paymentlistdetail={paymentlistdetail} 
                 onLoad={onLoad}

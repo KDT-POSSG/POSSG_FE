@@ -10,6 +10,7 @@ const Modal = ({ isOpen, onClose, children, style }) => {
       className="modal-content"
       overlayClassName="modal-overlay"
       style={style}
+      shouldCloseOnOverlayClick={false}
     >
       <button className="modal-close" onClick={onClose}>
         <span aria-hidden="true">
