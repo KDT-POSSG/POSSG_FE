@@ -150,13 +150,18 @@
         }
 
         .btn-container button {
-            padding: 15px 1rem;
+            padding: 0.8rem 2rem;
             margin-bottom: 50px;
             background-color: $color-main;
             color: $color-white;
             font-weight: bold;
-            border-radius: 32px;
-            width: 20vw;
+            border-radius: 1rem;
+            width: 10rem;
+            transition: $transition-cb2;
+            &:hover {
+                background-color: #F0A20A;
+                border-color: #F0A20A;
+            }
         }
     }
 }

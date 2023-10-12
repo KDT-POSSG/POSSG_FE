@@ -4,7 +4,6 @@ import InvenModal from '../components/inventory/InvenModal';
 import axios from 'axios';
 import Pagination from "react-js-pagination"; // npm i react-js-pagination
 import { addComma } from 'store/utils/function';
-import { toast } from "react-hot-toast";
 
 
 function Inventory() {
@@ -15,43 +14,11 @@ function Inventory() {
     const [selectedRow, setSelectedRow] = useState(null);  // 선택된 행의 인덱스를 저장
     const [totalCnt, setTotalCnt] = useState(0);
     const [page, setPage] = useState(1);  // 현재 페이지
-    const [itemsPerPage, setItemsPerPage] = useState(7);  // 한 페이지에 5개 아이템
+    const [itemsPerPage, setItemsPerPage] = useState(8);  // 한 페이지에 5개 아이템
     const [currentPageData, setCurrentPageData] = useState([]);
     const accesstoken = localStorage.getItem("accesstoken");
+    const [expandRows, setExpandRows] = useState({});
 
-    //페이지
-    useEffect(() => {
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        setCurrentPageData(inventoryList.slice(start, end));
-    }, [inventoryList, page, itemsPerPage]); 
-
-    //시간
-    useEffect( () => {
-        const timer = setInterval(() => {
-            setCurrentTime(new Date() );
-        }, 1000);
-
-        return () => {
-            clearInterval(timer);
-        };
-    }, []);
-
-    const formattedTime = `${currentTime.getFullYear()}.${String(currentTime.getMonth() + 1).padStart(2, '0')}.${String(currentTime.getDate()).padStart(2, '0')} ${String(currentTime.getHours()).padStart(2, '0')}:${String(currentTime.getMinutes()).padStart(2, '0')}:${String(currentTime.getSeconds()).padStart(2, '0')}`;
-    
-    const updateLastTime = (time) => {
-        setLastUpdateTime(time);
-    }
-    
-    //모달
-    const openModal = () => {
-        setModalIsOpen(true);
-    };
-    const closeModal = () => {
-        setModalIsOpen(false);
-    };
-
-    //시재 리스트 불러오기
     const fetchInventoryData = () => {
         axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page},
         headers:{ accessToken: `Bearer ${accesstoken}`}})
@@ -73,9 +40,43 @@ function Inventory() {
         fetchInventoryData();
         closeModal();
     }
-    
 
-   //시재 리스트 메모 드롭다운
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
+    useEffect( () => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date() );
+        }, 1000);
+
+        return () => {
+            clearInterval(timer);
+        };
+    }, []);
+
+    useEffect(() => {
+        const start = (page - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        setCurrentPageData(inventoryList.slice(start, end));
+    }, [inventoryList, page, itemsPerPage]); 
+
+    const formattedTime = `${currentTime.getFullYear()}.${String(currentTime.getMonth() + 1).padStart(2, '0')}.${String(currentTime.getDate()).padStart(2, '0')} ${String(currentTime.getHours()).padStart(2, '0')}:${String(currentTime.getMinutes()).padStart(2, '0')}:${String(currentTime.getSeconds()).padStart(2, '0')}`;
+    
+    const updateLastTime = (time) => {
+        setLastUpdateTime(time);
+    }
+    
+    const handleToggleRow = (index) => {
+        setExpandRows((prev) => ({
+            ...prev,
+            [index]: !prev[index]
+        }));
+    };
+    
     const handleRowClick = (index) => {
         if (selectedRow === index) {
             setSelectedRow(null);  // 이미 선택된 행을 다시 클릭하면 드롭다운을 닫
@@ -86,46 +87,50 @@ function Inventory() {
 
     return (
         <div className='inventory'>
-            
             <div className='inven-content'>
                 <div className='page-title'>시재 관리</div>
-                <div className='present-time'>현재 시간 : { formattedTime }</div>
-            <div className='btn-container'>
+            <div className='inventory-header'>
+                <div className='present-time'><span className='tossface'>⏰</span>&nbsp;&nbsp;<span className='time'>{ formattedTime }</span></div>
                 <button className='inven-btn' onClick={ openModal }>시재 입력</button>
             </div>
                 <div className='inventory-table'>
                 <table>
                     <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>지점명</th>
-                        <th>시재 입력 시간</th>
-                        <th>시재 금액</th> 
-                    </tr>
+                        <tr>
+                            <th>번호</th>
+                            <th>지점명</th>
+                            <th>시재 입력 시간</th>
+                            <th>시재 금액</th>
+                            <th>&nbsp;</th> 
+                        </tr>
                     </thead>
                     <tbody>
-                        {
-                            currentPageData.length === 0 ? (
-                                <tr className='inventory-empty'>
-                                    <td colSpan="4">📝</td>
-                                </tr>
+                        {currentPageData.length === 0 ? (
+                            <tr className='inventory-empty'>
+                                <td colSpan="5" className='tossface'>📝</td>
+                            </tr>
                             ) : (
                                 currentPageData.map((item, index) => (
-                                    <>
-                                    <tr key={index} onClick={() => handleRowClick(index)}>
+                                    <React.Fragment key={index}>
+                                    <tr onClick={() => handleToggleRow(index)}>
                                         <td>{(page - 1) * itemsPerPage + index + 1}</td>
                                         <td>{item.convName}</td>
                                         <td>{item.rdate}</td>
-                                        <td className='inventory-cash'>{addComma(item.cash)}</td>
+                                        <td className='inventory-cash'>{addComma(item.cash)} 원</td>
+                                        <td>
+                                            <button onClick={() => handleRowClick(index)} className={expandRows[index] ? "rotated" : ""}>
+                                                <span className='material-symbols-rounded'>expand_more</span>
+                                            </button>
+                                        </td>
                                     </tr>
-                                    {selectedRow === index && (
-                                            <tr className='drop-memo-container'>
-                                                <td className="drop-memo-td" colSpan="4">
-                                                    <div className='drop-memo'>{item.memo ? item.memo : '특이사항이 없습니다'}</div>
-                                                </td>
-                                            </tr>
-                                        )}
-                                    </>
+                                    {expandRows[index] && (
+                                        <tr className={`drop-memo-container ${expandRows[index] ? "expanded" : ""}`}>
+                                            <td className="drop-memo-td" colSpan="5">
+                                                <div className='drop-memo'><span className='tossface'>💬&nbsp; </span> {item.memo ? item.memo : ' 특이사항이 없습니다.'}</div>
+                                            </td>
+                                        </tr>
+                                    )}
+                                    </React.Fragment>
                                 ))
                             )
                         }
@@ -145,7 +150,11 @@ function Inventory() {
                 lastPageText={<span className="material-symbols-rounded page-btn">keyboard_double_arrow_right</span>}
             />
 
-            <Modal isOpen={modalIsOpen} onClose={ closeModal } >
+            <Modal isOpen={modalIsOpen} onClose={ closeModal } style={{
+                content :{
+                    height : '77%'
+                }
+            }} >
                 <InvenModal updateLastTime={ updateLastTime } closeModal={closeModal} onLoad={handleLoadInventoryData}/>
             </Modal>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { ACCESS_TOKEN } from 'store/apis/base';
+import { toast } from "react-hot-toast";
 
 
 function TerminateEmployeeModal({ employeeSeq, empName }){
@@ -15,11 +15,13 @@ function TerminateEmployeeModal({ employeeSeq, empName }){
         .then((res) => {
             setTerminateEmployee(res.data.terminateemployee);
             console.log('직원 퇴사 성공');
+            toast.success("직원 퇴사 완료");
             navigate('/employees');
         })
         .catch((err) => {
             console.log(err);
             console.log('직원 퇴사 실패');
+            toast.error("직원 퇴사 실패");
         });
     };
 

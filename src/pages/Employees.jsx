@@ -17,23 +17,8 @@ function Employees() {
     const [page, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPageData, setCurrentPageData] = useState([]);
-
-    useEffect(() => {
-      const start = (page - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-      setCurrentPageData(employeeList.slice(start, end));
-    }, [employeeList, page, itemsPerPage]);
   
-    //모달
-    const openModal = (type) => {
-      setEmployeeType(type);
-      setModalIsOpen(true);
-    };
-    const closeModal = () => {
-      setModalIsOpen(false);
-    };
- 
-     const fetchEmployees = () => {
+    const fetchEmployees = () => {
       axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setEmployeeList(res.data.employee);
@@ -56,10 +41,31 @@ function Employees() {
       closeModal();
     }
 
+    const openModal = (type) => {
+      setEmployeeType(type);
+      setModalIsOpen(true);
+    };
+    const closeModal = () => {
+      setModalIsOpen(false);
+    };
+
+    useEffect(() => {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      setCurrentPageData(employeeList.slice(start, end));
+    }, [employeeList, page, itemsPerPage]);
+
+    const formatPhoneNumber = (phoneNumber) => {
+      const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+      const match = cleaned.match(/^(\d{3})(\d{3,4})(\d{4})$/);
+      if (match) {
+          return [match[1], match[2], match[3]].join('-');
+      }
+      return phoneNumber;
+    }
 
     return(
         <div className="employee">
-          
           <div className="employee-content">
             <div className="employee-header">
               <div className='page-title'>직원 관리</div>
@@ -67,23 +73,19 @@ function Employees() {
               <button className='employee-btn' onClick={() => openModal('add')} >직원 추가</button>
               </div>
             </div>
-
-                  <div className="employee-table">
-                    
-                    <table>
-                      <thead className="">
+            <div className="employee-table">
+                <table>
+                    <thead className="">
                         <tr>
                           <th>직원 번호</th>
                           <th>이름</th>
-                        
                           <th>연락처</th>
                           <th>입사 날짜</th>
                           <th>퇴사 날짜</th>
                           <th>&nbsp;</th>
                         </tr>
-                      </thead>
-                      
-                      <tbody className="employee-list">
+                    </thead>
+                    <tbody className="employee-list">
                         {employeeList.length === 0 ? (
                           <tr>
                             <td className="tossface employee-empty" colSpan="6">🪪</td>
@@ -93,7 +95,7 @@ function Employees() {
                           <tr key={index} className={employee.terminationDate ? 'terminated' : ''}>
                             <td>{employee.employeeSeq}</td>
                             <td>{employee.empName}</td>
-                            <td>{employee.phoneNumber}</td>
+                            <td>{formatPhoneNumber(employee.phoneNumber)}</td>
                             <td>{employee.hireDate}</td>
                             <td>{employee.terminationDate ? employee.terminationDate : "-"}</td>
                             <td><button className='employee-info-btn' onClick={() => navigate(`/employeeInfo/${employee.employeeSeq}`)}>직원 정보</button></td>
@@ -101,12 +103,11 @@ function Employees() {
                           ))
                         )
                       }
-                      </tbody>
+                    </tbody>
                       
-                    </table>
-                  </div>
-                
+                </table>
             </div>
+          </div>
         
             <Pagination className="pagination"
                 activePage={page}

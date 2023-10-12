@@ -1,124 +1,148 @@
 .inventory{
   background-color: $color-back;
   min-height: calc(100vh - 4rem);
-
+  padding: 4.5vh 15vw;
     
     .inven-content {
-      padding: 5vh 10vw;
-      font-size: 1.5rem;
       text-align: center;
       .page-title{
-        
         display: flex;
         justify-content: left;
       }
     }
 
-    .btn-container{
-      display: flex;
-      justify-content: right;
-      
-    
-    .inven-btn {
-      background-color: $color-white;
-      color: $color-point;
-      border: 1px solid $color-point;  
-      border-radius: 1rem;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 1rem;
-      width: 200px;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-  }
-    .inven-btn:hover {
-      background-color: $color-point;
-      color: white;
-      transition: 0.3s;
-    }
+    .inventory-header{ 
+      text-align: right;
+      position: relative;
+      .present-time{
+        font-weight: bold;
+        font-size: 1.2rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .tossface{
+          font-size: 1.5rem;
+        }
+        .time{
+          color: $color-point;
+        }
+      }
+      .inven-btn {
+        background-color: $color-main;
+        color: $color-white;
+        border: 1px solid $color-main;  
+        border-radius: 1rem;
+        padding: 10px 2rem;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: $transition-cb2;
+      }
+      .inven-btn:hover {
+        background-color: #F0A20A;
+        border-color: #F0A20A;
+      }
   }
 
     .inventory-table {
+      padding: .5rem 2rem;
       display: flex;
       justify-content: center;
       width: 100%;
-      
-
+      margin-top: 1.2rem;
+      background-color: $color-white;
+      border-radius: 1rem;
+      filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
       table {
-        border: 1px #a39485 solid;
         font-size: 1rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,.25);
         width: 100%;
         border-collapse: collapse;
-        border-radius: 5px;
         overflow: hidden;
-
         tbody{
+          .drop-memo-container{
           .drop-memo-td{
             height: 2.5rem;
-            padding: 8px;
             font-size: 1rem;
+            background-color: $color-back;
+            &:hover{
+              background-color: $color-back;
+              cursor: default;
+            }
             .drop-memo{
-            color: $color-point;
+              font-weight: 500;
+              color: $color-gray;
             }
           }
+        }
           .inventory-cash{
             width: 200px;
+            text-align: right;
+            padding-right: 4rem;
           }
           .inventory-empty{
-            height: 300px;
+            height: 32rem;
             td{
-              font-size: 5rem;
+              font-size: 7rem;
+              cursor: default;
+              &:hover{
+                background-color: $color-white;
+              }
             }
           }
+          .drop-memo-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+
+            &.expanded {
+                max-height: 100px; // 이 값은 실제 컨텐츠의 높이에 따라 조절할 수 있습니다.
+                transition: max-height 0.5s ease-in-out;
+            }
+        }
+
+
         }
       }
       
       th {
         text-align: center;
-        padding: 1em .5em;
-        font-weight: 500;
-        font-size: 1.2rem;
-        color: #000000;
-        text-transform: uppercase;
+        padding: 1.5em .5em;
+        font-weight: bold;
+        font-size: 1rem;
+        border-bottom: 1px solid $color-border;
       }
         
       thead {
-        font-weight: bold;
         color: #fff;
         background: #ffffff;
       }
         
       td {
-        border-bottom: 1px solid rgba(0,0,0,.1);
+        border-bottom: 1px solid $color-back;
         background: #fff;
         cursor: pointer;
         vertical-align: middle;
-        padding: 1em 1em;
-        height: 3.75rem;
+        padding: 1rem 0.5rem;
+        transition: $transition-cb2;
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          transition: transform 0.3s ease-in-out;
+
+          &.rotated {
+              transform: rotate(180deg);
+          }
+        }
       }
 
       tr:hover td{
         background-color: #f5f5f5;
-
-      }
-      
-      
-      a {
-        color: #73685d;
       }
 
-      .drop-memo-hidden {
-        height: 0;
-        max-height: 0;
-        line-height: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-      
-      .drop-memo-visible {
-        padding: 0.5rem;
-      }
+    }
+    .pagination{
+      margin-top: 1.5rem;
     }
   
 }
