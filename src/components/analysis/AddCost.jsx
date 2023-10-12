@@ -66,13 +66,6 @@ function AddCost(){
         console.log(inputFields);
         e.preventDefault();
         axios.post("http://54.180.60.149:3000/addCost", {
-            // 숫자로 보내고 , 제거 작업필요!
-            // rent: parseInt(rent.replace(/,/g, ''), 10),
-            // waterBill: parseInt(waterBill.replace(/,/g, ''), 10),
-            // electricityBill: parseInt(electricityBill.replace(/,/g, ''), 10),
-            // gasBill: parseInt(gasBill.replace(/,/g, ''), 10),
-            // totalLaborCost: parseInt(totalLaborCost.replace(/,/g, ''), 10),
-            // securityMaintenanceFee: parseInt(securityMaintenanceFee.replace(/,/g, ''), 10),
             rent: rent,
             waterBill: waterBill,
             electricityBill: electricityBill,
@@ -98,8 +91,7 @@ function AddCost(){
             }
         })
         .catch((err) => {
-            console.error(err);  
-            console.log("catch 에러");
+            console.error('catch 오류:', err);
         })
     }
 
@@ -110,7 +102,7 @@ function AddCost(){
     return(
         <div className="addCost-content-wrap">
             <div className="addCost-nav">
-                <div className="addCost-title">비용 입력</div>
+                <div className="addCost-title page-title">비용 입력</div>
                 <div className="addCost-calendar-container">
                     <DatePicker
                             selected={selectedDate}

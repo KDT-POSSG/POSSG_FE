@@ -94,15 +94,14 @@ function UpdateCost(){
             }
 
         }catch(err){
-            console.error('조회 오류:', err);
+            console.error('catch 오류:', err);
             toast.error("조회 중 오류가 발생했습니다.");
         }
     }
 
     const onClick = () => {
-        // alert("클릭");
-        console.log(inputFields);
-        console.log("a");
+        // console.log(inputFields);
+        // console.log("a");
         axios.post("http://54.180.60.149:3000/updateCost", {
             rent: rent,
             waterBill: waterBill,
@@ -129,8 +128,7 @@ function UpdateCost(){
             }
         })
         .catch((err) => {
-            console.error(err);  
-            console.log("catch 에러");
+            console.error('catch 오류:', err);
         })
     }
 
@@ -141,7 +139,7 @@ function UpdateCost(){
     return(
         <div className="updateCost-content-wrap">
             <div className="updateCost-nav">
-                <div className="updateCost-title">비용 수정</div>
+                <div className="updateCost-title page-title">비용 수정</div>
                 <div className="updateCost-calendar-container">
                     <DatePicker
                         selected={selectedDate}
