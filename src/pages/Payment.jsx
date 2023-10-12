@@ -23,16 +23,16 @@ function Payment() {
     const [changeAmount, setChangeAmount] = useState(0);
     const barcodeInputRef = useRef(null);
     const accesstoken = localStorage.getItem("accesstoken");
-
+    const convSeq = localStorage.getItem("convSeq");
     
     // input에 바코드가 제대로 입력됐는지 확인
     const handleBarcode = () => {
         const barcodeInput = barcodeInputRef.current.value;
         if(!barcodeInput) {
-            toast.error("바코드 인식 에러");
+            toast.error("바코드 스캔 실패");
             return;
         }
-        axios.get('http://54.180.60.149:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
+        axios.get('http://54.180.60.149:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: convSeq}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             const productData = res.data;
             const existingProduct = products.find(p => p.productSeq === productData.productSeq); 
@@ -53,13 +53,11 @@ function Payment() {
         })
         .catch((err) => {
             console.log(err);
-            toast.error('상품을 찾을 수 없습니다.');
+            toast.error('바코드 스캔 실패');
         })
         setBarcodeInput("");
     }
 
-    //결제 완료 후, 결제 상품 목록 초기화
-    
     // 총 결제 금액 계산
     const getTotalAmount = () => {
         return products.reduce((total, product) => {
@@ -100,7 +98,7 @@ function Payment() {
             return {
                 content: {
                     padding: '1.5rem',
-                    width: '500px',  // CashpayReceipt 모달의 넓이를 설정
+                    width: '500px',
                 },
             };
         }

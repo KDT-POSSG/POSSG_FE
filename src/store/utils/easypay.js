@@ -5,6 +5,8 @@ import toast from 'react-hot-toast';
 import { ACCESS_TOKEN } from 'store/apis/base';
 
   export const handlePayment = async (pgType, totalAmount, products, setPaymentResponse, openModal) => {
+    const convSeq = localStorage.getItem("convSeq");
+
     try {
 
       const items = products.map(product => ({
@@ -50,7 +52,7 @@ import { ACCESS_TOKEN } from 'store/apis/base';
         const paymentData = {
           receiptId: response.data.receipt_id,
           userSeq: 1,
-          convSeq: 1,
+          convSeq: convSeq,
           pg: response.data.pg,
           method: response.data.method,
           discountInfo: products.length > 0 ? products[0].promotionInfo : '',

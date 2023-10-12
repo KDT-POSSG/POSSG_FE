@@ -17,10 +17,10 @@ function Employees() {
     const [page, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPageData, setCurrentPageData] = useState([]);
-  
+    const convSeq = localStorage.getItem("convSeq");
 
     const fetchEmployees = () => {
-      axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : 1}, headers:{ accessToken: `Bearer ${accesstoken}`}})
+      axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : convSeq}, headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setEmployeeList(res.data.employee);
             setTotalCnt(res.data.cnt);
