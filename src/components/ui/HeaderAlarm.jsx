@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from './Modal';
-import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { baseURL } from 'store/apis/base';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import toast from 'react-hot-toast';
 
@@ -62,10 +62,15 @@ function HeaderAlarm() {
     const expirationDate = new Date(productDate);
 
     if(expirationDate < currentDate) {
-      return "지났습니다";
+      return `지났습니다`;
     }
     else {
-      return "임박했습니다";
+
+      const timeDiff = expirationDate - currentDate;
+      const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
+      const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+      return `${hoursRemaining}시간 ${minutesRemaining}분 남았습니다`;
     }
   }
 
@@ -100,7 +105,7 @@ function HeaderAlarm() {
                     <span className='date-left'>상품유통기한</span>
                     <span className='date-right'>{item.expirationDate}</span>
                   </div>
-                  <div>
+                  <div className='alarm-info-text'>
                     '{item.productName}' 상품의 유통기한이 {handleExpirationDate(item.expirationDate)}
                   </div>
                 </div>
