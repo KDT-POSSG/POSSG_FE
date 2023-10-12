@@ -29,7 +29,7 @@ function Payment() {
     const handleBarcode = () => {
         const barcodeInput = barcodeInputRef.current.value;
         if(!barcodeInput) {
-            toast.error("바코드 인식 에러");
+            toast.error("바코드 스캔 실패");
             return;
         }
         axios.get('http://54.180.60.149:3000/findProductBarcode', {params: {Barcode: barcodeInput, convSeq: convSeq}, headers:{ accessToken: `Bearer ${accesstoken}`}})
@@ -53,13 +53,11 @@ function Payment() {
         })
         .catch((err) => {
             console.log(err);
-            toast.error('상품을 찾을 수 없습니다.');
+            toast.error('바코드 스캔 실패');
         })
         setBarcodeInput("");
     }
 
-    //결제 완료 후, 결제 상품 목록 초기화
-    
     // 총 결제 금액 계산
     const getTotalAmount = () => {
         return products.reduce((total, product) => {
@@ -100,7 +98,7 @@ function Payment() {
             return {
                 content: {
                     padding: '1.5rem',
-                    width: '500px',  // CashpayReceipt 모달의 넓이를 설정
+                    width: '500px',
                 },
             };
         }
