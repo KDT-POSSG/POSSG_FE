@@ -9,9 +9,11 @@ function Delivery() {
   const navi = useNavigate();
   
   const [isRegi, setIsRegi] = useState(false);
-  const [convAddress, setConvAddress] = useState("");
   const [activeSort, setActiveSort] = useState(1);
   const [page, setPage] = useState(1);
+  const [before, setBefore] = useState(0);
+  const [after, setAfter] = useState(0);
+  const [delivering, setDelivering] = useState(0);
 
   const handleActiveSort = (status) => {
     navi("/delivery");
@@ -47,8 +49,6 @@ function Delivery() {
       
         <div className='delivery-top'>
           <div className='page-title'>배달 페이지</div>
-          <div className='delivery-top-address'>{convAddress}</div>
-          {/* <div className='delivery-top-address'>해운대구 APEC로 17 센텀리더스마크 (주)지오택 227호</div> */}
         </div>
 
         {
@@ -56,12 +56,12 @@ function Delivery() {
           <>
             <div className='delivery-sort'>
               <div className={`delivery-sort-active status-0${activeSort}`}></div>
-              <div className='delivery-status' onClick={() => handleActiveSort(1)}>주문접수<span>4</span></div>
-              <div className='delivery-status' onClick={() => handleActiveSort(2)}>배달픽업대기<span>5</span></div>
-              <div className='delivery-status' onClick={() => handleActiveSort(3)}>배달중<span>20</span></div>
-              <div className='delivery-status' onClick={() => handleActiveSort(4)}>완료<span>12</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(1)}>주문접수<span>{before}</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(2)}>배달픽업대기<span>{after}</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(3)}>배달중<span>{delivering}</span></div>
+              <div className='delivery-status' onClick={() => handleActiveSort(4)}>완료</div>
             </div>
-            <Outlet context={{ activeSort, setActiveSort, page, setPage }} />
+            <Outlet context={{ activeSort, setActiveSort, page, setPage, setBefore, setAfter, setDelivering }} />
           </>
           :
           <DeliveryRegister setIsRegi={setIsRegi} />

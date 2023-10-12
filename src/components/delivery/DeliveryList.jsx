@@ -9,7 +9,7 @@ import DeliveryButton from './DeliveryButton';
 
 function DeliveryList() {
 
-  const { activeSort, page, setPage } = useOutletContext();
+  const { activeSort, page, setPage, setBefore, setAfter, setDelivering } = useOutletContext();
   const navi = useNavigate();
 
   // const [page, setPage] = useState(1);
@@ -31,8 +31,11 @@ function DeliveryList() {
       })
       .then((response) => {
         console.log(response.data);
-        setDeliveryList(response.data.DeliveryList);
-        setTotalPage(response.data.AllPage);
+        setDeliveryList(response.data.deliveryList);
+        setTotalPage(response.data.allPage);
+        setBefore(response.data.before);
+        setAfter(response.data.after);
+        setDelivering(response.data.delivering);
       })
       .catch((error) => {
         console.error(error);
@@ -45,13 +48,11 @@ function DeliveryList() {
   }
 
   const handleLink = (ref) => {
-    console.log("ref >> ", ref);
     navi(`/delivery/${ref}`);
   }
 
   const handleOrderStatus = (e, ref) => {
 
-    console.log("handleOrderStatus >> ", ref);
     e.stopPropagation();
 
     axios
@@ -81,7 +82,6 @@ function DeliveryList() {
 
   const handleOrderCancel = (e, ref) => {
 
-    console.log("handleOrderCancel >> ", ref);
     e.stopPropagation();
 
     axios
