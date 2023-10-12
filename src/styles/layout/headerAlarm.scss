@@ -1,0 +1,33 @@
+.alarm-container {
+  padding: 3rem 2rem;
+
+  .alarm-icon {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .alarm-item {
+    padding: 1rem 0.5rem;
+    border-top: 1px solid $color-border;
+    line-height: 1.5;
+
+    .alarm-item-date {
+      font-size: .875rem;
+      margin-bottom: 0.25rem;
+
+      .date-left {
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+
+      .date-right {
+        color: $color-point;
+      }
+    }
+
+    .alarm-info-text {
+      word-break: keep-all;
+    }
+  }
+}

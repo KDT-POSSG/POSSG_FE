@@ -18,6 +18,8 @@ function HeaderMenu() {
       left: '0',
       transform: 'translate(0, 0)',
       padding: '0',
+      backgroundColor: '#fff',
+      paddingBottom: '3.5rem',
     },
   };
 

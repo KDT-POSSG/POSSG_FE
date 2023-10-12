@@ -4,6 +4,9 @@ import toast from 'react-hot-toast';
 import HomeModalList from './HomeModalList';
 
 function HomeModal({ modalClose, homeMenu, isChange, setIsChange }) {
+
+  const accessToken = localStorage.getItem("accesstoken");
+
   const [enabledItems, setEnabledItems] = useState([]);
   const [disabledItems, setDisabledItems] = useState([]);
 
@@ -42,10 +45,15 @@ function HomeModal({ modalClose, homeMenu, isChange, setIsChange }) {
       menuSeq.push(enabledItems[i].seq);
     }
 
-    axios.post('http://54.180.60.149:3000/addFavoritePage', {
-      convSeq: 1,
-      seqList: menuSeq
-    })
+    axios
+      .post(`http://54.180.60.149:3000/addFavoritePage`, {
+        convSeq: 1,
+        seqList: menuSeq
+      }, {
+        headers: {
+          accessToken: `Bearer ${accessToken}`
+        }
+      })
       .then((response) => {
         console.log(response.data);
 
