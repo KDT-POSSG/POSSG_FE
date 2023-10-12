@@ -11,6 +11,8 @@ function Paymentlist()  {
     const [paymentlist, setPaymentlist] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentlistType, setPaymentListType] = useState(null);
+    const [searchResult, setSearchResult] = useState([]);
+    const [receiptId, setReceiptId] = useState('');
     const accesstoken = localStorage.getItem("accesstoken");
     const convSeq = localStorage.getItem("convSeq");
 
@@ -44,7 +46,7 @@ function Paymentlist()  {
         .then((response) => {
             setPaymentlistdetail(response.data);
             console.log('결제내역 상세 불러오기 성공');
-            console.log(response.data);
+            // console.log(response.data);
         })
         .catch((error) => {
             console.log('결제내역 상세 불러오기 실패:', error);
@@ -61,6 +63,20 @@ function Paymentlist()  {
         fetchPaymentListDetail();
         closeModal();
     }
+
+    // 영수증 ID로 결제내역 검색하는 함수
+    const searchPaymentList = () => {
+        axios.get('http://54.180.60.149:3000/paymentNumList', { params: { receiptId : receiptId },
+        headers:{ accessToken: `Bearer ${accesstoken}`}})
+        .then((response) => {
+            setSearchResult(response.data.list);
+            console.log('검색 성공');
+            console.log(response.data.list);
+        })
+        .catch((error) => {
+            console.log('검색 실패:', error);
+        });
+    };
   
   
     return (
@@ -69,11 +85,11 @@ function Paymentlist()  {
                 <div className="paymentlist-menu">
                     <div className="paymentlist-title page-title">결제 내역</div>
                     <div className="paymentlist-search">
-                        <input className="paymentlist-search-input" type="text" placeholder="카드번호 앞 6자리"></input>
-                        <button className="paymentlist-search-btn">조회</button>
+                        <input className="paymentlist-search-input" type="text" placeholder="영수증 ID 입력" onChange={(e) => setReceiptId(e.target.value)}></input>
+                        <button className="paymentlist-search-btn" onClick={searchPaymentList}>조회</button>
                     </div>
                     <div className="paymentlist-content">
-                        {paymentlist.map((payment, index) => (
+                        {(searchResult.length > 0 ? searchResult : paymentlist).map((payment, index) => (
                             <div key={index} className="paymentlist-content-row" onClick={() => fetchPaymentListDetail(payment.receiptId)}>
                                 <div className="paymentlist-content-method">{payment.pg}</div>
                                 <div className="paymentlist-content-price">{addComma(payment.price)} 원</div>
@@ -89,7 +105,7 @@ function Paymentlist()  {
                         <>
                         <div className="paymentlist-information-header">
                             <div className="title">
-                            <div className={`paymentlist-information-header-del ${paymentlistdetail.param.del === '결제완료' ? 'color-complete' : paymentlistdetail.param.del === '결제취소' ? 'color-cancel' : ''}`}>
+                            <div className={`paymentlist-information-header-del ${paymentlistdetail.param.del === '결제 완료' ? 'color-complete' : paymentlistdetail.param.del === '결제 취소' ? 'color-cancel' : ''}`}>
                                 {paymentlistdetail.param.del}
                             </div>
 
@@ -115,7 +131,7 @@ function Paymentlist()  {
                             <div className="paymentlist-list-title">결제 내역</div>
                             {paymentlistdetail.list?.map((item, idx) => (
                                 <div key={idx} className="paymentlist-list-row">
-                                    <div className="paymentlist-list-row-name">{item.itemName} x{item.qty}</div>
+                                    <div className="paymentlist-list-row-name">{item.itemName}&nbsp;&nbsp; x{item.qty}</div>
                                     <div className="paymentlist-list-row-price">{addComma((item.price)*(item.qty))} 원</div>
                                 </div>         
                             ))}

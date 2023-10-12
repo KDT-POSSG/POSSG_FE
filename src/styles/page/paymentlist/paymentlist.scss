@@ -76,7 +76,7 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        width: 60px;
+                        width: 100px;
                         height: 60px;
                         border-radius: 0.5rem;
                         background-color: $color-border;
@@ -164,7 +164,6 @@
                     margin-top: 2rem;
                     justify-content: space-between;
                     .paymentlist-information-body-btn{
-                        
                         color: $color-point;
                         border: 1px solid $color-point;  
                         border-radius: 1rem;
@@ -176,7 +175,7 @@
                     .paymentlist-information-body-btn:hover {
                         background-color: $color-point;
                         color: white;
-                        transition: 0.3s;
+                        transition: $transition-cb2;
                     }
                 }
             }

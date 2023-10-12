@@ -8,6 +8,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
  
   const convSeq = localStorage.getItem("convSeq");
   const accesstoken = localStorage.getItem("accesstoken");
+  const kstDate = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 19).replace('T', ' ');
 
   //넘버패드로 받은 금액 입력
   const handleInputValueChange = (value) => {
@@ -26,7 +27,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
       const millisPart = now.getMilliseconds().toString().padStart(3, '0');
       const combinedPart = `${datePart}${millisPart}`;
 
-      return shuffleString(combinedPart);
+      return shuffleString(combinedPart).toString();
   };
 
   //생선된 영수증 id를 랜덤으로 섞기
@@ -48,7 +49,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
     method: "현금",
     discountInfo: products.length > 0 ? products[0].promotionInfo : '',
     price: totalAmount.toString(),
-    purchasedAt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    purchasedAt: kstDate,
     receiptUrl: "",
     cardNum: '',
     cardCompany: ''
@@ -60,7 +61,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
     itemId: product.productSeq,
     itemName: product.productName,
     qty: product.amount,
-    price: product.price.toString()
+    price: product.priceDiscount.toString()
   }));
 
 
@@ -85,6 +86,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
             setChangeAmount(changeAmount);
             closeModal();
             openModal('cashpayreceipt');
+            console.log(paymentData.receiptId)
         }
     } catch (error) {
         console.error('결제 정보 에러', error);
