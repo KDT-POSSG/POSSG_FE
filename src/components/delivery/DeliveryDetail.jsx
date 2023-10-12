@@ -121,7 +121,7 @@ function DeliveryDetail() {
             </div>
             <div className='delivery-ref'>
               <span>요청사항</span>
-              {deliveryDetail.ref}
+              {deliveryDetail.delRemark}
             </div>
           </div>
 
