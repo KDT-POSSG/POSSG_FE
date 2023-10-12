@@ -123,8 +123,8 @@ function Employees() {
 
             <Modal isOpen={modalIsOpen} onClose={closeModal} style={{
               content: {
-                height: '78%',
-                width: '35%', 
+                height: '73%',
+                width: '33%', 
               }
             }}>
                 {employeeType === 'add' && <AddEmployeeModal onAdd={handleAddEmployee} />}
