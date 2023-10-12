@@ -3,46 +3,52 @@
     padding: 3vw 10vw;
     min-height: 100vh;
 
-    .salesReport-sort {
-        border-radius: 1rem;
-        background-color: $color-white;
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        padding: 1rem 0;
-        margin-bottom: 1.5rem;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-weight: bold;
-        z-index: 0;
-        border: 1px solid $color-border;
-    
-        .salesReport-sort-active {
-            position: absolute;
-            background-color: $color-main;
+    .salesReport-sort-wrap{
+        width: 75%;
+        margin-left: 170px;
+
+        .salesReport-sort {
             border-radius: 1rem;
-            width: 33.33%;
-            height: 100%;
-            top: 0;
-            z-index: -1;
-            transition: all 0.5s;
-        }
-    
-        .status-01 {
-            left: 0;
-        }
-        .status-02 {
-            left: 33.33%;
-        }
-        .status-03 {
-            left: 66.66%;
-        }
-    
-        .salesReport-status {
-            cursor: pointer;
+            background-color: $color-white;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 1rem 0;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            z-index: 0;
+            border: 1px solid $color-border;
+        
+            .salesReport-sort-active {
+                position: absolute;
+                background-color: $color-main;
+                border-radius: 1rem;
+                width: 33.33%;
+                height: 100%;
+                top: 0;
+                z-index: -1;
+                transition: all 0.5s;
+            }
+        
+            .status-01 {
+                left: 0;
+            }
+            .status-02 {
+                left: 33.33%;
+            }
+            .status-03 {
+                left: 66.66%;
+            }
+        
+            .salesReport-status {
+                cursor: pointer;
+            }
         }
     }
+
 
     .salesReport-content{
         width: 80vw;

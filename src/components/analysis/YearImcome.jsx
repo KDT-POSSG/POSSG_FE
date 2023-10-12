@@ -105,8 +105,9 @@ function YearImcome(){
                 </div>
             </div>
             ) : (
-                <div className="no-data-message">
-                    
+                <div className="select-date-message">
+                    <span className="tossface select-icon">📆</span>
+                    <p className="select-date-text">조회할 날짜를 선택해주세요</p>
                 </div>
             )}
         </div>

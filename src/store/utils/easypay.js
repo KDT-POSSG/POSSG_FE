@@ -4,7 +4,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { ACCESS_TOKEN } from 'store/apis/base';
 
-  export const handlePayment = async (totalAmount, products, setPaymentResponse, openModal) => {
+  export const handlePayment = async (pgType, totalAmount, products, setPaymentResponse, openModal) => {
     try {
 
       const items = products.map(product => ({
@@ -21,12 +21,12 @@ import { ACCESS_TOKEN } from 'store/apis/base';
         order_name: products.map(p => p.productName).join(", "), // 상품명 
         comapny_name: "Emart24 신세계센텀시티점",
         order_id: "미구현", // 고유 주문번호
-        pg: "토스", // 카카오, 토스 2개 회사는 확인
+        pg: pgType, // 카카오, 토스 2개 회사는 확인
         //method: "간편", // 카카오 - 간편, 토스 - 카드, 
         tax_free: 0,
         user: {
-          id: "abc123",
-          username: "최민규",
+          id: "Jeong Jae Won",
+          username: "정재원",
           phone: "01012345678",
           email: "qwer@naver.com"
         },
@@ -88,7 +88,7 @@ import { ACCESS_TOKEN } from 'store/apis/base';
               })
                 .then((response) => {
                   console.log("결제 상품 목록 전송 완료", response.data);
-                  openModal('tosspayreceipt');
+                  openModal('paymentreceipt');
                 })
                 .catch((error) => {
                   console.error('결제 상품 목록 에러', error);

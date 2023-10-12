@@ -4,7 +4,7 @@ import RefundConfirmModal from './RefundConfirmModal';
 import { addComma } from "store/utils/function";
 import { ACCESS_TOKEN } from 'store/apis/base';
 
-function RefundModal({ paymentlistdetail }) {
+function RefundModal({ paymentlistdetail, onLoad }) {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     
@@ -47,7 +47,11 @@ function RefundModal({ paymentlistdetail }) {
         </div>
     
         <Modal isOpen={modalIsOpen} onClose={ closeModal } style={{ content:{width:'30%',height:'32%' } }}>
-                <RefundConfirmModal closeModal={ closeModal } paymentlistdetail={paymentlistdetail}/>
+            <RefundConfirmModal 
+                paymentlistdetail={paymentlistdetail} 
+                onLoad={onLoad}
+                closeModal={closeModal}
+            />
         </Modal>
     </div>
     );
