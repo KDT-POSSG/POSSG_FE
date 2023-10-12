@@ -18,9 +18,10 @@ function Inventory() {
     const [currentPageData, setCurrentPageData] = useState([]);
     const accesstoken = localStorage.getItem("accesstoken");
     const [expandRows, setExpandRows] = useState({});
+    const convSeq = localStorage.getItem("convSeq");
 
     const fetchInventoryData = () => {
-        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq :1, page : page},
+        axios.get('http://54.180.60.149:3000/settlementlist', {params: {convSeq : convSeq, page : page},
         headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((res) => {
             setInventoryList(res.data.settlement);

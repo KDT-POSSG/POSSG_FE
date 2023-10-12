@@ -6,6 +6,9 @@ import { toast } from "react-hot-toast";
 
 function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalAmount, products }) {
  
+  const convSeq = localStorage.getItem("convSeq");
+  const accesstoken = localStorage.getItem("accesstoken");
+
   //넘버패드로 받은 금액 입력
   const handleInputValueChange = (value) => {
       setInputValue(value); 
@@ -40,7 +43,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
   const paymentData = {
     receiptId: generateReceiptId(),
     userSeq: 1,
-    convSeq: 1,
+    convSeq: convSeq,
     pg: "현금",
     method: "현금",
     discountInfo: products.length > 0 ? products[0].promotionInfo : '',
@@ -68,17 +71,20 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
         toast.error("결제할 상품이 없습니다.");
         return;
       }    
-        const response = await axios.post("http://54.180.60.149:3000/addpayment", paymentData);
+        const response = await axios.post("http://54.180.60.149:3000/addpayment", paymentData, {
+          headers: { accessToken: `Bearer ${accesstoken}`,}
+        });
         console.log("결제 정보 전송 완료", response.data);
         
         if(response.data === "YES") {
-            const itemResponse = await axios.post('http://54.180.60.149:3000/addItems', items);
+            const itemResponse = await axios.post('http://54.180.60.149:3000/addItems', items, {
+              headers: { accessToken: `Bearer ${accesstoken}`,}
+            });
             console.log("결제 상품 목록 전송 완료", itemResponse.data);
             setInputValue(inputValue);
             setChangeAmount(changeAmount);
             closeModal();
             openModal('cashpayreceipt');
-            
         }
     } catch (error) {
         console.error('결제 정보 에러', error);

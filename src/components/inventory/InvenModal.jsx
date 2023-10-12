@@ -10,11 +10,12 @@ function InvenModal ({updateLastTime, onLoad }) {
     const currentDateTime = new Date().toISOString();
     const accesstoken = localStorage.getItem("accesstoken");
     const prices = [50000, 10000, 5000, 1000, 500, 100, 50, 10];
+    const convSeq = localStorage.getItem("convSeq");
 
     const sendData = () => {
       const totalCash = calculateTotal();
       const data = {
-        "convSeq": 1,
+        "convSeq": convSeq,
         "rdate": currentDateTime,
         "cash": totalCash,
         "memo": memo

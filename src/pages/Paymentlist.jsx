@@ -4,7 +4,6 @@ import Modal from '../components/ui/Modal';
 import ReceiptModal from '../components/paymentlist/ReceiptModal'
 import RefundModal from "../components/paymentlist/RefundModal";
 import { addComma } from "store/utils/function";
-import { ACCESS_TOKEN } from "store/apis/base";
 
 function Paymentlist()  {
   
@@ -13,7 +12,7 @@ function Paymentlist()  {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentlistType, setPaymentListType] = useState(null);
     const accesstoken = localStorage.getItem("accesstoken");
-
+    const convSeq = localStorage.getItem("convSeq");
 
     const openModal = (type) => {
         setPaymentListType(type);
@@ -27,7 +26,7 @@ function Paymentlist()  {
 
     // 전체 결제내역을 불러오는 함수
     const getPaymentList = () => {
-        axios.get('http://54.180.60.149:3000/paymentlist', { params: { convSeq: 1 }, 
+        axios.get('http://54.180.60.149:3000/paymentlist', { params: { convSeq: convSeq }, 
         headers:{ accessToken: `Bearer ${accesstoken}`}})
         .then((response) => {
             setPaymentlist(response.data.list);
