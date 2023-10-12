@@ -9,7 +9,7 @@ import DeliveryButton from './DeliveryButton';
 
 function DeliveryList() {
 
-  const { activeSort, page, setPage, setBefore, setAfter, setDelivering } = useOutletContext();
+  const { activeSort, page, setPage, setBefore, setAfter, setDelivering, setLocation } = useOutletContext();
   const navi = useNavigate();
 
   // const [page, setPage] = useState(1);
@@ -36,6 +36,7 @@ function DeliveryList() {
         setBefore(response.data.before);
         setAfter(response.data.after);
         setDelivering(response.data.delivering);
+        setLocation(response.data.location);
       })
       .catch((error) => {
         console.error(error);

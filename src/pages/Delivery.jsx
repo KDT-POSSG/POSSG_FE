@@ -11,6 +11,7 @@ function Delivery() {
   const [isRegi, setIsRegi] = useState(false);
   const [activeSort, setActiveSort] = useState(1);
   const [page, setPage] = useState(1);
+  const [location, setLocation] = useState("");
   const [before, setBefore] = useState(0);
   const [after, setAfter] = useState(0);
   const [delivering, setDelivering] = useState(0);
@@ -49,6 +50,10 @@ function Delivery() {
       
         <div className='delivery-top'>
           <div className='page-title'>배달 페이지</div>
+          <div className='delivery-top-address'>
+            <span className='tossface'>🏠&nbsp;&nbsp;</span>
+            {location}
+          </div>
         </div>
 
         {
@@ -61,7 +66,7 @@ function Delivery() {
               <div className='delivery-status' onClick={() => handleActiveSort(3)}>배달중<span>{delivering}</span></div>
               <div className='delivery-status' onClick={() => handleActiveSort(4)}>완료</div>
             </div>
-            <Outlet context={{ activeSort, setActiveSort, page, setPage, setBefore, setAfter, setDelivering }} />
+            <Outlet context={{ activeSort, setActiveSort, page, setPage, setBefore, setAfter, setDelivering, setLocation }} />
           </>
           :
           <DeliveryRegister setIsRegi={setIsRegi} />
