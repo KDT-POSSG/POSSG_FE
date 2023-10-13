@@ -27,29 +27,29 @@ export const basicRequest = axios.create({
 });
 
 // token 처리
-basicRequest.interceptors.response.use(
+// basicRequest.interceptors.response.use(
 
-  (response) => {
-    console.log("base >> ", response);
-    console.log("base >> ", response.headers);
-    console.log("base >> ", response.data);
+//   (response) => {
+//     console.log("base >> ", response);
+//     console.log("base >> ", response.headers);
+//     console.log("base >> ", response.data);
 
-    // REFRESH_YES + headers에 새로운 accessToken
-    // localStorage에 토큰 저장
+//     // REFRESH_YES + headers에 새로운 accessToken
+//     // localStorage에 토큰 저장
 
-    return response;
-  },
-  (error) => {
-    console.error(error);
+//     return response;
+//   },
+//   (error) => {
+//     console.error(error);
     
-    if (error.response.status === 403) {
-      // localStorage 비우기
-      // 토스트
-      // 로그인 페이지로 이동
-    }
+//     if (error.response.status === 403) {
+//       // localStorage 비우기
+//       // 토스트
+//       // 로그인 페이지로 이동
+//     }
 
-    return Promise.reject(error);
-  }
-);
+//     return Promise.reject(error);
+//   }
+// );
 
 // form-data 확인 필요

@@ -46,7 +46,6 @@ function App() {
   return (
     <BrowserRouter>
       <Toaster toastOptions={{ className: 'common-toast' }} />
-      <Header />
       <Routes>
 
         <Route path='/login' element={<Login />} />
@@ -54,8 +53,7 @@ function App() {
         <Route path='/findId' element={<FindId />} />
         <Route path='/findPw' element={<FindPw />} />
 
-        {/* <Route element={<PrivateRoutes />}> */}
-          {/* <Route element={<Header />} /> */}
+        <Route element={<PrivateRoutes />}>
           <Route path='/' element={<Home />} />
           <Route path='/product' element={<ProductList />} />
           <Route path='/myPage' element={<MyPage />} />
@@ -92,7 +90,7 @@ function App() {
           <Route path='/customerRegister' element={<RegisterCustomer />} />
 
           <Route path='/check' element={<AttendaceCheck />} />
-        {/* </Route> */}
+        </Route>
         
       </Routes>
     </BrowserRouter>

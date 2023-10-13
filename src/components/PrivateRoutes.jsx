@@ -1,12 +1,19 @@
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Header from './layout/Header';
+import { isAceessToken } from 'store/utils/function';
 
 function PrivateRoutes() {
 
-  const isLogin = localStorage.getItem("accesstoken");
+  const [isLogin, setIsLogin] = useState(isAceessToken());
+  const { pathname } = useLocation();
 
-  // 유효한 토큰인지 확인하는 로직 필요 (API)
+  console.log("pathname >> ", pathname);
+
+  useEffect(() => {
+    setIsLogin(isAceessToken());
+    console.log("private routes isAceessToken >> ", isLogin);
+  }, [pathname]);
 
   return (
     <>
