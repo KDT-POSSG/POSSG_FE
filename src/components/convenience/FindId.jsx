@@ -31,7 +31,7 @@ function FindId(){
         formData.append("representativeName", repreName);
         formData.append("phoneNumber", phoneNum);
 
-        axios.post("http://10.10.10.220:3000/findId", formData)
+        axios.post("http://54.180.60.149:3000/NoSecurityZoneController/findId", formData)
         .then((res)=>{
             //console.log("res.data.user_id >>> ", res.data.user_id);
             const findId = res.data.user_id;

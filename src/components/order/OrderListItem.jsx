@@ -59,10 +59,6 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, se
     changeAmount(amountTemp);
   }
 
-  useEffect(() => {
-    console.log("OrderListItem 도는중 ", item.productName);
-  });
-
   return (
     <div className='ordercart-grid ordercart-grid-item'>
 
