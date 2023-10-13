@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ACCESS_TOKEN, BRANCH_NAME, baseURL } from 'store/apis/base';
+import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
 import menuDatas from '../../assets/datas/menuDatas.json';
 import logo from '../../assets/svg/possg_logo.svg';
 import Modal from 'components/ui/Modal';
@@ -22,6 +22,8 @@ function HeaderMenu() {
       paddingBottom: '3.5rem',
     },
   };
+
+  const branchName = localStorage.getItem("branchName");
 
   const navi = useNavigate();
 
@@ -75,7 +77,7 @@ function HeaderMenu() {
 
           <Link to={"/myPage"} onClick={modalClose}>
             <div className='menu-branch'>
-              <span>{BRANCH_NAME}</span>
+              <span>{branchName}</span>
               <span className="material-symbols-rounded">chevron_right</span>
             </div>
           </Link>
