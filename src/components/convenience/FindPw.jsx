@@ -90,7 +90,7 @@ function FindPw(){
             toast.error("휴대폰 번호를 입력해주세요")
         }else{
             try{//to - 번호 / content - 아디
-                const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/send`, { to: currentNum, content : currentId });
+                const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/send`, { to: currentNum, content : currentId });
                 console.log("res >>> " + res);
                 console.log("res.data >>> " + res.data);
                 if(res.data.statusCode === "202" && res.data.statusName === "success"){
@@ -131,7 +131,7 @@ function FindPw(){
             toast.error("인증번호를 입력해주세요")
         }else{
             try{
-                const res = await axios.post(`http://10.10.10.205:3000/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
+                const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
                 if(res.data==="YES"){
                     //alert("성공");
                     toast.success("휴대폰 인증에 성공하였습니다")

@@ -61,7 +61,7 @@ function FindPwInfo({id, setModalIsOpen}){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.205:3000/NoSecurityZoneController/findPassword",{
+        axios.post("http://54.180.60.149:3000/NoSecurityZoneController/findPassword",{
             "userId" : id,
             "newPwd" : changePw
         })

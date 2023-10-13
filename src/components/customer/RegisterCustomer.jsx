@@ -38,7 +38,7 @@ function RegisterCustomer(){
     const onClick = (e) => {
         console.log("클릭")
         e.preventDefault();
-        axios.post("http://10.10.10.205:3000/addCustomer", {
+        axios.post("http://154.180.60.149:3000/addCustomer", {
             phoneNumber: phoneNumber,
             pinNumber: pinNumber,
         }, {

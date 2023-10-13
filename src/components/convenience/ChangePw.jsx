@@ -67,7 +67,7 @@ function ChangePw({ userId, setModalIsOpen }){
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://10.10.10.220:3000/changePassword",{
+        axios.post("http://54.180.60.149:3000/changePassword",{
             "pwd" : currentPw,
             "newPwd" : changePw
         }, {

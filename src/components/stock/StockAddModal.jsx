@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { ACCESS_TOKEN } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
 
 function StockAddModal({ product_name, img_url, totalStock, price, modalClose }) {
@@ -37,11 +38,13 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
       return;
     }
 
-    axios.post('http://10.10.10.81:3000/addCallProductConv', null, {
+    axios.post('http://54.180.60.149:3000/addCallProductConv', null, {
       params: {
       productName: product_name,
       branchName: "수영구 이마트",
       amount: addStock
+    }, headers: {
+      accessToken: `Bearer ${ACCESS_TOKEN}`
     }})
       .then((response) => {
         console.log(response);
