@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { baseURL } from 'store/apis/base';
 import { addComma, dateString, deliveryStatus } from 'store/utils/function';
 import DeliveryButton from './DeliveryButton';
 import toast from 'react-hot-toast';
 
 function DeliveryDetail() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const { ref } = useParams();
   const navi = useNavigate();
@@ -22,7 +24,7 @@ function DeliveryDetail() {
           ref: ref
         },
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         }
       })
       .then((response) => {
@@ -45,7 +47,7 @@ function DeliveryDetail() {
         ref: ref
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         }
       })
       .then((response) => {
@@ -76,7 +78,7 @@ function DeliveryDetail() {
         ref: ref
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         }
       })
       .then((response) => {

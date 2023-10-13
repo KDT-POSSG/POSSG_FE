@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import OrderItem from 'components/order/OrderItem';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
-import { ACCESS_TOKEN } from 'store/apis/base';
 
 function Order() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const [orderList, setOrderList] = useState([]);
   const [page, setPage] = useState(1);
@@ -19,7 +20,7 @@ function Order() {
           pageSize: 20
         },
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {

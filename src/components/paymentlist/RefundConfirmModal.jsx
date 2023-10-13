@@ -1,4 +1,3 @@
-import { ACCESS_TOKEN } from "store/apis/base";
 import axios from "axios";
 import toast from 'react-hot-toast';
 

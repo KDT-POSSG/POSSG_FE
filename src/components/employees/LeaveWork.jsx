@@ -1,10 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import { ACCESS_TOKEN } from 'store/apis/base';
 import { toast } from 'react-hot-toast';
-
-
 
 function LeaveWork({onClose}) {
     const [employeeSeq, setEmployeeSeq] = useState(0);

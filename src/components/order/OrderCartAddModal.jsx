@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { baseURL } from 'store/apis/base';
 
 function OrderCartAddModal({ setIsModalOpen }) {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const [keyword, setKeyword] = useState("");
   const [searchList, setSearchList] = useState([]);
@@ -25,7 +27,7 @@ function OrderCartAddModal({ setIsModalOpen }) {
         promotionInfo: 0
       },
       headers: {
-        accessToken: `Bearer ${ACCESS_TOKEN}`
+        accessToken: `Bearer ${accesstoken}`
       }
     })
       .then((response) => {
@@ -50,7 +52,7 @@ function OrderCartAddModal({ setIsModalOpen }) {
           amount: 1
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {

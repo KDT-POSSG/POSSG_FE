@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { baseURL } from 'store/apis/base';
 import menuDatas from '../../assets/datas/menuDatas.json';
 import logo from '../../assets/svg/possg_logo.svg';
 import Modal from 'components/ui/Modal';
 
 function HeaderMenu() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const menuStyle = {
     content: {
@@ -43,7 +45,7 @@ function HeaderMenu() {
 
     axios.get(`${baseURL}/logout`, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`, 
+          accessToken: `Bearer ${accesstoken}`, 
         }
       })
       .then((res)=>{

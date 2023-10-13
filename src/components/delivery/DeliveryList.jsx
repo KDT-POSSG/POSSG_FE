@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
-import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { baseURL } from 'store/apis/base';
 import { addComma, dateString, deliveryStatus } from 'store/utils/function';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import DeliveryButton from './DeliveryButton';
 
 function DeliveryList() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const { activeSort, page, setPage, setBefore, setAfter, setDelivering, setLocation } = useOutletContext();
   const navi = useNavigate();
@@ -26,7 +28,7 @@ function DeliveryList() {
           orderStatus: activeSort
         },
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         }
       })
       .then((response) => {
@@ -61,7 +63,7 @@ function DeliveryList() {
         ref: ref
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         }
       })
       .then((response) => {
@@ -90,7 +92,7 @@ function DeliveryList() {
         ref: ref
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         }
       })
       .then((response) => {

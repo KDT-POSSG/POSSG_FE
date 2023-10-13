@@ -2,10 +2,11 @@ import axios from 'axios';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { ACCESS_TOKEN } from 'store/apis/base';
 import { orderState } from 'store/utils/function';
 
 function OrderDetailNav({ callStatus, callRef, callDate }) {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const navi = useNavigate();
 
@@ -17,7 +18,7 @@ function OrderDetailNav({ callStatus, callRef, callDate }) {
         callRef: callRef
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {

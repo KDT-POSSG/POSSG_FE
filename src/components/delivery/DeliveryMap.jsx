@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import axios from 'axios';
-import { ACCESS_TOKEN } from 'store/apis/base';
 
 function DeliveryMap({ setIsRegi }) {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const mapRef = useRef(null);
 
@@ -32,7 +33,7 @@ function DeliveryMap({ setIsRegi }) {
       }, 
       {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         },
       })
       .then((response)=>{

@@ -4,7 +4,7 @@ import MyChart from "../../store/utils/MyChart";
 import axios from "axios";
 import { addComma } from "store/utils/function";
 import toast from "react-hot-toast";
-import { ACCESS_TOKEN, baseURL } from "store/apis/base";
+import { baseURL } from "store/apis/base";
 import Calendar from "./Calendar";
 
 function YearImcome(){
@@ -39,7 +39,6 @@ function YearImcome(){
             const res = await axios.get(`${baseURL}/profitAndLoss?date=${yearImcomeDate}&choice=0`,
             {
                 headers: {
-                    // accessToken: `Bearer ${ACCESS_TOKEN}`,
                     accessToken: `Bearer ${accesstoken}`,
                 },
             })

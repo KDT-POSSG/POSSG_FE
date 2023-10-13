@@ -2,7 +2,6 @@ import Modal from '../ui/Modal';
 import { useState } from 'react';
 import RefundConfirmModal from './RefundConfirmModal';
 import { addComma } from "store/utils/function";
-import { ACCESS_TOKEN } from 'store/apis/base';
 
 function RefundModal({ paymentlistdetail, onLoad }) {
 

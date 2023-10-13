@@ -2,9 +2,12 @@
 import { Bootpay } from '@bootpay/client-js';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { ACCESS_TOKEN } from 'store/apis/base';
+// import { ACCESS_TOKEN } from 'store/apis/base';
 
   export const handlePayment = async (pgType, totalAmount, products, setPaymentResponse, openModal) => {
+
+    const accesstoken = localStorage.getItem("accesstoken");
+
     const convSeq = localStorage.getItem("convSeq");
 
     try {
@@ -66,7 +69,7 @@ import { ACCESS_TOKEN } from 'store/apis/base';
         // 결제 폼 전송
         await axios.post('http://54.180.60.149:3000/addpayment', paymentData, {
           headers : { 
-            accessToken : `Bearer ${ACCESS_TOKEN}`
+            accessToken : `Bearer ${accesstoken}`
           }
         })
           .then((response) => {
@@ -85,7 +88,7 @@ import { ACCESS_TOKEN } from 'store/apis/base';
               // 결제 된 상품 목록 전송
               axios.post('http://54.180.60.149:3000/addItems', items, {
                 headers : { 
-                  accessToken : `Bearer ${ACCESS_TOKEN}`
+                  accessToken : `Bearer ${accesstoken}`
                 }
               })
                 .then((response) => {

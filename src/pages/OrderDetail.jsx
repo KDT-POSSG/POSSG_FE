@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import OrderDetailNav from 'components/order/OrderDetailNav';
 import OrderList from 'components/order/OrderList';
-import { ACCESS_TOKEN } from 'store/apis/base';
 
 function OrderDetail() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const { callRef } = useParams();
 
@@ -22,7 +23,7 @@ function OrderDetail() {
           callRef: callRef
         }, 
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {

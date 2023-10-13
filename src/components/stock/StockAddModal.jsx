@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import { ACCESS_TOKEN } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
 
 function StockAddModal({ product_name, img_url, totalStock, price, modalClose }) {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const [addStock, setAddStock] = useState(1);
 
@@ -44,7 +45,7 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
       branchName: "수영구 이마트",
       amount: addStock
     }, headers: {
-      accessToken: `Bearer ${ACCESS_TOKEN}`
+      accessToken: `Bearer ${accesstoken}`
     }})
       .then((response) => {
         console.log(response);
