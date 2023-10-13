@@ -4,9 +4,11 @@ import toast from 'react-hot-toast';
 import OrderCartAddModal from './OrderCartAddModal';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { baseURL } from 'store/apis/base';
 
 function OrderCartNav({ isDone, setIsDone, selectedItems }) {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const navi = useNavigate();
 
@@ -35,7 +37,7 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
         callRef: 0
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {
@@ -61,7 +63,7 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
         convSeq: 1
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {

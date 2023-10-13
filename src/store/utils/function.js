@@ -9,10 +9,7 @@ export const isAceessToken = () => {
 
 // access 토큰 가져오기
 export const getAccessToken = () => {
-  if(isAceessToken){
-    return localStorage.getItem("accesstoken");
-  }
-  return false;
+  return localStorage.getItem("accesstoken");
 }
 
 // refresh 토큰 유무 확인
@@ -25,10 +22,7 @@ export const isRefreshToken = () => {
 
 // refresh 토큰 가져오기
 export const getRefreshToken = () => {
-  if(isRefreshToken){
-    return localStorage.getItem("refreshtoken");
-  }
-  return false;
+  return localStorage.getItem("refreshtoken");
 }
 
 // 숫자에 콤마 추가

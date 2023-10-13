@@ -3,8 +3,11 @@ import ProductNav from '../components/product/ProductNav';
 import ProductItem from '../components/product/ProductItem';
 import axios from 'axios';
 import { getProductList } from 'store/apis/product';
+import { baseURL } from 'store/apis/base';
 
 function ProductList() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const [product, setProduct] = useState([]);
   const [page, setPage] = useState(0);
@@ -20,7 +23,13 @@ function ProductList() {
 
     const timer = setTimeout(() => {
 
-      getProductList(keyword)
+      axios
+        .get(`${baseURL}/productList`, {
+          params: keyword,
+          headers: {
+            accessToken: `Bearer ${accesstoken}`
+          }
+        })
         .then((response) => {
           console.log(response.data);
           console.log(response.data.ProductList);

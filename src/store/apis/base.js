@@ -1,12 +1,26 @@
 import axios from 'axios';
-import { getAccessToken, getRefreshToken } from 'store/utils/function';
+import { getAccessToken, getRefreshToken, isAceessToken, isRefreshToken } from 'store/utils/function';
 
 // baseurl
 export const baseURL = "http://54.180.60.149:3000";
 
+const checkAccessToken = () => {
+  if (isAceessToken()) {
+    return `Bearer ${getAccessToken()}`;
+  }
+  return ``;
+};
+
+const checkRefreshToken = () => {
+  if (isRefreshToken()) {
+    return `Bearer ${getRefreshToken()}`;
+  }
+  return ``;
+};
+
 // 로컬에서 토큰 가져오기
-export let ACCESS_TOKEN = getAccessToken();
-export let REFRESH_TOKEN = getRefreshToken();
+export let ACCESS_TOKEN = checkAccessToken();
+export let REFRESH_TOKEN = checkRefreshToken();
 
 // TOKEN X 
 export const publicRequest = axios.create({

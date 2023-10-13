@@ -2,9 +2,10 @@ import axios from 'axios';
 import OrderList from 'components/order/OrderList';
 import OrderCartNav from 'components/order/OrderCartNav';
 import React, { useEffect, useState } from 'react';
-import { ACCESS_TOKEN } from 'store/apis/base';
 
 function OrderCart() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const [orderCart, setOrderCart] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -20,7 +21,7 @@ function OrderCart() {
           convSeq: 1
         },
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {

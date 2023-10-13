@@ -2,9 +2,10 @@ import axios from 'axios';
 import DeliveryRegister from 'components/delivery/DeliveryRegister';
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { ACCESS_TOKEN } from 'store/apis/base';
 
 function Delivery() {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const navi = useNavigate();
   
@@ -27,7 +28,7 @@ function Delivery() {
     axios
       .get("http://54.180.60.149:3000/deliveryCheck", {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`,
+          accessToken: `Bearer ${accesstoken}`,
         }
       })
       .then((response) => {

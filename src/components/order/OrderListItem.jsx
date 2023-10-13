@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { ACCESS_TOKEN, baseURL } from 'store/apis/base';
+import { baseURL } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
 
 function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, setIsDone }) {
+
+  const accesstoken = localStorage.getItem("accesstoken");
 
   const [addStock, setAddStock] = useState(item.amount);
 
@@ -21,7 +23,7 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, se
         callRef: item.callRef
       }, {
         headers: {
-          accessToken: `Bearer ${ACCESS_TOKEN}`
+          accessToken: `Bearer ${accesstoken}`
         }
       })
       .then((response) => {
