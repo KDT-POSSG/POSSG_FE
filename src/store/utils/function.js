@@ -1,3 +1,37 @@
+
+// access 토큰 유무 확인, 로그인 유무만 확인
+export const isAceessToken = () => {
+  if (localStorage.getItem("accesstoken")) {
+    return true;
+  }
+  return false;
+};
+
+// access 토큰 가져오기
+export const getAccessToken = () => {
+  if(isAceessToken){
+    return localStorage.getItem("accesstoken");
+  }
+  return false;
+}
+
+// refresh 토큰 유무 확인
+export const isRefreshToken = () => {
+  if (localStorage.getItem("refreshtoken")) {
+    return true;
+  }
+  return false;
+};
+
+// refresh 토큰 가져오기
+export const getRefreshToken = () => {
+  if(isRefreshToken){
+    return localStorage.getItem("refreshtoken");
+  }
+  return false;
+}
+
+// 숫자에 콤마 추가
 export const addComma = (price) => {
 
   price = price + "";
@@ -6,6 +40,7 @@ export const addComma = (price) => {
   return removedCommaValue.toLocaleString();
 };
 
+// 프로모션 번호
 export const promotion = (promotionInfo) => {
 
   switch (promotionInfo) {
@@ -24,6 +59,7 @@ export const promotion = (promotionInfo) => {
   }
 }
 
+// 발주 상태 번호
 export const orderState = (orderStateNumber) => {
 
   switch (orderStateNumber) {
@@ -38,9 +74,9 @@ export const orderState = (orderStateNumber) => {
     default:
       break;
   }
-
 }
 
+// 배달 상태 번호
 export const deliveryStatus = (deliveryStatusNumber) => {
 
   switch (deliveryStatusNumber) {
@@ -59,9 +95,9 @@ export const deliveryStatus = (deliveryStatusNumber) => {
     default:
       break;
   }
-
 }
 
+// 날짜 텍스트화
 export const dateString = (delDate) => {
 
   let month = delDate.slice(5, 7);
