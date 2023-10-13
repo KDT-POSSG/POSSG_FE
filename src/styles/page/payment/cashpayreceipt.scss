@@ -1,5 +1,4 @@
 .cashpayreceipt{
-    
     .cashpayreceipt-header{
         margin-top: 6px;
         border-bottom: 1px solid $color-border;
@@ -93,5 +92,94 @@
         }
 
 
+    }
+}
+
+.cashpayreceipt-1{
+    padding: 0 1.5rem;
+    .cashpayreceipt-title{
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-align: center;
+    }
+    
+    .cashpayreceipt-header{
+        border-bottom: 1px solid $color-border;
+        border-style: dashed;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-bottom: 1rem;
+        .branch-info{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .cashpayreceipt-body1{
+        text-align: center;
+        border-top: 2px solid $color-border;
+        border-bottom: 2px solid $color-border;
+        border-style: dashed;
+        margin-top: 0.2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 0.5rem 0;
+    }
+
+    .cashpayreceipt-body2{
+        text-align: center;
+        border-bottom: 2px solid $color-border;
+        border-style: dashed;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        padding: 0.5rem 0;
+        .body2-info1{
+            width: 120px;
+            
+        }
+    }
+
+    .cashpayreceipt-body3{
+        border-bottom: 2px solid $color-border;
+        border-style: dashed;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 2.7rem 0.5rem 0.5rem;
+    }
+
+    .cashpayreceipt-body4{
+        border-bottom: 1px solid $color-border;
+        border-style: dashed;
+        padding-top: 0.5rem;
+        padding-bottom: 0.2rem;
+        .body4-top{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4.5px;
+            padding: 0.2rem 2.7rem 0 0.5rem;
+        }
+    }
+
+    .cashpayreceipt-body5{
+        border-bottom: 2px solid $color-border;
+        border-style: dashed;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 2.7rem 0.5rem 0.5rem;
+    }
+
+    .cashpayreceipt-footer{
+        border-bottom: 2px solid $color-border;
+        border-style: dashed;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+    }
+
+    .cashpayreceipt-footer2{
+        padding-top: 0.5rem;
     }
 }
