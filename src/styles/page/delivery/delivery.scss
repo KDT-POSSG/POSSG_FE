@@ -15,7 +15,7 @@
     align-items: end;
 
     .delivery-top-address {
-      font-size: .875rem;
+      // font-size: .875rem;
       padding-right: 0.5rem;
     }
   }
@@ -57,7 +57,6 @@
     background-color: $color-white;
     position: relative;
     display: grid;
-    // grid-template-columns: repeat(3, 1fr);
     grid-template-columns: repeat(4, 1fr);
     padding: 1rem 0;
     margin-bottom: 1.5rem;
@@ -72,7 +71,6 @@
       position: absolute;
       background-color: $color-main;
       border-radius: 1rem;
-      // width: 33.33%;
       width: 25%;
       height: 100%;
       top: 0;
@@ -111,7 +109,7 @@
     justify-items: center;
     align-items: center;
     grid-row-gap: 1.5rem;
-    grid-column-gap: 1rem;
+    grid-column-gap: 1.5rem;
     margin: 0 auto;
 
     .delivery-list-item {
@@ -156,7 +154,8 @@
 
         .total-price {
           font-weight: bold;
-          margin-bottom: 1rem;
+          // margin-bottom: 1rem;
+          margin-bottom: 1vw;
         }
 
         .item-product-container {
@@ -167,12 +166,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            // margin-bottom: 0.5rem;
-            // display: grid;
-            // grid-template-columns: 80% 20%;
 
             .product-name {
-              // margin-right: 1.5rem;
               max-width: 160px;
               line-height: 1.8;
               text-overflow: ellipsis;
@@ -196,29 +191,25 @@
         display: flex;
         justify-content: center;
         align-items: start;
+        // margin-bottom: 0.5vw;
 
         .delivery-text {
-          // font-size: .875rem;
           font-weight: bold;
         }
 
         .status-4 {
           color: $color-green;
-          // color: $color-white;
-          // background-color: $color-green;
         }
         .status--1 {
           color: $color-red;
-          // color: $color-white;
-          // background-color: $color-red;
         }
 
         .receipt-btn, .cancel-btn {
           border: 1px solid $color-border;
           border-radius: 1rem;
-          // font-size: .75rem;
           font-size: .875rem;
-          padding: 0.25rem 0.75rem;
+          // padding: 0.25rem 0.75rem;
+          padding: 0.2vw 1vw;
         }
 
         .receipt-btn {
@@ -251,5 +242,17 @@
 
   .delivery-paging {
     margin: 2rem 0;
+
+    .delivery-icon-container {
+      width: 100%;
+      text-align: center;
+      padding: 3rem 0;
+
+      .delivery-icon {
+        font-size: 8rem;
+      }
+    }
+
+    
   }
 }

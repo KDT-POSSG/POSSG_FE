@@ -9,10 +9,10 @@ import DeliveryButton from './DeliveryButton';
 
 function DeliveryList() {
 
-  const activeSort = useOutletContext();
+  const { activeSort, page, setPage, setBefore, setAfter, setDelivering, setLocation } = useOutletContext();
   const navi = useNavigate();
 
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [deliveryList, setDeliveryList] = useState([]);
   const [isUpdate, setIsUpdate] = useState(false);
@@ -31,8 +31,12 @@ function DeliveryList() {
       })
       .then((response) => {
         console.log(response.data);
-        setDeliveryList(response.data.DeliveryList);
-        setTotalPage(response.data.AllPage);
+        setDeliveryList(response.data.deliveryList);
+        setTotalPage(response.data.allPage);
+        setBefore(response.data.before);
+        setAfter(response.data.after);
+        setDelivering(response.data.delivering);
+        setLocation(response.data.location);
       })
       .catch((error) => {
         console.error(error);
@@ -45,13 +49,11 @@ function DeliveryList() {
   }
 
   const handleLink = (ref) => {
-    console.log("ref >> ", ref);
     navi(`/delivery/${ref}`);
   }
 
   const handleOrderStatus = (e, ref) => {
 
-    console.log("handleOrderStatus >> ", ref);
     e.stopPropagation();
 
     axios
@@ -81,7 +83,6 @@ function DeliveryList() {
 
   const handleOrderCancel = (e, ref) => {
 
-    console.log("handleOrderCancel >> ", ref);
     e.stopPropagation();
 
     axios
@@ -135,9 +136,9 @@ function DeliveryList() {
                     ))
                   }
                   {
-                    item.details.length > 2 ?
+                    item.details.length > 3 ?
                     <div className='item-product-more'>
-                      <div>…</div>
+                      <div>...</div>
                     </div>
                     :
                     <></>
@@ -148,7 +149,12 @@ function DeliveryList() {
               </div>
 
               <div className='item-bottom'>
-                <DeliveryButton deliveryRef={item.ref} delStatus={item.delStatus} handleOrderStatus={handleOrderStatus} handleOrderCancel={handleOrderCancel} />
+                <DeliveryButton 
+                  deliveryRef={item.ref} 
+                  delStatus={item.delStatus} 
+                  handleOrderStatus={handleOrderStatus} 
+                  handleOrderCancel={handleOrderCancel} 
+                />
               </div>
 
             </div>
@@ -171,7 +177,9 @@ function DeliveryList() {
             onChange={handlePage}
           />
           :
-          <></>
+          <div className='delivery-icon-container'>
+            <span className='tossface delivery-icon'>🏃🏃🏃</span>
+          </div>
         }
       </div>
     </>

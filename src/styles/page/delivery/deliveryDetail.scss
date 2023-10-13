@@ -22,12 +22,10 @@
       justify-content: space-between;
       align-items: center;
       background-color: $color-main;
-      // background-color: $color-border;
       border-radius: 2rem 2rem 0 0;
       border-bottom: 1px solid $color-border;
 
       > div {
-        // color: $color-white;
         font-weight: bold;
         font-size: 1.25rem;
       }
@@ -56,6 +54,7 @@
         }
 
         .delivery-location {
+          margin-bottom: 0.5rem;
 
           > span {
             font-weight: bold;
@@ -96,7 +95,6 @@
       align-items: start;
 
       .delivery-text {
-        // font-size: .875rem;
         font-weight: bold;
       }
 
@@ -106,13 +104,9 @@
 
       .status-4 {
         color: $color-green;
-        // color: $color-white;
-        // background-color: $color-green;
       }
       .status--1 {
         color: $color-red;
-        // color: $color-white;
-        // background-color: $color-red;
       }
 
       .receipt-btn, .cancel-btn {
