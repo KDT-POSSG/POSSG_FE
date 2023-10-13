@@ -49,6 +49,7 @@ function HeaderMenu() {
       .then((res)=>{
         if(res.status === 200){
           localStorage.removeItem("accesstoken");
+          localStorage.removeItem("refreshtoken");
           localStorage.removeItem("convSeq");
           localStorage.removeItem("branchName");
           navi("/login");
