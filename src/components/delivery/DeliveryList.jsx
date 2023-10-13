@@ -180,7 +180,7 @@ function DeliveryList() {
           />
           :
           <div className='delivery-icon-container'>
-            <span className='tossface delivery-icon'>🏃🏃🏃</span>
+            <span className='tossface delivery-icon'>🏃</span>
           </div>
         }
       </div>

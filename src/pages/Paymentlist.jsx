@@ -33,6 +33,7 @@ function Paymentlist()  {
         .then((response) => {
             setPaymentlist(response.data.list);
             console.log('결제내역 불러오기 성공');
+            // console.log(response.data.list);
         })
         .catch((error) => {
             console.log('결제내역 불러오기 실패:', error);
@@ -173,7 +174,7 @@ function Paymentlist()  {
                 
             </div>
         
-        <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{width:'40%' } }}>
+        <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{width:'40%', height:'auto', backgroundColor:'#fff', maxHeight:'40rem'  } }}>
                 {paymentlistType === 'refund' &&
                 <RefundModal 
                     paymentlistdetail={paymentlistdetail}
