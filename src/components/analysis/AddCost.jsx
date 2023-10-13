@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
 import DatePicker from 'react-datepicker';
+import Calendar from "./Calendar";
 
 function AddCost(){
     const accesstoken = localStorage.getItem("accesstoken");
@@ -104,13 +105,10 @@ function AddCost(){
             <div className="addCost-nav">
                 <div className="addCost-title page-title">비용 입력</div>
                 <div className="addCost-calendar-container">
-                    <DatePicker
-                            selected={selectedDate}
+                    <Calendar
+                            selectedDate={selectedDate}
                             onChange={handleDateChange}
-                            showMonthYearPicker
-                            dateFormat="yyyy년 MM월"
-                            minDate={new Date(2000, 0)} 
-                            maxDate={new Date()} 
+                            type="month" 
                         />
                     <div className="material-symbols-rounded">calendar_month</div>
                 </div>

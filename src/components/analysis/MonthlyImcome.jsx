@@ -1,10 +1,11 @@
 import { useState } from "react";
 import DatePicker from 'react-datepicker';
-import MyChart from "../../store/apis/MyChart";
+import MyChart from "../../store/utils/MyChart";
 import axios from "axios";
 import { addComma } from "store/utils/function";
 import toast from "react-hot-toast";
 import { ACCESS_TOKEN, baseURL } from "store/apis/base";
+import Calendar from "./Calendar";
 
 function MonthlyImcome(){
     const accesstoken = localStorage.getItem("accesstoken");
@@ -71,14 +72,11 @@ function MonthlyImcome(){
             <div className="imcome-nav">
                 <div className="imcome-title page-title">월별 손익</div>
                 <div className="imcome-calendar-container">
-                    <DatePicker
-                        selected={selectedDate}
-                        onChange={handleDateChange}
-                        showMonthYearPicker
-                        dateFormat="yyyy년 MM월"
-                        minDate={new Date(2000, 0)} 
-                        maxDate={new Date()} 
-                    />
+                    <Calendar
+                            selectedDate={selectedDate}
+                            onChange={handleDateChange}
+                            type="month" 
+                        />
                     <div className="material-symbols-rounded">calendar_month</div>
                     <button className="calendar-button" type="button" onClick={onClick}>조회</button>
                 </div>

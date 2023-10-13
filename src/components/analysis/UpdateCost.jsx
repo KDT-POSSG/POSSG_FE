@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
 import DatePicker from 'react-datepicker';
 import { useNavigate } from "react-router-dom";
+import Calendar from "./Calendar";
 
 function UpdateCost(){
     const navi = useNavigate();
@@ -141,14 +142,11 @@ function UpdateCost(){
             <div className="updateCost-nav">
                 <div className="updateCost-title page-title">비용 수정</div>
                 <div className="updateCost-calendar-container">
-                    <DatePicker
-                        selected={selectedDate}
-                        onChange={handleDateChange}
-                        showMonthYearPicker
-                        dateFormat="yyyy년 MM월"
-                        minDate={new Date(2000, 0)} 
-                        maxDate={new Date()} 
-                    />
+                    <Calendar
+                            selectedDate={selectedDate}
+                            onChange={handleDateChange}
+                            type="month" 
+                        />
                     <div className="material-symbols-rounded">calendar_month</div>
                     <button className="calendar-button" type="button" onClick={onSearch}>조회</button>
                 </div>

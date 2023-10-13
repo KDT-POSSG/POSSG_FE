@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import MyChart from "../../store/apis/MyChart";
+import MyChart from "../../store/utils/MyChart";
 
 function ImcomeReport(){
     const [activeSort, setActiveSort] = useState(1);

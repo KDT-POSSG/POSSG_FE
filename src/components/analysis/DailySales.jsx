@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import ReactDatePicker from 'react-datepicker';
-import MyChart from '../../store/apis/MyChart';
+import MyChart from '../../store/utils/MyChart';
 import { baseURL } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
+import Calendar from './Calendar';
 
 function DailySales(){
     const accesstoken = localStorage.getItem("accesstoken");
@@ -65,12 +65,11 @@ function DailySales(){
             <div className="sales-nav">
                 <div className="sales-title page-title">일별 매출</div>
                 <div className="sales-calendar-container">           
-                    <ReactDatePicker
-                        selected={selectedDate}
+                    <Calendar
+                        className="date-calendar"
+                        selectedDate={selectedDate}
                         onChange={handleDateChange}
-                        dateFormat="yyyy년 MM월 dd일" 
-                        minDate={new Date(2000, 0, 1)} 
-                        maxDate={new Date()} 
+                        type="day"
                     />
                     <div className="material-symbols-rounded">calendar_month</div>
                     <button className="calendar-button" type="button" onClick={onClick}>조회</button>
