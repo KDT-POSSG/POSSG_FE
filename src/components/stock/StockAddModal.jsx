@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { baseURL } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
 
-function StockAddModal({ product_name, img_url, totalStock, price, modalClose }) {
+function StockAddModal({ product_seq, product_name, img_url, totalStock, price, price_Origin, modalClose }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const branchName = localStorage.getItem("branchName");
 
   const [addStock, setAddStock] = useState(1);
 
@@ -38,30 +40,34 @@ function StockAddModal({ product_name, img_url, totalStock, price, modalClose })
       toast.error("수량은 1 미만이 될 수 없습니다");
       return;
     }
-
-    axios.post('http://54.180.60.149:3000/addCallProductConv', null, {
-      params: {
-      productName: product_name,
-      branchName: "수영구 이마트",
-      amount: addStock
-    }, headers: {
-      accessToken: `Bearer ${accesstoken}`
-    }})
+    
+    axios
+      .post(`${baseURL}/addCallProductConv`, {
+        convSeq: 1,
+        productSeq: product_seq, 
+        priceOrigin: price_Origin,
+        price: price,
+        productName: product_name,
+        imgUrl: img_url,
+        amount: 1
+      }, {
+        headers: {
+          accessToken: `Bearer ${accesstoken}`
+      }})
       .then((response) => {
         console.log(response);
 
         if(response.data === "YES") {
           modalClose();
-          // toast.success(`"${product_name}" 상품의 발주가 추가 되었습니다`);
-          toast.success(`발주가 추가 되었습니다`);
+          toast.success(`발주 추가 완료`);
         }
         else {
-          toast.error(`발주 추가에 실패했습니다`);
+          toast.error(`발주 추가 실패`);
         }
       })
       .catch((error) => {
         console.error(error);
-        toast.error(`발주 추가에 실패했습니다`);
+        toast.error(`발주 추가 실패`);
       })
   }
 

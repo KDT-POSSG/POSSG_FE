@@ -34,7 +34,7 @@ function StockListItemMain({ stock, idx }) {
           </div>
         </div>
         <div>{stock.totalStock}</div>
-        <div>{addComma(stock.details[0].price)} 원</div>
+        <div>{addComma(stock.details[0].price_Origin)} 원</div>
         <div>
           <button type='button' className='stock-add' onClick={modalOpen}>발주 추가</button>
         </div>
@@ -51,10 +51,12 @@ function StockListItemMain({ stock, idx }) {
       <Modal isOpen={isModalOpen} onClose={modalClose}
              style={{ content: { width: '30rem', height: 'auto', backgroundColor: '#ffffff' } }}>
         <StockAddModal 
+          product_seq={stock.product_seq}
           product_name={stock.product_name} 
           img_url={stock.img_url} 
           totalStock={stock.totalStock} 
           price={stock.details[0].price} 
+          price_Origin={stock.details[0].price_Origin}
           modalClose={modalClose}
         />
       </Modal>

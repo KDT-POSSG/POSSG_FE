@@ -22,14 +22,14 @@ function Stock() {
 
   useEffect(() => {
 
-    console.log("accesstoken >> ", accesstoken);
-
     axios.get('http://54.180.60.149:3000/getAllProductStock', {
         params: {
+          convSeq: 1,
           pageNumber: page - 1,
           search: search,
           sortOrder: filter,
-          pageSize: 10
+          pageSize: 10,
+          stockListCheck: 1
         },
         headers:{ 
           accessToken: `Bearer ${accesstoken}`

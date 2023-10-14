@@ -10,7 +10,7 @@ function StockList({ stock }) {
         <div>번호</div>
         <div>상품명</div>
         <div>재고 수량</div>
-        <div>개당 가격</div>
+        <div>원가</div>
         <div>발주 추가</div>
       </div>
 

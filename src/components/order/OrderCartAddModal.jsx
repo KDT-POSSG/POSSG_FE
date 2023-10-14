@@ -42,7 +42,8 @@ function OrderCartAddModal({ setIsModalOpen }) {
 
   const handleAddProduct = (item) => {
     
-    axios.post(`${baseURL}/addCallProductConv`, {
+    axios
+      .post(`${baseURL}/addCallProductConv`, {
           convSeq: 1,
           productSeq: item.productSeq, 
           priceOrigin: item.priceOrigin,
