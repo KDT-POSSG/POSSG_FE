@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import Header from './layout/Header';
-import { isAceessToken } from 'store/utils/function';
+import { useRecoilValue } from 'recoil';
+import { PosState } from 'store/atom/posState';
 
 function PrivateRoutes() {
 
-  const [isLogin, setIsLogin] = useState(isAceessToken());
+  const accesstoken = localStorage.getItem("accesstoken");
+  const isPos = useRecoilValue(PosState);
+
+  const [isLogin, setIsLogin] = useState(accesstoken);
   const { pathname } = useLocation();
 
-  console.log("pathname >> ", pathname);
+  // console.log("pathname >> ", pathname);
 
   useEffect(() => {
-    setIsLogin(isAceessToken());
-    console.log("private routes isAceessToken >> ", isLogin);
-  }, [pathname]);
+    setIsLogin(accesstoken);
+    // console.log("private routes isAceessToken >> ", isLogin);
+  }, [pathname, isPos]);
 
   return (
     <>
