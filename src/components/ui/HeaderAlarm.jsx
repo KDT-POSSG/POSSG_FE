@@ -3,6 +3,8 @@ import Modal from './Modal';
 import { baseURL } from 'store/apis/base';
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import toast from 'react-hot-toast';
+import { useRecoilValue } from 'recoil';
+import { PosState } from 'store/atom/posState';
 
 function HeaderAlarm() {
 
@@ -21,6 +23,7 @@ function HeaderAlarm() {
   };
 
   const accessToken = localStorage.getItem("accesstoken");
+  const isPos = useRecoilValue(PosState);
   const currentDate = new Date();
 
   const [alarmList, setAlarmList] = useState([]);
@@ -29,33 +32,45 @@ function HeaderAlarm() {
 
   useEffect(() => {
 
-    const eventSource = new EventSourcePolyfill(`${baseURL}/notifications`, {
-      headers: {
-        accessToken: `Bearer ${accessToken}`,
-      },
-      heartbeatTimeout: 120000,
-    });
+    let eventSource = null;
 
-    eventSource.onmessage = function(event) {
+    if(isPos) {
 
-      const product = JSON.parse(event.data);
-      console.log("product >> ", product);
-      console.log("onmessage 들어옴");
-
-      setAlarmList(product);
-      setIsAlarm(true);
-
-      toast('알림이 있습니다', {
-        icon: <span className="tossface">🔔</span>,
+      eventSource = new EventSourcePolyfill(`${baseURL}/notifications`, {
+        headers: {
+          accessToken: `Bearer ${accessToken}`,
+        },
+        heartbeatTimeout: 120000,
       });
-    };
-
-    eventSource.onerror = function(error) {
-      console.error("SSE Error >> ", error);
-      eventSource.close();
+  
+      eventSource.onmessage = function(event) {
+  
+        const product = JSON.parse(event.data);
+        // console.log("product >> ", product);
+        console.log("onmessage 들어옴 ", new Date());
+  
+        setAlarmList(product);
+        setIsAlarm(true);
+  
+        toast('알림 도착', {
+          icon: <span className="tossface">🔔</span>,
+        });
+      };
+  
+      eventSource.onerror = function(error) {
+        eventSource.close();
+        console.error("SSE Error >> ", error);
+      };
+    }
+    
+    return () => {
+      if (eventSource) {
+        eventSource.close();
+        console.log("SSE 연결 종료");
+      }
     };
     
-  }, []);
+  }, [isPos]);
 
   const handleExpirationDate = (productDate) => {
     
