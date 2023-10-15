@@ -22,10 +22,10 @@ function Login(){
     // 컴포넌트가 마운트될 때, 쿠키에서 아이디를 가져와서 상태에 설정
     useEffect(() => {
 
-        if(isAceessToken()) {
-            navi("/");
-            return;
-        }
+        // if(isAceessToken()) {
+        //     navi("/");
+        //     return;
+        // }
 
         if (cookies.rememberedId) {
         setId(cookies.rememberedId);
