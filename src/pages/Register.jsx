@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import { baseURL } from "store/apis/base";
 
 function Register(){
 
@@ -49,62 +50,60 @@ function Register(){
         const branchNameIsValid = branchName.trim() !== ""; 
         const repreNameIsValid = repreName.trim() !== "";
         const phoneNumIsValid = phoneNum.trim() !== "";
-        
-
         setFormIsValid(
             idIsValid &&
             accountNumIsValid &&
             pwIsValid &&
             pwCheckIsValid &&
-            phoneNumIsValid
+            phoneNumIsValid 
         );
     };
 
-    //console.log(isId+"/"+isAccount+"/"+isPw+"/"+isPwCheck+"/"+isPhoneNum+"/"+isNum+"/");
+    // console.log(isId+"/"+isAccount+"/"+isPw+"/"+isPwCheck+"/"+isPhoneNum+"/"+isNum+"/");
 
     // 아이디 입력 & 아이디 중복체크
     const onChangeId = (e) => {
-        //console.log("e.target.value >> ", e.target.value);
         const currentId = e.target.value;
         setId(currentId);
         checkFormValidity();
         const idReg1 = /^[a-z][a-z\d]{6,16}$/;
         const idReg2 =  /[0-9]/;
-        //console.log("currentId >> ", currentId) // 
         if(idReg1.test(currentId)){
             if(idReg2.test(currentId)){
                 setIdMsg("");
-                //setIsId(true);
+                setIsId(true);
+            }else{
+                setIdMsg("아이디는 6~16자의 소문자, 숫자만 입력해야합니다");
+                setIsId(false);
             }
         }else{
             setIdMsg("아이디는 6~16자의 소문자, 숫자만 입력해야합니다");
             setIsId(false);
         }
-    }
-    
+    }   
+
     const checkDuplicateId = async (e) => {
         const currentId = id;
+        setId(currentId);
+        const idReg = /^[a-z][a-z0-9]{6,16}$/
         //console.log("currentId >> ", currentId);
         try {
-            const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/idcheck?userId=${currentId}`);
-            //console.log(res);
+            const res = await axios.post(`${baseURL}/NoSecurityZoneController/idcheck?userId=${currentId}`);
+            console.log("res >>> ", res);
             if (res.data==="YES") {
-                console.log(res.data);
-                setIdMsg("");
+                console.log("res.data >>> ", res.data);
                 setIsId(true);
             } else if(res.data==="NO") {
-                //console.log(res.data);
                 setIdMsg(currentId + "는 이미 사용중인 아이디입니다");
                 setIsId(false);
             }
         } catch (err) {
-            console.log(err);
+            console.error("catch err ", err);
         }
     }
 
     // 본사 지급 번호 유효성
     const onChangeAccountNum = (e) => {
-        ///^[0-9]$
         const currentNum = e.target.value;
         setAccountNum(currentNum);
         checkFormValidity();
@@ -120,21 +119,20 @@ function Register(){
     }
 
     const onClickAccountNum = async(e) => {
-        //alert("클릭")
         const currentNum = accountNum;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/keyCheck?convKey=${currentNum}`);
+            const res = await axios.post(`${baseURL}/NoSecurityZoneController/keyCheck?convKey=${currentNum}`);
             //console.log("res >>> " + res.data);
             if(res.data==="YES"){
-                toast.success("지급번호가 확인되었습니다");
+                toast.success("지급번호 확인 완료");
                 setIsAccount(true);
             }else if(res.data==="NO"){
-                toast.error("지급번호를 확인해주세요");
+                toast.error("지급번호 확인 실패");
                 setIsAccount(false);
             }
         }catch(err){
-            console.log(err);
+            console.error("catch err ", err);
         }
     }
 
@@ -144,15 +142,15 @@ function Register(){
         setPw(currentPw);
         checkFormValidity();
         const pwRegExp =
-          /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+            /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=~&.?-])(?=.*[0-9]).{8,16}$/;
         if (!pwRegExp.test(currentPw)) {
-          setPwMsg("비밀번호 형식을 확인해주세요");
-          setIsPw(false);
+            setPwMsg("비밀번호 형식을 확인해주세요");
+            setIsPw(false);
         } else {
-          setPwMsg("");
-          setIsPw(true);
+            setPwMsg("");
+            setIsPw(true);
         }
-      };
+    };
 
     // 비밀번호 확인 유효성
     const onChangePwCheck=(e)=>{
@@ -160,13 +158,13 @@ function Register(){
         setPwCheck(currentPwCheck);
         checkFormValidity();
         if (pw !== currentPwCheck) {
-          setPwCheckMsg("비밀번호가 일치하지 않습니다");
-          setIsPwCheck(false);
+            setPwCheckMsg("비밀번호가 일치하지 않습니다");
+            setIsPwCheck(false);
         } else {
-          setPwCheckMsg("");
-          setIsPwCheck(true);
+            setPwCheckMsg("");
+            setIsPwCheck(true);
         }
-      };
+    };
 
     // 휴대폰 번호 유효성
     const onChangePhoneNum = (e) => {
@@ -183,26 +181,24 @@ function Register(){
             setphoneNumMsg("");
             setIsPhoneNum(true);
         }
-      };
+    };
     
+    // 인증번호 보내기
     const onSendPhoneNum = async(e) => {
-        // 인증번호 보내기
         //alert("클릭")
         const currentNum = phoneNum; // 휴대폰번호 가져오기
         //console.log(currentNum);
         try{//to - 번호 / content - 아디
-            const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/regiSend`, { to: currentNum });
+            const res = await axios.post(`${baseURL}/NoSecurityZoneController/regiSend`, { to: currentNum });
             //console.log("res >>> " + res.data);
             if(res.data.statusCode === "202" && res.data.statusName === "success"){
-                toast.success("인증번호가 발송되었습니다");
-                //setIsPhoneNum(true);
-                setNumVisible(true); // 인증번호 입력 필드를 보이도록 설정
+                toast.success("인증번호 발송완료");
+                setNumVisible(true); 
             }else{
-                toast.error("휴대폰번호를 확인해주세요");
-                //setIsPhoneNum(false);
+                toast.error("인증번호 발송실패");
             }
         }catch(err){
-            console.log(err);
+            console.error("catch err ", err);
         }
     }
 
@@ -223,53 +219,54 @@ function Register(){
             setIsNum(true);
         }
     }
+    // 인증번호 확인
     const onCheckNum = async (e) => {
-        // 인증번호 확인
         const currentNum = num;
         //console.log(currentNum);
         try{
-            const res = await axios.post(`http://54.180.60.149:3000/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
-            //console.log("a");
+            const res = await axios.post(`${baseURL}/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
             //console.log(res.data);
             if(res.data==="YES"){
                 //alert("성공");
-                toast.success("휴대폰 인증에 성공하였습니다")
+                toast.success("휴대폰 인증성공")
                 setVerificationCode(true);
             }else if(res.data==="NO"){
-                // 인증 실패 처리
-                toast.error("인증번호를 확인해주세요");
+                // 인증 실패
+                toast.error("휴대폰 인증실패");
                 setVerificationCode(false);
             }
         }catch(err){
-            console.log(err);
+            console.error("catch err ", err);
         }
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        axios.post("http://54.180.60.149:3000/NoSecurityZoneController/addUser", {
-            //userId,pwd,representativeName,branchName,phoneNumber,convKey
-            "userId": id,
-            "pwd": pw,
-            "representativeName": repreName,
-            "branchName": branchName,
-            "phoneNumber": phoneNum,
-            "convKey": accountNum,
-        })
-        .then((res)=>{
-            console.log(res.data);
-            if(res.data==="YES"){
-                toast.success("회원가입에 성공하였습니다");
-                // 로그인으로
-                navi("/login");
-                
-            }else if(res.data==="NO"){
-                toast.error("회원가입에 실패하였습니다");
-            }
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
+    const register = () => {
+        if(!isId || !isAccount || !isPw || !isPwCheck || !isPhoneNum || !isNum){
+            toast.error("회원가입 실패")
+        }else{
+            axios.post(`${baseURL}/NoSecurityZoneController/addUser`, {
+                //userId,pwd,representativeName,branchName,phoneNumber,convKey
+                "userId": id,
+                "pwd": pw,
+                "representativeName": repreName,
+                "branchName": branchName,
+                "phoneNumber": phoneNum,
+                "convKey": accountNum,
+            })
+            .then((res)=>{
+                console.log("onSubmit res.data >>> ",res.data);
+                if(res.data==="YES"){
+                    toast.success("회원가입 성공");
+                    navi("/login");
+                }else{
+                    // toast.error("회원가입 실패");
+                }
+            })
+            .catch((err)=>{
+                toast.error("회원가입 실패");
+                console.error("catch 에러 ", err);
+            })
+        }
     }
 
     return(
@@ -277,8 +274,7 @@ function Register(){
             <div className="regi-title page-title">회원가입</div>
         
             <div className="regi-content">
-                <form id="regiForm" method="post" autoComplete="off" onSubmit={onSubmit}>
-                    <div className="form-row">
+                <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="id" name="id" value={id} onChange={onChangeId} onBlur={checkDuplicateId} required />
                             <label className="label-helper" htmlFor="id"><span>아이디 (소문자+숫자 6~16자)</span></label>
@@ -321,7 +317,6 @@ function Register(){
                             <p className="p-text"></p>
                         </div>
                     </div>
-
                     <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="phoneNum" name="phoneNum" value={phoneNum} onChange={onChangePhoneNum} required />
@@ -330,7 +325,6 @@ function Register(){
                             <p className="p-text">{phoneNumMsg}</p>
                         </div>
                     </div>
-
                     {numVisible && (
                     <div className="form-row">
                         <div className="input-container">
@@ -341,8 +335,17 @@ function Register(){
                         </div>
                     </div>
                     )}
+                        <div className="btn-container">
+                            <button className="regi-btn" type="button" onClick={register}>회원가입</button>
+                        </div>
+            </div>
+        </div>
+    )
+}
+export default Register;
 
-                    {/* 약관동의 : 내용, 기능 좀 더 수정해야됨. 약관 필요할까? */}
+
+{/* 약관동의 : 내용, 기능 좀 더 수정해야됨. 약관 필요할까? */}
                     {/* 
                     https://white-salt.tistory.com/28
                     https://hyeoky.tistory.com/24
@@ -373,14 +376,3 @@ function Register(){
                             </div>
                         </div>
                     </div> */}
-                        <div className="btn-container">
-                            <button className="regi-btn" type="submit" disabled={!formIsValid} >회원가입</button>
-                            {/* <input className="regi-btn" type="submit" value="회원가입" disabled={!formIsValid} /> */}
-                        </div>
-                </form>
-            </div>
-        </div>
-    )
-}
-
-export default Register;
