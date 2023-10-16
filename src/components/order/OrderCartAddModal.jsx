@@ -84,7 +84,7 @@ function OrderCartAddModal({ setIsModalOpen }) {
 
       <div className='ordercart-search'>
         {
-          searchList ?
+          searchList && searchList.length !== 0 ?
           searchList.map((item) => (
             <React.Fragment key={item.productSeq}>
               <hr />

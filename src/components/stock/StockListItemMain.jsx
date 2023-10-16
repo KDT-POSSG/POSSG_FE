@@ -34,7 +34,7 @@ function StockListItemMain({ stock, idx }) {
           </div>
         </div>
         <div>{stock.totalStock}</div>
-        <div>{addComma(stock.details[0].price_Origin)} 원</div>
+        <div>{addComma(stock.details[0].price_origin)} 원</div>
         <div>
           <button type='button' className='stock-add' onClick={modalOpen}>발주 추가</button>
         </div>
@@ -56,7 +56,7 @@ function StockListItemMain({ stock, idx }) {
           img_url={stock.img_url} 
           totalStock={stock.totalStock} 
           price={stock.details[0].price} 
-          price_Origin={stock.details[0].price_Origin}
+          price_origin={stock.details[0].price_origin}
           modalClose={modalClose}
         />
       </Modal>

@@ -3,6 +3,7 @@ import StockList from 'components/stock/StockList';
 import StockNav from 'components/stock/StockNav';
 import React, { useEffect, useState } from 'react';
 import Pagination from "react-js-pagination";
+import { baseURL } from 'store/apis/base';
 
 function Stock() {
 
@@ -22,7 +23,7 @@ function Stock() {
 
   useEffect(() => {
 
-    axios.get('http://54.180.60.149:3000/getAllProductStock', {
+    axios.get(`${baseURL}/getAllProductStock`, {
         params: {
           convSeq: 1,
           pageNumber: page - 1,

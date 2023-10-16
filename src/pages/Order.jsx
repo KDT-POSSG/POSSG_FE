@@ -43,10 +43,10 @@ function Order() {
       <div className='order-top'>
         <div className='page-title order-page-title'>발주 내역</div>
 
-        <div className='order-top-filter'>
+        {/* <div className='order-top-filter'>
           <button className='active-btn order-filter-btn'>점주 발주 목록</button>
           <button className='order-filter-btn'>고객 요청 목록</button>
-        </div>
+        </div> */}
       </div>
 
       <div className='order-grid-container'>

@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { baseURL } from 'store/apis/base';
 import { addComma } from 'store/utils/function';
 
-function StockAddModal({ product_seq, product_name, img_url, totalStock, price, price_Origin, modalClose }) {
+function StockAddModal({ product_seq, product_name, img_url, totalStock, price, price_origin, modalClose }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
   const branchName = localStorage.getItem("branchName");
@@ -45,11 +45,11 @@ function StockAddModal({ product_seq, product_name, img_url, totalStock, price, 
       .post(`${baseURL}/addCallProductConv`, {
         convSeq: 1,
         productSeq: product_seq, 
-        priceOrigin: price_Origin,
+        priceOrigin: price_origin,
         price: price,
         productName: product_name,
         imgUrl: img_url,
-        amount: 1
+        amount: addStock
       }, {
         headers: {
           accessToken: `Bearer ${accesstoken}`
@@ -81,7 +81,7 @@ function StockAddModal({ product_seq, product_name, img_url, totalStock, price, 
         <div className='product-info'>
           <div className='name'>{product_name}</div>
           <div className='stock-cnt'>현재 수량 : {totalStock} 개</div>
-          <div>개당 가격 : {addComma(price)} 원</div>
+          <div>개당 가격 : {addComma(price_origin)} 원</div>
         </div>
       </div>
 
@@ -94,7 +94,7 @@ function StockAddModal({ product_seq, product_name, img_url, totalStock, price, 
             <span className="material-symbols-rounded stock-calc">remove</span>
           </button>
 
-          <input type="text" placeholder='추가 수량 입력' value={addStock} onChange={handleAddStock} /><br/>
+          <input type="text" placeholder='추가 수량 입력' value={addStock} onChange={handleAddStock} disabled /><br/>
           
           <button value="plus" onClick={handleAddStock} className='plus'>
             <span className="material-symbols-rounded stock-calc">add</span>
@@ -102,7 +102,7 @@ function StockAddModal({ product_seq, product_name, img_url, totalStock, price, 
         </div>
 
         <div className='result'>
-          총합 : {addComma(price * addStock)} 원
+          총합 : {addComma(price_origin * addStock)} 원
         </div>
         
       </div>

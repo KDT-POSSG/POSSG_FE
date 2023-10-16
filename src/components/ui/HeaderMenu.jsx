@@ -109,8 +109,6 @@ function HeaderMenu() {
           <hr />
           <div className='header-menu-logout'>
             <button onClick={handleLogout}>로그아웃</button>
-            <Link to="/login">&nbsp;&nbsp;&nbsp;&nbsp;로그인</Link>
-            <Link to="/register">&nbsp;&nbsp;&nbsp;&nbsp;회원가입</Link>
           </div>
 
         </div>

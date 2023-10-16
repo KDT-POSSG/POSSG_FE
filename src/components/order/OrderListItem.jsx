@@ -12,8 +12,8 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, se
 
   const changeAmount = (amountTemp) => {
 
-    console.log("addStock >> ", addStock);
-    console.log("amountTemp >> ", amountTemp);
+    // console.log("addStock >> ", addStock);
+    // console.log("amountTemp >> ", amountTemp);
 
     axios.post(`${baseURL}/updateCallProductConv`, {
         convSeq: 1,
@@ -95,7 +95,7 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, se
               <span className="material-symbols-rounded stock-calc">remove</span>
             </button>
 
-            <input type="text" placeholder='수량' value={addStock} onChange={handleAddStock} /><br/>
+            <input type="text" placeholder='수량' value={addStock} onChange={handleAddStock} disabled /><br/>
             
             <button value="plus" onClick={handleAddStock} className='plus'>
               <span className="material-symbols-rounded stock-calc">add</span>
@@ -116,6 +116,6 @@ export default React.memo(OrderListItem, areEqual);
 
 function areEqual(prev, next) {
   return (
-    prev.amount === next.amount && prev.selectedItems === next.selectedItems
+    prev.item.amount === next.item.amount && prev.selectedItems === next.selectedItems
   );
 }

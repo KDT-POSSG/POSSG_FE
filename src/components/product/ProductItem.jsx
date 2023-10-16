@@ -19,10 +19,13 @@ function ProductItem({ product }) {
         product.stockQuantity === 0 ?
         (
           <div className='product-soldout'>
-            <div className='product-soldout-title'>품절</div>
-            <div>
-              <button>발주 요청하기</button>
+            <div className='product-soldout-title'>
+              일시품절<br /><br />
+              <span className='tossface'>🥲</span>
             </div>
+            {/* <div>
+              <button>발주 요청하기</button>
+            </div> */}
           </div>
         )
         :
