@@ -79,13 +79,13 @@ function HomeModal({ modalClose, homeMenu, isChange, setIsChange }) {
       <div className='home-modal'>
 
         <div className='home-modal-left'>
-          <div className='home-modal-title'>현재 즐겨찾기 항목</div>
-          <HomeModalList type="enable" list={enabledItems} handleMoveToRight={handleMoveToRight}/>
+          <div className='home-modal-title'>즐겨찾기 항목 추가</div>
+          <HomeModalList type="disable" list={disabledItems} handleMoveToLeft={handleMoveToLeft} />
         </div>
 
         <div className='home-modal-right'>
-          <div className='home-modal-title'>즐겨찾기 항목 추가</div>
-          <HomeModalList type="disable" list={disabledItems} handleMoveToLeft={handleMoveToLeft} />
+          <div className='home-modal-title'>현재 즐겨찾기 항목</div>
+          <HomeModalList type="enable" list={enabledItems} handleMoveToRight={handleMoveToRight}/>
         </div>
 
       </div>
