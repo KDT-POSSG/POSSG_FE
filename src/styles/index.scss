@@ -5,6 +5,8 @@
 @import './layout/header.scss';
 @import './layout/headerMenu.scss';
 @import './layout/headerAlarm.scss';
+@import './layout/headerToggleModal.scss';
+@import './layout/headerKiosk.scss';
 
 @import './ui/commonModal.scss';
 @import './ui/numberPad.scss';
@@ -12,6 +14,7 @@
 
 @import './page/home/home.scss';
 @import './page/home/homeModal.scss';
+@import './page/home/homeKiosk.scss';
 
 @import './page/product.scss';
 

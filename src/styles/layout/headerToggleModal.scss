@@ -1,0 +1,61 @@
+.header-toggle-modal {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    width: 60%;
+    text-align: center;
+  }
+
+  .toggle-text {
+    font-weight: bold;
+  }
+
+  .toggle-modal-input {
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    transition: $transition-cb2;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+
+    &::placeholder {
+      opacity: 0.8;
+    }
+
+    &:focus {
+      border: 1px solid $color-main;
+    }
+  }
+
+  .toggle-btn-container {
+
+    .toggle-modal-btn {
+      border-radius: 1rem;
+      padding: 0.5rem 2rem;
+      transition: $transition-cb2;
+    }
+  
+    .toggle-cancel {
+      border: 1px solid $color-border;
+      background-color: $color-white;
+    }
+  
+    .toggle-confirm {
+      border: 1px solid $color-main;
+      background-color: $color-main;
+      color: $color-white;
+  
+      &:hover {
+        border-color: #F0A20A;
+        background-color: #F0A20A;
+      }
+    }
+  }
+}

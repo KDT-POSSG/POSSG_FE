@@ -50,6 +50,7 @@ function Payment() {
                 productData.amount = 1;
                 setProducts(prevProducts => [...prevProducts, productData]); //그렇지 않으면 상품 1개로 
             }
+            console.log(productData);
         })
         .catch((err) => {
             console.log(err);
@@ -92,6 +93,10 @@ function Payment() {
         setModalIsOpen(false);
     };
 
+    const handleDeleteProduct = (productSeq) => {
+        setProducts(prevProducts => prevProducts.filter(product => product.productSeq !== productSeq));
+    };
+
     //paymentType에 따라 모달창의 크기를 다르게 설정, 결제 영수증 모달의 넓이 조절을 위해 추가함
     const getModalStyle = () => {
         if (paymentType === 'cashpayreceipt' || paymentType === 'paymentreceipt') {
@@ -128,7 +133,7 @@ function Payment() {
                     {products.length === 0 ? (
                         <div className='payment-list-empty-container'>
                             <span className="material-symbols-rounded">barcode</span>
-                            <div className='payment-list-empty'>바코드를 스캔해주세요.</div>
+                            <div className='payment-list-empty'>바코드를 스캔해주세요</div>
                         </div>
                         ) : (
                             products.map(product => (
@@ -137,6 +142,8 @@ function Payment() {
                                         <div className='payment-list-name'>{product.productName}</div>
                                         <div className='payment-list-amount'>x {product.amount}</div>
                                         <div className='payment-list-price'>{addComma(product.price * product.amount)} 원</div>
+                                        <div className='payment-list-priceDiscount'>{addComma(product.priceDiscount * product.amount)} 원</div>
+                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}>⛔❌➖</button>
                                     </div>
 
                                     {/* 할인율이 0이 아닐 때만 할인 정보를 보여줌 */}
@@ -166,14 +173,14 @@ function Payment() {
                             <button className='payment-method-cash' onClick={() => openModal('cash')}>현금 결제</button>
                         </div>
                         <div className='payment-method-container2'>
-                            <div className='payment-method-top'>
+                            {/* <div className='payment-method-top'>
                                 <button className='payment-method-discount' onClick={() => openModal('discount')}>X</button>
-                                <button className='payment-method-point' onClick={() => openModal('point')}>포인트</button>
-                            </div>
+                                <button className='payment-method-point' onClick={() => openModal('point')}>X</button>
+                            </div> */}
                             <div className='payment-method-bottom'>
                                 <button className='payment-method-tosspay' onClick={() => startPayment("토스")}>토스페이 결제</button>
                                 <button className='payment-method-kakaopay' onClick={() => startPayment("카카오")}>카카오 결제</button>
-                                <button className='payment-method-etcpay'>X</button>
+                                <button className='payment-method-etcpay' onClick={() => openModal('point')}>포인트</button>
                             </div>
                         </div>
                     </div>
@@ -195,14 +202,15 @@ function Payment() {
                 />}
             {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
-                    closeModal={closeModal} 
+                    closeModal={closeModal}
+                    openModal={openModal} 
                     totalAmount={getTotalAmount()} 
                     inputValue={inputValue}
                     changeAmount={changeAmount}
                     handlePaymentSuccess={handlePaymentSuccess}
                 />} 
             {paymentType === 'paymentreceipt' && 
-                    <PaymentReceipt
+                <PaymentReceipt
                     openModal={openModal}
                     closeModal={closeModal}
                     totalAmount={getTotalAmount()}

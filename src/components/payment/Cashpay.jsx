@@ -17,6 +17,8 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
       const change = receivedAmount - totalAmount; 
       if (change >= 0) {
           setChangeAmount(change); 
+      } else {
+          setChangeAmount(0); // 거스름돈을 0으로 설정
       }
   };
 
@@ -52,7 +54,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
     purchasedAt: kstDate,
     receiptUrl: "",
     cardNum: '',
-    cardCompany: ''
+    cardCompany: '',
   };
 
   //전송될 현금 결제 상품 매핑
@@ -69,13 +71,18 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
   const handlePayment = async () => {
     try {
       if(paymentData.price === "0") {
-        toast.error("결제할 상품이 없습니다.");
+        toast.error("결제할 상품이 없습니다");
         return;
-      }    
+      }
+      else if(totalAmount > inputValue) {
+        toast.error("받은 금액을 입력해주세요");
+        return;
+      }
         const response = await axios.post("http://54.180.60.149:3000/addpayment", paymentData, {
           headers: { accessToken: `Bearer ${accesstoken}`,}
         });
-        console.log("결제 정보 전송 완료", response.data);
+        console.log("결제 정보 전송 완료");
+        console.log(paymentData.itemId)
         
         if(response.data === "YES") {
             const itemResponse = await axios.post('http://54.180.60.149:3000/addItems', items, {
@@ -86,7 +93,6 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
             setChangeAmount(changeAmount);
             closeModal();
             openModal('cashpayreceipt');
-            console.log(paymentData.receiptId)
         }
     } catch (error) {
         console.error('결제 정보 에러', error);
