@@ -82,34 +82,35 @@ function ChangePw({ userId, setModalIsOpen }){
         setModalIsOpen(false);
     }
 
-    const change = () => {
+    const changePassword = () => {
         if(!currentPw || !changePw || !pwCheck){
             toast.error("비밀번호 입력 요망")
         }else if(changePw !== pwCheck){
             toast.error("새 비밀번호와 확인 비밀번호가 일치하지 않음")
         }else{
-            toast.success("비밀번호 ok")
-            // axios.post(`${baseURL}/changePassword`,{
-            //         "pwd" : currentPw,
-            //         "newPwd" : changePw
-            //     }, {
-            //         headers: {
-            //             accessToken: `Bearer ${accesstokenStorage}`,
-            //         },
-            //     })
-            //     .then((res)=>{
-            //         console.log("res >>> ", res)
-            //         // if(res.data==="YES"){
-            //         //     toast.success("비밀번호 변경 성공");
-            //         //     setModalIsOpen(false);
-            //         // }else{
-            //         //     toast.error("비밀번호 변경 실패");
-            //         // }
-            //     })
-            //     .catch((err)=>{
-            //         toast.error("catch 비밀번호 변경 실패");
-            //         console.error("catch 에러 ", err);
-            //     })
+            axios.post(`${baseURL}/changePassword`,{
+                    "pwd" : currentPw,
+                    "newPwd" : changePw
+                }, {
+                    headers: {
+                        accessToken: `Bearer ${accesstokenStorage}`,
+                    },
+                })
+                .then((res)=>{
+                    console.log("res >>> ", res)
+                    if(res.data==="YES"){
+                        toast.success("비밀번호 변경 성공");
+                        setModalIsOpen(false);
+                    }else if(res.data==="NO"){
+                        toast.error("현재 비밀번호와 새 비밀번호 확인");
+                    }else{
+                        toast.error("비밀번호 변경 실패")
+                    }
+                })
+                .catch((err)=>{
+                    toast.error("catch 비밀번호 변경 실패");
+                    console.error("catch 에러 ", err);
+                })
         }
     }
     
@@ -141,7 +142,7 @@ function ChangePw({ userId, setModalIsOpen }){
                     <div className="form-row">
                         <div className="btn-container">
                             <button type="button" onClick={cancleBtnClick}>취소</button>
-                            <button type="button" onClick={change} >변경</button>
+                            <button type="button" onClick={changePassword} >변경</button>
                         </div>
                     </div>
             </div>
