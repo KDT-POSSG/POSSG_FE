@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
 
 
-function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
+function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
     const [empName, setEmpName] = useState('');
     const [gender, setGender] = useState('남성');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -65,7 +65,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
             <div className='input-birth-container'>
 
             <div className="input-container">
-                <input type="text" className="input-birth" onChange={(e) => setBirthDate(e.target.value)} required />
+                <input type="text" className="input-birth" value={employeeData.birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
                 <label className="label-helper" htmlFor="branchName"><span>생년월일 (8자리 입력)</span></label>
             </div>
 
@@ -81,7 +81,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
 
         <div className="form-row">
             <div className="input-container">
-                <input type="text" className="input-text" onChange={(e) => setPhoneNumber(e.target.value)} required />
+                <input type="text" className="input-text" value={employeeData.phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
                 <label className="label-helper" htmlFor="repreName"><span>연락처 ex.01012345678</span></label>
                 
             </div>
@@ -89,7 +89,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
 
         <div className="form-row">
           <div className="input-container">
-              <input type="text" className="input-text" onChange={(e) => setHireDate(e.target.value)} required />
+              <input type="text" className="input-text" value={employeeData.hireDate} onChange={(e) => setHireDate(e.target.value)} required />
               <label className="label-helper" htmlFor="repreName"><span>고용 날짜 (8자리 입력)</span></label>
               
           </div>
@@ -97,7 +97,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate }) {
 
         <div className="form-row">
             <div className="input-container">
-                <input type="text" className="input-text" onChange={(e) => setSalary(parseInt(e.target.value))} required />
+                <input type="text" className="input-text" value={employeeData.salary} onChange={(e) => setSalary(parseInt(e.target.value))} required />
                 <label className="label-helper" htmlFor="repreName"><span>시급</span></label>
             </div>
         </div>
