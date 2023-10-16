@@ -6,7 +6,6 @@ function ReceiptModal({ paymentlistdetail }) {
 
   return (
     <>
-      
       {paymentlistdetail.param.method === '현금' ? (
       <div className="cashpayreceipt-1">
         <div className="cashpayreceipt-title">현금영수증</div>

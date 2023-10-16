@@ -174,6 +174,7 @@ function EmployeeInfo() {
                     <ModifyEmployeeModal 
                         employeeSeq={employeeSeq}
                         onUpdate={handleUpdateEmployee}
+                        employeeData={employeeData}
                     />}
                 </Modal>
             </div>)}
