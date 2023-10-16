@@ -2,6 +2,7 @@ import axios from 'axios';
 import OrderList from 'components/order/OrderList';
 import OrderCartNav from 'components/order/OrderCartNav';
 import React, { useEffect, useState } from 'react';
+import { baseURL } from 'store/apis/base';
 
 function OrderCart() {
 
@@ -16,7 +17,7 @@ function OrderCart() {
 
   useEffect(() => {
     
-    axios.get("http://54.180.60.149:3000/getAllCallProductConvList", {
+    axios.get(`${baseURL}/getAllCallProductConvList`, {
         params: {
           convSeq: 1
         },
