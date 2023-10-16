@@ -46,7 +46,7 @@ function HeaderAlarm() {
       eventSource.onmessage = function(event) {
   
         const product = JSON.parse(event.data);
-        // console.log("product >> ", product);
+        console.log("product >> ", product);
         console.log("onmessage 들어옴 ", new Date());
   
         setAlarmList(product);
@@ -77,7 +77,7 @@ function HeaderAlarm() {
     const expirationDate = new Date(productDate);
 
     if(expirationDate < currentDate) {
-      return `지났습니다`;
+      return `지났습니다.`;
     }
     else {
 
@@ -85,7 +85,12 @@ function HeaderAlarm() {
       const hoursRemaining = Math.floor(timeDiff / (1000 * 60 * 60));
       const minutesRemaining = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-      return `${hoursRemaining}시간 ${minutesRemaining}분 남았습니다`;
+      if(hoursRemaining === 0) {
+        return `${minutesRemaining}분 남았습니다.`;
+      }
+      else {
+        return `${hoursRemaining}시간 ${minutesRemaining}분 남았습니다.`;
+      }
     }
   }
 
@@ -112,21 +117,28 @@ function HeaderAlarm() {
 
           <div className='tossface alarm-icon'>🔔</div>
 
-          <div>
-            {
-              alarmList && alarmList.map((item) => (
-                <div key={item.productSeq} className='alarm-item'>
-                  <div className='alarm-item-date'>
-                    <span className='date-left'>상품유통기한</span>
-                    <span className='date-right'>{item.expirationDate}</span>
+          {
+            alarmList && alarmList.length === 0 ?
+            <div className='alarm-item'>
+              알림 없음
+            </div>
+            :
+            <div>
+              {
+                alarmList && alarmList.map((item) => (
+                  <div key={item.productSeq} className='alarm-item'>
+                    <div className='alarm-item-date'>
+                      <span className='date-left'>상품유통기한</span>
+                      <span className='date-right'>{item.expirationDate}</span>
+                    </div>
+                    <div className='alarm-info-text'>
+                      '{item.productName}' 상품의 유통기한이 {handleExpirationDate(item.expirationDate)}
+                    </div>
                   </div>
-                  <div className='alarm-info-text'>
-                    '{item.productName}' 상품의 유통기한이 {handleExpirationDate(item.expirationDate)}
-                  </div>
-                </div>
-              ))
-            }
-          </div>
+                ))
+              }
+            </div>
+          }
 
         </div>
 

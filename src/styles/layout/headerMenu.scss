@@ -42,6 +42,14 @@
   .menu-name,
   .header-menu-logout {
     padding-left: .25rem;
+
+    > button {
+      transition: $transition-cb2;
+
+      &:hover {
+        color: $color-main;
+      }
+    }
   }
 
   .menu-name {
