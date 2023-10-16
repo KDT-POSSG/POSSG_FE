@@ -1,112 +1,106 @@
 /* mypage-content-wrap */
-.mypage-content-wrap{
+.update-content-wrap{
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: $color-back;
     padding: 5vw 10vw;
-    min-height: 100vh;
+    min-height: 100vh; 
 
     // title
-    .mypage-title{
+    .update-title{
         font-size: 2rem;
         text-align: center;
         margin: 2.5rem;
     }
 
     // content
-    .mypage-content {
+    .update-content {
         background-color: $color-back;
         width: 100vw;
         height: 100vh; 
-        
-        .form-row {
-            text-align: center;
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
-            align-items: center;
-            background-color: $color-back;
-            
-        }
 
-        .input-container {
-            position: relative;
-            margin: 1.5rem 0;
-            height: 60px;
-        }
+            .form-row {
+                text-align: center;
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+                background-color: $color-back;
+                
+                .update-container {
+                    position: relative;
+                    margin: 1.5rem 0;
+                    height: 60px;
 
-        input {
-            border: 1px solid $color-border;
-            border-radius: 32px;
-            padding: 1rem 1.25rem;
-            width: 40vw;
-            //transition: all 0.2s;
-        }
+                    input {
+                        border: 1px solid $color-border;
+                        border-radius: 32px;
+                        padding: 1rem 1.25rem;
+                        width: 40vw;
+                    }
 
-        input:focus {
-            border-color: $color-main;
-        }
+                    input:focus {
+                        border-color: $color-main;
+                    }
 
-        label span {
-            position: absolute;
-            top: -4px;
-            left: 20px;
-            padding: 0 4px;
-            font-size: 1rem;
-            color: rgba($color: $color-gray, $alpha: 0.5);
-            //transition: all 0.2s;
-        }
+                    label span {
+                        position: absolute;
+                        top: -4px;
+                        left: 20px;
+                        padding: 0 4px;
+                        font-size: 1rem;
+                        color: rgba($color: $color-gray, $alpha: 0.5);
+                    }
 
-        input:focus + label span,
-        input:valid + label span {
-            position: absolute;
-            top: -4px;
-            left: 20px;
-            padding: 0 4px;
-            font-size: 1rem;
-            // font-weight: bold;
-            color: $color-main;
-            background: linear-gradient($color-back, $color-white);
-        }
+                    input:focus + label span,
+                    input:valid + label span {
+                        position: absolute;
+                        top: -4px;
+                        left: 20px;
+                        padding: 0 4px;
+                        font-size: 1rem;
+                        color: $color-main;
+                        background: linear-gradient($color-back, $color-white);
+                    }
+                    
+                    .readonly-input {
+                        pointer-events: none; /* 입력 이벤트 비활성화 */
+                        border: 1px solid $color-main;
+                        background-color: $color-border;
+                        
+                    }
 
-        .form-row button {
-            position: absolute;
-            top: 4px;
-            right: 5px;
-            padding: 14px 1.25rem;
-            background-color: $color-main;
-            color: $color-white;
-            // font-weight: bold;
-            border-radius: 32px;
-            font-size: 14px;
-        }
+                    button {
+                        position: absolute;
+                        top: 4px;
+                        right: 5px;
+                        padding: 14px 1.25rem;
+                        background-color: $color-main;
+                        color: $color-white;
+                        border-radius: 32px;
+                        font-size: 14px;
+                    }
+                }               
+            }
+            .btn-container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: $color-back;
+                padding: 1.5rem 0;
 
-        .p-text{
-            color: $color-point;
-            font-size: 12px;
-            text-align: left;
-            margin: 10px 20px;
-            background-color: $color-back;
-        }
-
-        .btn-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: $color-back;
-            padding: 1.5rem 0;
-        }
-
-        .btn-container button {
-            padding: 15px 1rem;
-            margin-bottom: 50px;
-            background-color: $color-main;
-            color: $color-white;
-            font-weight: bold;
-            border-radius: 32px;
-            width: 20vw;
-        }
+                button {
+                    padding: 15px 1rem;
+                    margin-bottom: 50px;
+                    background-color: $color-main;
+                    color: $color-white;
+                    font-weight: bold;
+                    border-radius: 32px;
+                    width: 20vw;
+                }
+            }
     }
 }
+
 
