@@ -30,19 +30,37 @@ function Header() {
         </>
         :
         <>
-          <div>
-            <Link to={"/kiosk"}>
-              홈
-            </Link>
-          </div>
+          {
+            pathname === "/kiosk" ?
+            <div></div>
+            :
+            <div className='kiosk-header kiosk-header-left'>
+              <Link to={"/kiosk"}>
+                <div className='kiosk-header-item'>
+                  <span class="material-symbols-rounded kiosk-home-icon">home</span>
+                  홈
+                </div>
+              </Link>
+            </div>
+          }
+
           <div>
             <HeaderToggle />
           </div>
-          <div>
-            <Link to={"/kiosk"}>
-              {pathname}
-            </Link>
-          </div>
+
+          {
+            pathname === "/kiosk" ?
+            <div></div>
+            :
+            <div className='kiosk-header kiosk-header-right'>
+              <Link to={ pathname === "/payment" ? "/product" : "/payment" }>
+                <div className='kiosk-header-item'>
+                  <span class="material-symbols-rounded kiosk-home-icon">touch_app</span>
+                  { pathname === "/payment" ? "상품 둘러보기" : "결제하기" }
+                </div>
+              </Link>
+            </div>
+          }
         </>
       }
     </div>
