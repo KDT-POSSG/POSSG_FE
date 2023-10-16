@@ -12,7 +12,7 @@
     .login-title{
         font-size: 2rem;
         text-align: center;
-        margin: 2.5rem;
+        padding: 2rem 1rem;
     }
 
     // content
@@ -32,72 +32,74 @@
             .input-container {
                 position: relative;
                 margin: 1.5rem 0; 
-            }
 
-            .input-container input {
-                border: 1px solid $color-border;
-                border-radius: 32px;
-                padding: 1rem 1.25rem;
-                width: 30vw;
-                transition: all 0.2s;
+                input {
+                    border: 1px solid $color-border;
+                    border-radius: 32px;
+                    padding: 1rem 1.25rem;
+                    width: 30vw;
+                    transition: all 0.2s;
+                }
+                input:focus {
+                    border-color: $color-main;
+                }
+                label span {
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                    padding: 0 4px;
+                    font-size: 1rem;
+                    color: rgba($color: $color-gray, $alpha: 0.5);
+                    transition: all 0.2s;
+                }
+    
+                input:focus + label span,
+                input:valid + label span {
+                    position: absolute;
+                    top: -4px;
+                    left: 20px;
+                    padding: 0 4px;
+                    font-size: 1rem;
+                    color: $color-main;
+                    background: linear-gradient($color-back, $color-white);
+                }               
             }
-            .input-container input:focus {
-                border-color: $color-main;
-            }
-            .input-container label span {
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                padding: 0 4px;
-                font-size: 1rem;
-                color: rgba($color: $color-gray, $alpha: 0.5);
-                transition: all 0.2s;
-            }
-
-            .input-container input:focus + label span,
-            .input-container input:valid + label span {
-                position: absolute;
-                top: -4px;
-                left: 20px;
-                padding: 0 4px;
-                font-size: 1rem;
-                color: $color-main;
-                background: linear-gradient($color-back, $color-white);
-            }
-
             .check-container{
                 position: relative;
                 right: 150px;
                 width: 10%;
-            }
-            .save-login{
-                position: absolute;
-                right: 80px;
-                accent-color: $color-main;
-                zoom: 1.5;
+
+                input{
+                    position: absolute;
+                    right: 80px;
+                    accent-color: $color-main;
+                    zoom: 1.5;
+                }
             }
 
             // button
             .btn-container{
                 padding: 1.5rem 0;
-            }
 
-            .btn-container button{
-                margin-top: 1.5rem;
-                padding: 15px 1rem;
-                background-color: $color-main;
-                color: $color-white;
-                font-weight: bold;
-                text-align: center;
-                border-radius: 32px;
-                width: 20vw;
-                cursor: pointer;
-            }
+                button{
+                    margin-top: 1.5rem;
+                    padding: 15px 1rem;
+                    background-color: $color-main;
+                    color: $color-white;
+                    font-weight: bold;
+                    text-align: center;
+                    border-radius: 32px;
+                    width: 20vw;
+                    cursor: pointer;
+                }
+            }   
         }
         // link
         .link-container{
             display: flex;
             justify-content: center;
+            align-items: center;
+            align-content: center;
             padding-top: 20px;
         }
     }
