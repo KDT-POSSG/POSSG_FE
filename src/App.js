@@ -17,7 +17,6 @@ import Paymentlist from './pages/Paymentlist';
 import ProductList from './pages/ProductList';
 import Login from './pages/Login';
 import Stock from './pages/Stock';
-import AttendaceCheck from './components/employees/AttendanceCheck';
 import MyPage from './pages/Mypage';
 import UpdateMyPage from './components/convenience/UpdateMyPage';
 import FindId from './components/convenience/FindId';
@@ -41,60 +40,69 @@ import UpdateCost from './components/analysis/UpdateCost';
 import ImcomeReport from './components/analysis/ImcomeReport';
 import MonthlyImcome from './components/analysis/MonthlyImcome';
 import YearImcome from './components/analysis/YearImcome';
+import { RecoilRoot } from 'recoil';
+import HomeKiosk from 'pages/HomeKiosk';
+import PosRoutes from 'components/PosRoutes';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Toaster toastOptions={{ className: 'common-toast' }} />
-      <Header />
-      <Routes>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Toaster toastOptions={{ className: 'common-toast' }} />
+        {/* <Header /> */}
+        <Routes>
 
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/findId' element={<FindId />} />
-        <Route path='/findPw' element={<FindPw />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/findId' element={<FindId />} />
+          <Route path='/findPw' element={<FindPw />} />
 
-        {/* <Route element={<PrivateRoutes />}> */}
-          <Route path='/' element={<Home />} />
-          <Route path='/product' element={<ProductList />} />
-          <Route path='/myPage' element={<MyPage />} />
-          <Route path='/updateMyPage' element={<UpdateMyPage />} />
-          <Route path='/payment' element={<Payment />} />
-          <Route path='/paymentlist' element={<Paymentlist />} />
-          <Route path='/inventory' element={<Inventory />} />
-          <Route path='/product' element={<ProductList />} />
-          <Route path='/stock' element={<Stock />} />
-          <Route path='/ordercart' element={<OrderCart />} />
-          <Route path='/order' element={<Order />}/>
-          <Route path='/order/:callRef' element={<OrderDetail />} />
-          <Route path='/delivery' element={<Delivery />}>
-            <Route index element={<DeliveryList />} />
-            <Route path=':ref' element={<DeliveryDetail />} />
-          </Route>
-          <Route path='/analysis' element={<Analysis />} />
-          <Route path='/cost' element={<Cost />} />
-          <Route path='/addCost' element={<AddCost />} />
-          <Route path='/salesReport' element={<SalesReport />}>
-            <Route index element={<DailySales />} />
-            <Route path='daily' element={<DailySales />} />
-            <Route path='monthlySales' element={<MonthlySales />} />
-            <Route path='yearSales' element={<YearSales />} />
-          </Route>
-          <Route path='/updateCost' element={<UpdateCost />} />
-          <Route path='/imcomeReport' element={<ImcomeReport />}>
-            <Route index element={<MonthlyImcome />} />
-            <Route path='monthlyImcome' element={<MonthlyImcome />} />
-            <Route path='yearImcome' element={<YearImcome />} />
-          </Route>
-          <Route path='/employees' element={<Employees />}/>
-          <Route path='/employeeInfo/:employeeSeq' element={<EmployeeInfo />} />
-          <Route path='/customerRegister' element={<RegisterCustomer />} />
+          <Route element={<PrivateRoutes />}>
 
-          <Route path='/check' element={<AttendaceCheck />} />
-        {/* </Route> */}
-        
-      </Routes>
-    </BrowserRouter>
+            <Route element={<PosRoutes />}>
+              
+              <Route path='/' element={<Home />} />
+              <Route path='/myPage' element={<MyPage />} />
+              <Route path='/updateMyPage' element={<UpdateMyPage />} />
+              <Route path='/paymentlist' element={<Paymentlist />} />
+              <Route path='/inventory' element={<Inventory />} />
+              <Route path='/stock' element={<Stock />} />
+              <Route path='/ordercart' element={<OrderCart />} />
+              <Route path='/order' element={<Order />}/>
+              <Route path='/order/:callRef' element={<OrderDetail />} />
+              <Route path='/delivery' element={<Delivery />}>
+                <Route index element={<DeliveryList />} />
+                <Route path=':ref' element={<DeliveryDetail />} />
+              </Route>
+              <Route path='/analysis' element={<Analysis />} />
+              <Route path='/cost' element={<Cost />} />
+              <Route path='/addCost' element={<AddCost />} />
+              <Route path='/salesReport' element={<SalesReport />}>
+                <Route index element={<DailySales />} />
+                <Route path='daily' element={<DailySales />} />
+                <Route path='monthlySales' element={<MonthlySales />} />
+                <Route path='yearSales' element={<YearSales />} />
+              </Route>
+              <Route path='/updateCost' element={<UpdateCost />} />
+              <Route path='/imcomeReport' element={<ImcomeReport />}>
+                <Route index element={<MonthlyImcome />} />
+                <Route path='monthlyImcome' element={<MonthlyImcome />} />
+                <Route path='yearImcome' element={<YearImcome />} />
+              </Route>
+              <Route path='/employees' element={<Employees />}/>
+              <Route path='/employeeInfo/:employeeSeq' element={<EmployeeInfo />} />
+              <Route path='/customerRegister' element={<RegisterCustomer />} />
+            </Route>
+
+            <Route path='/kiosk' element={<HomeKiosk />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/product' element={<ProductList />} />
+
+          </Route>
+          
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 

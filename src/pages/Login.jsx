@@ -16,10 +16,12 @@ function Login(){
     const [cookies, setCookie] = useCookies(["rememberedId"]);
 
     useEffect(() => {
-        if(isAceessToken()) {
-            navi("/");
-            return;
-        }
+
+        // if(isAceessToken()) {
+        //     navi("/");
+        //     return;
+        // }
+
         if (cookies.rememberedId) {
         setId(cookies.rememberedId);
         setRememberMe(true);
