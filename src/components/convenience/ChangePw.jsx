@@ -16,6 +16,7 @@ function ChangePw({ userId, setModalIsOpen }){
     const [pwCheck, setPwCheck] = useState("");
     
     // 오류 메세지 전달 상태값 세팅
+    const [currentPwMsg, setCurrentPwMsg] = useState(""); // 비번
     const [pwMsg, setPwMsg] = useState(""); // 비번
     const [pwCheckMsg, setPwCheckMsg] = useState(""); // 비번확인
 
@@ -35,13 +36,13 @@ function ChangePw({ userId, setModalIsOpen }){
         const currentPw = e.target.value;
         setCurrentPw(currentPw);
         checkFormValidity();
-        console.log("currentPw >>> ", currentPw);
+        // console.log("currentPw >>> ", currentPw);
         const pwRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=~&.?-])(?=.*[0-9]).{8,16}$/;
         if (!pwRegExp.test(currentPw)) {
-            setPwMsg("비밀번호 형식을 확인해주세요");
+            setCurrentPwMsg("비밀번호 형식을 확인해주세요");
             setIsPw(false);
         } else {
-            setPwMsg("");
+            setCurrentPwMsg("");
             setIsPw(true);
         }
     }
@@ -51,7 +52,7 @@ function ChangePw({ userId, setModalIsOpen }){
         const changePw = e.target.value;
         setChangePw(changePw);
         checkFormValidity();
-        console.log("changePw >>> ", changePw);
+        // console.log("changePw >>> ", changePw);
         const pwRegExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=~&.?-])(?=.*[0-9]).{8,16}$/;
         if (!pwRegExp.test(changePw)) {
             setPwMsg("비밀번호 형식을 확인해주세요");
@@ -67,11 +68,11 @@ function ChangePw({ userId, setModalIsOpen }){
         const currentPwCheck = e.target.value;
         setPwCheck(currentPwCheck);
         checkFormValidity();
-        console.log("currentPwCheck >>> ", currentPwCheck);
+        // console.log("currentPwCheck >>> ", currentPwCheck);
         if (changePw !== currentPwCheck) {
             setPwCheckMsg("비밀번호가 일치하지 않습니다");
             setIsPwCheck(false);
-        } else {
+        } else {        
             setPwCheckMsg("");
             setIsPwCheck(true);
         }
@@ -84,28 +85,31 @@ function ChangePw({ userId, setModalIsOpen }){
     const change = () => {
         if(!currentPw || !changePw || !pwCheck){
             toast.error("비밀번호 입력 요망")
+        }else if(changePw !== pwCheck){
+            toast.error("새 비밀번호와 확인 비밀번호가 일치하지 않음")
         }else{
-            axios.post(`${baseURL}/changePassword`,{
-                "pwd" : currentPw,
-                "newPwd" : changePw
-            }, {
-                headers: {
-                    accessToken: `Bearer ${accesstokenStorage}`,
-                },
-            })
-            .then((res)=>{
-                //console.log("res >>> ", res)
-                if(res.data==="YES"){
-                    toast.success("비밀번호 변경 성공");
-                    setModalIsOpen(false);
-                }else{
-                    toast.error("비밀번호 변경 실패");
-                }
-            })
-            .catch((err)=>{
-                toast.error("catch 에러 실패");
-                console.error("catch 에러 ", err);
-            })
+            toast.success("비밀번호 ok")
+            // axios.post(`${baseURL}/changePassword`,{
+            //         "pwd" : currentPw,
+            //         "newPwd" : changePw
+            //     }, {
+            //         headers: {
+            //             accessToken: `Bearer ${accesstokenStorage}`,
+            //         },
+            //     })
+            //     .then((res)=>{
+            //         console.log("res >>> ", res)
+            //         // if(res.data==="YES"){
+            //         //     toast.success("비밀번호 변경 성공");
+            //         //     setModalIsOpen(false);
+            //         // }else{
+            //         //     toast.error("비밀번호 변경 실패");
+            //         // }
+            //     })
+            //     .catch((err)=>{
+            //         toast.error("catch 비밀번호 변경 실패");
+            //         console.error("catch 에러 ", err);
+            //     })
         }
     }
     
@@ -117,6 +121,7 @@ function ChangePw({ userId, setModalIsOpen }){
                         <div className="input-container">
                             <input type="password" className="input-text" id="currentPw" name="currentPw" value={currentPw} onChange={onCurrentPw} required />
                             <label className="label-helper" htmlFor="currentPw"><span>현재비밀번호</span></label>
+                            <p className="p-text">{currentPwMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
