@@ -32,11 +32,15 @@ function LeaveWork({onClose}) {
     };
     
     return (
-        <div className='attendancecheck'>
-            <div className='attendancecheck-title'>퇴근</div>
-            <div className='attendancecheck-subtitle'>직원 번호를 입력해 주세요</div>
-            <input className='attendancecheck-input' placeholder="직원번호" onChange={(e) => setEmployeeSeq(parseInt(e.target.value))} />
-            <button className="attendancecheck-btn" onClick={handleclickLeaveWork}>퇴근</button>
+        <div className='attendancecheck-container'>
+            <div className='attendancecheck'>
+                <div className='attendancecheck-title'>퇴근</div>
+                <div className='attendancecheck-subtitle'>직원 번호를 입력해 주세요</div>
+                <div>
+                    <input className='attendancecheck-input' placeholder="직원번호" onChange={(e) => setEmployeeSeq(parseInt(e.target.value))} />
+                    <button className="attendancecheck-btn" onClick={handleclickLeaveWork}>퇴근</button>
+                </div>
+            </div>
         </div>
     )
 }

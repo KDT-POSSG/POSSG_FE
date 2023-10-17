@@ -46,8 +46,9 @@ function Home() {
           ))
         }
         <HomeItemEdit homeMenu={homeMenu} isChange={isChange} setIsChange={setIsChange} />
+
+        <AttendanceCehck />
       </div>
-      <AttendanceCehck />
     </div>
   )
 }

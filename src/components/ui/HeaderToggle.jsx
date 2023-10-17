@@ -84,14 +84,11 @@ function HeaderToggle() {
         }
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={modalClose} style={{ content:{ width:'25rem', height: '15rem' } }}>
+      <Modal isOpen={isModalOpen} onClose={modalClose} style={{ content:{ width:'25rem', height: '13rem' } }}>
         <div className='header-toggle-modal'>
           <div className='toggle-text'>관리자 번호를 입력해주세요</div>
           <div>
             <input type="text" placeholder='관리자 번호' className='toggle-modal-input' value={checkNumber} onChange={handleCheckInput} />
-          </div>
-          <div className='toggle-btn-container'>
-            {/* <button className='toggle-modal-btn toggle-cancel'>취소</button> */}
             <button className='toggle-modal-btn toggle-confirm' onClick={handleCheckConfirm}>확인</button>
           </div>
         </div>
