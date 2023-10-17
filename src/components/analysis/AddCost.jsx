@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
 import DatePicker from 'react-datepicker';
 import Calendar from "./Calendar";
+import { baseURL } from "store/apis/base";
 
 function AddCost(){
     const accesstoken = localStorage.getItem("accesstoken");
@@ -66,7 +67,7 @@ function AddCost(){
     const onClick = (e) => {
         console.log(inputFields);
         e.preventDefault();
-        axios.post("http://54.180.60.149:3000/addCost", {
+        axios.post(`${baseURL}/addCost`, {
             rent: rent,
             waterBill: waterBill,
             electricityBill: electricityBill,
@@ -85,14 +86,15 @@ function AddCost(){
             // console.log("b");
             console.log("res >>> ", res);
             if(res.data==="YES"){
-                toast.success("입력이 완료되었습니다");
+                toast.success("입력 완료");
             }else{
                 // console.log("c");
-                toast.error("입력에 실패되었습니다");
+                toast.error("입력 실패");
             }
         })
         .catch((err) => {
-            console.error('catch 오류:', err);
+            toast.error("catch 입력 실패");
+            console.error('catch 오류', err);
         })
     }
 
@@ -117,18 +119,18 @@ function AddCost(){
                 <div className="addCost-info">
                 {inputFields.map((inputField, index) => (
                     <div className="info-container" key={index}>
-                    <input
-                        type="text"
-                        className="input-text"
-                        id={`inputField-${index}`}
-                        name={`inputField-${index}`}
-                        value={inputField.state}
-                        onFocus={() => handleInputFocus(index)}
-                        required
-                    />
-                    <label className="label-helper" htmlFor={`inputField-${index}`}>
+                        <input
+                            type="text"
+                            className="input-text"
+                            id={`inputField-${index}`}
+                            name={`inputField-${index}`}
+                            value={inputField.state}
+                            onFocus={() => handleInputFocus(index)}
+                            required
+                        />
+                        <label className="label-helper" htmlFor={`inputField-${index}`}>
                         <span>{inputField.name}</span>
-                    </label>
+                        </label>
                     </div>
                 ))}
                 </div>

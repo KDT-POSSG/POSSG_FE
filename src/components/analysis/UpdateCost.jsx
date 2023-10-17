@@ -3,9 +3,9 @@ import NumberPad from "components/ui/NumberPad";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
-import DatePicker from 'react-datepicker';
 import { useNavigate } from "react-router-dom";
 import Calendar from "./Calendar";
+import { baseURL } from "store/apis/base";
 
 function UpdateCost(){
     const navi = useNavigate();
@@ -18,8 +18,8 @@ function UpdateCost(){
     const [gasBill, setGasBill] = useState("");
     const [totalLaborCost, setTotalLaborCost] = useState("");
     const [securityMaintenanceFee, setSecurityMaintenanceFee] = useState("");
-    const [costYear, setCostYear] = useState("2023"); // 임시로 입력
-    const [costMonth, setCostMonth] = useState("09");
+    const [costYear, setCostYear] = useState(""); // 임시로 입력
+    const [costMonth, setCostMonth] = useState("");
 
     const inputFields = [
         { state: rent, setState: setRent, name:"월세" },
@@ -63,16 +63,13 @@ function UpdateCost(){
     };
 
     const onSearch = async () => {
-        // alert("클릭");
         try {
             if(selectedDate){
                 const year = selectedDate.getFullYear();
                 const month = selectedDate.getMonth() + 1;
                 setCostYear(String(year));
                 setCostMonth(String(month).padStart(2, "0"));
-                // console.log("year >>> ",year)
-                // console.log("month >>> ",month)
-                const res = await axios.post("http://54.180.60.149:3000/callSelectCost", {
+                const res = await axios.post(`${baseURL}/callSelectCost`, {
                     costYear: String(year),
                     costMonth: String(month).padStart(2, "0"),
                 },{
@@ -91,19 +88,17 @@ function UpdateCost(){
 
                 toast.success("조회 완료");
             }else{
-                toast.error("날짜를 선택해주세요.");
+                toast.error("날짜를 선택해주세요");
             }
 
         }catch(err){
             console.error('catch 오류:', err);
-            toast.error("조회 중 오류가 발생했습니다.");
+            toast.error("조회 중 오류 발생");
         }
     }
 
     const onClick = () => {
-        // console.log(inputFields);
-        // console.log("a");
-        axios.post("http://54.180.60.149:3000/updateCost", {
+        axios.post(`${baseURL}/updateCost`, {
             rent: rent,
             waterBill: waterBill,
             electricityBill: electricityBill,
@@ -118,18 +113,17 @@ function UpdateCost(){
             },
         })
         .then((res)=>{
-            // console.log("b");
             console.log("res >>> ", res);
             if(res.data==="YES"){
-                toast.success("수정이 완료되었습니다");
+                toast.success("수정 완료");
                 navi("/cost");
             }else{
-                console.log("c");
-                toast.error("수정에 실패되었습니다");
+                toast.error("수정 실패");
             }
         })
         .catch((err) => {
-            console.error('catch 오류:', err);
+            toast.error("catch 입력 실패");
+            console.error('catch 오류', err);
         })
     }
 
