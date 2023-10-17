@@ -7,13 +7,8 @@ import { baseURL } from 'store/apis/base';
 function ProductList() {
 
   const accesstoken = localStorage.getItem("accesstoken");
-
-  const [bottom, setBottom] = useState(null);
-	const bottomObserver = useRef(null);
-
   const [product, setProduct] = useState([]);
 
-  const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
 
   const [keyword, setKeyword] = useState({
@@ -21,49 +16,9 @@ function ProductList() {
     pageNumber: page,
     promotionInfo: 0,
     search: null,
-    sortOrder: "newest"
+    sortOrder: "newest",
+    convSeq: 1
   });
-
-  const getProduct = async () => {
-
-    try {
-      const response = await axios.get(`${baseURL}/productList`, {
-        params: keyword,
-        headers: {
-          accessToken: `Bearer ${accesstoken}`
-        }
-      })
-      console.log(response.data);
-      return response.data;
-    } 
-    catch (error) {
-      console.log(error);
-    }
-  }
-
-  const loadMoreData = () => {
-
-    const nextPage = page + 1;
-    setKeyword((prevKeyword) => ({
-      ...prevKeyword,
-      pageNumber: nextPage,
-    }));
-
-    axios
-      .get(`${baseURL}/productList`, {
-        params: keyword,
-        headers: {
-          accessToken: `Bearer ${accesstoken}`
-        }
-      })
-      .then((response) => {
-        setProduct((prevProduct) => [...prevProduct, ...response.data.ProductList]);
-        setPage(nextPage); // 페이지 번호 업데이트
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   useEffect(() => {
 
@@ -79,8 +34,8 @@ function ProductList() {
         .then((response) => {
           console.log(response.data);
           console.log(response.data.ProductList);
-          // setProduct(response.data);
-          setProduct((prevProduct) => [...prevProduct, ...response.data.ProductList]);
+          setProduct(response.data.ProductList);
+          // setProduct((prevProduct) => [...prevProduct, ...response.data.ProductList]);
         })
         .catch((error) => {
           console.error(error);
@@ -91,33 +46,6 @@ function ProductList() {
     
   }, [keyword]);
 
-  
-
-  useEffect(() => {
-		const observer = new IntersectionObserver(
-			entries => {
-				if (entries[0].isIntersecting) {
-          loadMoreData();
-          console.log("1");
-				}
-			},
-			{ threshold: 0.25, rootMargin: '0px' },
-		);
-		bottomObserver.current = observer;
-	}, []);
-
-	useEffect(() => {
-		const observer = bottomObserver.current;
-		if (bottom) {
-			observer.observe(bottom);
-		}
-		return () => {
-			if (bottom) {
-				observer.unobserve(bottom);
-			}
-		};
-	}, [bottom]);
-
   return (
     <div className='product-page'>
 
@@ -125,7 +53,7 @@ function ProductList() {
         <div className='page-title product-page-title'>상품 페이지</div>
 
         <div>
-          <ProductNav keyword={keyword} setKeyword={setKeyword} />
+          <ProductNav keyword={keyword} setKeyword={setKeyword} setPage={setPage} />
         </div>
         
         {
@@ -148,9 +76,6 @@ function ProductList() {
           }
         </div>
       </div>
-
-      <div ref={setBottom} style={{ height: "300px", backgroundColor: "skyblue" }}>loading...</div>
-      {/* <div ref={setBottom}>loading...</div> */}
 
     </div>
   )
