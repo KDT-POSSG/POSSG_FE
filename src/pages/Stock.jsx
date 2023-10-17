@@ -13,9 +13,7 @@ function Stock() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("newest");
 
-
   const accesstoken = localStorage.getItem("accesstoken");
-
 
   const handlePage = (pageNumber) => {
     setPage(pageNumber);
@@ -51,7 +49,7 @@ function Stock() {
       
       <div className='stock-top'>
         <div className='page-title stock-page-title'>재고 관리</div>
-        <StockNav search={search} setSearch={setSearch} filter={filter} setFilter={setFilter} />
+        <StockNav search={search} setSearch={setSearch} filter={filter} setFilter={setFilter} setPage={setPage} />
       </div>
 
       <StockList stock={stock.ProductList} />

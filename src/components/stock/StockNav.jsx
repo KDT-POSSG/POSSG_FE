@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import stockSortDatas from '../../assets/datas/stockSortDatas.json'
 
-function StockNav({ search, setSearch, setFilter }) {
+function StockNav({ search, setSearch, setFilter, setPage }) {
 
   const [keyword, setKeyword] = useState(search);
 
   const handleSearchBtn = () => {
     setSearch(keyword);
+    setPage(1);
   }
 
   const handleKeyword = (e) => {
@@ -15,6 +16,7 @@ function StockNav({ search, setSearch, setFilter }) {
 
   const handleFilter = (e) => {
     setFilter(e.target.value);
+    setPage(1);
   }
 
   return (
