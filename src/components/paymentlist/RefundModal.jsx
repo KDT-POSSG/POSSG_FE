@@ -3,17 +3,14 @@ import { useState } from 'react';
 import RefundConfirmModal from './RefundConfirmModal';
 import { addComma } from "store/utils/function";
 
-function RefundModal({ paymentlistdetail, onLoad }) {
+function RefundModal({ closeModal, paymentlistdetail, setPaymentlistdetail }) {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     
-    const openModal = (type) => {
+    const openModal = () => {
         setModalIsOpen(true);
-        };
+    };
 
-    const closeModal = () => {
-        setModalIsOpen(false);
-        };
             
     
     return (
@@ -48,7 +45,7 @@ function RefundModal({ paymentlistdetail, onLoad }) {
         <Modal isOpen={modalIsOpen} onClose={ closeModal } style={{ content:{width:'30%',height:'30%' } }}>
             <RefundConfirmModal 
                 paymentlistdetail={paymentlistdetail} 
-                onLoad={onLoad}
+                setPaymentlistdetail={setPaymentlistdetail}
                 closeModal={closeModal}
             />
         </Modal>

@@ -162,8 +162,10 @@ function Payment() {
                             products.map(product => (
                                 <div className='payment-list-row' key={product.productSeq}>
                                     <div className='payment-list-delete-container'>
-                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}>❌</button>
+                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}><span class="material-symbols-rounded">close
+                                        </span></button>
                                     </div>
+                                    <div className='container'>
                                     <div className='payment-list-row-info'>
                                         <div className='payment-list-name'>{product.productName}</div>
                                         <div className='payment-list-amount'>x {product.amount}</div>
@@ -174,10 +176,13 @@ function Payment() {
                                     {/* 할인율이 0이 아닐 때만 할인 정보를 보여줌 */}
                                     {product.discountRate !== 0.0 && (
                                     <div className='payment-list-discount-info'>
+                                        <div></div>
                                         <div className='payment-list-discount'>할인</div>
+                                        
                                         <div className='payment-list-discount2'>-{addComma((product.price - product.priceDiscount) * product.amount)} 원</div>
                                     </div>
                                     )}
+                                    </div>
                                 </div>
                             ))
                         )}

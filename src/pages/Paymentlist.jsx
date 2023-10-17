@@ -59,12 +59,6 @@ function Paymentlist()  {
         fetchPaymentListDetail();
     }, []);
 
-    const handleLoadPaymentListDetail = () => {
-        getPaymentList();
-        fetchPaymentListDetail();
-        closeModal();
-    }
-
     // 영수증 ID로 결제내역 검색하는 함수
     const searchPaymentList = () => {
         axios.get('http://54.180.60.149:3000/paymentNumList', { params: { receiptId : receiptId },
@@ -185,7 +179,7 @@ function Paymentlist()  {
                 {paymentlistType === 'refund' &&
                 <RefundModal 
                     paymentlistdetail={paymentlistdetail}
-                    onLoad={handleLoadPaymentListDetail}
+                    setPaymentlistdetail={setPaymentlistdetail}
                     closeModal={closeModal}
                 />}
                 {paymentlistType === 'receipt' && 
