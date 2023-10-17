@@ -117,10 +117,17 @@ function Paymentlist()  {
                                 <div className="paymentlist-information-header-price2">{addComma(paymentlistdetail.param.price)} 원</div>
                             </div>
                             <hr/>
-                            <div className="paymentlist-information-body">
-                                <button className="paymentlist-information-body-btn" onClick={() => openModal('refund')}>환불</button>
-                                <button className="paymentlist-information-body-btn" onClick={() => openModal('receipt')}>영수증 보기</button>
-                            </div>
+                            {paymentlistdetail.param.del === '결제 취소' ? (
+                                <div className="paymentlist-information-body">
+                                    <button className="paymentlist-information-body-refundbtn">환불 완료</button>
+                                    <button className="paymentlist-information-body-btn" onClick={() => openModal('receipt')}>영수증 보기</button>
+                                </div>
+                                ) : (
+                                <div className="paymentlist-information-body">
+                                    <button className="paymentlist-information-body-btn" onClick={() => openModal('refund')}>환불</button>
+                                    <button className="paymentlist-information-body-btn" onClick={() => openModal('receipt')}>영수증 보기</button>
+                                </div>
+                                )}
                         </div>
 
                         <div className="body2">
@@ -142,7 +149,7 @@ function Paymentlist()  {
                         <div className="paymentlist-information-empty">
                             <div className="paymentlist-information-header">
                                 <div className="title">
-                                    <div className="paymentlist-information-header-del">결제완료</div>
+                                    <div className="paymentlist-information-header-del">결제 상태</div>
                                     <div className="paymentlist-information-header-date">결제 시간</div>
                                 </div>
                                 <div className="body"> 

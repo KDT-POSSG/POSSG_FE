@@ -41,10 +41,15 @@
                 .payment-list-row{
                     border-bottom: 1px solid $color-border;
                     padding-bottom: 1rem;
+                    .payment-list-delete-container{
+                        display: flex;
+                        justify-content: right;
+                        padding: 0.6rem 0.6rem 0 0;
+                    }
                     .payment-list-row-info{
                         display: grid;
                         grid-template-columns: 2fr 1fr 1fr;
-                        padding: 2rem 2rem 0rem 2rem;
+                        padding: 0 1.5rem 0rem 1.5rem;
                         .payment-list-name{
                             font-weight: 500;
                         }
@@ -59,7 +64,7 @@
                         }
                     }
                     .payment-list-discount-info{
-                        padding: 10px 3rem 0 3rem;
+                        padding: 8px 81px 0 3rem;
                         display: flex;
                         justify-content: space-between;
                         .payment-list-discount{

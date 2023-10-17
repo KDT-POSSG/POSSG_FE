@@ -35,6 +35,7 @@ function Inventory() {
 
     useEffect(() => {
         fetchInventoryData();
+        setExpandRows({});
     }, [page]);
 
     const handleLoadInventoryData = () => {
@@ -63,7 +64,7 @@ function Inventory() {
         const start = (page - 1) * itemsPerPage;
         const end = start + itemsPerPage;
         setCurrentPageData(inventoryList.slice(start, end));
-    }, [inventoryList, page, itemsPerPage]); 
+    }, [inventoryList, page, itemsPerPage,]); 
 
     const formattedTime = `${currentTime.getFullYear()}.${String(currentTime.getMonth() + 1).padStart(2, '0')}.${String(currentTime.getDate()).padStart(2, '0')} ${String(currentTime.getHours()).padStart(2, '0')}:${String(currentTime.getMinutes()).padStart(2, '0')}:${String(currentTime.getSeconds()).padStart(2, '0')}`;
     

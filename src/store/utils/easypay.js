@@ -4,11 +4,30 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 // import { ACCESS_TOKEN } from 'store/apis/base';
 
-  export const handlePayment = async (pgType, totalAmount, products, setPaymentResponse, openModal) => {
+  export const handlePayment = async (pgType, totalOriginalPrice, totalDiscountPrice, products, setPaymentResponse, openModal) => {
 
     const accesstoken = localStorage.getItem("accesstoken");
-
     const convSeq = localStorage.getItem("convSeq");
+
+  //생선된 영수증 id를 랜덤으로 섞기
+    const shuffleString = (str) => {
+      const arr = str.split('');
+      for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr.join('');
+    }
+     //현재시간을 이용해 영수증 id 생성(ms까지 사용)
+    const generateOrderId = () => {
+      const now = new Date();
+      const datePart = now.toISOString().slice(0, 19).replace(/[-T:]/g, '');
+      const millisPart = now.getMilliseconds().toString().padStart(3, '0');
+      const combinedPart = `${datePart}${millisPart}`;
+
+      return shuffleString(combinedPart).toString();
+    };
+
 
     try {
 
@@ -22,10 +41,10 @@ import toast from 'react-hot-toast';
 
       const response = await Bootpay.requestPayment({
         application_id: "64f673d8e57a7e001bbb128a", //가맹점ID
-        price: totalAmount.toString(), // 총액 = items의 가격 합 
+        price: totalDiscountPrice.toString(), // 총액 = items의 가격 합 
         order_name: products.map(p => p.productName).join(", "), // 상품명 
         comapny_name: "Emart24 신세계센텀시티점",
-        order_id: "미구현", // 고유 주문번호
+        order_id: generateOrderId(), // 고유 주문번호response.data.receipt_id
         pg: pgType, // 카카오, 토스 2개 회사는 확인
         //method: "간편", // 카카오 - 간편, 토스 - 카드, 
         tax_free: 0,
@@ -60,6 +79,7 @@ import toast from 'react-hot-toast';
           method: response.data.method,
           discountInfo: products.length > 0 ? products[0].promotionInfo : '',
           price: response.data.price,
+          originalPrice: totalOriginalPrice.toString(),
           purchasedAt: response.data.purchased_at.slice(0, 19).replace('T', ' '), // new Date().toISOString().slice(0, 19).replace('T', ' '), // 현재 시간 설정
           receiptUrl: response.data.receipt_url,
           cardNum: response.data.card_data ? response.data.card_data.card_no : null, // card_data가 존재하면 card_approve_no를 사용, 아니면 null
@@ -94,6 +114,7 @@ import toast from 'react-hot-toast';
                 .then((response) => {
                   console.log("결제 상품 목록 전송 완료", response.data);
                   openModal('paymentreceipt');
+                  console.log(response.data);
                 })
                 .catch((error) => {
                   console.error('결제 상품 목록 에러', error);
