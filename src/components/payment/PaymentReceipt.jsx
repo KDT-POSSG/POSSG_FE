@@ -5,7 +5,7 @@ import Modal from "../ui/Modal";
 import PaymentReceiptInfoModal from "./PaymentReceiptInfoModal"
 
 
-function PaymentReceipt({  closeModal, totalAmount, paymentResponse, handlePaymentSuccess }){
+function PaymentReceipt({  closeModal, totalDiscountPrice, paymentResponse, handlePaymentSuccess }){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalType, setModalType] = useState(null);
@@ -20,7 +20,6 @@ function PaymentReceipt({  closeModal, totalAmount, paymentResponse, handlePayme
     }
 
     const handleCheckReceipt = () => {
-        handlePaymentSuccess();
         setModalType('paymentreceiptmodal');
         openModal();
     }
@@ -41,16 +40,16 @@ function PaymentReceipt({  closeModal, totalAmount, paymentResponse, handlePayme
                 </div>
                 <div className="cashpayreceipt-body-middle">
                     <div className="cashpayreceipt-body-middle-price">결제 금액</div>
-                    <div className="cashpayreceipt-body-middle-price2">{addComma(totalAmount)} 원</div>
+                    <div className="cashpayreceipt-body-middle-price2">{addComma(totalDiscountPrice)} 원</div>
                 </div>
                 <div className="cashpayreceipt-body-bottom">
                     <div className="cashpayreceipt-input-price">
                         <div className="cashpayreceipt-body-input-price">부가세</div>
-                        <div className="cashpayreceipt-body-input-price2">{addComma(Math.round(totalAmount*10/110))} 원</div>
+                        <div className="cashpayreceipt-body-input-price2">{addComma(Math.round(totalDiscountPrice*10/110))} 원</div>
                     </div>
                     <div className="cashpayreceipt-change">
                         <div className="cashpayreceipt-body-change">과세 금액</div>
-                        <div className="cashpayreceipt-body-change2">{addComma(totalAmount -(Math.round(totalAmount*10/110)))} 원</div>
+                        <div className="cashpayreceipt-body-change2">{addComma(totalDiscountPrice -(Math.round(totalDiscountPrice*10/110)))} 원</div>
                     </div>
                 </div>
             </div>

@@ -10,6 +10,8 @@ import PaymentReceipt from 'components/payment/PaymentReceipt';
 import { handlePayment } from 'store/utils/easypay.js';
 import { addComma } from 'store/utils/function.js';
 import { toast } from 'react-hot-toast';
+import ReceiptModal from 'components/paymentlist/ReceiptModal';
+import CashpayReceiptInfoModal from 'components/payment/CashPayReceiptInfoModal';
 
 
 
@@ -24,6 +26,9 @@ function Payment() {
     const barcodeInputRef = useRef(null);
     const accesstoken = localStorage.getItem("accesstoken");
     const convSeq = localStorage.getItem("convSeq");
+
+    const [paymentData, setPaymentData] = useState(null);
+
     
     // input에 바코드가 제대로 입력됐는지 확인
     const handleBarcode = () => {
@@ -50,7 +55,7 @@ function Payment() {
                 productData.amount = 1;
                 setProducts(prevProducts => [...prevProducts, productData]); //그렇지 않으면 상품 1개로 
             }
-            console.log(productData);
+            // console.log(productData);
         })
         .catch((err) => {
             console.log(err);
@@ -59,10 +64,16 @@ function Payment() {
         setBarcodeInput("");
     }
 
-    // 총 결제 금액 계산
-    const getTotalAmount = () => {
+    // 총 할인 결제 금액 계산
+    const getTotalDiscountPrice = () => {
         return products.reduce((total, product) => {
             return total + (product.priceDiscount) * product.amount;
+        }, 0);
+    };
+    // 총 원가 결제 금액 계산
+    const getTotalOriginalPrice = () => {
+        return products.reduce((total, product) => {
+            return total + (product.price) * product.amount;
         }, 0);
     };
     
@@ -70,8 +81,9 @@ function Payment() {
      //결제 함수 시작
      const startPayment = async (pgType) => {
         try {
-            const totalAmount = getTotalAmount();
-            await handlePayment(pgType, totalAmount, products, setPaymentResponse, openModal);
+            const totalOriginalPrice = getTotalOriginalPrice();
+            const totalDiscountPrice = getTotalDiscountPrice();
+            await handlePayment(pgType, totalOriginalPrice, totalDiscountPrice, products, setPaymentResponse, openModal);
         } catch (error) {
             console.error("Payment failed:", error);
         }
@@ -91,6 +103,9 @@ function Payment() {
        };
     const closeModal = () => {
         setModalIsOpen(false);
+        if(paymentType === 'cashpayreceipt' || paymentType === 'paymentreceipt' || paymentType === 'cashpayreceiptinfomodal') {
+            handlePaymentSuccess();
+        }
     };
 
     const handleDeleteProduct = (productSeq) => {
@@ -107,14 +122,22 @@ function Payment() {
                 },
             };
         }
+        else if (paymentType === 'cashpayreceiptinfomodal') {
+            return {
+                content: {
+                    width: '40%',
+                    height: 'auto',
+                    backgroundColor:'#fff',
+                    maxHeight:'40rem'
+                }
+            };
+        }
         return {
             content: {
                 padding: '1.5rem',
             },
         };
     };
-    
-   
 
     return (
         // payment-container를 클릭하면 바코드 입력창에 포커스가 가도록 함 (사용자가 다른 곳을 클릭했을 때 input창에 포커스가 해제되는 것 방지용)
@@ -138,12 +161,14 @@ function Payment() {
                         ) : (
                             products.map(product => (
                                 <div className='payment-list-row' key={product.productSeq}>
+                                    <div className='payment-list-delete-container'>
+                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}>❌</button>
+                                    </div>
                                     <div className='payment-list-row-info'>
                                         <div className='payment-list-name'>{product.productName}</div>
                                         <div className='payment-list-amount'>x {product.amount}</div>
                                         <div className='payment-list-price'>{addComma(product.price * product.amount)} 원</div>
-                                        <div className='payment-list-priceDiscount'>{addComma(product.priceDiscount * product.amount)} 원</div>
-                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}>⛔❌➖</button>
+                                        {/* <div className='payment-list-priceDiscount'>{addComma(product.priceDiscount * product.amount)} 원</div> */}
                                     </div>
 
                                     {/* 할인율이 0이 아닐 때만 할인 정보를 보여줌 */}
@@ -161,7 +186,7 @@ function Payment() {
                     
                     <div className='payment-list-result'>
                         <div className='payment-list-total'>총액</div>
-                        <div className='payment-list-total2'>{addComma(getTotalAmount())} 원</div>
+                        <div className='payment-list-total2'>{addComma(getTotalDiscountPrice())} 원</div>
                     </div> 
                 </div>
 
@@ -169,7 +194,7 @@ function Payment() {
                     <div className='container'>
                         <div className='payment-total'>결제 금액</div>
                         <div className='payment-total-container'>
-                            <div className='payment-total-price'>{addComma(getTotalAmount())} 원</div>
+                            <div className='payment-total-price'>{addComma(getTotalDiscountPrice())} 원</div>
                             <button className='payment-method-cash' onClick={() => openModal('cash')}>현금 결제</button>
                         </div>
                         <div className='payment-method-container2'>
@@ -178,8 +203,8 @@ function Payment() {
                                 <button className='payment-method-point' onClick={() => openModal('point')}>X</button>
                             </div> */}
                             <div className='payment-method-bottom'>
-                                <button className='payment-method-tosspay' onClick={() => startPayment("토스")}>토스페이 결제</button>
-                                <button className='payment-method-kakaopay' onClick={() => startPayment("카카오")}>카카오 결제</button>
+                                <button className='payment-method-tosspay' onClick={() => startPayment("토스")}>카드 결제</button>
+                                <button className='payment-method-kakaopay' onClick={() => startPayment("카카오")}>카카오페이 결제</button>
                                 <button className='payment-method-etcpay' onClick={() => openModal('point')}>포인트</button>
                             </div>
                         </div>
@@ -188,36 +213,44 @@ function Payment() {
             </div>
             
 
-            <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()}>
+            <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()} shouldCloseOnOverlayClick={false}>
             {paymentType === 'cash' && 
                 <Cashpay 
                     openModal={openModal} 
                     closeModal={closeModal} 
-                    totalAmount={getTotalAmount()} 
+                    totalDiscountPrice={getTotalDiscountPrice()} 
+                    totalOriginalPrice={getTotalOriginalPrice()}
                     products={products}
                     inputValue={inputValue}
                     setInputValue={setInputValue}
                     changeAmount={changeAmount}
                     setChangeAmount={setChangeAmount}
+                    setPaymentData={setPaymentData}
                 />}
             {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
                     closeModal={closeModal}
                     openModal={openModal} 
-                    totalAmount={getTotalAmount()} 
+                    totalDiscountPrice={getTotalDiscountPrice()} 
                     inputValue={inputValue}
                     changeAmount={changeAmount}
                     handlePaymentSuccess={handlePaymentSuccess}
+                    paymentData={paymentData}
                 />} 
             {paymentType === 'paymentreceipt' && 
                 <PaymentReceipt
                     openModal={openModal}
                     closeModal={closeModal}
-                    totalAmount={getTotalAmount()}
+                    totalDiscountPrice={getTotalDiscountPrice()}
                     handlePaymentSuccess={handlePaymentSuccess}
                     paymentResponse={paymentResponse}
                 />}
-            {paymentType === 'etc' && <Etcpay />}
+            {paymentType === 'cashpayreceiptinfomodal' && 
+                <CashpayReceiptInfoModal 
+                    handlePaymentSuccess={handlePaymentSuccess}
+                    closeModal={closeModal}
+                    paymentData={paymentData}
+                />}
             {paymentType === 'discount' && <Discount />}
             {paymentType === 'point' && <Point />}
         </Modal>

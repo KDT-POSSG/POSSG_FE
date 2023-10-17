@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 
 function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
     const [empName, setEmpName] = useState('');
-    const [gender, setGender] = useState('남성');
+    const [gender, setGender] = useState(employeeData.gender);
     const [phoneNumber, setPhoneNumber] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [hireDate, setHireDate] = useState('');
@@ -55,7 +55,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
         <div className="regi-content">
         <div className="form-row">
             <div className="input-container">
-                <input className="input-text" onChange={(e) => setEmpName(e.target.value)} required />
+                <input className="input-text" value={employeeData.empName} onChange={(e) => setEmpName(e.target.value)} required />
                 <label className="label-helper" htmlFor="id"><span>이름</span></label>
                 
             </div>

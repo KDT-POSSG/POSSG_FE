@@ -1,20 +1,19 @@
 import Modal from "components/ui/Modal";
 import CheckmarkComponent from "../ui/CheckMark";
-import ReceiptModal from '../paymentlist/ReceiptModal'
 import { addComma } from "store/utils/function";
 import { useState } from "react";
+import ReceiptModal from "components/paymentlist/ReceiptModal";
+import CashpayReceiptInfoModal from "./CashPayReceiptInfoModal";
 
-function CashpayReceipt({ closeModal, inputValue, changeAmount, totalAmount, handlePaymentSuccess}){
+function CashpayReceipt({ openModal, closeModal, inputValue, changeAmount, totalDiscountPrice, handlePaymentSuccess, paymentData}){
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-
-    const openModal = () => {
-        setModalIsOpen(true);
-    };
-    
     const handlePaymentComplete = () => {
         handlePaymentSuccess();
         closeModal();
+    };
+
+    const handleCashReceipt = () => {
+        openModal("cashpayreceiptinfomodal");
     }
 
     return(
@@ -31,7 +30,7 @@ function CashpayReceipt({ closeModal, inputValue, changeAmount, totalAmount, han
                 </div>
                 <div className="cashpayreceipt-body-middle">
                     <div className="cashpayreceipt-body-middle-price">결제 금액</div>
-                    <div className="cashpayreceipt-body-middle-price2">{addComma(totalAmount)} 원</div>
+                    <div className="cashpayreceipt-body-middle-price2">{addComma(totalDiscountPrice)} 원</div>
                 </div>
                 <div className="cashpayreceipt-body-bottom">
                     <div className="cashpayreceipt-input-price">
@@ -46,13 +45,9 @@ function CashpayReceipt({ closeModal, inputValue, changeAmount, totalAmount, han
             </div>
 
             <div className="cashpayreceipt-buttons">
-                <button className="cashpayreceipt-btn" onClick={openModal}>영수증 출력</button>
+                <button className="cashpayreceipt-btn" onClick={ handleCashReceipt }>영수증 출력</button>
                 <button className="cashpayreceipt-complete-btn" onClick={handlePaymentComplete}>확인</button>
             </div>
-
-            <Modal openModal={openModal} closeModal={closeModal} style={{ content:{width:'70%', height:'auto', backgroundColor:'#fff', maxHeight:'40rem'  } }}>
-                <ReceiptModal/>
-            </Modal>
         </div>
     );
     

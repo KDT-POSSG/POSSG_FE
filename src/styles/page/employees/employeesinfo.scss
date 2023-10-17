@@ -133,6 +133,10 @@
       tbody{
         .employeeinfo-empty{
           font-size: 98px;
+        &:hover{
+          cursor: default;
+          background-color: $color-back;
+        }
         }
       }
     }

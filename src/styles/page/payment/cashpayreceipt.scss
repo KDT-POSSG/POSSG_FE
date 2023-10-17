@@ -182,4 +182,25 @@
     .cashpayreceipt-footer2{
         padding-top: 0.5rem;
     }
+
+    .cashpayreceipt-btn-container{
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        .cashpayreceipt-btn{
+            background-color: $color-white;
+            color: $color-main;
+            font-size: 1rem;
+            border: 1px solid $color-main;
+            border-radius: 2rem;
+            padding: 0.25rem 1rem;
+            transition: $transition-cb2;
+            width: 10rem;
+            height: 2.5rem;
+            &:hover {
+                background-color: $color-main;
+                color: $color-white;
+              }
+        }
+    }
 }
