@@ -4,12 +4,13 @@ import ProductItem from '../components/product/ProductItem';
 import axios from 'axios';
 import { baseURL } from 'store/apis/base';
 
-function ProductListTest() {
+function ProductScroll() {
 
   const accesstoken = localStorage.getItem("accesstoken");
 
-  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
+  const [product, setProduct] = useState([]);
   const [page, setPage] = useState(0);
 
   const [keyword, setKeyword] = useState({
@@ -18,16 +19,22 @@ function ProductListTest() {
     promotionInfo: 0,
     search: null,
     sortOrder: "newest",
-    convSeq: 1
+    convSeq: 2
   });
 
-  const getProduct = async () => {
+  const getProduct = async (nowPage) => {
 
     console.log("getProduct keyword >> ", keyword);
     
-    const response = await axios
-      .get(`${baseURL}/productList`, {
-        params: keyword,
+    const response = await axios.get(`${baseURL}/productList`, {
+        params: {
+          choice: keyword.choice,
+          pageNumber: nowPage,
+          promotionInfo: keyword.promotionInfo,
+          search: keyword.search,
+          sortOrder: keyword.sortOrder,
+          convSeq: 2
+        },
         headers: {
           accessToken: `Bearer ${accesstoken}`
         }
@@ -38,12 +45,16 @@ function ProductListTest() {
 
   useEffect(() => {
 
-    // const timer = setTimeout(() => {
+    console.log("=====초기세팅=====");
 
+    // const timer = setTimeout(() => {
+      setLoading(true);
+
+      setHasMore(true);
       setPage(0);
       setKeyword({...keyword, pageNumber: 0});
 
-      getProduct()
+      getProduct(0)
         .then((response) => {
           console.log(response.data);
           // console.log(response.data.ProductList);
@@ -52,6 +63,10 @@ function ProductListTest() {
         .catch((error) => {
           console.error(error);
         })
+        .finally(() => {
+          // 초기 로딩이 완료되면 loading 상태를 해제합니다.
+          setLoading(false);
+        });
 
     // }, 300); 
     // return () => clearTimeout(timer);
@@ -61,13 +76,22 @@ function ProductListTest() {
   const bottomRef = useRef(null);
 
   useEffect(() => {
+
+    if (loading) {
+      return; // 로딩 중에는 무한 스크롤 이벤트를 무시
+    }
+
+    console.log("=====무한스크롤=====");
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore) {
+
+          setLoading(true);
           setPage(page + 1);
           setKeyword({...keyword, pageNumber: page + 1});
 
-          getProduct()
+          getProduct(page + 1)
             .then((response) => {
               console.log(response.data);
               // console.log(response.data.ProductList);
@@ -77,6 +101,10 @@ function ProductListTest() {
             .catch((error) => {
               console.error(error);
             })
+            .finally(() => {
+              // 초기 로딩이 완료되면 loading 상태를 해제합니다.
+              setLoading(false);
+            });
         }
       },
       { threshold: 0.3 }
@@ -89,7 +117,8 @@ function ProductListTest() {
         observer.unobserve(bottomRef.current);
       }
     }
-  }, [page]);
+
+  }, [page, loading]);
 
   return (
     <div className='product-page'>
@@ -98,7 +127,7 @@ function ProductListTest() {
         <div className='page-title product-page-title'>상품 페이지</div>
 
         <div>
-          <ProductNav keyword={keyword} setKeyword={setKeyword} setPage={setPage} page={page} />
+          <ProductNav keyword={keyword} setKeyword={setKeyword} setPage={setPage} page={page} setHasMore={setHasMore} />
         </div>
         
         {
@@ -116,17 +145,24 @@ function ProductListTest() {
         <div className='product-item-container'>
           {
             product && product.map((item, idx) => (
-              <ProductItem key={idx} product={item} />
+              // <ProductItem key={idx} product={item} />
+              <ProductItem key={item.productSeq} product={item} />
             ))
           }
         </div>
       </div>
 
-      <div ref={bottomRef} style={{ height: "100px", backgroundColor: "skyblue" }}>loading...</div>
-      {/* <div ref={setBottom}>loading...</div> */}
+      {
+        // product && 
+        // product.length !== 0 && 
+        // hasMore &&
+        !loading &&
+        <div ref={bottomRef} className='product-loading'></div>
+        // <div ref={bottomRef} style={{ height: "100px", backgroundColor: "none" }}></div>
+      }
 
     </div>
   )
 }
 
-export default ProductListTest;
+export default ProductScroll;
