@@ -62,7 +62,7 @@ function Login(){
         })
     }
     return(
-        <div className="login-testtest">
+        <div className="login-wrap">
         <div className="login-content-wrap">
             <div className="login-title page-title">로그인</div>
             <div className="login-content">
@@ -82,10 +82,7 @@ function Login(){
                     <div className="form-row">
                             <div className="check-container">
                                 <input type="checkbox" className="save-login" id="saveLogin" name="saveLogin" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)}  />
-                                <span>&nbsp;&nbsp;아이디 저장</span>
-                                {/* <span className="save-login-span"> */}{/* </span> */}
-                                    
-                                    
+                                <span>&nbsp;&nbsp;아이디 저장</span>                                    
                             </div>                        
                     </div>
                     <div className="form-row">

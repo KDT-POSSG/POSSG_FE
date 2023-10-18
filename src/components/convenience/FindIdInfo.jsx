@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 function FindIdInfo({findId}){  
     return(
         <div className="findInfo-content-wrap">
-            <div className="findInfo-title">아이디 찾기
+            <div className="findInfo-title page-title">아이디 찾기
             </div>
 
             <div className="findInfo-content">
                 <form id="findInfoForm" method="post" autoComplete="off">
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="id" name="id" required defaultValue={findId} />
+                            <input type="text" className="input-text readonly-input" id="id" name="id" required defaultValue={findId} />
                             <label className="label-helper" htmlFor="id"><span>아이디</span></label>
                         </div>
                     </div>
