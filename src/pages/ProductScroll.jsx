@@ -8,10 +8,12 @@ function ProductScroll() {
 
   const accesstoken = localStorage.getItem("accesstoken");
 
+  const bottomRef = useRef(null);
+
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
-  const [product, setProduct] = useState([]);
   const [page, setPage] = useState(0);
+  const [product, setProduct] = useState([]);
 
   const [keyword, setKeyword] = useState({
     choice: "productName",
@@ -19,7 +21,7 @@ function ProductScroll() {
     promotionInfo: 0,
     search: null,
     sortOrder: "newest",
-    convSeq: 2
+    convSeq: 1
   });
 
   const getProduct = async (nowPage) => {
@@ -47,38 +49,30 @@ function ProductScroll() {
 
     console.log("=====초기세팅=====");
 
-    // const timer = setTimeout(() => {
-      setLoading(true);
+    setLoading(true);
+    setHasMore(true);
+    setPage(0);
+    setKeyword({...keyword, pageNumber: 0});
 
-      setHasMore(true);
-      setPage(0);
-      setKeyword({...keyword, pageNumber: 0});
-
-      getProduct(0)
-        .then((response) => {
-          console.log(response.data);
-          // console.log(response.data.ProductList);
-          setProduct(response.data.ProductList);
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-        .finally(() => {
-          // 초기 로딩이 완료되면 loading 상태를 해제합니다.
-          setLoading(false);
-        });
-
-    // }, 300); 
-    // return () => clearTimeout(timer);
+    getProduct(0)
+      .then((response) => {
+        console.log(response.data);
+        // console.log(response.data.ProductList);
+        setProduct(response.data.ProductList);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
     
   }, [keyword.promotionInfo, keyword.search, keyword.sortOrder]);
-  
-  const bottomRef = useRef(null);
 
   useEffect(() => {
 
     if (loading) {
-      return; // 로딩 중에는 무한 스크롤 이벤트를 무시
+      return; 
     }
 
     console.log("=====무한스크롤=====");
@@ -102,13 +96,13 @@ function ProductScroll() {
               console.error(error);
             })
             .finally(() => {
-              // 초기 로딩이 완료되면 loading 상태를 해제합니다.
               setLoading(false);
             });
         }
       },
       { threshold: 0.3 }
     );
+
     if (bottomRef.current) {
       observer.observe(bottomRef.current);
     }
@@ -144,8 +138,7 @@ function ProductScroll() {
 
         <div className='product-item-container'>
           {
-            product && product.map((item, idx) => (
-              // <ProductItem key={idx} product={item} />
+            product && product.map((item) => (
               <ProductItem key={item.productSeq} product={item} />
             ))
           }
@@ -153,12 +146,8 @@ function ProductScroll() {
       </div>
 
       {
-        // product && 
-        // product.length !== 0 && 
-        // hasMore &&
         !loading &&
         <div ref={bottomRef} className='product-loading'></div>
-        // <div ref={bottomRef} style={{ height: "100px", backgroundColor: "none" }}></div>
       }
 
     </div>

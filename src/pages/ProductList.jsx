@@ -35,7 +35,6 @@ function ProductList() {
           console.log(response.data);
           console.log(response.data.ProductList);
           setProduct(response.data.ProductList);
-          // setProduct((prevProduct) => [...prevProduct, ...response.data.ProductList]);
         })
         .catch((error) => {
           console.error(error);

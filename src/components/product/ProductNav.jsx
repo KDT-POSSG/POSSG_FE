@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import productFilterDatas from '../../assets/datas/productFilterDatas.json';
 import productSortDatas from '../../assets/datas/productSortDatas.json';
 
-function ProductNav({ keyword, setKeyword, setPage, page, setHasMore }) {
+function ProductNav({ keyword, setKeyword }) {
 
   const [search, setSearch] = useState("");
 
   const handleKeyword = (e) => {
-
-    // setPage(0);
-    // setKeyword({...keyword, pageNumber: 0});
-    // setHasMore(true);
 
     if(e.target.name === "search") {
       setTimeout(() => setKeyword({...keyword, [e.target.name]: e.target.value}), 300);
