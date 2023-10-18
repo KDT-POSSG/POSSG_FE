@@ -111,9 +111,16 @@
                     justify-content: space-between;
                     padding-top: 1rem;
                     .payment-total-price{
+                    .payment-total-price1{
                         font-size: 2.5rem;
                         font-weight: 500;
                         color: $color-point;
+                    }
+                    .payment-total-price2{
+                        padding-top: 0.5rem;
+                        font-size: 1rem;
+                        font-weight: 500;
+                    }
                     }
                     .payment-method-cash{
                         background-color: $color-white;

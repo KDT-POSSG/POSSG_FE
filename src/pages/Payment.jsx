@@ -9,9 +9,9 @@ import CashpayReceipt from '../components/payment/CashpayReceipt';
 import PaymentReceipt from 'components/payment/PaymentReceipt';
 import { handlePayment } from 'store/utils/easypay.js';
 import { addComma } from 'store/utils/function.js';
-import { toast } from 'react-hot-toast';
-import ReceiptModal from 'components/paymentlist/ReceiptModal';
+ import ReceiptModal from 'components/paymentlist/ReceiptModal';
 import CashpayReceiptInfoModal from 'components/payment/CashPayReceiptInfoModal';
+import { toast } from 'react-hot-toast';
 
 
 
@@ -26,10 +26,9 @@ function Payment() {
     const barcodeInputRef = useRef(null);
     const accesstoken = localStorage.getItem("accesstoken");
     const convSeq = localStorage.getItem("convSeq");
-
+    const [usepoint, setUsePoint] = useState(0);
     const [paymentData, setPaymentData] = useState(null);
 
-    
     // input에 바코드가 제대로 입력됐는지 확인
     const handleBarcode = () => {
         const barcodeInput = barcodeInputRef.current.value;
@@ -67,7 +66,7 @@ function Payment() {
     // 총 할인 결제 금액 계산
     const getTotalDiscountPrice = () => {
         return products.reduce((total, product) => {
-            return total + (product.priceDiscount) * product.amount;
+            return total + (product.priceDiscount) * product.amount - usepoint;
         }, 0);
     };
     // 총 원가 결제 금액 계산
@@ -177,7 +176,7 @@ function Payment() {
                                     {product.discountRate !== 0.0 && (
                                     <div className='payment-list-discount-info'>
                                         <div></div>
-                                        <div className='payment-list-discount'>할인</div>
+                                        <div className='payment-list-discount'>행사 할인</div>
                                         
                                         <div className='payment-list-discount2'>-{addComma((product.price - product.priceDiscount) * product.amount)} 원</div>
                                     </div>
@@ -199,7 +198,10 @@ function Payment() {
                     <div className='container'>
                         <div className='payment-total'>결제 금액</div>
                         <div className='payment-total-container'>
-                            <div className='payment-total-price'>{addComma(getTotalDiscountPrice())} 원</div>
+                            <div className='payment-total-price'>
+                                <div className='payment-total-price1'>{addComma(getTotalDiscountPrice())} 원</div>
+                                <div className='payment-total-price2'>포인트 사용 {addComma(usepoint)} P</div>
+                            </div>
                             <button className='payment-method-cash' onClick={() => openModal('cash')}>현금 결제</button>
                         </div>
                         <div className='payment-method-container2'>
@@ -221,43 +223,46 @@ function Payment() {
             <Modal isOpen={modalIsOpen} onClose={closeModal} style={getModalStyle()} shouldCloseOnOverlayClick={false}>
             {paymentType === 'cash' && 
                 <Cashpay 
-                    openModal={openModal} 
-                    closeModal={closeModal} 
-                    totalDiscountPrice={getTotalDiscountPrice()} 
-                    totalOriginalPrice={getTotalOriginalPrice()}
-                    products={products}
-                    inputValue={inputValue}
-                    setInputValue={setInputValue}
-                    changeAmount={changeAmount}
-                    setChangeAmount={setChangeAmount}
-                    setPaymentData={setPaymentData}
+                openModal={openModal} 
+                closeModal={closeModal} 
+                totalDiscountPrice={getTotalDiscountPrice()} 
+                totalOriginalPrice={getTotalOriginalPrice()}
+                products={products}
+                inputValue={inputValue}
+                setInputValue={setInputValue}
+                changeAmount={changeAmount}
+                setChangeAmount={setChangeAmount}
+                setPaymentData={setPaymentData}
                 />}
             {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
-                    closeModal={closeModal}
-                    openModal={openModal} 
-                    totalDiscountPrice={getTotalDiscountPrice()} 
-                    inputValue={inputValue}
-                    changeAmount={changeAmount}
-                    handlePaymentSuccess={handlePaymentSuccess}
-                    paymentData={paymentData}
+                closeModal={closeModal}
+                openModal={openModal} 
+                totalDiscountPrice={getTotalDiscountPrice()} 
+                inputValue={inputValue}
+                changeAmount={changeAmount}
+                handlePaymentSuccess={handlePaymentSuccess}
+                paymentData={paymentData}
                 />} 
             {paymentType === 'paymentreceipt' && 
                 <PaymentReceipt
-                    openModal={openModal}
-                    closeModal={closeModal}
-                    totalDiscountPrice={getTotalDiscountPrice()}
-                    handlePaymentSuccess={handlePaymentSuccess}
-                    paymentResponse={paymentResponse}
+                openModal={openModal}
+                closeModal={closeModal}
+                totalDiscountPrice={getTotalDiscountPrice()}
+                handlePaymentSuccess={handlePaymentSuccess}
+                paymentResponse={paymentResponse}
                 />}
             {paymentType === 'cashpayreceiptinfomodal' && 
                 <CashpayReceiptInfoModal 
-                    handlePaymentSuccess={handlePaymentSuccess}
-                    closeModal={closeModal}
-                    paymentData={paymentData}
+                handlePaymentSuccess={handlePaymentSuccess}
+                closeModal={closeModal}
+                paymentData={paymentData}
                 />}
-            {paymentType === 'discount' && <Discount />}
-            {paymentType === 'point' && <Point />}
+            {paymentType === 'point' && 
+                <Point 
+                usepoint={usepoint}
+                setUsePoint={setUsePoint}
+                />}
         </Modal>
 
         </div>

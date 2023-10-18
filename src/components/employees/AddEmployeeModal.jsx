@@ -22,7 +22,7 @@ function AddEmployeeModal({onAdd}) {
     };
 
     const employeeData = {
-     empName,
+      empName,
       convSeq,
       birthDate: formatDate(birthDate),
       gender,
