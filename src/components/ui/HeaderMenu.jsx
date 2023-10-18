@@ -8,8 +8,6 @@ import Modal from 'components/ui/Modal';
 
 function HeaderMenu() {
 
-  const accesstoken = localStorage.getItem("accesstoken");
-
   const menuStyle = {
     content: {
       width: '20rem',
@@ -25,6 +23,8 @@ function HeaderMenu() {
     },
   };
 
+  const accesstoken = localStorage.getItem("accesstoken");
+  const refreshtoken = localStorage.getItem("refreshtoken");
   const branchName = localStorage.getItem("branchName");
 
   const navi = useNavigate();
@@ -46,6 +46,7 @@ function HeaderMenu() {
     axios.get(`${baseURL}/logout`, {
         headers: {
           accessToken: `Bearer ${accesstoken}`, 
+          refreshToken: `${refreshtoken}`, 
         }
       })
       .then((res)=>{
