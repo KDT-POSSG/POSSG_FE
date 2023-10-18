@@ -74,6 +74,14 @@
                         background-color: $color-border;       
                     }
 
+                    p{
+                        color: $color-point;
+                        font-size: 12px;
+                        text-align: left;
+                        margin: 10px 20px;
+                        background-color: $color-back;
+                    }
+
                     button {
                         position: absolute;
                         top: 4px;
