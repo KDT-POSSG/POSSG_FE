@@ -1,11 +1,13 @@
 .salesReport-content-wrap{
     background-color: $color-back;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 3vw 10vw;
-    min-height: 100vh;
 
     .salesReport-sort-wrap{
-        width: 75%;
-        margin-left: 170px;
+        width: 80vw;
 
         .salesReport-sort {
             border-radius: 1rem;
@@ -14,7 +16,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             padding: 1rem 0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.875rem;
             justify-content: center;
             align-items: center;
             text-align: center;
