@@ -18,7 +18,8 @@ function UpdateMyPage(){
         representativeName: "", 
         phoneNumber: "",  
     });
-    const [isPhoneNum, setIsPhoneNum] = useState(false); // 폰번호
+    const [isPhoneNum, setIsPhoneNum] = useState(false);
+    const [phoneNumMsg, setphoneNumMsg] = useState("");
 
     const onChangeRepreName = (e) => {
         setUserData((prevUserData) => ({
@@ -32,12 +33,14 @@ function UpdateMyPage(){
             ...prevUserData,
             phoneNumber: e.target.value
         }));
+        console.log("currentPNum >>> ", currentPNum)
         const numRegExp = /^([0-9]{11})$/;
         if (!numRegExp.test(currentPNum)) {
-            toast.error("숫자만 입력해주세요");
+            setphoneNumMsg("숫자만 입력해주세요");
             setIsPhoneNum(false);
         }
-        else {          
+        else {       
+            setphoneNumMsg("");   
             setIsPhoneNum(true);
         }
     };
@@ -138,6 +141,7 @@ function UpdateMyPage(){
                         <div className="update-container">
                             <input type="text" className="update-text" id="phoneNum" name="phoneNum" value={userData.phoneNumber} onChange={onChangePhoneNum} />
                             <label className="label-helper" htmlFor="phoneNum"><span>휴대폰번호</span></label>
+                            <p className="p-text">{phoneNumMsg}</p>
                         </div>
                     </div>                   
                         <div className="btn-container">

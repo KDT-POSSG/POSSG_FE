@@ -87,6 +87,8 @@ function ChangePw({ userId, setModalIsOpen }){
             toast.error("비밀번호 입력 요망")
         }else if(changePw !== pwCheck){
             toast.error("새 비밀번호와 확인 비밀번호가 일치하지 않음")
+        }else if(isPw===false){
+            toast.error("비밀번호 양식 확인 요망")
         }else{
             axios.post(`${baseURL}/changePassword`,{
                     "pwd" : currentPw,
