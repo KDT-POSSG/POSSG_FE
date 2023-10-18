@@ -46,15 +46,15 @@ function HeaderAlarm() {
       eventSource.onmessage = function(event) {
   
         const product = JSON.parse(event.data);
-        console.log("product >> ", product);
-        console.log("onmessage 들어옴 ", new Date());
+        // console.log("product >> ", product);
+        // console.log("onmessage 들어옴 ", new Date());
   
         setAlarmList(product);
         setIsAlarm(true);
   
-        toast('알림 도착', {
-          icon: <span className="tossface">🔔</span>,
-        });
+        // toast('알림 도착', {
+        //   icon: <span className="tossface">🔔</span>,
+        // });
       };
   
       eventSource.onerror = function(error) {
