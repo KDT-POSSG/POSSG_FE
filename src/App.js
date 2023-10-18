@@ -43,6 +43,7 @@ import YearImcome from './components/analysis/YearImcome';
 import { RecoilRoot } from 'recoil';
 import HomeKiosk from 'pages/HomeKiosk';
 import PosRoutes from 'components/PosRoutes';
+import ProductScroll from 'pages/ProductScroll';
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
             <Route path='/kiosk' element={<HomeKiosk />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/product' element={<ProductList />} />
+            <Route path='/producttest' element={<ProductScroll />} />
 
           </Route>
           

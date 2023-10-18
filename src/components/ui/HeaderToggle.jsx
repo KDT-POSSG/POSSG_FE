@@ -45,11 +45,11 @@ function HeaderToggle() {
   const handleToggle = () => {
 
     if(isPos) {
-      toast.success("KIOSK 모드로 변경");
+      toast.success("KIOSK 모드로 변경", { style: { marginTop: '3.5rem', } });
       navi("/kiosk")
     }
     else {
-      toast.success("POS 모드로 변경");
+      toast.success("POS 모드로 변경", { style: { marginTop: '3.5rem', } });
       navi("/");
     }
     setIsPos(!isPos);

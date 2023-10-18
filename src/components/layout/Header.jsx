@@ -37,7 +37,7 @@ function Header() {
             <div className='kiosk-header kiosk-header-left'>
               <Link to={"/kiosk"}>
                 <div className='kiosk-header-item'>
-                  <span class="material-symbols-rounded kiosk-home-icon">home</span>
+                  <span className="material-symbols-rounded kiosk-home-icon">home</span>
                   홈
                 </div>
               </Link>
@@ -55,7 +55,7 @@ function Header() {
             <div className='kiosk-header kiosk-header-right'>
               <Link to={ pathname === "/payment" ? "/product" : "/payment" }>
                 <div className='kiosk-header-item'>
-                  <span class="material-symbols-rounded kiosk-home-icon">touch_app</span>
+                  <span className="material-symbols-rounded kiosk-home-icon">touch_app</span>
                   { pathname === "/payment" ? "상품 둘러보기" : "결제하기" }
                 </div>
               </Link>

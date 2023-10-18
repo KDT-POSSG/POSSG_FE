@@ -2,21 +2,22 @@ import React, { useEffect, useRef, useState } from 'react';
 import ProductNav from '../components/product/ProductNav';
 import ProductItem from '../components/product/ProductItem';
 import axios from 'axios';
-import { getProductList } from 'store/apis/product';
 import { baseURL } from 'store/apis/base';
 
 function ProductList() {
 
   const accesstoken = localStorage.getItem("accesstoken");
-
   const [product, setProduct] = useState([]);
+
   const [page, setPage] = useState(0);
+
   const [keyword, setKeyword] = useState({
     choice: "productName",
     pageNumber: page,
     promotionInfo: 0,
     search: null,
-    sortOrder: "newest"
+    sortOrder: "newest",
+    convSeq: 1
   });
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function ProductList() {
         .then((response) => {
           console.log(response.data);
           console.log(response.data.ProductList);
-          setProduct(response.data);
+          setProduct(response.data.ProductList);
         })
         .catch((error) => {
           console.error(error);
@@ -51,11 +52,11 @@ function ProductList() {
         <div className='page-title product-page-title'>상품 페이지</div>
 
         <div>
-          <ProductNav keyword={keyword} setKeyword={setKeyword} />
+          <ProductNav keyword={keyword} setKeyword={setKeyword} setPage={setPage} />
         </div>
-
+        
         {
-          !product.ProductList || product.ProductList.length === 0 ? 
+          !product || product.length === 0 ? 
           (
             <div className='product-noitem'>
               <span className='tossface'>📦</span>
@@ -68,7 +69,7 @@ function ProductList() {
 
         <div className='product-item-container'>
           {
-            product.ProductList && product.ProductList.map((item) => (
+            product && product.map((item) => (
               <ProductItem key={item.productSeq} product={item} />
             ))
           }

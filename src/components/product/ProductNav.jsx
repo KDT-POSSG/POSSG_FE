@@ -7,11 +7,13 @@ function ProductNav({ keyword, setKeyword }) {
   const [search, setSearch] = useState("");
 
   const handleKeyword = (e) => {
-    setKeyword({...keyword, [e.target.name]: e.target.value});
-  }
 
-  const handleSearchText = (e) => {
-    setSearch(e.target.value);
+    if(e.target.name === "search") {
+      setTimeout(() => setKeyword({...keyword, [e.target.name]: e.target.value}), 300);
+    }
+    else {
+      setKeyword({...keyword, [e.target.name]: e.target.value});
+    }
   }
 
   return (
@@ -29,7 +31,6 @@ function ProductNav({ keyword, setKeyword }) {
       </div>
 
       <div className='product-nav-search'>
-        {/* <input type="text" placeholder='검색할 상품을 입력해주세요' value={search} onChange={handleSearchText} /> */}
         <input type="text" placeholder='검색할 상품을 입력해주세요' name='search' value={search} 
                 onChange={(e) => {setSearch(e.target.value); handleKeyword(e);} } />
         <button type='button' name='search' value={search} onClick={handleKeyword}>
