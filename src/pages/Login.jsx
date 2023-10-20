@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import { isAceessToken } from "store/utils/function";
 import { baseURL } from "store/apis/base";
+import logo from "../assets/svg/possg_logo.svg"
 
 function Login(){
     const navi = useNavigate();
@@ -64,7 +65,12 @@ function Login(){
     return(
         <div className="login-wrap">
         <div className="login-content-wrap">
-            <div className="login-title page-title">로그인</div>
+
+            <div className="login-logo">
+                <img src={logo} alt="POSSG 로고" width="100%" />
+            </div>
+
+            {/* <div className="login-title page-title">로그인</div> */}
             <div className="login-content">
                 <form id="loginForm" method="post" autoComplete="off" onSubmit={onSubmit}>
                     <div className="form-row">
@@ -92,9 +98,11 @@ function Login(){
                     </div>  
                 </form>
                     <div className="link-container">
-                        <Link to="/findId">아이디찾기</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to="/findPw"> 비밀번호찾기</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <Link to="/register">회원가입</Link>                        
+                        <Link to="/findId" className="login-link">아이디찾기</Link>
+                        <span className="login-bar">|</span>
+                        <Link to="/findPw" className="login-link"> 비밀번호찾기</Link>
+                        <span className="login-bar">|</span>
+                        <Link to="/register" className="login-link">회원가입</Link>  
                     </div>
             </div>            
         </div>
