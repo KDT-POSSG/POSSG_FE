@@ -3,6 +3,8 @@ import ProductNav from '../components/product/ProductNav';
 import ProductItem from '../components/product/ProductItem';
 import axios from 'axios';
 import { baseURL } from 'store/apis/base';
+import Modal from 'components/ui/Modal';
+import ProductNutrition from 'components/product/ProductNutrition';
 
 function ProductScroll() {
 
@@ -24,6 +26,25 @@ function ProductScroll() {
     convSeq: 1
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalProduct, setModalProduct] = useState({
+    productSeq: 0,
+    productName: ""
+  });
+
+  const modalOpen = (productSeq, productName) => {
+    setModalProduct({
+      ...modalProduct,
+      productSeq: productSeq,
+      productName: productName
+    });
+    setIsModalOpen(true);
+  }
+
+  const modalClose = () => {
+    setIsModalOpen(false);
+  }
+
   const getProduct = async (nowPage) => {
 
     console.log("getProduct keyword >> ", keyword);
@@ -35,7 +56,7 @@ function ProductScroll() {
           promotionInfo: keyword.promotionInfo,
           search: keyword.search,
           sortOrder: keyword.sortOrder,
-          convSeq: 2
+          convSeq: 1
         },
         headers: {
           accessToken: `Bearer ${accesstoken}`
@@ -139,7 +160,7 @@ function ProductScroll() {
         <div className='product-item-container'>
           {
             product && product.map((item) => (
-              <ProductItem key={item.productSeq} product={item} />
+              <ProductItem key={item.productSeq} product={item} modalOpen={modalOpen} />
             ))
           }
         </div>
@@ -149,6 +170,10 @@ function ProductScroll() {
         !loading &&
         <div ref={bottomRef} className='product-loading'></div>
       }
+
+      <Modal isOpen={isModalOpen} onClose={modalClose} style={{ content: { width: '25rem', height: 'auto' } }}>
+        { modalProduct && <ProductNutrition modalProduct={modalProduct} />}
+      </Modal>
 
     </div>
   )
