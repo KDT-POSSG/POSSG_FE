@@ -165,7 +165,7 @@ function Payment() {
                             products.map(product => (
                                 <div className='payment-list-row' key={product.productSeq}>
                                     <div className='payment-list-delete-container'>
-                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}><span class="material-symbols-rounded">close
+                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}><span className="material-symbols-rounded">close
                                         </span></button>
                                     </div>
                                     <div className='container'>
@@ -209,9 +209,9 @@ function Payment() {
                                 <div>비밀번호 : {pwd}</div> */}
                             </div>
                             <button className='payment-method-cash' onClick={() => {if(products.length > 0){openModal('cash')}
-                                                                                    else{toast.error('결제할 상품이 없습니다')}}}><span class="material-symbols-rounded">
-                                                                                    payments
-                                                                                    </span>현금</button>
+                                                                                    else{toast.error('결제할 상품이 없습니다')}}}>
+                                                                                    <span className="material-symbols-rounded">payments</span>
+                                                                                    <div className='cash'>현금</div></button>
                         </div>
 
                         <div className='set-usepoint-container'>
