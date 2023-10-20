@@ -37,13 +37,17 @@ import YearSales from './components/analysis/YearSales';
 import DeliveryDetail from './components/delivery/DeliveryDetail';
 import DeliveryList from './components/delivery/DeliveryList';
 import UpdateCost from './components/analysis/UpdateCost';
-import ImcomeReport from './components/analysis/ImcomeReport';
-import MonthlyImcome from './components/analysis/MonthlyImcome';
-import YearImcome from './components/analysis/YearImcome';
+import ImcomeReport from './components/analysis/CashSale';
+import MonthlyImcome from './components/analysis/MonthlyCashSale';
+import YearImcome from './components/analysis/YearCashSale';
 import { RecoilRoot } from 'recoil';
 import HomeKiosk from 'pages/HomeKiosk';
 import PosRoutes from 'components/PosRoutes';
 import ProductScroll from 'pages/ProductScroll';
+import CashSale from './components/analysis/CashSale';
+import MonthlyCashSale from './components/analysis/MonthlyCashSale';
+import DailyCashSale from 'components/analysis/DailyCashSale';
+import YearCashSale from './components/analysis/YearCashSale';
 
 function App() {
   return (
@@ -78,17 +82,18 @@ function App() {
               <Route path='/analysis' element={<Analysis />} />
               <Route path='/cost' element={<Cost />} />
               <Route path='/addCost' element={<AddCost />} />
+              <Route path='/updateCost' element={<UpdateCost />} />
               <Route path='/salesReport' element={<SalesReport />}>
                 <Route index element={<DailySales />} />
                 <Route path='daily' element={<DailySales />} />
                 <Route path='monthlySales' element={<MonthlySales />} />
                 <Route path='yearSales' element={<YearSales />} />
-              </Route>
-              <Route path='/updateCost' element={<UpdateCost />} />
-              <Route path='/imcomeReport' element={<ImcomeReport />}>
-                <Route index element={<MonthlyImcome />} />
-                <Route path='monthlyImcome' element={<MonthlyImcome />} />
-                <Route path='yearImcome' element={<YearImcome />} />
+              </Route>    
+              <Route path='/cashSale' element={<CashSale />}>
+                <Route index element={<DailyCashSale />} />
+                <Route path='dailyCashSale' element={<DailyCashSale />} />
+                <Route path='monthlyCashSale' element={<MonthlyCashSale />} />
+                <Route path='yearCashSale' element={<YearCashSale />} />
               </Route>
               <Route path='/employees' element={<Employees />}/>
               <Route path='/employeeInfo/:employeeSeq' element={<EmployeeInfo />} />
