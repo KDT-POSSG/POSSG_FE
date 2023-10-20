@@ -1,20 +1,22 @@
-.imcomeReport-content-wrap{
+.cashSale-content-wrap{
     background-color: $color-back;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 3vw 10vw;
-    min-height: 100vh;
 
-    .imcomeReport-sort-wrap{
-        width: 75%;
-        margin-left: 170px;
+    .cashSale-sort-wrap{
+        width: 80vw;
 
-        .imcomeReport-sort {
+        .cashSale-sort {
             border-radius: 1rem;
             background-color: $color-white;
             position: relative;
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             padding: 1rem 0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.875rem;
             justify-content: center;
             align-items: center;
             text-align: center;
@@ -22,11 +24,11 @@
             z-index: 0;
             border: 1px solid $color-border;
         
-            .imcomeReport-sort-active {
+            .cashSale-sort-active {
                 position: absolute;
                 background-color: $color-main;
                 border-radius: 1rem;
-                width: 50%;
+                width: 33.33%;
                 height: 100%;
                 top: 0;
                 z-index: -1;
@@ -37,17 +39,30 @@
                 left: 0;
             }
             .status-02 {
-                left: 50%;
+                left: 33.33%;
+            }
+            .status-03 {
+                left: 66.66%;
             }
     }
     
-        .imcomeReport-status {
+        .cashSale-status {
             cursor: pointer;
         }
     }
 
-    .imcomeReport-content{
+    .cashSale-content{
         width: 80vw;
         height: 100%;
     }
 }
+
+.react-datepicker__input-container input {
+    border-radius: 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    padding: 1rem 32px 1rem 8px;
+    width: 20vw;
+    text-align: center;
+}
+
