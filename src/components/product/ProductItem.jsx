@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { addComma } from '../../store/utils/function.js';
 import { promotion } from '../../store/utils/function.js';
 
-function ProductItem({ product }) {
+function ProductItem({ product, modalOpen }) {
 
   const [isPromotion, setIsPromotion] = useState(1);
 
@@ -13,7 +13,7 @@ function ProductItem({ product }) {
   }, []);
 
   return (
-    <div className='product-item'>
+    <div className='product-item' onClick={() => modalOpen(product.productSeq, product.productName)}>
 
       {
         product.stockQuantity === 0 ?
