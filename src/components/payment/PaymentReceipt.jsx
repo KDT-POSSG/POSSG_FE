@@ -5,7 +5,7 @@ import Modal from "../ui/Modal";
 import PaymentReceiptInfoModal from "./PaymentReceiptInfoModal"
 
 
-function PaymentReceipt({  closeModal, totalDiscountPrice, paymentResponse, handlePaymentSuccess }){
+function PaymentReceipt({  closeModal, totalDiscountPrice, usepoint, paymentResponse, handlePaymentSuccess }){
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalType, setModalType] = useState(null);
@@ -23,6 +23,8 @@ function PaymentReceipt({  closeModal, totalDiscountPrice, paymentResponse, hand
         setModalType('paymentreceiptmodal');
         openModal();
     }
+
+    const paymentAmount = parseInt(totalDiscountPrice) - parseInt(usepoint);
     
    
 
@@ -40,16 +42,16 @@ function PaymentReceipt({  closeModal, totalDiscountPrice, paymentResponse, hand
                 </div>
                 <div className="cashpayreceipt-body-middle">
                     <div className="cashpayreceipt-body-middle-price">결제 금액</div>
-                    <div className="cashpayreceipt-body-middle-price2">{addComma(totalDiscountPrice)} 원</div>
+                    <div className="cashpayreceipt-body-middle-price2">{addComma(paymentAmount)} 원</div>
                 </div>
                 <div className="cashpayreceipt-body-bottom">
                     <div className="cashpayreceipt-input-price">
                         <div className="cashpayreceipt-body-input-price">부가세</div>
-                        <div className="cashpayreceipt-body-input-price2">{addComma(Math.round(totalDiscountPrice*10/110))} 원</div>
+                        <div className="cashpayreceipt-body-input-price2">{addComma(Math.round(paymentAmount*10/110))} 원</div>
                     </div>
                     <div className="cashpayreceipt-change">
                         <div className="cashpayreceipt-body-change">과세 금액</div>
-                        <div className="cashpayreceipt-body-change2">{addComma(totalDiscountPrice -(Math.round(totalDiscountPrice*10/110)))} 원</div>
+                        <div className="cashpayreceipt-body-change2">{addComma(paymentAmount -(Math.round(paymentAmount*10/110)))} 원</div>
                     </div>
                 </div>
             </div>

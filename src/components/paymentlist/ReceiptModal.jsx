@@ -27,22 +27,33 @@ function ReceiptModal({ paymentlistdetail, paymentData }) {
           <div className="body1-info3">수량</div>
           <div className="body1-info4">금액</div>
         </div>
-        {paymentlistdetail.list && paymentlistdetail.list.map(item => (
+
         <div className="cashpayreceipt-body2">
-          <div className="body2-info1">{item.itemName}
-            {/* {item.itemName.length > 5 ? `${item.itemName.slice(0,5)}...` : item.itemName} */}
+          {paymentlistdetail.list && paymentlistdetail.list.map(item => (
+          <div className="cashpayreceipt-body2-list">
+            <div className="body2-info1">{item.itemName}            </div>
+            <div className="body2-info2">{addComma(item.price)}</div>
+            <div className="body2-info3">{item.qty}</div>
+            <div className="body2-info4">{addComma(item.price * item.qty)}</div>
           </div>
-          <div className="body2-info2">{addComma(item.price)}</div>
-          <div className="body2-info3">{item.qty}</div>
-          <div className="body2-info4">{addComma(item.price * item.qty)}</div>
+          ))}
         </div>
-        ))}
+
+
         {paymentlistdetail.param && (
         <>
+
         <div className="cashpayreceipt-body3">
-          <div className="body3-info1">합계 금액</div>
-          <div className="body3-info2">{addComma(paymentlistdetail.param.price)}</div>
+          <div className="body3-totalprice">
+            <div className="body3-info">총 상품 금액</div>
+            <div className="body3-info">{addComma(paymentlistdetail.param.price + paymentlistdetail.param.usePoint)}</div>
+          </div>
+          <div className="body3-totalprice">
+            <div className="body3-point">포인트</div>
+            <div className="body3-point">-{addComma(paymentlistdetail.param.usePoint)}</div>
+          </div>
         </div>
+
         <div className="cashpayreceipt-body4">
           <div className="body4-top">
             <div className="body4-info1">과세 금액</div>
@@ -53,10 +64,12 @@ function ReceiptModal({ paymentlistdetail, paymentData }) {
             <div className="body4-info2">{addComma(Math.round(paymentlistdetail.param.price*10/110))}</div>
           </div>   
         </div>
+
         <div className="cashpayreceipt-body5">
-          <div className="body5-info1">현금 결제</div>
-          <div className="body5-info2">{addComma(paymentlistdetail.param.price)}</div>
+          <div className="body5-info">총 결제 금액</div>
+          <div className="body5-info">{addComma(paymentlistdetail.param.price)}</div>
         </div>
+
         <div className="cashpayreceipt-footer">
           <div className="payment-type">[결제구분] {paymentlistdetail.param.method}</div>
           <div className="payment-num">[승인번호] {paymentlistdetail.param.receiptId}</div>
@@ -71,11 +84,12 @@ function ReceiptModal({ paymentlistdetail, paymentData }) {
       ) : (
 
       <div className="payreceipt">
-      <iframe className="payreceipt-iframe"
-        src={paymentlistdetail.param.receiptUrl}
-        width="100%"
-        height="790px">
-      </iframe>
+        <iframe className="payreceipt-iframe"
+          src={paymentlistdetail.param.receiptUrl}
+          width="100%"
+          height="790px"
+          >
+        </iframe>
       </div>
       
       )}

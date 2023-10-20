@@ -104,13 +104,14 @@
     }
     
     .cashpayreceipt-header{
-        border-bottom: 1px solid $color-border;
-        border-style: dashed;
-        margin-top: 1.5rem;
+        border-top: 2px solid $color-main;
+        border-bottom: 2px solid $color-border;
+        margin-top: 1rem;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-        padding-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        padding-top: 1rem;
         .branch-info{
             display: flex;
             justify-content: space-between;
@@ -129,24 +130,30 @@
     }
 
     .cashpayreceipt-body2{
-        text-align: center;
         border-bottom: 2px solid $color-border;
         border-style: dashed;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        padding: 0.5rem 0;
-        .body2-info1{
-            width: 120px;
-            
+        .cashpayreceipt-body2-list{
+            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            padding: 0.2rem 0;
+            .body2-info1{
+            }
         }
     }
 
     .cashpayreceipt-body3{
         border-bottom: 2px solid $color-border;
-        border-style: dashed;
-        display: flex;
-        justify-content: space-between;
-        padding: 0.5rem 2.7rem 0.5rem 0.5rem;
+        .body3-totalprice{
+            border-style: dashed;
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 2.7rem 0.3rem 0.5rem;
+
+            .body3-info{
+                font-weight: 600;
+            }
+        }
     }
 
     .cashpayreceipt-body4{
@@ -168,6 +175,9 @@
         display: flex;
         justify-content: space-between;
         padding: 0.5rem 2.7rem 0.5rem 0.5rem;
+        .body5-info{
+            font-weight: 600;
+        }
     }
 
     .cashpayreceipt-footer{
@@ -181,26 +191,34 @@
 
     .cashpayreceipt-footer2{
         padding-top: 0.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid $color-main;
     }
 
-    .cashpayreceipt-btn-container{
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        .cashpayreceipt-btn{
-            background-color: $color-white;
-            color: $color-main;
-            font-size: 1rem;
-            border: 1px solid $color-main;
-            border-radius: 2rem;
-            padding: 0.25rem 1rem;
-            transition: $transition-cb2;
-            width: 10rem;
-            height: 2.5rem;
-            &:hover {
-                background-color: $color-main;
-                color: $color-white;
-              }
-        }
+    // .cashpayreceipt-btn-container{
+    //     display: flex;
+    //     justify-content: center;
+    //     margin-top: 1rem;
+    //     .cashpayreceipt-btn{
+    //         background-color: $color-white;
+    //         color: $color-main;
+    //         font-size: 1rem;
+    //         border: 1px solid $color-main;
+    //         border-radius: 2rem;
+    //         padding: 0.25rem 1rem;
+    //         transition: $transition-cb2;
+    //         width: 10rem;
+    //         height: 2.5rem;
+    //         &:hover {
+    //             background-color: $color-main;
+    //             color: $color-white;
+    //           }
+    //     }
+    // }
+}
+
+.payreceipt{
+    iframe{
+        
     }
 }

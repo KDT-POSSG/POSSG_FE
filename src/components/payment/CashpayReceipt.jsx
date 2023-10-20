@@ -5,7 +5,7 @@ import { useState } from "react";
 import ReceiptModal from "components/paymentlist/ReceiptModal";
 import CashpayReceiptInfoModal from "./CashPayReceiptInfoModal";
 
-function CashpayReceipt({ openModal, closeModal, inputValue, changeAmount, totalDiscountPrice, handlePaymentSuccess, paymentData}){
+function CashpayReceipt({ openModal, closeModal, inputValue, changeAmount, totalDiscountPrice, handlePaymentSuccess, usepoint}){
 
     const handlePaymentComplete = () => {
         handlePaymentSuccess();
@@ -30,7 +30,7 @@ function CashpayReceipt({ openModal, closeModal, inputValue, changeAmount, total
                 </div>
                 <div className="cashpayreceipt-body-middle">
                     <div className="cashpayreceipt-body-middle-price">결제 금액</div>
-                    <div className="cashpayreceipt-body-middle-price2">{addComma(totalDiscountPrice)} 원</div>
+                    <div className="cashpayreceipt-body-middle-price2">{addComma(parseInt(totalDiscountPrice) - parseInt(usepoint))} 원</div>
                 </div>
                 <div className="cashpayreceipt-body-bottom">
                     <div className="cashpayreceipt-input-price">

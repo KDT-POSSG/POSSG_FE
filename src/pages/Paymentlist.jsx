@@ -109,8 +109,21 @@ function Paymentlist()  {
                             <div className="body"> 
                                 <div className="paymentlist-information-header-price">총 결제 금액</div>
                                 <div className="paymentlist-information-header-price2">{addComma(paymentlistdetail.param.price)} 원</div>
+                                <div className="paymentlist-discountinfo-container-1">
+                                    <div className="paymentlist-discountinfo-1">총 상품 금액</div>
+                                    <div className="paymentlist-discountinfo-2">{addComma(paymentlistdetail.param.price + paymentlistdetail.param.usePoint)} 원</div>
+                                </div>
+                                {paymentlistdetail.param.usePoint == 0 ? (
+                                <div className="paymentlist-discountinfo-container-1">
+                                </div>
+                                ) : (
+                                <div className="paymentlist-discountinfo-container-1">
+                                    <div className="paymentlist-discountinfo-1">포인트</div>
+                                    <div className="paymentlist-discountinfo-2">- {addComma(paymentlistdetail.param.usePoint)} P</div>
+                                </div>
+                                )}
+                                
                             </div>
-                            <hr/>
                             {paymentlistdetail.param.del === '결제 취소' ? (
                                 <div className="paymentlist-information-body">
                                     <button className="paymentlist-information-body-refundbtn">환불 완료</button>
@@ -175,7 +188,7 @@ function Paymentlist()  {
                 
             </div>
         
-        <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{width:'40%', height:'auto', backgroundColor:'#fff', maxHeight:'40rem'  } }}>
+        <Modal isOpen={modalIsOpen} onClose={closeModal} style={{ content:{width:'40%', height:'auto', backgroundColor:'#fff', maxHeight:'53rem',  } }}>
                 {paymentlistType === 'refund' &&
                 <RefundModal 
                     paymentlistdetail={paymentlistdetail}

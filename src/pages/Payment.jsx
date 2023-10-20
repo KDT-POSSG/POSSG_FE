@@ -2,8 +2,6 @@ import React, { useState, useRef} from 'react';
 import axios from 'axios';
 import Modal from '../components/ui/Modal';
 import Cashpay from '../components/payment/Cashpay'
-import Etcpay from '../components/payment/Etcpay'
-import Discount from '../components/payment/Discount'
 import Point from '../components/payment/Point'
 import CashpayReceipt from '../components/payment/CashpayReceipt';
 import PaymentReceipt from 'components/payment/PaymentReceipt';
@@ -16,18 +14,24 @@ import { toast } from 'react-hot-toast';
 
 
 function Payment() {
+    
+    const accesstoken = localStorage.getItem("accesstoken");
+    const convSeq = localStorage.getItem("convSeq");
+    const barcodeInputRef = useRef(null);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [paymentType, setPaymentType] = useState(null);
+    const [pointType, setPointType] = useState(null);
     const [paymentResponse, setPaymentResponse] = useState(null);
     const [barcodeInput, setBarcodeInput] = useState("");
     const [products, setProducts] = useState([]);
     const [inputValue, setInputValue] = useState("");
     const [changeAmount, setChangeAmount] = useState(0);
-    const barcodeInputRef = useRef(null);
-    const accesstoken = localStorage.getItem("accesstoken");
-    const convSeq = localStorage.getItem("convSeq");
-    const [usepoint, setUsePoint] = useState(0);
     const [paymentData, setPaymentData] = useState(null);
+    const [usepoint, setUsePoint] = useState(0);
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [remainingPoint, setRemainingPoint] = useState('');
+    const [pwdChecked, setPwdChecked] = useState(false);
 
     // input에 바코드가 제대로 입력됐는지 확인
     const handleBarcode = () => {
@@ -66,7 +70,7 @@ function Payment() {
     // 총 할인 결제 금액 계산
     const getTotalDiscountPrice = () => {
         return products.reduce((total, product) => {
-            return total + (product.priceDiscount) * product.amount - usepoint;
+            return total + (product.priceDiscount) * product.amount;
         }, 0);
     };
     // 총 원가 결제 금액 계산
@@ -82,7 +86,9 @@ function Payment() {
         try {
             const totalOriginalPrice = getTotalOriginalPrice();
             const totalDiscountPrice = getTotalDiscountPrice();
-            await handlePayment(pgType, totalOriginalPrice, totalDiscountPrice, products, setPaymentResponse, openModal);
+            
+            await handlePayment(pgType, totalOriginalPrice, totalDiscountPrice, products, usepoint, phoneNumber, pwd,
+                                setPaymentResponse, openModal);
         } catch (error) {
             console.error("Payment failed:", error);
         }
@@ -92,6 +98,9 @@ function Payment() {
         setProducts([]);
         setInputValue("");
         setChangeAmount(0);
+        setUsePoint(0);
+        setPwd('');
+        setPhoneNumber('');
     };
     
 
@@ -100,7 +109,8 @@ function Payment() {
         setPaymentType(type);
         setModalIsOpen(true);
        };
-    const closeModal = () => {
+    const closeModal = (type) => {
+        setPointType(type);
         setModalIsOpen(false);
         if(paymentType === 'cashpayreceipt' || paymentType === 'paymentreceipt' || paymentType === 'cashpayreceiptinfomodal') {
             handlePaymentSuccess();
@@ -115,26 +125,18 @@ function Payment() {
     const getModalStyle = () => {
         if (paymentType === 'cashpayreceipt' || paymentType === 'paymentreceipt') {
             return {
-                content: {
-                    padding: '1.5rem',
-                    width: '500px',
-                },
-            };
-        }
+                content: { padding: '1.5rem', width: '500px' },
+            };}
         else if (paymentType === 'cashpayreceiptinfomodal') {
             return {
-                content: {
-                    width: '40%',
-                    height: 'auto',
-                    backgroundColor:'#fff',
-                    maxHeight:'40rem'
-                }
-            };
-        }
+                content: { width: '40%', height: 'auto', backgroundColor:'#fff', maxHeight:'40rem' }
+            };}
+        else if (paymentType === 'point') {
+            return {
+                content: { height : '70%' }
+            };}
         return {
-            content: {
-                padding: '1.5rem',
-            },
+            content: { padding: '1.5rem', },
         };
     };
 
@@ -154,14 +156,16 @@ function Payment() {
                     <div className='payment-list-list'>
                     {products.length === 0 ? (
                         <div className='payment-list-empty-container'>
-                            <span className="material-symbols-rounded">barcode</span>
+                            {/* <span className="material-symbols-rounded">barcode_scanner</span> */}
+                            <span className="material-symbols-rounded">barcode_reader</span>
+                            {/* <span className="material-symbols-rounded">barcode</span> */}
                             <div className='payment-list-empty'>바코드를 스캔해주세요</div>
                         </div>
                         ) : (
                             products.map(product => (
                                 <div className='payment-list-row' key={product.productSeq}>
                                     <div className='payment-list-delete-container'>
-                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}><span class="material-symbols-rounded">close
+                                        <button className='payment-list-delete tossface' onClick={() => handleDeleteProduct(product.productSeq)}><span className="material-symbols-rounded">close
                                         </span></button>
                                     </div>
                                     <div className='container'>
@@ -199,20 +203,39 @@ function Payment() {
                         <div className='payment-total'>결제 금액</div>
                         <div className='payment-total-container'>
                             <div className='payment-total-price'>
-                                <div className='payment-total-price1'>{addComma(getTotalDiscountPrice())} 원</div>
+                                <div className='payment-total-price1'>{addComma(getTotalDiscountPrice() - usepoint)} 원</div>
                                 <div className='payment-total-price2'>포인트 사용 {addComma(usepoint)} P</div>
+                                {/* <div>사용자 : {phoneNumber}</div>
+                                <div>비밀번호 : {pwd}</div> */}
                             </div>
-                            <button className='payment-method-cash' onClick={() => openModal('cash')}>현금 결제</button>
+                            <button className='payment-method-cash' onClick={() => {if(products.length > 0){openModal('cash')}
+                                                                                    else{toast.error('결제할 상품이 없습니다')}}}>
+                                                                                    <span className="material-symbols-rounded">payments</span>
+                                                                                    <div className='cash'>현금</div></button>
                         </div>
+
+                        <div className='set-usepoint-container'>
+                            <button className='set-usepoint-btn' onClick={() => {setUsePoint(0)}}>포인트 초기화</button>
+                        </div>
+
                         <div className='payment-method-container2'>
                             {/* <div className='payment-method-top'>
                                 <button className='payment-method-discount' onClick={() => openModal('discount')}>X</button>
                                 <button className='payment-method-point' onClick={() => openModal('point')}>X</button>
                             </div> */}
                             <div className='payment-method-bottom'>
-                                <button className='payment-method-tosspay' onClick={() => startPayment("토스")}>카드 결제</button>
-                                <button className='payment-method-kakaopay' onClick={() => startPayment("카카오")}>카카오페이 결제</button>
-                                <button className='payment-method-etcpay' onClick={() => openModal('point')}>포인트</button>
+                                <button className='payment-method-tosspay' onClick={() => { if(products.length > 0){startPayment("토스")}
+                                                                                            else{toast.error('결제할 상품이 없습니다')}}}>
+                                                                                                <span className="material-symbols-rounded">credit_card</span>
+                                                                                                <div className='card'>카드</div></button>
+                                <button className='payment-method-kakaopay' onClick={() => { if(products.length > 0){startPayment("카카오")}
+                                                                                            else{toast.error('결제할 상품이 없습니다')}}}>
+                                                                                                <span className="material-symbols-rounded">qr_code_2</span>
+                                                                                                <div className='kakao'>카카오페이</div></button>
+                                <button className='payment-method-point' onClick={() => { if(products.length > 0){openModal('point')}
+                                                                                            else{toast.error('결제할 상품이 없습니다')}}}>
+                                                                                                <span className="material-symbols-rounded">local_parking</span>
+                                                                                                <div className='point'>포인트</div></button>
                             </div>
                         </div>
                     </div>
@@ -233,6 +256,8 @@ function Payment() {
                 changeAmount={changeAmount}
                 setChangeAmount={setChangeAmount}
                 setPaymentData={setPaymentData}
+                usepoint={usepoint}
+                phoneNumber={phoneNumber}
                 />}
             {paymentType === 'cashpayreceipt' && 
                 <CashpayReceipt 
@@ -243,6 +268,7 @@ function Payment() {
                 changeAmount={changeAmount}
                 handlePaymentSuccess={handlePaymentSuccess}
                 paymentData={paymentData}
+                usepoint={usepoint}
                 />} 
             {paymentType === 'paymentreceipt' && 
                 <PaymentReceipt
@@ -251,6 +277,7 @@ function Payment() {
                 totalDiscountPrice={getTotalDiscountPrice()}
                 handlePaymentSuccess={handlePaymentSuccess}
                 paymentResponse={paymentResponse}
+                usepoint={usepoint}
                 />}
             {paymentType === 'cashpayreceiptinfomodal' && 
                 <CashpayReceiptInfoModal 
@@ -260,8 +287,20 @@ function Payment() {
                 />}
             {paymentType === 'point' && 
                 <Point 
+                closeModal={closeModal}
                 usepoint={usepoint}
                 setUsePoint={setUsePoint}
+                phoneNumber={phoneNumber}
+                setPhoneNumber={setPhoneNumber}
+                pwd={pwd}
+                setPwd={setPwd}
+                remainingPoint={remainingPoint}
+                setRemainingPoint={setRemainingPoint}
+                pointType={pointType}
+                setPointType={setPointType}
+                totalDiscountPrice={getTotalDiscountPrice()}
+                setPwdChecked={setPwdChecked}
+                pwdChecked={pwdChecked}
                 />}
         </Modal>
 
