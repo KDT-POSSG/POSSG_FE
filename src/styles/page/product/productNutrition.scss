@@ -1,0 +1,84 @@
+.product-nutrition-modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  padding-bottom: 2rem;
+
+  .product-nutrition-modal {
+    width: 100%;
+    height: 100%;
+
+    .nutrition-none {
+      // background-color: red;
+      text-align: center;
+      padding: 2rem 0;
+
+      .nutrition-none-icon {
+        font-size: 5rem;
+      }
+    }
+
+    .nutrition-product {
+      font-weight: bold;
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      // padding-left: 1rem;
+      text-align: center;
+    }
+
+    .nutrition-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $color-main;
+      padding: 0.75rem 1rem;
+      border-radius: 1rem 1rem 0 0;
+
+      .nutrition-title-left {
+        color: $color-white;
+        // font-weight: bold;
+        font-size: 1.25rem;
+      }
+
+      .nutrition-title-right {
+        text-align: right;
+        font-size: 14px;
+        line-height: 1.2;
+
+        > div {
+          color: $color-white;
+        }
+      }
+    }
+
+    .nutrition-content-container {
+
+      .nutrition-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: .625rem 1rem;
+        border-bottom: 1px solid rgba($color-gray, 0.5);
+        // border-top: none;
+
+        div {
+          // border: 1px solid blue;
+        }
+
+        .nutrition-content-title {
+          // font-weight: bold;
+        }
+
+        .nutrition-content-value {
+          text-align: right;
+        }
+      }
+
+      .nutrition-content-bottom {
+        height: 1rem;
+        background-color: $color-main;
+      }
+    }
+  }
+}
