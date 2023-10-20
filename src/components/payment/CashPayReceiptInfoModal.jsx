@@ -52,21 +52,27 @@ function CashpayReceiptInfoModal({ paymentData, handlePaymentSuccess, closeModal
           <div className="body1-info3">수량</div>
           <div className="body1-info4">금액</div>
         </div>
-        {paymentdetail.list && paymentdetail.list.map(item => (
         <div className="cashpayreceipt-body2">
-          <div className="body2-info1">{item.itemName}
-            {/* {item.itemName.length > 5 ? `${item.itemName.slice(0,5)}...` : item.itemName} */}
+          {paymentdetail.list && paymentdetail.list.map(item => (
+          <div className="cashpayreceipt-body2-list">
+            <div className="body2-info1">{item.itemName}            </div>
+            <div className="body2-info2">{addComma(item.price)}</div>
+            <div className="body2-info3">{item.qty}</div>
+            <div className="body2-info4">{addComma(item.price * item.qty)}</div>
           </div>
-          <div className="body2-info2">{addComma(item.price)}</div>
-          <div className="body2-info3">{item.qty}</div>
-          <div className="body2-info4">{addComma(item.price * item.qty)}</div>
+          ))}
         </div>
-        ))}
         {paymentdetail.param && (
         <>
         <div className="cashpayreceipt-body3">
-          <div className="body3-info1">합계 금액</div>
-          <div className="body3-info2">{addComma(paymentdetail.param.price)}</div>
+          <div className="body3-totalprice">
+            <div className="body3-info">총 상품 금액</div>
+            <div className="body3-info">{addComma(paymentdetail.param.price + paymentdetail.param.usePoint)}</div>
+          </div>
+          <div className="body3-totalprice">
+            <div className="body3-point">포인트</div>
+            <div className="body3-point">-{addComma(paymentdetail.param.usePoint)}</div>
+          </div>
         </div>
         <div className="cashpayreceipt-body4">
           <div className="body4-top">
@@ -79,8 +85,8 @@ function CashpayReceiptInfoModal({ paymentData, handlePaymentSuccess, closeModal
           </div>   
         </div>
         <div className="cashpayreceipt-body5">
-          <div className="body5-info1">현금 결제</div>
-          <div className="body5-info2">{addComma(paymentdetail.param.price)}</div>
+          <div className="body5-info">총 결제 금액</div>
+          <div className="body5-info">{addComma(paymentdetail.param.price)}</div>
         </div>
         <div className="cashpayreceipt-footer">
           <div className="payment-type">[결제구분] {paymentdetail.param.method}</div>
@@ -91,10 +97,7 @@ function CashpayReceiptInfoModal({ paymentData, handlePaymentSuccess, closeModal
         <div className="cashpayreceipt-footer2">
           <div className="call-number">전화 : 국번없이 126</div>
         </div>
-
-        <div className="cashpayreceipt-btn-container">
-            <button className="cashpayreceipt-btn"  onClick={handlePaymentComplete}>확인</button>
-        </div>
+        
       </div>
     );
 }

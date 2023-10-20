@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from "react-hot-toast";
 import { addComma } from "store/utils/function";
 
-function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, totalOriginalPrice, totalDiscountPrice, products, setPaymentData }) {
+function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmount, setChangeAmount, usepoint, phoneNumber, totalOriginalPrice, totalDiscountPrice, products, setPaymentData }) {
  
   const convSeq = localStorage.getItem("convSeq");
   const accesstoken = localStorage.getItem("accesstoken");
@@ -13,7 +13,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
   const handleInputValueChange = (value) => {
       setInputValue(value); 
       const receivedAmount = parseInt(value, 10); 
-      const change = receivedAmount - totalDiscountPrice; 
+      const change = receivedAmount - totalDiscountPrice + parseInt(usepoint); 
       if (change >= 0) {
           setChangeAmount(change); 
       } else {
@@ -49,12 +49,15 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
     pg: "현금",
     method: "현금",
     discountInfo: products.length > 0 ? products[0].promotionInfo : '',
-    price: totalDiscountPrice.toString(),
+    price: totalDiscountPrice.toString() - usepoint.toString(),
     originalPrice: totalOriginalPrice.toString(),
     purchasedAt: kstDate,
     receiptUrl: "",
     cardNum: '',
     cardCompany: '',
+    ptPhoneNum : phoneNumber,
+    usePoint : usepoint,
+    earnedPoint : parseInt(totalDiscountPrice * 0.05)
   };
 
   //전송될 현금 결제 상품 매핑
@@ -69,12 +72,14 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
 
   //수행되는 결제 함수, 완료 후 영수증 모달창 열고, payment 컴포넌트에게 받은 금액, 거스름 돈 전달
   const handlePayment = async () => {
+    console.log(totalDiscountPrice);
+    console.log(parseInt(inputValue));
     try {
       if(paymentData.price === "0") {
         toast.error("결제할 상품이 없습니다");
         return;
       }
-      else if(totalDiscountPrice > inputValue) {
+      else if((totalDiscountPrice - parseInt(usepoint)) > parseInt(inputValue)) {
         toast.error("받은 금액을 확인해주세요");
         return;
       }
@@ -85,7 +90,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
         setPaymentData(paymentData);
         console.log(paymentData)
         
-        if(response.data === "YES") {
+        if(response.data === "POINT YES" || response.data === "YES") {
             const itemResponse = await axios.post('http://54.180.60.149:3000/addItems', items, {
               headers: { accessToken: `Bearer ${accesstoken}`,}
             });
@@ -118,7 +123,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
 
               <div className="cashpaymodal-info-price">
                 <div className="cashpaymodal-price">결제 금액</div>
-                <div className="cashpaymodal-price2">{addComma(totalDiscountPrice)} 원</div>
+                <div className="cashpaymodal-price2">{addComma(parseInt(totalDiscountPrice) - parseInt(usepoint))} 원</div>
               </div>
               <div className="cashpaymodal-input-price">받은 금액</div>
               <input className="cashpaymodal-input-price2" value={addComma(inputValue)} readOnly placeholder={`${addComma(totalDiscountPrice)} 원`}/>

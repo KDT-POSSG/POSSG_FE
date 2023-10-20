@@ -3,14 +3,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import NumberPad from "components/ui/NumberPad";
 
-function RegisterPoint({ openModal, closeModal, phoneNumber, setResponse}){
+function RegisterPoint({ phoneNumber, setResponse, setRemainingPoint, closeModal}){
     const [pwd, setPwd] = useState('');
     const accesstoken = localStorage.getItem("accesstoken");
+    
+    
     const handleInputValueChange = (value) => {
         setPwd(value);
       };
-
-
 
     const handleRegiPoint = () => {
         if (pwd.length !== 4) {
@@ -30,9 +30,18 @@ function RegisterPoint({ openModal, closeModal, phoneNumber, setResponse}){
             if (response.data === 'YES'){
                 toast.success("가입 완료");
                 setResponse('YES');
-                closeModal();
+                closeModal('registerpoint');
                 setResponse('ALREADY REGISTER');
-            }
+                axios.get('http://54.180.60.149:3000/checkNumPoint', {params : {phoneNumber : phoneNumber}, 
+                headers:{ accessToken: `Bearer ${accesstoken}`}})
+                .then(response => {
+                console.log(response.data);
+                setRemainingPoint(response.data.toString());
+                })
+                .catch(error => {
+                console.log('실패', error);
+                });
+                }
         })
         .catch(error => {
             console.log('데이터 전송 실패', error);
