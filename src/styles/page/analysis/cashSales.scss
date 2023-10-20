@@ -1,0 +1,165 @@
+.cashSales-content-wrap{
+    background-color: $color-back;
+    width: 80vw;
+
+    .cashSales-nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.875rem;
+
+        .cashSales-title {
+            text-align: center;
+        }
+
+        .cashSales-calendar-container{
+            position: relative;
+            
+            .material-symbols-rounded{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                left: 10px;
+                color: $color-main;
+            }
+            .calendar-button{
+                position: absolute;
+                padding: 10px 20px;
+                top: 7px;
+                right: 5px;
+                background-color: $color-main;
+                color: $color-white;
+                border-radius: 1rem;
+            }
+        }
+    }
+
+    .cashSales-content{
+        padding: 20px 0;
+
+        .cashSales-data-container{
+            margin: 0 auto;
+            background-color: $color-white;
+            border-radius: 1rem;
+            filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-row-gap: 2rem;
+            grid-column-gap: 2rem;
+            
+            .cashSales-data{
+                padding: 30px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+
+                .cashSales-data-title{
+                    margin-bottom: 1.25rem;
+                    padding: 0 50px;     
+                }
+
+                .cashSales-data-amount{
+                    font-size: 20px;
+                    font-weight: bold; 
+                }
+                .cashSales-data-increaseRate{
+                    position: absolute;
+                    bottom: 140px;
+                    padding: 5px 10px;
+                    border-radius: 12px;
+                    
+                }
+                .cashSales-data-increaseRate.positive-increase {
+                    border: 1px solid rgba($color-red, $alpha: 0.5);
+                    color: $color-red;
+                }
+                
+                .cashSales-data-increaseRate.zero-increase {
+                    border: 1px solid rgba($color-gray, $alpha: 0.5);
+                    color: $color-gray;
+                }
+                
+                .cashSales-data-increaseRate.negative-increase {
+                    border: 1px solid rgba(rgba(49, 49, 246), $alpha: 0.5);
+                    color: rgba(49, 49, 246);
+                }
+            }
+        }
+
+        .cashSales-no-datas{
+            padding: 4rem;
+            background-color: $color-white;
+            border-radius: 1rem;
+            filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+            margin: 30px 0px;
+            padding: 30px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            p{
+                color: $color-red;
+            }
+
+            .material-symbols-rounded{
+                color: $color-red;
+            }
+            
+        }
+
+        .cashSales-chart-datas{
+            padding: 4rem;
+            background-color: $color-white;
+            border-radius: 1rem;
+            filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
+            margin: 30px 0px;
+            padding: 30px 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            align-content: center;
+            .cashSales-chart{
+            }
+            .cashSales-datas-container{
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                grid-row-gap: 1rem;
+                grid-column-gap: 4rem;               
+                
+                .cashSales-datas{
+                    padding: 20px 20px;
+
+                    .cashSales-datas-title{
+                        margin-bottom: 1.25rem;
+                    }
+
+                    .cashSales-datas-amount{
+                        font-size: 20px;
+                        font-weight: bold;
+                        color: $color-point; 
+
+                    }
+                }
+            }
+        }
+    }
+
+    .cashSales-date-message{
+        text-align: center;
+        background-color: $color-white;
+        border-radius: 1rem;
+        padding: 10vw 2vw;
+        filter: drop-shadow(2px 2px 4px rgba(235, 235, 235, 0.8));
+
+        .select-icon{
+            font-size: 5rem;
+        }
+
+        .select-date-text {
+            margin-top: 1rem;
+            line-height: 1.2;
+        }
+    }
+}

@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { baseURL } from "store/apis/base";
 import Calendar from "./Calendar";
 
-function YearImcome(){
+function YearCashSale(){
     const accesstoken = localStorage.getItem("accesstoken");
     
     const [selectedDate, setSelectedDate] = useState(null);
@@ -109,4 +109,4 @@ function YearImcome(){
         </div>
     )
 }
-export default YearImcome;
+export default YearCashSale;
