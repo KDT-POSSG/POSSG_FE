@@ -46,9 +46,10 @@ function Stock() {
 
   return (
     <div className='stock-page'>
+
+      <div className='page-title stock-page-title'>재고 관리</div>
       
       <div className='stock-top'>
-        <div className='page-title stock-page-title'>재고 관리</div>
         <StockNav search={search} setSearch={setSearch} filter={filter} setFilter={setFilter} setPage={setPage} />
       </div>
 

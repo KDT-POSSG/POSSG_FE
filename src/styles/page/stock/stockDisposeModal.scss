@@ -1,0 +1,32 @@
+.stock-dispose-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  padding-top: 2.5rem;
+
+  .dispose-title {
+    font-weight: bold;
+  }
+
+  .dispose-input {
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    transition: $transition-cb2;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+    width: 16rem;
+
+    &::placeholder {
+      opacity: 0.8;
+    }
+
+    &:focus {
+      border: 1px solid $color-main;
+    }
+  }
+}
