@@ -83,17 +83,26 @@
                 }
             }
             .payment-list-result{
-                // height: 10.75rem;
-                display: flex;
-                justify-content: space-between;
-                padding: 2rem;
-                font-weight: bold;
-                font-size: 1.2rem;
-                .payment-list-total{
-                    
+                .payment-list-total-container{
+                    // height: 10.75rem;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 1.5rem 2rem;
+                    font-weight: bold;
+                    font-size: 1.2rem;
                 }
-                .payment-list-total2{
 
+                .payment-list-discount-container{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 2rem 2rem 1rem 2rem;
+                    font-size: 1rem;
+                    .payment-list-discount1{
+                        color: $color-point;
+                    }
+                    .payment-list-discount2{
+                        color: $color-point;
+                    }
                 }
             }
         }
