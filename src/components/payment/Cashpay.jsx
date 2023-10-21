@@ -55,7 +55,7 @@ function Cashpay({ openModal, closeModal, inputValue, setInputValue, changeAmoun
     receiptUrl: "",
     cardNum: '',
     cardCompany: '',
-    ptPhoneNum : phoneNumber,
+    ptPhoneNum : phoneNumber === "" ? "0" : phoneNumber,
     usePoint : usepoint,
     earnedPoint : parseInt(totalDiscountPrice * 0.05)
   };

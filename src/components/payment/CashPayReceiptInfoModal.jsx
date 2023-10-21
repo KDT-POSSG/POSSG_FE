@@ -69,10 +69,11 @@ function CashpayReceiptInfoModal({ paymentData, handlePaymentSuccess, closeModal
             <div className="body3-info">총 상품 금액</div>
             <div className="body3-info">{addComma(paymentdetail.param.price + paymentdetail.param.usePoint)}</div>
           </div>
+          {paymentdetail.param.usePoint !== 0 && (
           <div className="body3-totalprice">
             <div className="body3-point">포인트</div>
             <div className="body3-point">-{addComma(paymentdetail.param.usePoint)}</div>
-          </div>
+          </div>)}
         </div>
         <div className="cashpayreceipt-body4">
           <div className="body4-top">

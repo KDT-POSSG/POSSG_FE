@@ -50,8 +50,8 @@ import toast from 'react-hot-toast';
         user: {
           id: "Jeong Jae Won",
           username: "정재원",
-          phone: "01012345678",
-          email: "qwer@naver.com"
+          phone: "01056852833",
+          email: "412896@naver.com"
         },
         // 아이템이 JSON으로 담기면 됨. id는 product_id 써야할듯, qty price 맞아야함 
         extra: {
@@ -79,7 +79,7 @@ import toast from 'react-hot-toast';
           receiptUrl: response.data.receipt_url,
           cardNum: response.data.card_data ? response.data.card_data.card_no : null, // card_data가 존재하면 card_approve_no를 사용, 아니면 null
           cardCompany: response.data.card_data ? response.data.card_data.card_company : null,
-          ptPhoneNum : phoneNumber,
+          ptPhoneNum : phoneNumber === "" ? "0" : phoneNumber,
           usePoint : usepoint,
           earnedPoint : parseInt(response.data.price * 0.01)
         };
