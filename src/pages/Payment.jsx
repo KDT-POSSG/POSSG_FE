@@ -38,24 +38,27 @@ function Payment() {
   const handleBarcode = () => {
     const barcodeInput = barcodeInputRef.current.value;
     if (!barcodeInput) {
-      toast.error("바코드 스캔 실패");
+      toast.error("바코드 스캔를 스캔해주세요");
       return;
     }
     axios
-      .get("http://54.180.60.149:3000/findProductBarcode", {
-        params: { Barcode: barcodeInput, convSeq: convSeq },
-        headers: { accessToken: `Bearer ${accesstoken}` },
-      })
+      .get("http://54.180.60.149:3000/findProductBarcode", {params: { Barcode: barcodeInput, convSeq: convSeq },
+        headers: { accessToken: `Bearer ${accesstoken}` }})
       .then((res) => {
         const productData = res.data;
         const existingProduct = products.find(
           (p) => p.productSeq === productData.productSeq
         );
+        if(res.data === ""){
+          toast.error("유통기한이 만료되었습니다");
+          return;
+        }
         //현재 상품의 시퀀스와 들어오는 상품의 시퀀스가 같으면 상품의 수량을 1개씩 더해줌
-        if (existingProduct) {
+        else if (existingProduct) {
           setProducts((prevProducts) => {
             return prevProducts.map((p) => {
               if (p.productSeq === productData.productSeq) {
+                console.log(p.amount);
                 return { ...p, amount: p.amount + 1 };
               }
               return p;
@@ -74,7 +77,7 @@ function Payment() {
     setBarcodeInput("");
   };
 
-  // 총 할인 결제 금액 계산
+  // 총 할인된 결제 금액 계산
   const getTotalDiscountPrice = () => {
     return products.reduce((total, product) => {
       return total + product.priceDiscount * product.amount;
@@ -84,6 +87,13 @@ function Payment() {
   const getTotalOriginalPrice = () => {
     return products.reduce((total, product) => {
       return total + product.price * product.amount;
+    }, 0);
+  };
+  // 얼만큼 할인됐는지 금액 계산
+  const getTotalDiscountAmount = () => {
+    return products.reduce((total, product) => {
+      const discountAmountForProduct = (product.price - product.priceDiscount) * product.amount;
+      return total + discountAmountForProduct; 
     }, 0);
   };
 
@@ -144,6 +154,7 @@ function Payment() {
     
   };
 
+  //상품 목록에서 상품 삭제
   const handleDeleteProduct = (productSeq) => {
     setProducts((prevProducts) =>
       prevProducts.filter((product) => product.productSeq !== productSeq)
@@ -268,11 +279,19 @@ function Payment() {
           </div>
 
           <div className="payment-list-result">
-            <div className="payment-list-total">총액</div>
-            <div className="payment-list-total2">
-              {addComma(getTotalDiscountPrice())} 원
+            
+            <div className="payment-list-discount-container">
+              <div className="payment-list-discount1">할인 금액</div>
+              <div className="payment-list-discount2">{getTotalDiscountAmount() !== 0 && ('-')}{addComma(getTotalDiscountAmount())} 원</div>
+            </div>
+            <div className="payment-list-total-container">
+              <div className="payment-list-total">총액</div>
+              <div className="payment-list-total2">
+                {addComma(getTotalDiscountPrice())} 원
+              </div>
             </div>
           </div>
+
         </div>
 
         <div className="payment-method-container">
