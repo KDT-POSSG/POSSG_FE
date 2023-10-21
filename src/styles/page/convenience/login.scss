@@ -15,6 +15,10 @@
     background-color: $color-back;
     margin-bottom: 1.5rem;
 
+    .login-logo {
+        margin-bottom: 3rem;
+    }
+
     // title
     .login-title{
         font-size: 2rem;
@@ -38,13 +42,14 @@
 
             .input-container {
                 position: relative;
-                margin: 1.5rem 0; 
+                margin: 0.5rem 0; 
 
                 input {
                     border: 1px solid $color-border;
                     border-radius: 32px;
                     padding: 1rem 1.25rem;
-                    width: 30vw;
+                    // width: 30vw;
+                    width: 25rem;
                     transition: all 0.2s;
                 }
                 input:focus {
@@ -74,12 +79,15 @@
             .check-container{
                 display: flex;
                 align-items: center;
-                width: 30vw;
+                // width: 30vw;
+                width: 25rem;
+                margin-top: 0.5rem;
                 padding-left: 2rem;
+                font-size: .875rem;
 
                 input{
                     accent-color: $color-main;
-                    zoom: 1.5;
+                    zoom: 1.2;
                 }
             }
 
@@ -88,15 +96,21 @@
                 padding: 1.5rem 0;
 
                 button{
-                    margin-top: 1.5rem;
+                    margin-top: 0.75rem;
                     padding: 15px 1rem;
                     background-color: $color-main;
                     color: $color-white;
                     font-weight: bold;
                     text-align: center;
                     border-radius: 32px;
-                    width: 20vw;
+                    // width: 20vw;
+                    width: 25rem;
                     cursor: pointer;
+                    transition: $transition-cb2;
+
+                    &:hover {
+                        background-color: #F0A20A;
+                    }
                 }
             }   
         }
@@ -107,6 +121,24 @@
             align-items: center;
             align-content: center;
             padding-top: 20px;
+
+            .login-link {
+                // margin: 0 1.5rem;
+                transition: $transition-cb2;
+                color: rgba($color-gray, $alpha: 0.8);
+                font-size: .875rem;
+
+                &:hover {
+                    color: $color-main;
+                }
+            }
+
+            .login-bar {
+                margin: 0 1rem;
+                font-size: .625rem;
+                font-weight: bold;
+                color: rgba($color-gray, $alpha: 0.8);
+            }
         }
     }
 

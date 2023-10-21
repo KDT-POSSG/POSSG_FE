@@ -48,6 +48,7 @@ import CashSale from './components/analysis/CashSale';
 import MonthlyCashSale from './components/analysis/MonthlyCashSale';
 import DailyCashSale from 'components/analysis/DailyCashSale';
 import YearCashSale from './components/analysis/YearCashSale';
+import NotFound from 'pages/NotFound';
 
 function App() {
   return (
@@ -104,6 +105,8 @@ function App() {
             <Route path='/payment' element={<Payment />} />
             <Route path='/product' element={<ProductList />} />
             <Route path='/producttest' element={<ProductScroll />} />
+
+            <Route path='/*' element={<NotFound />} />
 
           </Route>
           
