@@ -76,7 +76,7 @@ function OrderCartAddModal({ setIsModalOpen }) {
     <div className='order-cart-add-modal'>
 
       <div className='stock-search'>
-        <input type="text" placeholder='상품명을 입력해주세요' value={keyword} onChange={handleKeyword} />
+        <input type="text" placeholder='상품명을 입력해주세요' value={keyword} onChange={handleKeyword} onKeyDown={(e) => { if (e.key === 'Enter') {handleSearch();} }} />
         <button type='button' onClick={handleSearch}>
           <span className="material-symbols-rounded">search</span>
         </button>

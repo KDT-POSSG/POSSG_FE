@@ -34,7 +34,7 @@ function StockNav({ search, setSearch, setFilter, setPage }) {
     <div className='stock-top-nav'>
 
       <div>
-        <button className='stock-dispose' onClick={modalOpen}>상품 폐기</button>
+        <button className='stock-dispose' onClick={modalOpen}>상품 폐기 처리</button>
 
         <Modal isOpen={isModalOpen} onClose={modalClose} style={{ content: { width: '24rem', height: '13rem' } }}>
           <StockDispose />
@@ -43,7 +43,7 @@ function StockNav({ search, setSearch, setFilter, setPage }) {
 
       <div className='stock-search-container'>
         <div className='stock-search'>
-          <input type="text" placeholder='검색할 상품을 입력해주세요' value={keyword} onChange={handleKeyword} />
+          <input type="text" placeholder='검색할 상품을 입력해주세요' value={keyword} onChange={handleKeyword} onKeyDown={(e) => { if (e.key === 'Enter') {handleSearchBtn();} }} />
           <button type='button' onClick={handleSearchBtn}>
             <span className="material-symbols-rounded">search</span>
           </button>
