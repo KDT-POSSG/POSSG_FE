@@ -283,7 +283,7 @@ function Register(){
                 <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="id" name="id" value={id} onChange={onChangeId} onBlur={checkDuplicateId} required />
-                            <label className="label-helper" htmlFor="id"><span>아이디 (소문자+숫자 6~16자)</span></label>
+                            <label className="label-helper" htmlFor="id"><span>아이디 (소문자 + 숫자 6~16자)</span></label>
                             <p className="p-text">{idMsg}</p>
                         </div>
                     </div>
@@ -298,14 +298,14 @@ function Register(){
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="pw" name="pw" value={pw} onChange={onChangePw} required />
-                            <label className="label-helper" htmlFor="pw"><span>비밀번호 (대소문자+숫자+특수문자(!,@,#,$,%,^,&,*) 8자~16자)</span></label>
+                            <label className="label-helper" htmlFor="pw"><span>비밀번호 (대소문자 + 숫자 + 특수문자(!, @, #, $, %, ^, &, *) 8자~16자)</span></label>
                             <p className="p-text">{pwMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="pwCheck" name="pwCheck" value={pwCheck} onChange={onChangePwCheck} required />
-                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자+숫자+특수문자(!,@,#,$,%,^,&,*) 8자~16자)</span></label>
+                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자 + 숫자 + 특수문자(!, @, #, $, %, ^, &, *) 8자~16자)</span></label>
                             <p className="p-text">{pwCheckMsg}</p>
                         </div>
                     </div>
@@ -326,7 +326,7 @@ function Register(){
                     <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="phoneNum" name="phoneNum" value={phoneNum} onChange={onChangePhoneNum} required />
-                            <label className="label-helper" htmlFor="phoneNum"><span>휴대폰번호 (숫자만 입력해주세요)</span></label>
+                            <label className="label-helper" htmlFor="phoneNum"><span>휴대폰번호 (숫자만 입력)</span></label>
                             <button className="input-button" onClick={onSendPhoneNum} type="button">인증 받기</button>
                             <p className="p-text">{phoneNumMsg}</p>
                         </div>
