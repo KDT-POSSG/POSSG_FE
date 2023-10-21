@@ -110,6 +110,14 @@
     margin-bottom: 1.5rem;
     filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
 
+    .stock-none {
+      padding: 7rem;
+
+      .stock-none-icon {
+        font-size: 5rem;
+      }
+    }
+
     .stock-grid {
       display: grid;
       grid-template-columns: 1fr 5fr 1fr 1fr 1fr;

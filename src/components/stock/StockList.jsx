@@ -15,14 +15,15 @@ function StockList({ stock }) {
       </div>
 
       {
-        stock && stock.length === 0 ? 
-        (
-          <div>
-            해당하는 상품이 없습니다.
+        stock && stock.length === 0 &&
+        // (
+          <div className='stock-none'>
+            <span className='tossface stock-none-icon'>📦</span>
+            <br /><br />해당하는 상품이 없습니다
           </div>
-        )
-        :
-        (<></>)
+        // )
+        // :
+        // (<></>)
       }
 
       {
