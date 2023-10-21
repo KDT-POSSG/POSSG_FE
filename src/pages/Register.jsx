@@ -142,7 +142,7 @@ function Register(){
         setPw(currentPw);
         checkFormValidity();
         const pwRegExp =
-            /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=~&.?-])(?=.*[0-9]).{8,16}$/;
+            /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,16}$/;
         if (!pwRegExp.test(currentPw)) {
             setPwMsg("비밀번호 형식을 확인해주세요");
             setIsPw(false);
@@ -165,6 +165,12 @@ function Register(){
             setIsPwCheck(true);
         }
     };
+
+    const branchNameBlur = (e) => {
+        if(!branchName.endsWith("점")){
+            setBranchName(branchName+"점");
+        }
+    }
 
     // 휴대폰 번호 유효성
     const onChangePhoneNum = (e) => {
@@ -292,20 +298,20 @@ function Register(){
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="pw" name="pw" value={pw} onChange={onChangePw} required />
-                            <label className="label-helper" htmlFor="pw"><span>비밀번호 (대소문자+숫자+특수문자 8자~16자)</span></label>
+                            <label className="label-helper" htmlFor="pw"><span>비밀번호 (대소문자+숫자+특수문자(!,@,#,$,%,^,&,*) 8자~16자)</span></label>
                             <p className="p-text">{pwMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="pwCheck" name="pwCheck" value={pwCheck} onChange={onChangePwCheck} required />
-                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자+숫자+특수문자 8자~16자)</span></label>
+                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자+숫자+특수문자(!,@,#,$,%,^,&,*) 8자~16자)</span></label>
                             <p className="p-text">{pwCheckMsg}</p>
                         </div>
                     </div>
                     <div className="form-row">
                         <div className="input-container">
-                            <input type="text" className="input-text" id="branchName" name="branchName" value={branchName} onChange={(e)=>{setBranchName(e.target.value)}} required />
+                            <input type="text" className="input-text" id="branchName" name="branchName" value={branchName} onChange={(e)=>{setBranchName(e.target.value)}} onBlur={branchNameBlur} required />
                             <label className="label-helper" htmlFor="branchName"><span>지점명</span></label>
                             <p className="p-text">{branchNameMsg}</p>
                         </div>
@@ -343,36 +349,3 @@ function Register(){
     )
 }
 export default Register;
-
-
-{/* 약관동의 : 내용, 기능 좀 더 수정해야됨. 약관 필요할까? */}
-                    {/* 
-                    https://white-salt.tistory.com/28
-                    https://hyeoky.tistory.com/24
-                    https://velog.io/@94lfnv/React-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0 << 모달로 추천
-                    */}
-                    {/* <div className="check-wrap">
-                        <div className="all-check">
-                            <label>
-                                <input type="checkbox" id="allCheck" name="allCheck" />전체동의
-                            </label>
-                        </div>
-                        <div>
-                            <div>
-                                <label><input type="checkbox" />이용약관 (필수)</label>
-                            </div>
-                            <div>
-                                <label><input type="checkbox" />개인정보 수집 및 이용 안내 (필수)</label>
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <label><input type="checkbox" />마케팅 수신동의 (선택) </label>
-                                <label> ( </label>
-                                <label><input type="checkbox" /> 이메일 </label>
-                                <label><input type="checkbox" /> SMS </label>
-                                <label><input type="checkbox" /> 카카오톡 </label>
-                                <label> ) </label>
-                            </div>
-                        </div>
-                    </div> */}
