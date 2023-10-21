@@ -26,12 +26,18 @@ function StockDispose() {
       })
       .then((response) => {
         console.log(response.data);
-        // toast.success(`바밤바 상품 폐기되었습니다`);
-        toast.success(`바밤바\n폐기되었습니다`);
+
+        if(response.data[0].YES) {
+          toast.success(`'${response.data[0].YES}'\n폐기 처리되었습니다`, { style: { maxWidth: 500 } });
+        } 
+        else {
+          toast.error(`${response.data[0].NO}`, { style: { maxWidth: 500 } });
+        }
         setBarcode("");
       })
       .catch((error) => {
         console.log(error);
+        toast.error("폐기 처리에 실패했습니다");
       })
   }
 
