@@ -45,6 +45,11 @@
                         display: flex;
                         justify-content: right;
                         padding: 3px 3px 0 0;
+                        .payment-list-delete{
+                            .material-symbols-rounded{
+                                font-size: 22px;
+                            }
+                        }
                     }
                     .payment-list-row-info{
                         display: grid;
@@ -103,53 +108,49 @@
                     padding-top: 4rem;
                     font-size: 1.2rem;
                     font-weight: 500;
-                    
                 }
-
                 .payment-total-container{
                     display: flex;
                     justify-content: center;
                     justify-content: space-between;
                     padding-top: 1rem;
                     .payment-total-price{
-                    .payment-total-price1{
-                        font-size: 2.5rem;
-                        font-weight: 500;
-                        color: $color-point;
+                        .payment-total-price1{
+                            font-size: 2.5rem;
+                            font-weight: 500;
+                            color: $color-point;
+                        }
+                        .payment-total-price2{
+                            padding-top: 0.5rem;
+                            font-size: 1rem;
+                            font-weight: 500;
+                        }
                     }
-                    .payment-total-price2{
-                        padding-top: 0.5rem;
-                        font-size: 1rem;
-                        font-weight: 500;
-                    }
-                    }
+
                     .payment-method-cash{
                         background-color: $color-white;
                         border: 1px solid $color-border;
+                        width: 13rem;
+                        height: 7rem;
                         border-radius: 0.5rem;
-                        cursor: pointer;
-                        width: 10rem;
-                        height: 5rem;
-                        filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
+                        filter: drop-shadow(1px 1px 2px rgba($color-gray, $alpha: 0.5));
                         .material-symbols-rounded{
                             position: absolute;
-                            top: 0.6rem;
+                            top: 1rem;
                             left: 1rem;
-                            font-size: 1.5rem;
+                            font-size: 2rem;
                         }
                         .cash{
-                            position: absolute;
-                            bottom: 0.5rem;
-                            left: 1rem;
-                            font-weight: bold;
                             font-size: 1.25rem;
+                            font-weight: 500;
+                            position: absolute;
+                            bottom: 1rem;
+                            left: 1.2rem;
                         }
                     }
-                    
-                }
-                .set-usepoint-container{
-                    margin-top: 0.5rem;
+
                     .set-usepoint-btn{
+                        margin-top: 0.75rem;
                         background-color: #4e5059;
                         color: $color-white;
                         font-size: 0.8rem;
@@ -160,7 +161,15 @@
                         border-radius: 50px;
                         // filter: drop-shadow(1px 1px 2px rgba($color-gray, $alpha: 0.5));
                     }
+
+
+
+
+
+                    
                 }
+                    
+                
 
                 .payment-method-container2{
                     width: 100%;

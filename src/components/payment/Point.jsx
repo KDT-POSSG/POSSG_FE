@@ -8,12 +8,12 @@ import RegisterPoint from './RegisterPoint';
 import { addComma } from 'store/utils/function';
 
 
-function Point({ totalDiscountPrice, pointType, setPointType, usepoint, setUsePoint, phoneNumber, setPhoneNumber, pwd, setPwd, remainingPoint, setRemainingPoint, closeModal }) {
+function Point({ totalDiscountPrice, usepoint, setUsePoint, phoneNumber, setPhoneNumber, pwd, setPwd, remainingPoint, setRemainingPoint, 
+                  openModal, closeModal, response, setResponse }) {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const accesstoken = localStorage.getItem("accesstoken");
   const [activeInput, setActiveInput] = useState('phoneNumber');
-  const [response, setResponse] = useState('');
   
 
   //전화번호 포맷
@@ -142,7 +142,7 @@ function Point({ totalDiscountPrice, pointType, setPointType, usepoint, setUsePo
             setPwd('');
           }
           else {
-              toast.success("결제를 완료하면 포인트가 차감됩니다");
+              toast.success("포인트가 적용되었습니다");
               closeModal('point');
           }
         })
@@ -152,12 +152,6 @@ function Point({ totalDiscountPrice, pointType, setPointType, usepoint, setUsePo
       }
     }
 
-
-  //모달창 열고 닫기
-  const openModal = (type) => {
-    setPointType(type);
-    setModalIsOpen(true);
-  };
 
   
   const handleInputValueChange = (value) => {
@@ -180,16 +174,6 @@ function Point({ totalDiscountPrice, pointType, setPointType, usepoint, setUsePo
     }
   };
 
-  const getModalStyle = () => {
-    if (pointType === 'registerpoint') {
-        return {
-            content: { width : '45%', height : '50%' },
-        };}
-    return {
-          content: {
-          },
-      };
-  };
 
   return (
     <div className="point">
@@ -240,7 +224,7 @@ function Point({ totalDiscountPrice, pointType, setPointType, usepoint, setUsePo
             ) : (
             <div className='not-customer'>
               <div className="tossface point-bottom-img">👤</div>
-              <div className="point-bottom-text1">전화번호 전체를 입력하면<br/>신규 고객 등록과 포인트 조회가 가능합니다.</div>
+              <div className="point-bottom-text1">전화번호 전체를 입력하면<br/>신규 고객 등록과 포인트 조회가 가능합니다</div>
             </div>
             )}
           </div>
@@ -257,16 +241,17 @@ function Point({ totalDiscountPrice, pointType, setPointType, usepoint, setUsePo
       </div>
       </div>
 
-    <Modal isOpen={modalIsOpen} close={closeModal} style={getModalStyle()}>
+    {/* <Modal isOpen={modalIsOpen} close={closeModal} style={getModalStyle()}>
     {pointType === 'registerpoint' && 
       <RegisterPoint
-        phoneNumber={phoneNumber}
-        setResponse={setResponse}
-        closeModal={closeModal}
-        setRemainingPoint={setRemainingPoint}
-        />
+      openModal={openModal}
+      phoneNumber={phoneNumber}
+      setResponse={setResponse}
+      closeModal={closeModal}
+      setRemainingPoint={setRemainingPoint}
+      />
     }
-    </Modal>
+    </Modal> */}
 
 
     </div>
