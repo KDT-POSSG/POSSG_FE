@@ -52,7 +52,7 @@ function HeaderAlarm() {
         setAlarmList(product);
         setIsAlarm(true);
   
-        // toast('알림 도착', {
+        // toast('알림이 도착했습니다', {
         //   icon: <span className="tossface">🔔</span>,
         // });
       };

@@ -72,14 +72,22 @@
       border-bottom: 1px solid $color-border;
     }
 
-    .order-grid-item:hover {
-      background-color: rgba($color-border, $alpha: 0.6);
+    .order-list-none-container {
+      padding: 7rem 0;
+
+      .order-list-none {
+        font-size: 5rem;
+      }
     }
 
     .order-grid-item {
       border-bottom: 1px solid $color-back;
       padding: 0.75rem 0;
       transition: $transition-cb2;
+
+      &:hover {
+        background-color: rgba($color-border, $alpha: 0.6);
+      }
     }
   }
 

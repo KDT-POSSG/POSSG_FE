@@ -7,7 +7,6 @@ import { addComma } from 'store/utils/function';
 function StockAddModal({ product_seq, product_name, img_url, totalStock, price, price_origin, modalClose }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
-  const branchName = localStorage.getItem("branchName");
 
   const [addStock, setAddStock] = useState(1);
 
@@ -59,15 +58,15 @@ function StockAddModal({ product_seq, product_name, img_url, totalStock, price, 
 
         if(response.data === "YES") {
           modalClose();
-          toast.success(`발주 추가 완료`);
+          toast.success(`발주 추가가 완료되었습니다`);
         }
         else {
-          toast.error(`발주 추가 실패`);
+          toast.error(`발주 추가에 실패했습니다`);
         }
       })
       .catch((error) => {
         console.error(error);
-        toast.error(`발주 추가 실패`);
+        toast.error(`발주 추가에 실패했습니다`);
       })
   }
 

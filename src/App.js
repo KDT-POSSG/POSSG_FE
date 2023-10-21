@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import { RecoilRoot } from 'recoil';
 
 import './styles/index.scss';
 
 import PrivateRoutes from './components/PrivateRoutes';
-
-import Header from './components/layout/Header';
 
 import Register from './pages/Register';
 import Inventory from './pages/Inventory';
@@ -40,7 +39,6 @@ import UpdateCost from './components/analysis/UpdateCost';
 import ImcomeReport from './components/analysis/CashSale';
 import MonthlyImcome from './components/analysis/MonthlyCashSale';
 import YearImcome from './components/analysis/YearCashSale';
-import { RecoilRoot } from 'recoil';
 import HomeKiosk from 'pages/HomeKiosk';
 import PosRoutes from 'components/PosRoutes';
 import ProductScroll from 'pages/ProductScroll';
@@ -55,7 +53,6 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Toaster toastOptions={{ className: 'common-toast' }} />
-        {/* <Header /> */}
         <Routes>
 
           <Route path='/login' element={<Login />} />
@@ -103,8 +100,8 @@ function App() {
 
             <Route path='/kiosk' element={<HomeKiosk />} />
             <Route path='/payment' element={<Payment />} />
-            <Route path='/product' element={<ProductList />} />
-            <Route path='/producttest' element={<ProductScroll />} />
+            {/* <Route path='/product' element={<ProductList />} /> */}
+            <Route path='/product' element={<ProductScroll />} />
 
             <Route path='/*' element={<NotFound />} />
 

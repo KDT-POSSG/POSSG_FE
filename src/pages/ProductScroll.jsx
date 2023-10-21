@@ -139,7 +139,7 @@ function ProductScroll() {
     <div className='product-page'>
 
       <div className='product-test'>
-        <div className='page-title product-page-title'>상품 페이지</div>
+        <div className='page-title product-page-title'>편의점 상품</div>
 
         <div>
           <ProductNav keyword={keyword} setKeyword={setKeyword} setPage={setPage} page={page} setHasMore={setHasMore} />

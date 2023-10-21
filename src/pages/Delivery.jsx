@@ -50,7 +50,7 @@ function Delivery() {
       <div className='delivery-test'>
       
         <div className='delivery-top'>
-          <div className='page-title'>배달 페이지</div>
+          <div className='page-title'>배달</div>
           <div className='delivery-top-address'>
             <span className='tossface'>🏠&nbsp;&nbsp;</span>
             {location}

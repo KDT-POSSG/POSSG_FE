@@ -20,6 +20,7 @@ function HeaderToggle() {
 
   const modalClose = () => {
     setIsModalOpen(false);
+    setCheckNumber("");
   }
 
   const handleCheck = () => {
@@ -32,7 +33,7 @@ function HeaderToggle() {
 
   const handleCheckConfirm = () => {
 
-    if(checkNumber == 1234) {
+    if(checkNumber == "1234") {
       modalClose();
       setCheckNumber("");
       handleToggle();
@@ -45,11 +46,11 @@ function HeaderToggle() {
   const handleToggle = () => {
 
     if(isPos) {
-      toast.success("KIOSK 모드로 변경", { style: { marginTop: '3.5rem', } });
+      toast.success("KIOSK 모드로 변경되었습니다", { style: { marginTop: '3.5rem', } });
       navi("/kiosk")
     }
     else {
-      toast.success("POS 모드로 변경", { style: { marginTop: '3.5rem', } });
+      toast.success("POS 모드로 변경되었습니다", { style: { marginTop: '3.5rem', } });
       navi("/");
     }
     setIsPos(!isPos);
@@ -88,7 +89,15 @@ function HeaderToggle() {
         <div className='header-toggle-modal'>
           <div className='toggle-text'>관리자 번호를 입력해주세요</div>
           <div>
-            <input type="text" placeholder='관리자 번호' className='toggle-modal-input' value={checkNumber} onChange={handleCheckInput} />
+            <input 
+              type="password" 
+              placeholder='관리자 번호' 
+              className='toggle-modal-input' 
+              autoFocus
+              value={checkNumber} 
+              onChange={handleCheckInput} 
+              onKeyDown={(e) => { if (e.key === 'Enter') {handleCheckConfirm();} }} 
+            />
             <button className='toggle-modal-btn toggle-confirm' onClick={handleCheckConfirm}>확인</button>
           </div>
         </div>

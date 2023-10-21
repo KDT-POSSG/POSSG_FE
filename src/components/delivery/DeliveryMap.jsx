@@ -78,7 +78,7 @@ function DeliveryMap({ setIsRegi }) {
       // 정상적으로 검색이 완료됐으면 
       if (status === window.kakao.maps.services.Status.OK) {
 
-        toast.success("검색 성공");
+        // toast.success("검색 성공");
 
         let coords = new window.kakao.maps.LatLng(result[0].y, result[0].x);
 
@@ -99,7 +99,7 @@ function DeliveryMap({ setIsRegi }) {
         setMapData(coords);
       } 
       else {
-        toast.error("검색 실패");
+        toast.error("검색에 실패했습니다");
       }
     }); 
   }

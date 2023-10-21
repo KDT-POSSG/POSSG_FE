@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import OrderItem from 'components/order/OrderItem';
 import axios from 'axios';
 import Pagination from 'react-js-pagination';
+import { baseURL } from 'store/apis/base';
 
 function Order() {
 
@@ -13,7 +14,7 @@ function Order() {
 
   useEffect(() => {
 
-    axios.get('http://54.180.60.149:3000/getAllConvOrderList', {
+    axios.get(`${baseURL}/getAllConvOrderList`, {
         params: {
           convSeq: 1,
           pageNumber: page - 1,
@@ -58,6 +59,14 @@ function Order() {
           <div>총 발주 상품 종류</div>
           <div>총 발주 금액</div>
         </div>
+
+        {
+          orderList && orderList.length === 0 &&
+          <div className='order-list-none-container'>
+            <span className='tossface order-list-none'>📑</span>
+            <br/><br/>발주 내역이 없습니다
+          </div>
+        }
 
         {
           orderList && orderList.map((item) => (
