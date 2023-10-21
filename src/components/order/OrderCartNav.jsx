@@ -70,11 +70,11 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
         console.log(response.data);
 
         if(response.data === "YES") {
-          toast.success("발주 완료");
+          toast.success("발주가 완료되었습니다");
           navi("/order");
         }
         else {
-          toast.error("발주 실패");
+          toast.error("발주에 실패했습니다");
         }
       })
       .catch((error) => {

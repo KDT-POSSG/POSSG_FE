@@ -21,9 +21,9 @@ function Attendance({onClose}) {
             if(res.data === "YES") {
                 setAttendance(res.data.attendance);
                 console.log('출근 성공');
-                toast.success('출근합니다.'); // 
+                toast.success('출근합니다'); // 
             } else if(res.data === "ALREADY CHECK") {
-                toast.error('이미 출근했습니다.'); //
+                toast.error('이미 출근했습니다'); //
             } else {
                 console.log(res.data);
             }
@@ -33,7 +33,7 @@ function Attendance({onClose}) {
         .catch((err)=>{
             console.log('Error Response:', err.response);
             console.log('출근 실패')
-            toast.error('출근에 실패했습니다.'); // 추가된 에러 알림
+            toast.error('출근에 실패했습니다'); // 추가된 에러 알림
         });
     };
     

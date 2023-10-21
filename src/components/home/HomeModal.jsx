@@ -59,17 +59,17 @@ function HomeModal({ modalClose, homeMenu, isChange, setIsChange }) {
 
         if(response.data === "RESET YES ADD YES") {
           modalClose();
-          toast.success("즐겨찾기 메뉴 수정 완료");
+          toast.success("즐겨찾기 메뉴 수정이 완료되었습니다");
           setIsChange(!isChange);
         }
         else {
-          toast.error("즐겨찾기 메뉴 수정 실패");
+          toast.error("즐겨찾기 메뉴 수정에 실패했습니다");
         }
 
       })
       .catch((error) => {
         console.error(error);
-        toast.error("즐겨찾기 메뉴 수정 실패");
+        toast.error("즐겨찾기 메뉴 수정에 실패했습니다");
       })
   }
 
