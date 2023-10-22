@@ -305,7 +305,8 @@ function Register(){
                     <div className="form-row">
                         <div className="input-container">
                             <input type="password" className="input-text" id="pwCheck" name="pwCheck" value={pwCheck} onChange={onChangePwCheck} required />
-                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자 + 숫자 + 특수문자(!, @, #, $, %, ^, &, *) 8자~16자)</span></label>
+                            {/* <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인 (대소문자 + 숫자 + 특수문자(!, @, #, $, %, ^, &, *) 8자~16자)</span></label> */}
+                            <label className="label-helper" htmlFor="pwCheck"><span>비밀번호 확인</span></label>
                             <p className="p-text">{pwCheckMsg}</p>
                         </div>
                     </div>
