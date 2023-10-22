@@ -6,6 +6,7 @@ import HomeModalList from './HomeModalList';
 function HomeModal({ modalClose, homeMenu, isChange, setIsChange }) {
 
   const accessToken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [enabledItems, setEnabledItems] = useState([]);
   const [disabledItems, setDisabledItems] = useState([]);
@@ -47,7 +48,7 @@ function HomeModal({ modalClose, homeMenu, isChange, setIsChange }) {
 
     axios
       .post(`http://54.180.60.149:3000/addFavoritePage`, {
-        convSeq: 1,
+        convSeq: convSeq,
         seqList: menuSeq
       }, {
         headers: {

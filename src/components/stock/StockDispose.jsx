@@ -18,7 +18,7 @@ function StockDispose() {
     axios.post(`${baseURL}/updateProductExpirationFlag`, 
       [{
         barcode: barcode,
-        convSeq: 1 
+        convSeq: convSeq 
       }], {
         headers: {
           accessToken: `Bearer ${accesstoken}`
