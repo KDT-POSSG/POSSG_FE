@@ -6,6 +6,7 @@ import { baseURL } from 'store/apis/base';
 function StockDispose() {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [barcode, setBarcode] = useState("");
 

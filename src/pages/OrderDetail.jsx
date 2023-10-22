@@ -7,6 +7,7 @@ import OrderList from 'components/order/OrderList';
 function OrderDetail() {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const { callRef } = useParams();
 
@@ -19,7 +20,7 @@ function OrderDetail() {
 
     axios.get("http://54.180.60.149:3000/getRefCallProductConvList", {
         params: {
-          convSeq: 1,
+          convSeq: convSeq,
           callRef: callRef
         }, 
         headers: {

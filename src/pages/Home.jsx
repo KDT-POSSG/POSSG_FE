@@ -9,6 +9,7 @@ import AttendanceCehck from 'components/employees/AttendanceCheck';
 function Home() {
 
   const accessToken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [isChange, setIsChange] = useState(false);
   const [homeMenu, setHomeMenu] = useState([]);
@@ -17,7 +18,7 @@ function Home() {
 
     axios.get(`http://54.180.60.149:3000/favoritePageList`, {
         params: {
-          convSeq: 1
+          convSeq: convSeq
         },
         headers: {
           accessToken: `Bearer ${accessToken}`

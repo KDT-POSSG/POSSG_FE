@@ -7,6 +7,7 @@ import { baseURL } from 'store/apis/base';
 function Order() {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [orderList, setOrderList] = useState([]);
   const [page, setPage] = useState(1);
@@ -16,7 +17,7 @@ function Order() {
 
     axios.get(`${baseURL}/getAllConvOrderList`, {
         params: {
-          convSeq: 1,
+          convSeq: convSeq,
           pageNumber: page - 1,
           pageSize: 20
         },
