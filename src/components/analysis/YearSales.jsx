@@ -6,10 +6,11 @@ import { addComma } from 'store/utils/function';
 import Calendar from './Calendar';
 import MyPieChart from 'store/utils/MyPieChart';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function YearSales(){
     const accesstoken = localStorage.getItem("accesstoken");
-
+    const navi = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
     const [salesData, setSalesData] = useState([]);
     const [data, setData] = useState(false);
@@ -59,13 +60,18 @@ function YearSales(){
     const onClick = () => {
         if (selectedDate) {
             fetchData(selectedDate);
+        }else{
+            toast.error("날짜를 선택해주세요");
         }
     }
 
     return(
         <div className="sales-content-wrap">
+            <div className="sales-title page-title">연별 매출</div>
             <div className="sales-nav">
-                <div className="sales-title page-title">연별 매출</div>
+                <div className="list-btn">
+                    <button onClick={() => navi("/analysis")}>목록</button>
+                </div>
                 <div className="sales-calendar-container">
                     <Calendar
                         selectedDate={selectedDate}
