@@ -118,6 +118,7 @@ function YearCashSale(){
 
             {data ? (
             <div className="cashSales-content-wrap">
+                {cashSaleData.cash > 0 || totalCardAmount(cashSaleData.card) > 0 || cashSaleData.kakao > 0 || cashSaleData.toss > 0 ? (
                 <div className="cashSales-data-container">
                     <div className="cashSales-piechart">
                         <div>
@@ -147,6 +148,9 @@ function YearCashSale(){
                         </div>
                     </div>
                 </div>
+                ) : (
+                    <div></div>
+                )}
 
                 {Object.keys(cardData).length > 0 ? (
                     <div className="cashSales-barchart-datas">

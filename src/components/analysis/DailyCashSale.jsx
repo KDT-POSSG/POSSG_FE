@@ -116,7 +116,9 @@ function DailyCashSale(){
 
             {data ? (
             <div className="cashSales-content-wrap">
-                <div className="cashSales-data-container">
+                    {cashSaleData.cash > 0 || totalCardAmount(cashSaleData.card) > 0 || cashSaleData.kakao > 0 || cashSaleData.toss > 0 ? 
+                    (
+                        <div className="cashSales-data-container">
                     <div className="cashSales-piechart">
                         <div>
                             <MyPieChart
@@ -145,6 +147,11 @@ function DailyCashSale(){
                         </div>
                     </div>
                 </div>
+                    ) : (
+                        <div></div>
+                    )}
+                
+
 
                 {Object.keys(cardData).length > 0 ? (
                     <div className="cashSales-barchart-datas">
@@ -170,7 +177,6 @@ function DailyCashSale(){
                         <span className="material-symbols-rounded chart-icon">bar_chart_4_bars</span>       
                     </div>
                 )}
-
             </div>
             ) : (
                 <div className="cashSales-date-message">
