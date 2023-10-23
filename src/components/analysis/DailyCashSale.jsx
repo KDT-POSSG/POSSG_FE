@@ -5,10 +5,11 @@ import Calendar from "./Calendar";
 import toast from 'react-hot-toast';
 import { addComma } from 'store/utils/function';
 import MyChart from 'store/utils/MyChart';
+import { useNavigate } from 'react-router';
 
 function DailyCashSale(){
     const accesstoken = localStorage.getItem("accesstoken");
-
+    const navi = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
     const [cashSaleData, setCashSaleData] = useState({});
     const [cardData, setCardData] = useState({});
@@ -32,7 +33,6 @@ function DailyCashSale(){
             const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
             const day = String(selectedDate.getDate()).padStart(2, '0');
             const dailySalesdDate = `${year}년${month}월${day}일`;
-            // console.log("dailySalesdDate >>> ", dailySalesdDate)
             const res = await axios.get(`${baseURL}/cardOrCash?date=${dailySalesdDate}&choice=0`,
             {
                 headers: {
@@ -46,9 +46,9 @@ function DailyCashSale(){
                 const data = Object.values(cardData);
 
                 const dataset = {
-                    label: dailySalesdDate, // 레이블을 날짜로 설정
+                    label: dailySalesdDate, 
                     data: data,
-                    backgroundColor: "red", // 적절한 색상을 설정하세요
+                    backgroundColor: "red", 
                 };
                 console.log("dataset >>> " , dataset)
                 setChartDataList((prevDataList) => [
@@ -81,8 +81,11 @@ function DailyCashSale(){
 
     return(
         <div className="cashSales-content-wrap">
+            <div className="cashSales-title page-title">일별 결제내역</div>
             <div className="cashSales-nav">
-                <div className="cashSales-title page-title">일별 결제내역</div>
+                <div className="list-btn">
+                    <button onClick={() => navi("/analysis")}>목록</button>
+                </div>
                 <div className="cashSales-calendar-container">           
                     <Calendar
                         className="date-calendar"
