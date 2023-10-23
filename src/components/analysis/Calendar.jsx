@@ -6,7 +6,7 @@ import ko from "date-fns/locale/ko";
 
 registerLocale("ko", ko);
 
-function Calendar({ selectedDate, onChange, type }) {
+function Calendar({ selectedDate, onChange, type, costDate  }) {
     const getDateFormat = (type) => {
         switch (type) {
         case 'day':
@@ -53,6 +53,7 @@ function Calendar({ selectedDate, onChange, type }) {
             placeholderText="날짜를 선택하세요"
             {...getDatePickerProps(type)}
             className="datepicker"
+            value={costDate}
             
         />
     );

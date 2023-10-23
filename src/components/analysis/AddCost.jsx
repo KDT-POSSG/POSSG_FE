@@ -3,19 +3,19 @@ import NumberPad from "components/ui/NumberPad";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { addComma } from "store/utils/function";
-import DatePicker from 'react-datepicker';
 import Calendar from "./Calendar";
 import { baseURL } from "store/apis/base";
+import { useNavigate } from "react-router-dom";
 
 function AddCost(){
     const accesstoken = localStorage.getItem("accesstoken");
-
-    const [rent, setRent] = useState("");
-    const [waterBill, setWaterBill] = useState("");
-    const [electricityBill, setElectricityBill] = useState("");
-    const [gasBill, setGasBill] = useState("");
-    const [totalLaborCost, setTotalLaborCost] = useState("");
-    const [securityMaintenanceFee, setSecurityMaintenanceFee] = useState("");
+    const navi = useNavigate();
+    const [rent, setRent] = useState(0);
+    const [waterBill, setWaterBill] = useState(0);
+    const [electricityBill, setElectricityBill] = useState(0);
+    const [gasBill, setGasBill] = useState(0);
+    const [totalLaborCost, setTotalLaborCost] = useState(0);
+    const [securityMaintenanceFee, setSecurityMaintenanceFee] = useState(0);
     const [costYear, setCostYear] = useState("");
     const [costMonth, setCostMonth] = useState("");
 
@@ -49,12 +49,10 @@ function AddCost(){
         if(date){
             const year = date.getFullYear();
             const month = date.getMonth() + 1;
+            const day = date.getDate() ? String(date.getDate()).padStart(2, '0') : "";
+            const costDate = `${year}년${month}월${day}일`;
             setCostYear(String(year));
             setCostMonth(String(month).padStart(2, "0"));
-
-            console.log("date >> ", date);
-            console.log("year >> ", year);
-            console.log("month >> ", month);
         }else {
             const currentDate = new Date();
             const currentYear = currentDate.getFullYear();
@@ -65,37 +63,40 @@ function AddCost(){
     };
 
     const onClick = (e) => {
-        console.log(inputFields);
         e.preventDefault();
-        axios.post(`${baseURL}/addCost`, {
-            rent: rent,
-            waterBill: waterBill,
-            electricityBill: electricityBill,
-            gasBill: gasBill,
-            totalLaborCost: totalLaborCost,
-            securityMaintenanceFee: securityMaintenanceFee,
-            costYear: costYear,
-            costMonth: costMonth,
-        }, 
-        {
-            headers: {
-            accessToken: `Bearer ${accesstoken}`,
-            },
-        })
-        .then((res)=>{
-            // console.log("b");
-            console.log("res >>> ", res);
-            if(res.data==="YES"){
-                toast.success("입력 완료");
-            }else{
-                // console.log("c");
+        if (!selectedDate) {
+            toast.error("날짜를 선택해 주세요.");
+            return;
+        }else{
+            axios.post(`${baseURL}/addCost`, {
+                rent: rent,
+                waterBill: waterBill,
+                electricityBill: electricityBill,
+                gasBill: gasBill,
+                totalLaborCost: totalLaborCost,
+                securityMaintenanceFee: securityMaintenanceFee,
+                costYear: costYear,
+                costMonth: costMonth,
+            }, 
+            {
+                headers: {
+                accessToken: `Bearer ${accesstoken}`,
+                },
+            })
+            .then((res)=>{
+                console.log("res >>> ", res);
+                if(res.data==="YES"){
+                    toast.success("입력 완료");
+                    navi("/cost")
+                }else{
+                    toast.error("입력 실패");
+                }
+            })
+            .catch((err) => {
                 toast.error("입력 실패");
-            }
-        })
-        .catch((err) => {
-            toast.error("catch 입력 실패");
-            console.error('catch 오류', err);
-        })
+                console.error('catch 오류', err);
+            })
+        }
     }
 
     useEffect(() => {
