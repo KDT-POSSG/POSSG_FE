@@ -4,14 +4,14 @@
     .sales-title {
         text-align: left;
         padding: .625rem 0;
+        margin-bottom: 0.75rem;
     }
 
     .sales-nav{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
-        margin-bottom: 1.875rem;
+        margin-bottom: 0.75rem;
 
         .list-btn{
             button{
@@ -162,7 +162,7 @@
         text-align: center;
         background-color: $color-white;
         border-radius: 1rem;
-        padding: 10vw 2vw;
+        padding: 8rem 4rem;
         filter: drop-shadow(2px 2px 4px rgba(235, 235, 235, 0.8));
 
         .select-icon{

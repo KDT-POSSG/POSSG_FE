@@ -5,11 +5,12 @@ import Calendar from "./Calendar";
 import toast from 'react-hot-toast';
 import { addComma } from 'store/utils/function';
 import MyChart from 'store/utils/MyChart';
+import { useNavigate } from 'react-router';
 import MyPieChart from 'store/utils/MyPieChart';
 
 function DailyCashSale(){
     const accesstoken = localStorage.getItem("accesstoken");
-
+    const navi = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
     const [cashSaleData, setCashSaleData] = useState({});
     const [cardData, setCardData] = useState({});
@@ -68,6 +69,12 @@ function DailyCashSale(){
                     datasets.push(dataset);
                 }
 
+                // const dataset = {
+                //     label: dailySalesdDate, 
+                //     data: data,
+                //     backgroundColor: "red", 
+                // };
+                // console.log("dataset >>> " , dataset)
                 setChartDataList((prevDataList) => [
                     ...prevDataList,
                     {
@@ -100,8 +107,11 @@ function DailyCashSale(){
 
     return(
         <div className="cashSales-content-wrap">
+            <div className="cashSales-title page-title">일별 결제내역</div>
             <div className="cashSales-nav">
-                <div className="cashSales-title page-title">일별 결제내역</div>
+                <div className="list-btn">
+                    <button onClick={() => navi("/analysis")}>목록</button>
+                </div>
                 <div className="cashSales-calendar-container">           
                     <Calendar
                         className="date-calendar"

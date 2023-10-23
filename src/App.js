@@ -31,14 +31,10 @@ import SalesReport from './components/analysis/SalesReport';
 import DailySales from './components/analysis/DailySales';
 import MonthlySales from './components/analysis/MonthlySales';
 import Delivery from './pages/Delivery';
-import Cost from './components/analysis/Cost';
 import YearSales from './components/analysis/YearSales';
 import DeliveryDetail from './components/delivery/DeliveryDetail';
 import DeliveryList from './components/delivery/DeliveryList';
 import UpdateCost from './components/analysis/UpdateCost';
-import ImcomeReport from './components/analysis/CashSale';
-import MonthlyImcome from './components/analysis/MonthlyCashSale';
-import YearImcome from './components/analysis/YearCashSale';
 import HomeKiosk from 'pages/HomeKiosk';
 import PosRoutes from 'components/PosRoutes';
 import ProductScroll from 'pages/ProductScroll';
@@ -78,7 +74,6 @@ function App() {
                 <Route path=':ref' element={<DeliveryDetail />} />
               </Route>
               <Route path='/analysis' element={<Analysis />} />
-              <Route path='/cost' element={<Cost />} />
               <Route path='/addCost' element={<AddCost />} />
               <Route path='/updateCost' element={<UpdateCost />} />
               <Route path='/salesReport' element={<SalesReport />}>

@@ -2,15 +2,28 @@
     background-color: $color-back;
     width: 80vw;
 
+    .cashSales-title {
+        text-align: left;
+        padding: .625rem 0;
+        margin-bottom: 0.75rem;
+    }
+
     .cashSales-nav{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1.875rem;
+        margin-bottom: 0.75rem;
 
-        .cashSales-title {
-            text-align: center;
+        .list-btn{
+            button{
+                padding: 10px 20px;
+                background-color: $color-white;
+                color: $color-main;
+                border: 1px solid $color-main;
+                border-radius: 1rem;
+            }
         }
+        
 
         .cashSales-calendar-container{
             position: relative;
@@ -35,7 +48,6 @@
     }
 
     .cashSales-content-wrap{
-        padding: 20px 0;
         
         .cashSales-data-container{
             margin: 0 auto;
