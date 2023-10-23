@@ -145,7 +145,8 @@ function AddCost(){
                                 : ""
                             }/>
                     <div className="keypad-container">
-                        <button className="save-btn" type="button" onClick={onClick}>저장하기</button>
+                        <button className="cancle-btn" type="button" onClick={() => navi("/analysis")}>목록</button>
+                        <button className="save-btn" type="button" onClick={onClick}>저장</button>
                     </div>
                 </div>
             </div>
