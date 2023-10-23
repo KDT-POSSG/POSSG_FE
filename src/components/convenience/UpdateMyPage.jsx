@@ -8,11 +8,8 @@ import ChangePw from "./ChangePw";
 import { baseURL } from "store/apis/base";
 
 function UpdateMyPage(){
-
     const navi = useNavigate();
-
     const accesstokenStorage = localStorage.getItem("accesstoken");
-
     const [accesstoken, setAccesstoken] = useState("");
     const [userData, setUserData] = useState({
         representativeName: "", 
@@ -69,11 +66,10 @@ function UpdateMyPage(){
         axios.get(`${baseURL}/myPage`, {
             headers: {
                 accessToken: `Bearer ${accesstoken}`,
-                // Authorization: `Bearer ${accesstoken}`
             },
         })
         .then( (res)=>{
-            console.log("res >>> ", res);
+            // console.log("res >>> ", res);
             setUserData(res.data);
         })
         .catch( (err)=>{
