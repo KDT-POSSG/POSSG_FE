@@ -9,25 +9,23 @@ import { baseURL } from "store/apis/base";
 
 function UpdateCost(){
     const navi = useNavigate();
-
     const accesstoken = localStorage.getItem("accesstoken");
-
     const [rent, setRent] = useState("");
     const [waterBill, setWaterBill] = useState("");
     const [electricityBill, setElectricityBill] = useState("");
     const [gasBill, setGasBill] = useState("");
     const [totalLaborCost, setTotalLaborCost] = useState("");
     const [securityMaintenanceFee, setSecurityMaintenanceFee] = useState("");
-    const [costYear, setCostYear] = useState(""); // 임시로 입력
+    const [costYear, setCostYear] = useState(""); 
     const [costMonth, setCostMonth] = useState("");
 
     const inputFields = [
-        { state: rent, setState: setRent, name:"월세" },
-        { state: waterBill, setState: setWaterBill, name:"수도세" },
-        { state: electricityBill, setState: setElectricityBill, name:"전기세" },
-        { state: gasBill, setState: setGasBill, name:"가스비" },
-        { state: totalLaborCost, setState: setTotalLaborCost, name:"총 인건비" },
-        { state: securityMaintenanceFee, setState: setSecurityMaintenanceFee, name:"보안유지비" },
+        { state: rent, setState: setRent, name:"월세", value:rent },
+        { state: waterBill, setState: setWaterBill, name:"수도세", value:waterBill },
+        { state: electricityBill, setState: setElectricityBill, name:"전기세", value:electricityBill },
+        { state: gasBill, setState: setGasBill, name:"가스비", value:gasBill },
+        { state: totalLaborCost, setState: setTotalLaborCost, name:"총 인건비", value:totalLaborCost },
+        { state: securityMaintenanceFee, setState: setSecurityMaintenanceFee, name:"보안유지비", value:securityMaintenanceFee },
     ];
     
     const [selectedInputIndex, setSelectedInputIndex] = useState(null); 
@@ -40,17 +38,42 @@ function UpdateCost(){
         if (selectedInputIndex !== null) {
             const currentInputField = inputFields[selectedInputIndex];
             const addCommaValue = addComma(value); 
-            currentInputField.setState(addCommaValue);
+            if (addCommaValue !== "") {
+                currentInputField.setState(addCommaValue);
+            }
         }   
     };
 
     const [selectedDate, setSelectedDate] = useState(null);
 
-    const handleDateChange = (date) => {
+    const getData = (accesstoken, costDate) => { // 해당 월의 data 불러오기
+        axios.get(`${baseURL}/selectCost?date=${costDate}&choice=2`, {
+            headers: {
+                accessToken: `Bearer ${accesstoken}`,
+            },
+        })
+        .then( (res) => {
+            console.log("getData res >>> ", res);
+            setRent(res.data.rent);
+            setWaterBill(res.data.waterBill);
+            setElectricityBill(res.data.electricityBill);
+            setGasBill(res.data.gasBill);
+            setTotalLaborCost(res.data.totalLaborCost);
+            setSecurityMaintenanceFee(res.data.securityMaintenanceFee);
+        })
+        .catch( (err) => {
+            toast.error("데이터 불러오기 에러");
+            console.error("catch 에러 ", err )
+        })
+    }
+
+    const handleDateChange = (date) => { // 날짜 선택하기
         setSelectedDate(date);
         if(date){
             const year = date.getFullYear();
             const month = date.getMonth() + 1;
+            const day = date.getDate() ? String(date.getDate()).padStart(2, '0') : "";
+            const costDate = `${year}년${month}월${day}일`;
             setCostYear(String(year));
             setCostMonth(String(month).padStart(2, "0"));
         }else {
@@ -62,7 +85,7 @@ function UpdateCost(){
         }
     };
 
-    const onSearch = async () => {
+    const onSearch = async () => { // 조회하기 버튼을 누르면 data 불러오기
         try {
             if(selectedDate){
                 const year = selectedDate.getFullYear();
@@ -78,56 +101,60 @@ function UpdateCost(){
                     },
                 })
                 const resData = res.data;
-                // console.log("resData >>> ", resData);
-                setRent(addComma(resData.rent));
-                setWaterBill(addComma(resData.waterBill));
-                setElectricityBill(addComma(resData.electricityBill));
-                setGasBill(addComma(resData.gasBill));
-                setTotalLaborCost(addComma(resData.totalLaborCost));
-                setSecurityMaintenanceFee(addComma(resData.securityMaintenanceFee));
-
+                console.log("onSearch resData >>> ",resData)
+                setRent(resData.rent || 0); 
+                setWaterBill(resData.waterBill || 0);
+                setElectricityBill(resData.electricityBill || 0); 
+                setGasBill(resData.gasBill || 0); 
+                setTotalLaborCost(resData.totalLaborCost || 0);
+                setSecurityMaintenanceFee(resData.securityMaintenanceFee || 0);
                 toast.success("조회 완료");
             }else{
                 toast.error("날짜를 선택해주세요");
             }
-
         }catch(err){
-            console.error('catch 오류:', err);
+            console.error('조회 오류', err);
             toast.error("조회 중 오류 발생");
         }
     }
 
     const onClick = () => {
-        axios.post(`${baseURL}/updateCost`, {
-            rent: rent,
-            waterBill: waterBill,
-            electricityBill: electricityBill,
-            gasBill: gasBill,
-            totalLaborCost: totalLaborCost,
-            securityMaintenanceFee: securityMaintenanceFee,
-            costYear: costYear,
-            costMonth: costMonth,
-        }, {
-            headers: {
-            accessToken: `Bearer ${accesstoken}`,
-            },
-        })
-        .then((res)=>{
-            console.log("res >>> ", res);
-            if(res.data==="YES"){
-                toast.success("수정 완료");
-                navi("/cost");
-            }else{
+        if (!selectedDate) {
+            toast.error("날짜를 선택해 주세요.");
+            return;
+        }else{
+            axios.post(`${baseURL}/updateCost`, {
+                rent: rent,
+                waterBill: waterBill,
+                electricityBill: electricityBill,
+                gasBill: gasBill,
+                totalLaborCost: totalLaborCost,
+                securityMaintenanceFee: securityMaintenanceFee,
+                costYear: costYear,
+                costMonth: costMonth,
+            }, {
+                headers: {
+                accessToken: `Bearer ${accesstoken}`,
+                },
+            })
+            .then((res)=>{
+                console.log("res >>> ", res);
+                if(res.data==="YES"){
+                    toast.success("수정 완료");
+                    navi("/cost");
+                }else{
+                    toast.error("수정 실패");
+                }
+            })
+            .catch((err) => {
                 toast.error("수정 실패");
-            }
-        })
-        .catch((err) => {
-            toast.error("catch 입력 실패");
-            console.error('catch 오류', err);
-        })
+                console.error('catch 오류', err);
+            })
+        }
     }
 
     useEffect(() => {
+        getData(accesstoken, costYear, costMonth)
         handleDateChange(null);
     }, []);
 
@@ -140,6 +167,7 @@ function UpdateCost(){
                             selectedDate={selectedDate}
                             onChange={handleDateChange}
                             type="month" 
+                            costDate={`${costYear}년${costMonth}월`}
                         />
                     <div className="material-symbols-rounded">calendar_month</div>
                     <button className="calendar-button" type="button" onClick={onSearch}>조회</button>

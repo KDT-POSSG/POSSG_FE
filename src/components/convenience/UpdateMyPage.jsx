@@ -8,11 +8,8 @@ import ChangePw from "./ChangePw";
 import { baseURL } from "store/apis/base";
 
 function UpdateMyPage(){
-
     const navi = useNavigate();
-
     const accesstokenStorage = localStorage.getItem("accesstoken");
-
     const [accesstoken, setAccesstoken] = useState("");
     const [userData, setUserData] = useState({
         representativeName: "", 
@@ -69,11 +66,10 @@ function UpdateMyPage(){
         axios.get(`${baseURL}/myPage`, {
             headers: {
                 accessToken: `Bearer ${accesstoken}`,
-                // Authorization: `Bearer ${accesstoken}`
             },
         })
         .then( (res)=>{
-            console.log("res >>> ", res);
+            // console.log("res >>> ", res);
             setUserData(res.data);
         })
         .catch( (err)=>{
@@ -107,7 +103,7 @@ function UpdateMyPage(){
 
     return(
         <div className="update-content-wrap">
-            <div className="update-title page-title">내 정보 관리</div>
+            <div className="update-title page-title">내 정보 수정</div>
             <div className="update-content">
             <form id="regiForm" method="post" autoComplete="off" onSubmit={onSubmit}>
                     <div className="form-row">
@@ -145,7 +141,7 @@ function UpdateMyPage(){
                         </div>
                     </div>                   
                         <div className="btn-container">
-                            <button className="mypage-btn" type="submit" >저장하기</button>
+                            <button className="mypage-btn" type="submit">저장</button>
                         </div>
                     </form>
 

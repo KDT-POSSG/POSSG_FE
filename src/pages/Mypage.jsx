@@ -76,7 +76,7 @@ function MyPage(){
                         </div>
                     </div>
                         <div className="btn-container">
-                            <Link to="/updateMypage"><button className="mypage-btn" type="button">관리하러가기</button></Link>
+                            <Link to="/updateMypage"><button className="mypage-btn" type="button">수정</button></Link>
                         </div>
             </div>
         </div>

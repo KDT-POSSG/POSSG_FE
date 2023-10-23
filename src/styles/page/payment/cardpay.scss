@@ -1,12 +1,10 @@
-.cardpaymodal{
-    .cardpay-header{
-        border-bottom: 1px solid $color-border;
-        padding-bottom: 1rem;
-        .cardpay-header-title{
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
+.cardpaymodal {
+  .cardpay-header {
+    border-bottom: 1px solid $color-border;
+    padding-bottom: 1rem;
+    .cardpay-header-title {
+      font-weight: bold;
+      font-size: 1.2rem;
     }
-
+  }
 }

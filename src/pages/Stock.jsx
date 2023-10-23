@@ -7,13 +7,14 @@ import { baseURL } from 'store/apis/base';
 
 function Stock() {
 
+  const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
+
   const [stock, setStock] = useState([]);
 
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("newest");
-
-  const accesstoken = localStorage.getItem("accesstoken");
 
   const handlePage = (pageNumber) => {
     setPage(pageNumber);
@@ -23,7 +24,7 @@ function Stock() {
 
     axios.get(`${baseURL}/getAllProductStock`, {
         params: {
-          convSeq: 1,
+          convSeq: convSeq,
           pageNumber: page - 1,
           search: search,
           sortOrder: filter,

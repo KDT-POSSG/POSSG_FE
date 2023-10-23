@@ -7,6 +7,7 @@ import { addComma } from 'store/utils/function';
 function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, setIsDone }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [addStock, setAddStock] = useState(item.amount);
 
@@ -16,7 +17,7 @@ function OrderListItem({ type, item, handleCheck, selectedItems, idx, isDone, se
     // console.log("amountTemp >> ", amountTemp);
 
     axios.post(`${baseURL}/updateCallProductConv`, {
-        convSeq: 1,
+        convSeq: convSeq,
         productName: item.productName,
         amount: amountTemp,
         priceOrigin: item.priceOrigin,

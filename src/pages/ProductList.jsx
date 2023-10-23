@@ -7,6 +7,8 @@ import { baseURL } from 'store/apis/base';
 function ProductList() {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
+  
   const [product, setProduct] = useState([]);
 
   const [page, setPage] = useState(0);
@@ -17,7 +19,7 @@ function ProductList() {
     promotionInfo: 0,
     search: null,
     sortOrder: "newest",
-    convSeq: 1
+    convSeq: convSeq
   });
 
   useEffect(() => {

@@ -4,14 +4,15 @@
     flex-direction: column;
     align-items: center;
     background-color: $color-back;
-    padding: 5vw 10vw;
-    min-height: 100vh;
+    padding-top: 50px;
+    height: 550px;
 
     .updateCost-nav{
         display: flex;
         justify-content: space-around;
         align-items: center;
-        width: 80%;
+        align-content: center;
+        width: 1000px;
 
         // title
         .updateCost-title{
@@ -36,6 +37,7 @@
                 padding: 10px 20px;
                 top: 7px;
                 left: 10px;
+                color: $color-main;
             }
 
             .calendar-button{
@@ -48,7 +50,6 @@
                 border-radius: 1rem;
             }
         }
-
     }
 
     // content
@@ -59,7 +60,6 @@
         padding: 2rem;
         text-align: center;
         border-radius: 1rem;
-        margin-bottom: 1.5rem;
         filter: drop-shadow(2px 2px 4px rgba($color-border, $alpha: 0.8));
         background-color: $color-white;
 
@@ -124,7 +124,6 @@
         }
 
         .keypad-container{
-            // background-color: burlywood;
             display: flex;
             justify-content: center;
 
@@ -137,8 +136,6 @@
                 width: 15vw;
             }
         }
-
-        
     }
 }
 

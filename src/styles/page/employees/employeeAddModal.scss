@@ -1,167 +1,163 @@
-.addemployeemodal{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    
-    input{
-        background-color: $color-back;
-    }
-    // content
-    .regi-content {
-        .form-row {
-            text-align: center;
-            display: flex;
-            flex-flow: column;
-            justify-content: center;
-            align-items: center;
-            .input-birth-container{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding-right: 18px;
-                .input-birth{
-                    width: 260px;
-                }
-                .input-gender{
-                    display: flex;
-                    justify-content: center;
-                    height: 3.55rem;
-                    
-                    input[type="radio"] + label{
-                        width: 100%;
-                        padding: 1em;
-                        line-height: 1.4;
-                        background-color: $color-back;  //선택 안 된 radio 배경색
-                        border: 1px solid #e5e5e5; //선택 안 된 radio 테두리
-                        border-radius: 3px;
-                        transition: all 0.35s ease-in-out;
-                        color: rgba($color: $color-gray, $alpha: 0.5);
-                        cursor: pointer;
+.addemployeemodal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
 
-                    }
-                    input[type="radio"] {
-                    display: none;
-
-                    & + label,
-                    select {
-                        display: inline-block;
-                        width: 100%;
-                        text-align: center;
-                        border-radius: 0;  //raido 버튼 모서리 둥글게
-
-                        &:first-of-type {
-                        border-top-left-radius: 2rem;
-                        border-bottom-left-radius: 2rem;
-                        }
-
-                        &:last-of-type {
-                        border-top-right-radius: 2rem;
-                        border-bottom-right-radius: 2rem;
-                        }
-
-                        i {
-                        padding-right: 0.4em;
-                        }
-                    }
-
-                    &:checked + label,
-                    &:checked + label:before,
-                    &:focus,
-                    &:active {
-                        background-color: $color-main;
-                        color: $color-white;
-                        font-weight: bold;
-                        border-color: #bd8200; //선택된 radio 테두리
-                    }
-                    }
-    
-                }
-            }
+  input {
+    background-color: $color-back;
+  }
+  // content
+  .regi-content {
+    .form-row {
+      text-align: center;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      .input-birth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 18px;
+        .input-birth {
+          width: 260px;
         }
+        .input-gender {
+          display: flex;
+          justify-content: center;
+          height: 3.55rem;
 
-        .input-container {
-            position: relative;
-            margin: 1rem;
-            height: 60px;
-        }
-
-        input {
-            border: 1px solid $color-border;
-            border-radius: 32px;
-            padding: 1rem 1rem;
-            width: 25rem;
-            transition: all 0.2s;
-
-            
-        }
-
-        input:focus {
-            border-color: $color-main;
-        }
-
-        label span {
-            position: absolute;
-            top: 18px;
-            left: 20px;
-            padding: 0 4px;
-            font-size: 1rem;
+          input[type="radio"] + label {
+            width: 100%;
+            padding: 1em;
+            line-height: 1.4;
+            background-color: $color-back; //선택 안 된 radio 배경색
+            border: 1px solid #e5e5e5; //선택 안 된 radio 테두리
+            border-radius: 3px;
+            transition: all 0.35s ease-in-out;
             color: rgba($color: $color-gray, $alpha: 0.5);
-            transition: all 0.2s;
-        }
+            cursor: pointer;
+          }
+          input[type="radio"] {
+            display: none;
 
-        input:focus + label span,
-        input:valid + label span {
-            position: absolute;
-            top: -4px;
-            left: 20px;
-            padding: 0 4px;
-            font-size: 1rem;
-            // font-weight: bold;
-            color: $color-main;
-            background: linear-gradient($color-back, $color-white);
-        }
+            & + label,
+            select {
+              display: inline-block;
+              width: 100%;
+              text-align: center;
+              border-radius: 0; //raido 버튼 모서리 둥글게
 
-        .form-row button {
-            position: absolute;
-            top: 4px;
-            right: 5px;
-            padding: 14px 1.25rem;
-            background-color: $color-main;
-            color: $color-white;
-            // font-weight: bold;
-            border-radius: 32px;
-            font-size: 14px;
-        }
+              &:first-of-type {
+                border-top-left-radius: 2rem;
+                border-bottom-left-radius: 2rem;
+              }
 
-        .p-text{
-            color: $color-point;
-            font-size: 12px;
-            text-align: left;
-            margin: 10px 20px;
-            background-color: $color-back;
-        }
+              &:last-of-type {
+                border-top-right-radius: 2rem;
+                border-bottom-right-radius: 2rem;
+              }
 
-        .btn-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem 0;
-        }
-
-        .btn-container button {
-            padding: 0.8rem 2rem;
-            margin-bottom: 50px;
-            background-color: $color-main;
-            color: $color-white;
-            font-weight: bold;
-            border-radius: 1rem;
-            width: 10rem;
-            transition: $transition-cb2;
-            &:hover {
-                background-color: #F0A20A;
-                border-color: #F0A20A;
+              i {
+                padding-right: 0.4em;
+              }
             }
+
+            &:checked + label,
+            &:checked + label:before,
+            &:focus,
+            &:active {
+              background-color: $color-main;
+              color: $color-white;
+              font-weight: bold;
+              border-color: #bd8200; //선택된 radio 테두리
+            }
+          }
         }
+      }
     }
+
+    .input-container {
+      position: relative;
+      margin: 1rem;
+      height: 60px;
+    }
+
+    input {
+      border: 1px solid $color-border;
+      border-radius: 32px;
+      padding: 1rem 1rem;
+      width: 25rem;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      border-color: $color-main;
+    }
+
+    label span {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      padding: 0 4px;
+      font-size: 1rem;
+      color: rgba($color: $color-gray, $alpha: 0.5);
+      transition: all 0.2s;
+    }
+
+    input:focus + label span,
+    input:valid + label span {
+      position: absolute;
+      top: -4px;
+      left: 20px;
+      padding: 0 4px;
+      font-size: 1rem;
+      // font-weight: bold;
+      color: $color-main;
+      background: linear-gradient($color-back, $color-white);
+    }
+
+    .form-row button {
+      position: absolute;
+      top: 4px;
+      right: 5px;
+      padding: 14px 1.25rem;
+      background-color: $color-main;
+      color: $color-white;
+      // font-weight: bold;
+      border-radius: 32px;
+      font-size: 14px;
+    }
+
+    .p-text {
+      color: $color-point;
+      font-size: 12px;
+      text-align: left;
+      margin: 10px 20px;
+      background-color: $color-back;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem 0;
+    }
+
+    .btn-container button {
+      padding: 0.8rem 2rem;
+      margin-bottom: 50px;
+      background-color: $color-main;
+      color: $color-white;
+      font-weight: bold;
+      border-radius: 1rem;
+      width: 10rem;
+      transition: $transition-cb2;
+      &:hover {
+        background-color: #f0a20a;
+        border-color: #f0a20a;
+      }
+    }
+  }
 }
