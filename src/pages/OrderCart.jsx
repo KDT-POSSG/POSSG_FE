@@ -7,6 +7,7 @@ import { baseURL } from 'store/apis/base';
 function OrderCart() {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [orderCart, setOrderCart] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -19,7 +20,7 @@ function OrderCart() {
     
     axios.get(`${baseURL}/getAllCallProductConvList`, {
         params: {
-          convSeq: 1
+          convSeq: convSeq
         },
         headers: {
           accessToken: `Bearer ${accesstoken}`
@@ -45,7 +46,7 @@ function OrderCart() {
       <div className='page-title ordercart-title'>발주 바구니</div>
 
       <div>
-        <OrderCartNav isDone={isDone} setIsDone={setIsDone} selectedItems={selectedItems} />
+        <OrderCartNav isDone={isDone} setIsDone={setIsDone} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
         <OrderList 
           type={"before"} 
           orderList={orderCart} 

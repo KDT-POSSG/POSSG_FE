@@ -7,6 +7,7 @@ import { addComma } from 'store/utils/function';
 function StockAddModal({ product_seq, product_name, img_url, totalStock, price, price_origin, modalClose }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [addStock, setAddStock] = useState(1);
 
@@ -42,7 +43,7 @@ function StockAddModal({ product_seq, product_name, img_url, totalStock, price, 
     
     axios
       .post(`${baseURL}/addCallProductConv`, {
-        convSeq: 1,
+        convSeq: convSeq,
         productSeq: product_seq, 
         priceOrigin: price_origin,
         price: price,

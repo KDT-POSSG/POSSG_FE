@@ -7,6 +7,7 @@ import { orderState } from 'store/utils/function';
 function OrderDetailNav({ callStatus, callRef, callDate }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const navi = useNavigate();
 
@@ -14,7 +15,7 @@ function OrderDetailNav({ callStatus, callRef, callDate }) {
 
     axios
       .post("http://54.180.60.149:3000/cancelConvOrderList", {
-        convSeq: 1,
+        convSeq: convSeq,
         callRef: callRef
       }, {
         headers: {

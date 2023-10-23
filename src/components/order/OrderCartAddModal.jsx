@@ -6,6 +6,7 @@ import { baseURL } from 'store/apis/base';
 function OrderCartAddModal({ setIsModalOpen }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [keyword, setKeyword] = useState("");
   const [searchList, setSearchList] = useState([]);
@@ -18,7 +19,7 @@ function OrderCartAddModal({ setIsModalOpen }) {
 
     axios.get(`${baseURL}/productList`, {
       params: {
-        convSeq: 1,
+        convSeq: convSeq,
         search: keyword,
         pageSize: 65534,
         pageNumber: 0,
@@ -44,7 +45,7 @@ function OrderCartAddModal({ setIsModalOpen }) {
     
     axios
       .post(`${baseURL}/addCallProductConv`, {
-          convSeq: 1,
+          convSeq: convSeq,
           productSeq: item.productSeq, 
           priceOrigin: item.priceOrigin,
           price: item.price,

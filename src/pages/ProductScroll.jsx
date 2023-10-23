@@ -9,6 +9,7 @@ import ProductNutrition from 'components/product/ProductNutrition';
 function ProductScroll() {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const bottomRef = useRef(null);
 
@@ -23,7 +24,7 @@ function ProductScroll() {
     promotionInfo: 0,
     search: null,
     sortOrder: "newest",
-    convSeq: 1
+    convSeq: convSeq
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,7 +57,7 @@ function ProductScroll() {
           promotionInfo: keyword.promotionInfo,
           search: keyword.search,
           sortOrder: keyword.sortOrder,
-          convSeq: 1
+          convSeq: convSeq
         },
         headers: {
           accessToken: `Bearer ${accesstoken}`
@@ -135,6 +136,13 @@ function ProductScroll() {
 
   }, [page, loading]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+  }
+
   return (
     <div className='product-page'>
 
@@ -174,6 +182,12 @@ function ProductScroll() {
       <Modal isOpen={isModalOpen} onClose={modalClose} style={{ content: { width: '25rem', height: 'auto' } }}>
         { modalProduct && <ProductNutrition modalProduct={modalProduct} />}
       </Modal>
+
+      <div className="scroll-top-container">
+        <button type="button" className="scroll-top-btn" onClick={scrollToTop}>
+          <span className="material-symbols-rounded">expand_less</span>
+        </button>
+      </div>
 
     </div>
   )
