@@ -141,7 +141,7 @@ function UpdateCost(){
                 console.log("res >>> ", res);
                 if(res.data==="YES"){
                     toast.success("수정 완료");
-                    navi("/cost");
+                    navi("/analysis");
                 }else{
                     toast.error("수정 실패");
                 }

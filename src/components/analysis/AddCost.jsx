@@ -87,7 +87,7 @@ function AddCost(){
                 console.log("res >>> ", res);
                 if(res.data==="YES"){
                     toast.success("입력 완료");
-                    navi("/cost")
+                    navi("/analysis")
                 }else{
                     toast.error("입력 실패");
                 }
