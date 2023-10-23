@@ -7,10 +7,11 @@ import toast from "react-hot-toast";
 import { baseURL } from "store/apis/base";
 import Calendar from "./Calendar";
 import MyPieChart from "store/utils/MyPieChart";
+import { useNavigate } from "react-router";
 
 function MonthlyCashSale(){
     const accesstoken = localStorage.getItem("accesstoken");
-
+    const navi = useNavigate();
     const [selectedDate, setSelectedDate] = useState(null);
     const [cashSaleData, setCashSaleData] = useState({});
     const [cardData, setCardData] = useState({});
@@ -101,8 +102,11 @@ function MonthlyCashSale(){
 
     return(
         <div className="cashSales-content-wrap">
+            <div className="cashSales-title page-title">월별 결제내역</div>
             <div className="cashSales-nav">
-                <div className="cashSales-title page-title">월별 결제내역</div>
+                <div className="list-btn">
+                        <button onClick={() => navi("/analysis")}>목록</button>
+                </div>
                 <div className="cashSales-calendar-container">           
                     <Calendar
                         className="date-calendar"
