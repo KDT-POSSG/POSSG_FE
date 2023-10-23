@@ -122,7 +122,7 @@ function DailySales(){
                         <div className="sales-data-amount">{addComma(salesData.refundCount)}건</div>
                     </div>
                     <div className="sales-data">
-                        <div className="sales-data-title">총 비용</div>
+                        <div className="sales-data-title">총 운영비용</div>
                         <div className="sales-data-amount">{addComma(salesData.totalLoss)}원</div>
                     </div>
                     <div className="sales-data">
@@ -141,7 +141,7 @@ function DailySales(){
                         <div className="sales-chart">
                             <MyPieChart
                                 data={[salesData.totalPrice, salesData.totalLoss, salesData.profit]}
-                                labels={["총 매출", "총 비용", "순 이익"]}
+                                labels={["총 매출", "총 운영비용", "순 이익"]}
                                 chartOptions={{}}
                             />
                         </div>
@@ -151,7 +151,7 @@ function DailySales(){
                                 <div className="sales-datas-amount">{addComma(salesData.totalPrice)}원</div>
                             </div>
                             <div className="sales-datas">
-                                <div className="sales-datas-title">총 비용</div>
+                                <div className="sales-datas-title">총 운영비용</div>
                                 <div className="sales-datas-amount">{addComma(salesData.totalLoss)}원</div>
                             </div>
                             <div className="sales-datas">

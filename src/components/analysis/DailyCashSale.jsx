@@ -28,6 +28,8 @@ function DailyCashSale(){
         return 0;
     }
 
+    
+
     const fetchData = async (selectedDate) => { 
         try {
             const year = selectedDate.getFullYear();
