@@ -1,46 +1,39 @@
-.terminateemployeemodal{
-    .terminate-container{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 16px;
+.terminateemployeemodal {
+  .terminate-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 16px;
 
-        .terminate-title{
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .terminate-msg{
-            font-size: 1.2rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            padding-top: 32px;
-        }
-
-        .terminate-btn {
-            background-color: $color-red;
-            color: $color-white;
-            border: 2px solid $color-red;  
-            border-radius: 1rem;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 1rem;
-            width: 200px;
-            margin-top: 36px;
-            transition: $transition-cb2;
-          }
-            .terminate-btn:hover {
-              background-color: rgb(231, 2, 2);
-              color: white;
-            }
+    .terminate-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
     }
 
-    
+    .terminate-msg {
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      padding-top: 32px;
+    }
 
-
-
-
-
+    .terminate-btn {
+      background-color: $color-red;
+      color: $color-white;
+      border: 2px solid $color-red;
+      border-radius: 1rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      width: 200px;
+      margin-top: 36px;
+      transition: $transition-cb2;
+    }
+    .terminate-btn:hover {
+      background-color: rgb(231, 2, 2);
+      color: white;
+    }
+  }
 }
