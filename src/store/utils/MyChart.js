@@ -15,29 +15,6 @@ const MyChart = ({datasets, labels}) => {
         data: {
           labels: labels,
           datasets: datasets,
-          // [
-          //   {
-          //     label: "카드사별 매출",
-          //     data: data,
-          //     backgroundColor: [
-          //       "rgba(255, 99, 132, 0.2)",
-          //       "rgba(54, 162, 235, 0.2)",
-          //       "rgba(255, 206, 86, 0.2)",
-          //       "rgba(75, 192, 192, 0.2)",
-          //       "rgba(153, 102, 255, 0.2)",
-          //       "rgba(255, 159, 64, 0.2)",
-          //     ],
-          //     borderColor: [
-          //       "rgba(255, 99, 132, 1)",
-          //       "rgba(54, 162, 235, 1)",
-          //       "rgba(255, 206, 86, 1)",
-          //       "rgba(75, 192, 192, 1)",
-          //       "rgba(153, 102, 255, 1)",
-          //       "rgba(255, 159, 64, 1)",
-          //     ],
-          //     borderWidth: 1,
-          //   },
-          // ],
         },
         options: {
           responsive:false,
@@ -58,15 +35,6 @@ const MyChart = ({datasets, labels}) => {
             }
           }
         }
-          // chartOptions,
-        // {
-        //   scales: {
-        //     y: {
-        //       beginAtZero: true,
-        //       max: 10000000, // 최댓값
-        //     },
-        //   },
-        // },
       });
     };
 
@@ -77,15 +45,15 @@ const MyChart = ({datasets, labels}) => {
       }
     };
 
-    destroyChart(); // 기존 차트 파괴
-    createChart(); // 새로운 차트 생성
+    destroyChart(); 
+    createChart(); 
 
     return () => {
-      destroyChart(); // 컴포넌트가 unmount될 때 차트 파괴
+      destroyChart(); 
     };
   }, [datasets, labels]);
 
-  return <canvas ref={chartRef} width={400} height={400} />;
+  return <canvas ref={chartRef} width={1000} height={50} />;
 };
 
 export default MyChart;
