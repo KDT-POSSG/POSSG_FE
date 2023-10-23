@@ -46,7 +46,7 @@ function Login(){
                 localStorage.setItem("refreshtoken", refreshtoken);
                 localStorage.setItem("convSeq", convSeq);
                 localStorage.setItem("branchName", branchName);
-                toast.success("로그인 되었습니다.");
+                toast.success("로그인 되었습니다");
                 if (rememberMe) {
                     setCookie("rememberedId", id, { path: "/" });
                 } else {

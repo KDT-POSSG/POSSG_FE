@@ -5,11 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { baseURL } from "store/apis/base";
 
 function ChangePw({ userId, setModalIsOpen }){
-
-    const accesstokenStorage = localStorage.getItem("accesstoken");
-
+    const accesstoken = localStorage.getItem("accesstoken");
+    const refreshtoken = localStorage.getItem("refreshtoken");
     const navi = useNavigate();
-
     // 상태관리 초기값 세팅
     const [currentPw, setCurrentPw] = useState("");
     const [changePw, setChangePw] = useState("");
@@ -95,14 +93,36 @@ function ChangePw({ userId, setModalIsOpen }){
                     "newPwd" : changePw
                 }, {
                     headers: {
-                        accessToken: `Bearer ${accesstokenStorage}`,
+                        accessToken: `Bearer ${accesstoken}`,
                     },
                 })
                 .then((res)=>{
                     console.log("res >>> ", res)
                     if(res.data==="YES"){
-                        toast.success("비밀번호 변경 성공");
+                        // toast.success("비밀번호 변경 성공");
                         setModalIsOpen(false);
+                        axios.get(`${baseURL}/logout`, {
+                            headers: {
+                                accessToken: `Bearer ${accesstoken}`, 
+                                refreshToken: `${refreshtoken}`, 
+                            }
+                        })
+                        .then((res)=>{
+                            if(res.status === 200){
+                                localStorage.removeItem("accesstoken");
+                                localStorage.removeItem("refreshtoken");
+                                localStorage.removeItem("convSeq");
+                                localStorage.removeItem("branchName");
+                                toast.success("비밀번호가 변경되어 다시 로그인해주세요");
+                                navi("/login");
+                            }
+                            else{
+                                console.log("비밀번호 변경 실패");
+                            }
+                        })
+                        .catch((err)=>{
+                            console.log(err);
+                        })
                     }else if(res.data==="NO"){
                         toast.error("현재 비밀번호와 새 비밀번호 확인");
                     }else{
