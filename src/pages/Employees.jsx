@@ -4,20 +4,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from '../components/ui/Modal';
 import AddEmployeeModal from '../components/employees/AddEmployeeModal'
-import ModifyEmployeeModal from '../components/employees/ModifyEmployeeModal'
 import Pagination from "react-js-pagination";
 
 function Employees() {
+  const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
     const navigate = useNavigate();
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [employeeType, setEmployeeType] = useState(null);
     const [employeeList, setEmployeeList] = useState([]);
     const [totalCnt, setTotalCnt] = useState(0);
-    const accesstoken = localStorage.getItem("accesstoken");
     const [page, setPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(9);
     const [currentPageData, setCurrentPageData] = useState([]);
-    const convSeq = localStorage.getItem("convSeq");
 
     const fetchEmployees = () => {
       axios.get('http://54.180.60.149:3000/findallemployee', {params: {convSeq : convSeq}, headers:{ accessToken: `Bearer ${accesstoken}`}})

@@ -10,8 +10,8 @@ import { addComma } from "store/utils/function.js";
 import CashpayReceiptInfoModal from "components/payment/CashPayReceiptInfoModal";
 import RegisterPoint from "components/payment/RegisterPoint";
 import { toast } from "react-hot-toast";
-import { useRecoilValue } from 'recoil';
-import { PosState } from 'store/atom/posState';
+import { useRecoilValue } from "recoil";
+import { PosState } from "store/atom/posState";
 
 function Payment() {
   const accesstoken = localStorage.getItem("accesstoken");
@@ -38,18 +38,20 @@ function Payment() {
   const handleBarcode = () => {
     const barcodeInput = barcodeInputRef.current.value;
     if (!barcodeInput) {
-      toast.error("바코드 스캔를 스캔해주세요");
+      toast.error("바코드를 스캔해주세요");
       return;
     }
     axios
-      .get("http://54.180.60.149:3000/findProductBarcode", {params: { Barcode: barcodeInput, convSeq: convSeq },
-        headers: { accessToken: `Bearer ${accesstoken}` }})
+      .get("http://54.180.60.149:3000/findProductBarcode", {
+        params: { Barcode: barcodeInput, convSeq: convSeq },
+        headers: { accessToken: `Bearer ${accesstoken}` },
+      })
       .then((res) => {
         const productData = res.data;
         const existingProduct = products.find(
           (p) => p.productSeq === productData.productSeq
         );
-        if(res.data === ""){
+        if (res.data === "") {
           toast.error("유통기한이 만료되었습니다");
           return;
         }
@@ -72,7 +74,7 @@ function Payment() {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("바코드 스캔 실패");
+        toast.error("바코드 스캔에 실패했습니다");
       });
     setBarcodeInput("");
   };
@@ -92,8 +94,9 @@ function Payment() {
   // 얼만큼 할인됐는지 금액 계산
   const getTotalDiscountAmount = () => {
     return products.reduce((total, product) => {
-      const discountAmountForProduct = (product.price - product.priceDiscount) * product.amount;
-      return total + discountAmountForProduct; 
+      const discountAmountForProduct =
+        (product.price - product.priceDiscount) * product.amount;
+      return total + discountAmountForProduct;
     }, 0);
   };
 
@@ -147,11 +150,10 @@ function Payment() {
     ) {
       handlePaymentSuccess();
     }
-    if ( paymentType === "cash" ){
+    if (paymentType === "cash") {
       setInputValue("");
       setChangeAmount(0);
     }
-    
   };
 
   //상품 목록에서 상품 삭제
@@ -196,7 +198,7 @@ function Payment() {
     setPhoneNumber("");
     setPwd("");
     setResponse("");
-  }
+  };
 
   return (
     // payment-container를 클릭하면 바코드 입력창에 포커스가 가도록 함 (사용자가 다른 곳을 클릭했을 때 input창에 포커스가 해제되는 것 방지용)
@@ -279,10 +281,12 @@ function Payment() {
           </div>
 
           <div className="payment-list-result">
-            
             <div className="payment-list-discount-container">
               <div className="payment-list-discount1">할인 금액</div>
-              <div className="payment-list-discount2">{getTotalDiscountAmount() !== 0 && ('-')}{addComma(getTotalDiscountAmount())} 원</div>
+              <div className="payment-list-discount2">
+                {getTotalDiscountAmount() !== 0 && "-"}
+                {addComma(getTotalDiscountAmount())} 원
+              </div>
             </div>
             <div className="payment-list-total-container">
               <div className="payment-list-total">총액</div>
@@ -291,7 +295,6 @@ function Payment() {
               </div>
             </div>
           </div>
-
         </div>
 
         <div className="payment-method-container">
@@ -306,32 +309,30 @@ function Payment() {
                   포인트 사용 {addComma(usepoint)} P
                 </div>
                 <button
-                className="set-usepoint-btn"
-                onClick={() => {
-                  resetPointInfo()
-                }}
-              >
-                포인트 초기화
-              </button>
-
+                  className="set-usepoint-btn"
+                  onClick={() => {
+                    resetPointInfo();
+                  }}
+                >
+                  포인트 초기화
+                </button>
               </div>
-              {isPos && 
-              <button
-                className="payment-method-cash"
-                onClick={() => {
-                  if (products.length > 0) {
-                    openModal("cash");
-                  } else {
-                    toast.error("결제할 상품이 없습니다");
-                  }
-                }}
-              >
-                <span className="material-symbols-rounded">payments</span>
-                <div className="cash">현금</div>
-              </button>
-              }
+              {isPos && (
+                <button
+                  className="payment-method-cash"
+                  onClick={() => {
+                    if (products.length > 0) {
+                      openModal("cash");
+                    } else {
+                      toast.error("결제할 상품이 없습니다");
+                    }
+                  }}
+                >
+                  <span className="material-symbols-rounded">payments</span>
+                  <div className="cash">현금</div>
+                </button>
+              )}
             </div>
-
 
             <div className="payment-method-container2">
               {/* <div className='payment-method-top'>
