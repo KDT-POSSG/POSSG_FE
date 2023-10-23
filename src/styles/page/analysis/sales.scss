@@ -1,14 +1,26 @@
 .sales-content-wrap{
     background-color: $color-back;
 
+    .sales-title {
+        text-align: left;
+        padding: .625rem 0;
+    }
+
     .sales-nav{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        
         margin-bottom: 1.875rem;
 
-        .sales-title {
-            text-align: center;
+        .list-btn{
+            button{
+                padding: 10px 20px;
+                background-color: $color-white;
+                color: $color-main;
+                border: 1px solid $color-main;
+                border-radius: 1rem;
+            }
         }
 
         .sales-calendar-container{
@@ -32,8 +44,8 @@
             }
         }
     }
+    
     .sales-content{
-        padding: 20px 0;
 
         .sales-data-container{
             margin: 0 auto;

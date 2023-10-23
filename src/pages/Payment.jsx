@@ -242,6 +242,8 @@ function Payment() {
                       onClick={() => handleDeleteProduct(product.productSeq)}
                     >
                       <span className="material-symbols-rounded">close</span>
+                      {/* <span className="material-symbols-rounded">cancel</span> */}
+                      {/* <span className="material-symbols-rounded">delete</span> */}
                     </button>
                   </div>
                   <div className="container">
@@ -265,7 +267,7 @@ function Payment() {
                         <div className="payment-list-discount">행사 할인</div>
 
                         <div className="payment-list-discount2">
-                          -
+                          -&nbsp;
                           {addComma(
                             (product.price - product.priceDiscount) *
                               product.amount
@@ -306,7 +308,7 @@ function Payment() {
                   {addComma(getTotalDiscountPrice() - usepoint)} 원
                 </div>
                 <div className="payment-total-price2">
-                  포인트 사용 {addComma(usepoint)} P
+                  포인트 사용&nbsp;&nbsp;&nbsp;{addComma(usepoint)}&nbsp;P
                 </div>
                 <button
                   className="set-usepoint-btn"

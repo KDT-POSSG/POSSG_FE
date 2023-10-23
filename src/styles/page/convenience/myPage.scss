@@ -2,23 +2,27 @@
 .mypage-content-wrap{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    background-color: $color-back;
-    padding: 5vw 10vw;
-    min-height: 100vh;
+    // background-color: skyblue;
+    // background-color: $color-back;
+    // padding: 5vw 10vw;
+    padding: 3vw 10vw;
+    // min-height: 100vh;
+    min-height: calc(100vh - 4rem);
 
     // title
     .mypage-title{
         font-size: 2rem;
         text-align: center;
-        margin: 2.5rem;
+        margin-bottom: 2.5rem;
     }
 
     // content
     .mypage-content {
-        background-color: $color-back;
+        // background-color: $color-back;
         width: 100vw;
-        height: 100vh; 
+        // height: 100vh; 
         
         .form-row {
             text-align: center;
@@ -26,7 +30,7 @@
             flex-flow: column;
             justify-content: center;
             align-items: center;
-            background-color: $color-back;
+            // background-color: $color-back;
             
             .mypage-container {
                 position: relative;
@@ -75,12 +79,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: $color-back;
+            // background-color: $color-back;
             padding: 1.5rem 0;
 
             button {
                 padding: 15px 1rem;
-                margin-bottom: 50px;
+                // margin-bottom: 50px;
                 background-color: $color-main;
                 color: $color-white;
                 font-weight: bold;

@@ -6,6 +6,7 @@ import { baseURL } from 'store/apis/base';
 function StockDispose() {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const [barcode, setBarcode] = useState("");
 
@@ -18,7 +19,7 @@ function StockDispose() {
     axios.post(`${baseURL}/updateProductExpirationFlag`, 
       [{
         barcode: barcode,
-        convSeq: 1 
+        convSeq: convSeq 
       }], {
         headers: {
           accessToken: `Bearer ${accesstoken}`

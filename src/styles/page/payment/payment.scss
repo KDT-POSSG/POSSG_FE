@@ -1,5 +1,12 @@
-.payment-container {
-  min-height: calc(100vh - 4rem);
+.payment-container{
+    // min-height: calc(100vh - 4rem);
+   
+    .payment-header{
+        border-bottom: 1px solid $color-border;
+        height: 4rem;
+        padding-left: 2rem;
+        display: flex;
+        align-items: center;
 
   .payment-header {
     border-bottom: 2px solid $color-border;
@@ -25,6 +32,7 @@
         overflow-y: auto;
         &::-webkit-scrollbar {
           display: none;
+
         }
         .payment-list-empty-container {
           display: flex;

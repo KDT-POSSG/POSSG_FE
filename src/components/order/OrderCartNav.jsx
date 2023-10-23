@@ -6,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { baseURL } from 'store/apis/base';
 
-function OrderCartNav({ isDone, setIsDone, selectedItems }) {
+function OrderCartNav({ isDone, setIsDone, selectedItems, setSelectedItems }) {
 
   const accesstoken = localStorage.getItem("accesstoken");
+  const convSeq = localStorage.getItem("convSeq");
 
   const navi = useNavigate();
 
@@ -32,7 +33,7 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
 
     axios
       .post(`${baseURL}/deleteCallProductConv`, {
-        convSeq: 1,
+        convSeq: convSeq,
         nameList: selectedItems,
         callRef: 0
       }, {
@@ -46,6 +47,7 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
         if(response.data === "YES") {
           toast.success("선택한 상품이 삭제되었습니다");
           setIsDone(!isDone);
+          setSelectedItems([]);
         }
         else {
           toast.error("선택한 상품 삭제에 실패했습니다");
@@ -60,7 +62,7 @@ function OrderCartNav({ isDone, setIsDone, selectedItems }) {
   const handleOrderSend = () => {
 
     axios.post(`${baseURL}/addConvOrderList`, {
-        convSeq: 1
+        convSeq: convSeq
       }, {
         headers: {
           accessToken: `Bearer ${accesstoken}`

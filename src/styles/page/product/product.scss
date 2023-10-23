@@ -3,6 +3,34 @@
   padding: 3vw 10vw;
   // min-height: 100vh;
 
+  .scroll-top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 2rem;
+    right: 10%;
+    // border: 1px solid black;
+    width: 3.5rem;
+    height: 3.5rem;
+  
+    .scroll-top-btn {
+      background-color: $color-main;
+      width: 100%;
+      height: 100%;
+      // border: 1px solid blue;
+      border-radius: 100px;
+      border: 1px solid $color-main;
+      // filter: drop-shadow(2px 2px 2px rgba($color-gray, $alpha: 0.2));
+
+      > span {
+        color: $color-white;
+        font-weight: bold;
+        font-size: 2rem;
+      }
+    }
+  }
+
   .product-loading {
     height: 100px;
     // background-color: skyblue;
