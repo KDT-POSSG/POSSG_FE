@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"; 
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
 function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
-  const navigate = useNavigate();
   const accesstoken = localStorage.getItem("accesstoken");
-  const [empName, setEmpName] = useState("");
   const [gender, setGender] = useState(employeeData.gender);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [hireDate, setHireDate] = useState("");
-  const [salary, setSalary] = useState(0);
+  const [empName, setEmpName] = useState(employeeData.empName);
+  const [phoneNumber, setPhoneNumber] = useState(employeeData.phoneNumber);
+  const [birthDate, setBirthDate] = useState(employeeData.birthDate);
+  const [hireDate, setHireDate] = useState(employeeData.hireDate);
+  const [salary, setSalary] = useState(employeeData.salary);
+  
 
   //직원 정보를 수정
   const updateEmployee = () => {
@@ -61,7 +60,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
           <div className="input-container">
             <input
               className="input-text"
-              value={employeeData.empName}
+              value={empName}
               onChange={(e) => setEmpName(e.target.value)}
               required
             />
@@ -77,12 +76,12 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
               <input
                 type="text"
                 className="input-birth"
-                value={employeeData.birthDate}
+                value={birthDate}
                 onChange={(e) => setBirthDate(e.target.value)}
                 required
               />
               <label className="label-helper" htmlFor="branchName">
-                <span>생년월일 (8자리 입력)</span>
+                <span>생년월일</span>
               </label>
             </div>
 
@@ -114,7 +113,7 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
             <input
               type="text"
               className="input-text"
-              value={employeeData.phoneNumber}
+              value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               required
             />
@@ -129,12 +128,12 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
             <input
               type="text"
               className="input-text"
-              value={employeeData.hireDate}
+              value={hireDate}
               onChange={(e) => setHireDate(e.target.value)}
               required
             />
             <label className="label-helper" htmlFor="repreName">
-              <span>고용 날짜 (8자리 입력)</span>
+              <span>고용 날짜</span>
             </label>
           </div>
         </div>
@@ -144,8 +143,8 @@ function ModifyEmployeeModal({ employeeSeq, onUpdate, employeeData }) {
             <input
               type="text"
               className="input-text"
-              value={employeeData.salary}
-              onChange={(e) => setSalary(parseInt(e.target.value))}
+              value={salary}
+              onChange={(e) => setSalary(e.target.value ? parseInt(e.target.value) : 0)}
               required
             />
             <label className="label-helper" htmlFor="repreName">

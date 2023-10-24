@@ -44,7 +44,7 @@ function PaymentReceipt({
           <CheckmarkComponent />
           <div className="cashpayreceipt-body-top-title">결제 완료</div>
           <div className="cashpayreceipt-body-top-text">
-            카드 결제가 완료되었습니다.
+            결제가 완료되었습니다.
           </div>
         </div>
         <div className="cashpayreceipt-body-middle">

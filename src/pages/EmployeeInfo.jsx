@@ -6,6 +6,7 @@ import TerminateEmployeeModal from "../components/employees/TerminateEmployeeMod
 import ModifyEmployeeModal from "../components/employees/ModifyEmployeeModal";
 import Pagination from "react-js-pagination";
 import monkey from "../assets/img/monkeypng.png";
+import { addComma } from "store/utils/function";
 
 function EmployeeInfo() {
   const accesstoken = localStorage.getItem("accesstoken");
@@ -143,9 +144,7 @@ function EmployeeInfo() {
                     </div>
                     <div className="employee-info">시급</div>
                     <div className="employee-info2">
-                      {new Intl.NumberFormat("ko-KR").format(
-                        employeeData.salary
-                      )}{" "}
+                      {addComma(employeeData.salary)}
                       원
                     </div>
                   </div>
