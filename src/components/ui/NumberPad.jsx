@@ -3,17 +3,20 @@ function NumberPad({ onInputValueChange, selectedInputValue }) {
 
     const handleButtonClick = (value) => {
       let newInputValue;
+
+      // 들어오는 값이 문자열이 아니라 숫자라면, 에러가 발생해 함수를 추가함
+      let inputValueString = selectedInputValue.toString();
   
       if (value === "C") {
         newInputValue = "";
       } 
 
       else if (value === "⇦") {
-        newInputValue = selectedInputValue.slice(0, -1);
+        newInputValue = inputValueString.slice(0, -1);
       } 
       
       else {
-        newInputValue = selectedInputValue + value;
+        newInputValue = inputValueString + value;
       }
   
       onInputValueChange(newInputValue);
