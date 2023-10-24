@@ -67,7 +67,7 @@ function Login(){
         <div className="login-content-wrap">
 
             <div className="login-logo">
-                <img src={logo} alt="POSSG 로고" width="100%" />
+                <img src={logo} alt="POSSG 로고" width="20%" />
             </div>
 
             {/* <div className="login-title page-title">로그인</div> */}
