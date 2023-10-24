@@ -13,7 +13,7 @@ function ProductItem({ product, modalOpen }) {
   }, []);
 
   return (
-    <div className='product-item' onClick={() => modalOpen(product.productSeq, product.productName)}>
+    <div className='product-item' onClick={() => modalOpen(product.productSeq, product.productName, product.productRomanName)}>
 
       {
         product.stockQuantity === 0 ?

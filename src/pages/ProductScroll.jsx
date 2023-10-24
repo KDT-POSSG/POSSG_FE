@@ -30,14 +30,16 @@ function ProductScroll() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState({
     productSeq: 0,
-    productName: ""
+    productName: "",
+    productRomanName: ""
   });
 
-  const modalOpen = (productSeq, productName) => {
+  const modalOpen = (productSeq, productName, productRomanName) => {
     setModalProduct({
       ...modalProduct,
       productSeq: productSeq,
-      productName: productName
+      productName: productName,
+      productRomanName: productRomanName
     });
     setIsModalOpen(true);
   }
