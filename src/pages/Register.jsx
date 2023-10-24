@@ -290,7 +290,7 @@ function Register(){
                     <div className="form-row">
                         <div className="input-container">
                             <input type="text" className="input-text" id="accountNum" name="accountNum" onChange={onChangeAccountNum} required />
-                            <label className="label-helper" htmlFor="accountNum"><span>본사 지급 번호 (숫자 16자)</span></label>
+                            <label className="label-helper" htmlFor="accountNum"><span>본사 지급 번호 (16자)</span></label>
                             <button className="input-button" onClick={onClickAccountNum} type="button">번호 확인</button>
                             <p className="p-text">{accountNumMsg}</p>
                         </div>
