@@ -3,6 +3,7 @@ import { getAccessToken, getRefreshToken, isAceessToken, isRefreshToken } from '
 
 // baseurl
 export const baseURL = "http://54.180.60.149:3000";
+// export const baseURL = "http://10.10.10.44:3000";
 
 const checkAccessToken = () => {
   if (isAceessToken()) {
@@ -22,48 +23,57 @@ const checkRefreshToken = () => {
 export let ACCESS_TOKEN = checkAccessToken();
 export let REFRESH_TOKEN = checkRefreshToken();
 
-// TOKEN X 
-export const publicRequest = axios.create({
-  baseURL: baseURL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+// interceptors.request
+axios.interceptors.request.use(
+  (config) => {
 
-// TOKEN O
-export const basicRequest = axios.create({
-  baseURL: baseURL,
-  headers: {
-    'Content-Type': 'application/json',
-    accessToken: `Bearer ${ACCESS_TOKEN}`,
-    refreshToken: `${REFRESH_TOKEN}`,
-  },
-});
-
-// token 처리
-// basicRequest.interceptors.response.use(
-
-//   (response) => {
-//     console.log("base >> ", response);
-//     console.log("base >> ", response.headers);
-//     console.log("base >> ", response.data);
-
-//     // REFRESH_YES + headers에 새로운 accessToken
-//     // localStorage에 토큰 저장
-
-//     return response;
-//   },
-//   (error) => {
-//     console.error(error);
+    console.log("interceptors request");
     
-//     if (error.response.status === 403) {
-//       // localStorage 비우기
-//       // 토스트
-//       // 로그인 페이지로 이동
-//     }
+    const accessToken = localStorage.getItem("accesstoken");
+    const refreshToken = localStorage.getItem("refreshtoken");
 
-//     return Promise.reject(error);
-//   }
-// );
+    config.headers.accessToken = `Bearer ${accessToken}`;
+    // config.headers.refreshToken = `Bearer ${refreshToken}`;
+    config.headers.refreshToken = `${refreshToken}`;
 
-// form-data 확인 필요
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// interceptors.response
+axios.interceptors.response.use(
+  (response) => {
+
+    console.log("interceptors response");
+    console.log("base >> ", response);
+
+    if(response.data === "REFRESH_YES") {
+      // console.log("토큰 저장 이프문");
+      const { accesstoken } = response.headers;
+      localStorage.setItem("accesstoken", accesstoken);
+      return axios(response.config);
+    }
+
+    return response;
+  },
+  (error) => {
+    console.error(error);
+
+    if(error.response.status === 403 && error.response.data === "REFRESH_NO") {
+
+      // console.log("403 이프문 들어옴");
+
+      localStorage.removeItem("accesstoken");
+      localStorage.removeItem("refreshtoken");
+      localStorage.removeItem("convSeq");
+      localStorage.removeItem("branchName");
+
+      window.location.href = '/login';
+    }
+
+    return Promise.reject(error);
+  }
+);
