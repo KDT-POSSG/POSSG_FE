@@ -2,8 +2,8 @@ import axios from 'axios';
 import { getAccessToken, getRefreshToken, isAceessToken, isRefreshToken } from 'store/utils/function';
 
 // baseurl
-// export const baseURL = "http://54.180.60.149:3000";
-export const baseURL = "http://10.10.10.44:3000";
+export const baseURL = "http://54.180.60.149:3000";
+// export const baseURL = "http://10.10.10.44:3000";
 
 const checkAccessToken = () => {
   if (isAceessToken()) {

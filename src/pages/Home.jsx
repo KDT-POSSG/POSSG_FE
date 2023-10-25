@@ -5,6 +5,7 @@ import axios from 'axios';
 import Attendance from 'components/employees/Attendance';
 import LeaveWork from 'components/employees/LeaveWork';
 import AttendanceCehck from 'components/employees/AttendanceCheck';
+import { baseURL } from 'store/apis/base';
 
 function Home() {
 
@@ -16,7 +17,7 @@ function Home() {
 
   useEffect(() => {
 
-    axios.get(`http://54.180.60.149:3000/favoritePageList`, {
+    axios.get(`${baseURL}/favoritePageList`, {
         params: {
           convSeq: convSeq
         },
