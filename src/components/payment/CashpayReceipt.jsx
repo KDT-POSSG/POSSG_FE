@@ -10,6 +10,9 @@ function CashpayReceipt({
   handlePaymentSuccess,
   usepoint,
 }) {
+
+  console.log(inputValue)
+  console.log(changeAmount)
   //결제 완료 후처리
   const handlePaymentComplete = () => {
     handlePaymentSuccess();
@@ -44,7 +47,7 @@ function CashpayReceipt({
           <div className="cashpayreceipt-input-price">
             <div className="cashpayreceipt-body-input-price">받은 금액</div>
             <div className="cashpayreceipt-body-input-price2">
-              {addComma(inputValue)} 원
+              {addComma(parseInt(inputValue))} 원
             </div>
           </div>
           <div className="cashpayreceipt-change">

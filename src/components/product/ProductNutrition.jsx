@@ -37,7 +37,8 @@ function ProductNutrition({ modalProduct }) {
       <div className='product-nutrition-modal'>
       
         <div className='nutrition-product'>
-          {modalProduct.productName}
+          {modalProduct.productName}<br/>
+          <span className='nutrition-product-roman'>{modalProduct.productRomanName}</span>
         </div>
 
         {

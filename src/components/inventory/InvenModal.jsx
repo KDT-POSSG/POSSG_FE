@@ -77,7 +77,7 @@ function InvenModal({ updateLastTime, onLoad }) {
           <input value="10,000 원" readOnly />
           <input value="5,000 원" readOnly />
           <input value="1,000 원" readOnly />
-          <input value="50 원" readOnly />
+          <input value="500 원" readOnly />
           <input value="100 원" readOnly />
           <input value="50 원" readOnly />
           <input value="10 원" readOnly />

@@ -131,7 +131,8 @@ function DeliveryDetail() {
 
             <div className='item-product item-index'>
               <div>상품명</div>
-              <div>단가</div>
+              {/* <div>단가</div> */}
+              <div></div>
               <div>수량</div>
               <div>금액</div>
             </div>
@@ -142,9 +143,10 @@ function DeliveryDetail() {
                   <div className='item-product-name'>
                     {item.product_name}
                   </div>
-                  <div>{addComma(item.price)}</div>
+                  {/* <div>{addComma(item.price)}</div> */}
+                  <div></div>
                   <div>{addComma(item.quantity)}</div>
-                  <div>{addComma(item.price * item.quantity)}</div>
+                  <div>{addComma(item.price)}</div>
                 </div>
               ))
             }

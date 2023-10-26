@@ -24,7 +24,7 @@ function Payment() {
   const [paymentResponse, setPaymentResponse] = useState(null);
   const [barcodeInput, setBarcodeInput] = useState("");
   const [products, setProducts] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(0);
   const [changeAmount, setChangeAmount] = useState(0);
   const [paymentData, setPaymentData] = useState(null);
   const [usepoint, setUsePoint] = useState(0);
@@ -60,7 +60,6 @@ function Payment() {
           setProducts((prevProducts) => {
             return prevProducts.map((p) => {
               if (p.productSeq === productData.productSeq) {
-                console.log(p.amount);
                 return { ...p, amount: p.amount + 1 };
               }
               return p;
@@ -125,7 +124,7 @@ function Payment() {
   //걸제 완료 후 초기화 시킬 것들
   const handlePaymentSuccess = () => {
     setProducts([]);
-    setInputValue("");
+    setInputValue(0);
     setChangeAmount(0);
     setUsePoint(0);
     setPwd("");
@@ -139,6 +138,11 @@ function Payment() {
     if (type === "point") {
       resetPointInfo();
     }
+    if (type === "cash") {
+      setInputValue(0);
+      setChangeAmount(0);
+    }
+
   };
   const closeModal = (type) => {
     setPaymentType(type);
@@ -149,10 +153,6 @@ function Payment() {
       paymentType === "cashpayreceiptinfomodal"
     ) {
       handlePaymentSuccess();
-    }
-    if (paymentType === "cash") {
-      setInputValue("");
-      setChangeAmount(0);
     }
   };
 

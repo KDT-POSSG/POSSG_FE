@@ -121,7 +121,7 @@ function MonthlyCashSale(){
 
     return(
         <div className="cashSales-content-wrap">
-            <div className="cashSales-title page-title">월별 결제내역</div>
+            <div className="cashSales-title page-title">월별 결제 보고서</div>
             <div className="cashSales-nav">
                 <div className="list-btn">
                         <button onClick={() => navi("/analysis")}>목록</button>

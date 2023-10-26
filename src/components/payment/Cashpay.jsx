@@ -86,15 +86,14 @@ function Cashpay({
 
   //수행되는 결제 함수, 완료 후 영수증 모달창 열고, payment 컴포넌트에게 받은 금액, 거스름 돈 전달
   const handlePayment = async () => {
-    console.log(totalDiscountPrice);
-    console.log(parseInt(inputValue));
+    // console.log(totalDiscountPrice);
+    // console.log(parseInt(inputValue));
     try {
       if (paymentData.price === "0") {
         toast.error("결제 상품이 없습니다");
         return;
       } else if (
-        totalDiscountPrice - parseInt(usepoint) >
-        parseInt(inputValue)
+        totalDiscountPrice - parseInt(usepoint) > parseInt(inputValue)
       ) {
         toast.error("받은 금액을 확인해주세요");
         return;
@@ -108,7 +107,6 @@ function Cashpay({
       );
       console.log("결제 정보 전송 완료");
       setPaymentData(paymentData);
-      console.log(paymentData);
 
       if (response.data === "POINT YES" || response.data === "YES") {
         const itemResponse = await axios.post(
@@ -118,10 +116,12 @@ function Cashpay({
             headers: { accessToken: `Bearer ${accesstoken}` },
           }
         );
-        console.log("결제 상품 목록 전송 완료", itemResponse.data);
+        console.log("결제 상품 목록 전송 완료");
         setInputValue(inputValue);
         setChangeAmount(changeAmount);
-        closeModal();
+        console.log("받은 금액", inputValue);
+        console.log("거스름 돈", changeAmount);
+        closeModal('cash');
         openModal("cashpayreceipt");
       }
     } catch (error) {

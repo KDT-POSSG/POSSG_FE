@@ -54,12 +54,12 @@ function UpdateCost(){
         })
         .then( (res) => {
             console.log("getData res >>> ", res);
-            setRent(res.data.rent);
-            setWaterBill(res.data.waterBill);
-            setElectricityBill(res.data.electricityBill);
-            setGasBill(res.data.gasBill);
-            setTotalLaborCost(res.data.totalLaborCost);
-            setSecurityMaintenanceFee(res.data.securityMaintenanceFee);
+            setRent(addComma(res.data.rent));
+            setWaterBill(addComma(res.data.waterBill));
+            setElectricityBill(addComma(res.data.electricityBill));
+            setGasBill(addComma(res.data.gasBill));
+            setTotalLaborCost(addComma(res.data.totalLaborCost));
+            setSecurityMaintenanceFee(addComma(res.data.securityMaintenanceFee));
         })
         .catch( (err) => {
             toast.error("데이터 불러오기 에러");
@@ -141,7 +141,7 @@ function UpdateCost(){
                 console.log("res >>> ", res);
                 if(res.data==="YES"){
                     toast.success("수정 완료");
-                    navi("/cost");
+                    navi("/analysis");
                 }else{
                     toast.error("수정 실패");
                 }
