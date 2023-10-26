@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { orderState } from 'store/utils/function';
+import { hourClock, orderState } from 'store/utils/function';
 
 function OrderDetailNav({ callStatus, callRef, callDate }) {
 
@@ -57,7 +57,8 @@ function OrderDetailNav({ callStatus, callRef, callDate }) {
           </div>
           <div className='right'>
             <span>발주날짜</span>
-            &nbsp;&nbsp;&nbsp;{callDate}
+            {/* &nbsp;&nbsp;&nbsp;{callDate} */}
+            &nbsp;&nbsp;&nbsp;{callRef.slice(0, 4)}-{callRef.slice(4, 6)}-{callRef.slice(6, 8)}&nbsp;{callRef.slice(8, 10)}:{callRef.slice(10, 12)}:{callRef.slice(12)}
           </div>
         </div>
       </div>
