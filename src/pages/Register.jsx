@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { baseURL } from "store/apis/base";
+import Timer from "components/convenience/Timer";
 
 function Register(){
 
@@ -41,6 +42,21 @@ function Register(){
 
     const [formIsValid, setFormIsValid] = useState(false);
 
+    // 타이머와 타이머 관련 상태
+    const [timerActive, setTimerActive] = useState(false);
+    const [timerFinished, setTimerFinished] = useState(false);
+
+    // 타이머 시작 함수
+    const startTimer = () => {
+        setTimerActive(true);
+    };
+
+    // 타이머 완료 함수
+    const finishTimer = () => {
+        setTimerActive(false);
+        setTimerFinished(true);
+    };
+
     const checkFormValidity = () => {
         //어떤 입력 필드가 변경될 때마다 폼의 유효성을 확인하는 함수를 생성
         const idIsValid = id.trim() !== "";
@@ -58,8 +74,6 @@ function Register(){
             phoneNumIsValid 
         );
     };
-
-    // console.log(isId+"/"+isAccount+"/"+isPw+"/"+isPwCheck+"/"+isPhoneNum+"/"+isNum+"/");
 
     // 아이디 입력 & 아이디 중복체크
     const onChangeId = (e) => {
@@ -132,6 +146,7 @@ function Register(){
                 setIsAccount(false);
             }
         }catch(err){
+            toast.error("지급번호 확인 실패");
             console.error("catch err ", err);
         }
     }
@@ -191,19 +206,19 @@ function Register(){
     
     // 인증번호 보내기
     const onSendPhoneNum = async(e) => {
-        //alert("클릭")
-        const currentNum = phoneNum; // 휴대폰번호 가져오기
-        //console.log(currentNum);
+        const currentNum = phoneNum;
         try{//to - 번호 / content - 아디
             const res = await axios.post(`${baseURL}/NoSecurityZoneController/regiSend`, { to: currentNum });
             //console.log("res >>> " + res.data);
             if(res.data.statusCode === "202" && res.data.statusName === "success"){
                 toast.success("인증번호 발송완료");
                 setNumVisible(true); 
+                startTimer();
             }else{
                 toast.error("인증번호 발송실패");
             }
         }catch(err){
+            toast.error("인증번호 발송실패");
             console.error("catch err ", err);
         }
     }
@@ -228,7 +243,6 @@ function Register(){
     // 인증번호 확인
     const onCheckNum = async (e) => {
         const currentNum = num;
-        //console.log(currentNum);
         try{
             const res = await axios.post(`${baseURL}/NoSecurityZoneController/Authentication?CodeNumber=${currentNum}`);
             //console.log(res.data);
@@ -236,12 +250,16 @@ function Register(){
                 //alert("성공");
                 toast.success("휴대폰 인증성공")
                 setVerificationCode(true);
+                finishTimer();
             }else if(res.data==="NO"){
                 // 인증 실패
                 toast.error("휴대폰 인증실패");
                 setVerificationCode(false);
+                setNum("");
             }
         }catch(err){
+            toast.error("휴대폰 인증실패");
+            setNum("");
             console.error("catch err ", err);
         }
     }
@@ -251,7 +269,6 @@ function Register(){
             toast.error("회원가입 실패")
         }else{
             axios.post(`${baseURL}/NoSecurityZoneController/addUser`, {
-                //userId,pwd,representativeName,branchName,phoneNumber,convKey
                 "userId": id,
                 "pwd": pw,
                 "representativeName": repreName,
@@ -265,7 +282,7 @@ function Register(){
                     toast.success("회원가입 성공");
                     navi("/login");
                 }else{
-                    // toast.error("회원가입 실패");
+                    toast.error("회원가입 실패");
                 }
             })
             .catch((err)=>{
@@ -335,9 +352,15 @@ function Register(){
                     {numVisible && (
                     <div className="form-row">
                         <div className="input-container">
+                            <Timer onFinish={finishTimer} />
+                            {/* {timerActive ? (
+                                <Timer onFinish={finishTimer} />
+                                ) : (
+                                timerFinished && <p className="timer-end-text">인증시간이 끝났습니다</p>
+                            )} */}
                             <input type="text" className="input-text" id="num" name="num" value={num} onChange={onChangeNum} required />
                             <label className="label-helper" htmlFor="num"><span>인증번호 (숫자 6자)</span></label>
-                            <button className="input-button" onClick={onCheckNum} type="button">인증 확인</button>
+                            <button className="input-button" onClick={onCheckNum} disabled={!isNum} type="button">인증 확인</button>
                             <p className="p-text">{numMsg}</p>
                         </div>
                     </div>
