@@ -48,107 +48,157 @@
     }
 
     .cashSales-content-wrap{
-        
         .cashSales-data-container{
-            margin: 0 auto;
+            margin: 30px 0px;
+            padding: 0 30px;
+            padding-bottom: 30px;
             background-color: $color-white;
             border-radius: 1rem;
             filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
             display: flex;
-            justify-content: space-around;
-            align-items: center;
-            align-content: center;
-            padding: 20px 0;
+            flex-direction: column;
 
-            .cashSales-piechart{
+            .cashSales-data-container-title{
+                padding: 30px 0;
+                text-align: center;
+                font-weight: bold;
+                font-size: 20px;
+            }
+            
+
+            .cashSales-piechart-container{
                 display: flex;
-                justify-content: center;
+                justify-content: space-around;
                 align-items: center;
                 align-content: center;
-                width: 500px;
-            }
 
-            .cashSales-data-content{
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-row-gap: 4rem;
-                grid-column-gap: 3.5rem; 
-                width: 500px;
+                .cashSales-piechart{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                    width: 320px;
+                }
+                .cashSales-data-content{
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-row-gap: 4rem;
+                    grid-column-gap: 6rem; 
 
-                .cashSales-data{
-                    .cashSales-data-title{
-                        font-weight: bold;
-                        margin-bottom: 20px;
-                        
-                    }
+                    .cashSales-data{
+                        .cashSales-data-title{
+                            font-weight: bold;
+                            margin-bottom: 20px;
 
-                    .cashSales-data-amount{
-                        font-weight: bold;
-                        color: $color-red;
-                        font-size: 20px;
+                        }
+                        .cashSales-data-amount{
+                            font-weight: bold;
+                            color: $color-red;
+                            font-size: 20px;
+
+                        }
                     }
                 }
             }
         }
 
-        .cashSales-barchart-datas{
-            padding: 8rem 4rem;
+        .cashSales-cardChart-datas{
             background-color: $color-white;
             border-radius: 1rem;
             filter: drop-shadow(2px 2px 2px rgba($color-border, $alpha: 0.5));
-            margin: 30px 0px;
-            padding: 30px 30px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            align-content: center;
 
-            .cashSales-barchart-title{
+            .cashSales-cardChart-title{
+                padding: 30px 0;
+                text-align: center;
                 font-weight: bold;
                 font-size: 1.25rem;
-                margin-bottom: 1.875rem;
             }
-
-            .cashSales-barchart{
-                margin-bottom: 1.875rem;
+            .cashSales-card-piechart-container{
                 display: flex;
+                justify-content: space-around;
+                align-items: center;
+                align-content: center; 
+
+
+                .cashSales-card-piechart{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: center;
+                    padding: 50px 100px;
+                    
+                }
+
+                .cashSales-card-datas{
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-row-gap: 4rem;
+                    grid-column-gap: 3rem;        
+                        .cashSales-card-detail{ 
+                            .cashSales-card-title{
+                                margin-bottom: 10px;
+                            }
+                            .cashSales-card-amount{
+                                font-weight: bold;
+                                font-size: 16px;
+                            }
+                        }
+                }  
+            }
+            .cashSales-card-barchart-container{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                border: 1px solid red;
+
+                .cashSales-card-barchart-container-title{
+                    font-weight: bold;
+                    font-size: 1.25rem;
+                    // padding-bottom: 30px;
+                    margin-bottom: 30px;
+                }
+            }
+            
+            .cashSales-card-barchart{
+                display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 align-content: center;
                 
-
                 canvas{
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     align-content: center;
-                    padding-left: 100px;
                 }
-                
+                .cashSales-card-barchart-detail-container{
+                    display: grid;
+                    grid-template-columns: repeat(7, 1fr);
+                    grid-row-gap: 2rem;
+                    grid-column-gap: 3rem; 
+                    .cashSales-card-barchart-detail{
+                        margin-top: 40px;
+                        
+                                .cashSales-card-barchart-title{
+                                    font-weight: bold;
+                                    margin-bottom: 20px;
+                                }
+                                .cashSales-card-barchart-share{
+                                    font-weight: bold;
+                                    color: $color-red;
+                                    font-size: 20px;
+                                }
+                    }
+                }
             }
 
-            .cashSales-datas-container{
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                grid-row-gap: 3.5rem;
-                grid-column-gap: 3.5rem;      
                 
-                    .cashSales-card-detail{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        align-content: center;
-                        .cashSales-card-title{
-                            margin-right: 20px;
-                        }
-
-                        .cashSales-card-amount{
-                            font-weight: bold;
-                            font-size: 20px;
-                        }
-                    }
-            }      
         }
         .cashSales-no-datas{
             padding: 8rem 4rem;
