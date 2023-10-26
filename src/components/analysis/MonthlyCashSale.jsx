@@ -15,6 +15,7 @@ function MonthlyCashSale(){
     const [selectedDate, setSelectedDate] = useState(null);
     const [cashSaleData, setCashSaleData] = useState({});
     const [cardData, setCardData] = useState({});
+    const [cardShareData, setCardShareData] = useState({});
     const [data, setData] = useState(false);
     const [chartDataList, setChartDataList] = useState([]);
 
@@ -28,6 +29,18 @@ function MonthlyCashSale(){
         }
         return 0;
     }
+
+    const totalCardShare = (cardShareData) => {
+        if (cardShareData) {
+            return Object.values(cardShareData).reduce((acc, value) => acc + value, 0);
+        }
+        return 0;
+    }
+
+    const barChartData = Object.keys(cardShareData).map((key) => ({
+        카드: key,
+        점유율: cardShareData[key],
+    }))
     
     const fetchData = async (selectedDate) => {   
         try {
@@ -45,11 +58,17 @@ function MonthlyCashSale(){
                 "rgba(255, 99, 132, 0.2)",
                 "rgba(54, 162, 235, 0.2)",
                 "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
                 "rgba(153, 102, 255, 0.2)",
+                "rgba(75, 192, 192, 0.2)", 
                 "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 0, 0, 0.2)",
+                "rgba(0, 255, 0, 0.2)",
+                "rgba(0, 0, 255, 0.2)",
+                "rgba(255, 255, 0, 0.2)",
+                "rgba(0, 255, 255, 0.2)",
             ];
-            if(res.data && res.data.card){
+            if(res.data && res.data.card && res.data.cardShare){
+                const cardShareData = res.data.cardShare;
                 const cardData = res.data.card;
                 const labels = Object.keys(cardData);
                 const data = Object.values(cardData);
@@ -77,7 +96,7 @@ function MonthlyCashSale(){
                         datasets: datasets,
                     },
                 ]);
-                console.log("cashSaleData >>> ", cashSaleData)
+                setCardShareData(cardShareData);
                 setCardData(cardData);
                 setCashSaleData(res.data);
                 setData(true);
@@ -121,56 +140,92 @@ function MonthlyCashSale(){
 
             {data ? (
             <div className="cashSales-content-wrap">
-                {cashSaleData.cash > 0 || totalCardAmount(cashSaleData.card) > 0 || cashSaleData.kakao > 0 || cashSaleData.toss > 0 ? (
-                <div className="cashSales-data-container">
-                    <div className="cashSales-piechart">
-                        <div>
-                            <MyPieChart
-                                data={[cashSaleData.cash, totalCardAmount(cashSaleData.card), cashSaleData.kakao, cashSaleData.toss]}
-                                labels={["현금","카드","카카오페이","토스페이","기타"]}
-                                chartOptions={{}} 
-                            />
-                        </div>
-                    </div>
-                    <div className="cashSales-data-content">
-                        <div className="cashSales-data">
-                            <div className="cashSales-data-title">현금</div>
-                            <div className="cashSales-data-amount">{addComma(cashSaleData.cash)}원</div>
-                        </div>
-                        <div className="cashSales-data">
-                        <div className="cashSales-data-title">카드</div>
-                        <div className="cashSales-data-amount">{addComma(totalCardAmount(cashSaleData.card))}원</div>
-                        </div>
-                        <div className="cashSales-data">
-                            <div className="cashSales-data-title">카카오페이</div>
-                            <div className="cashSales-data-amount">{addComma(cashSaleData.kakao)}원</div>
-                        </div>
-                        <div className="cashSales-data">
-                            <div className="cashSales-data-title">토스페이</div>
-                            <div className="cashSales-data-amount">{addComma(cashSaleData.toss)}원</div>
-                        </div>
-                    </div>
-                </div>
-                ) : (
-                    <div></div>
-                )}
-
-                {Object.keys(cardData).length > 0 ? (
-                    <div className="cashSales-barchart-datas">
-                            <div className="cashSales-barchart-title">카드사별 매출내역</div>
-                            <div className="cashSales-barchart">
-                                {chartDataList.map((chartData, index) => (
-                                    <MyChart key={index} datasets={chartData.datasets} labels={chartData.labels} />
-                                ))}
+                    {cashSaleData.cash > 0 || totalCardAmount(cashSaleData.card) > 0 || cashSaleData.kakao > 0 || cashSaleData.toss > 0 ? 
+                    (
+                    <div className="cashSales-data-container">
+                        <div className="cashSales-data-container-title">매출 결제내역</div>
+                        <div className="cashSales-piechart-container">
+                            <div className="cashSales-piechart">
+                                    <MyPieChart
+                                        data={[
+                                            { label: "현금", data: cashSaleData.cash },
+                                            { label: "카드", data: totalCardAmount(cashSaleData.card) },
+                                            { label: "카카오페이", data: cashSaleData.kakao },
+                                            { label: "토스페이", data: cashSaleData.toss }
+                                        ]}
+                                        labels={["현금","카드","카카오페이","토스페이"]}
+                                        chartOptions={{}} 
+                                    />
                             </div>
-                            <div className="cashSales-datas-container">
-                                    {Object.keys(cardData).map((cardName)=>(
-                                        <div key={cardName} className="cashSales-card-detail">
-                                            <div className="cashSales-card-title">{cardName}</div>
-                                            <div className="cashSales-card-amount">{addComma(cardData[cardName])}원</div>
-                                        </div>
+                            <div className="cashSales-data-content">
+                                <div className="cashSales-data">
+                                    <div className="cashSales-data-title">현금</div>
+                                    <div className="cashSales-data-amount">{addComma(cashSaleData.cash)}원</div>
+                                </div>
+                                <div className="cashSales-data">
+                                    <div className="cashSales-data-title">카드</div>
+                                    <div className="cashSales-data-amount">{addComma(totalCardAmount(cashSaleData.card))}원</div>
+                                </div>
+                                <div className="cashSales-data">
+                                    <div className="cashSales-data-title">카카오페이</div>
+                                    <div className="cashSales-data-amount">{addComma(cashSaleData.kakao)}원</div>
+                                </div>
+                                <div className="cashSales-data">
+                                    <div className="cashSales-data-title">토스페이</div>
+                                    <div className="cashSales-data-amount">{addComma(cashSaleData.toss)}원</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="cashSales-barchart">
+                            {/* <MyChart 
+                                data={[cashSaleData.cashShare,totalCardShare(cardShareData),cashSaleData.kakaoShare,cashSaleData.tossShare]}
+                                labels={["현금점유율", "카드점유율", "카카오페이점유율", "토스페이점유율"]} 
+                            /> */}
+                        </div>
+                    </div>
+                    ) : (
+                        <div></div>
+                    )}
+                {Object.keys(cardData).length > 0 ? (
+                    <div className="cashSales-cardChart-datas">
+                            <div className="cashSales-cardChart-title">카드사별 매출내역</div>
+                            <div className="cashSales-card-piechart-container">
+                                <div className="cashSales-card-piechart">
+                                    <MyPieChart
+                                        data={Object.keys(cardData).map((cardName) => ({
+                                            label: cardName,
+                                            data: cardData[cardName]
+                                        }))}
+                                        chartOptions={{}}
+                                    />
+                                </div>
+                                <div className="cashSales-card-datas">
+                                        {Object.keys(cardData).map((cardName)=>(
+                                            <div key={cardName} className="cashSales-card-detail">
+                                                <div className="cashSales-card-title">{cardName}</div>
+                                                <div className="cashSales-card-amount">{addComma(cardData[cardName])}원</div>
+                                            </div>
+                                        ))}
+                                </div>
+                            </div>
+                            <div className="cashSales-card-barchart-container">
+                                <div className="cashSales-card-barchart-container-title">카드사별 매출점유율</div>
+                                <div className="cashSales-card-barchart" style={{height:"300px", width:"900px"}}>
+                                    {chartDataList.map((cardShareData, index) => (
+                                        <MyChart key={index} datasets={cardShareData.datasets} labels={cardShareData.labels} />
                                     ))}
-                            </div>    
+                                    <div className="cashSales-card-barchart-detail-container">
+                                    {Object.keys(cardShareData).map((cardShareDataName)=>(
+                                        <div key={cardShareDataName} className="cashSales-card-barchart-detail">
+                                        <div className="cashSales-card-barchart-title">{cardShareDataName}</div>
+                                        <div className="cashSales-card-barchart-share">{cardShareData[cardShareDataName]}%</div>
+                                    </div>
+                                    ))}
+                                    </div>
+                                    {/* <MyBarChart data={barChartData} labels={["점유율"]} /> */}
+                                </div>
+
+                            </div>
                         
                     </div>
                 ) : (
@@ -179,7 +234,6 @@ function MonthlyCashSale(){
                         <span className="material-symbols-rounded chart-icon">bar_chart_4_bars</span>       
                     </div>
                 )}
-
             </div>
             ) : (
                 <div className="cashSales-date-message">

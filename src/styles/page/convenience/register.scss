@@ -37,13 +37,30 @@
             position: relative;
             margin: 1.5rem 0;
             height: 60px;
+
+            .timer {
+                position: absolute;
+                top: 20px;
+                left: 450px;
+            }
+            .timer-text {
+                font-size: 20px;
+                font-weight: bold;
+                color: $color-border; 
+            }
+            .timer-end-text{
+                position: absolute;
+                top: 20px;
+                left: 350px;
+                color: $color-gray;
+            }
+            
         }
 
         input {
             border: 1px solid $color-border;
             border-radius: 32px;
             padding: 1rem 1.25rem;
-            // width: 40vw;
             width: 38rem;
             transition: all 0.2s;
         }
@@ -114,23 +131,3 @@
     }
 }
 
-
-
-// /* 
-// .check-wrap{
-//     border: 1px solid #dedede;
-// }
-// .all-check{
-//     border-bottom: 1px solid #dedede;
-// }
-
-//  */
-
-label, button, span {
-    // font-size: 1rem !important;
-    // font-weight: normal !important;
-}
-
-input:invalid + label {
-    // opacity: 0.8;
-}
